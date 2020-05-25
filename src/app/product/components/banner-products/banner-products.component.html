@@ -1,0 +1,53 @@
+<!-- Swiper -->
+<div class="swiper-container general">
+    <div class="row between-xs middled-xs" style="padding: 10px 10px 0px 20px;">
+        <mat-card-title 
+        class="title-slide" 
+        style="padding: 8px 0px; margin: 0px;">
+            {{nameBanner}}
+        </mat-card-title>
+        <div class="row show-hover title-slide">
+            <div class="row" style="padding: 0px 20px 0px 0px">
+                <!-- <mat-card-subtitle
+                class="title-slide"
+                style="padding: 8px 8px 8px 0px; margin: 0px;">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </mat-card-subtitle> -->
+                <mat-card-subtitle
+                class="title-slide"
+                style="padding: 8px 8px 4px 0px; margin: 0px;">
+                    ver mas
+                </mat-card-subtitle>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor = "let img of images" 
+            (mouseenter) ="mouseEnter()"
+            (mouseleave) ="mouseLeave()">
+            <mat-card class="card-banner" >
+                <mat-card-header>
+                    <mat-card-title>Producto</mat-card-title>
+                    <mat-card-subtitle>$90.000</mat-card-subtitle>
+                </mat-card-header>
+                <div class="crop-image">
+                    <img [src]="img" alt="imagen de banner">
+                </div>
+                <a mat-button 
+                    *ngIf="estadoHover"
+                    style="margin-top: -50px; position: absolute;"
+                    class="btn-add">
+                    agregar
+                </a>
+                <mat-card-content>
+                    <p>este es un super producto</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <!-- Add Pagination -->
+    <!-- <div class="swiper-pagination"></div> -->
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>

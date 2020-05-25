@@ -1,0 +1,38 @@
+<mat-card (mouseenter) ="mouseEnter('div a') "  
+    (mouseleave) ="mouseLeave('div A')"
+    [ngClass]="{show: estadoHover}">
+    <app-counter-products
+        style="cursor: pointer;"
+        [product]="product">
+    </app-counter-products>
+    <mat-card-header>
+        <div mat-card-avatar
+            style="background-image: url({{product.image}});
+            background-size: cover;">
+            <img *ngIf="product.image ===''" src="./../../../../assets/images/icon-store.png">
+        </div>
+        <mat-card-title style="font-size: 15px;" 
+            class="title-style"
+            [routerLink]="['/products', product.id]">
+            {{product.title | uppercase | slice:0:20 }}
+        </mat-card-title>
+        <mat-card-subtitle [routerLink]="['/products', product.id]">
+            {{product.price | currency:'$':'symbol':'1.0-0'}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <div [routerLink]="['/products', product.id]" class="crop-image">
+        <img *ngIf="product.image !== ''" 
+        onerror="this.src = './../../../../assets/images/not-image.png'" 
+        [src]="product.image">
+        <img *ngIf="product.image ===''" src="./../../../../assets/images/not-image.png">
+    </div>
+    <mat-card-content>
+        <p>{{product.description | slice:0:40}}</p>
+    </mat-card-content>
+    <mat-card-actions class="cont-actions">
+        <button (click)="addCart()" mat-raised-button class="btn-add">
+            agregar
+        </button>
+    </mat-card-actions>
+</mat-card>
+

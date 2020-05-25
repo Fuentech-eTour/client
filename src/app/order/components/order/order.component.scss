@@ -1,0 +1,102 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+.mat-form-field {
+    margin-top: 16px;
+  }
+
+.position-button {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.margin-button {
+    width: 100%;
+}
+
+.border-table {
+    border-bottom: solid rgba(0,0,0,.12) 1px;
+    margin-bottom: 10px;
+}
+
+.init-border {
+    border-right: none;
+}
+
+/* address -- init */ 
+.full-width {
+    width: 100%;
+  }
+  
+  .shipping-card {
+    width: 450px;
+    min-width: 120px;
+    margin: 20px auto;
+  }
+  
+  .mat-radio-button {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .col {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .col:last-child {
+    margin-right: 0;
+  }
+
+  .address-shadow {
+    margin-bottom: 10px; 
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2), 
+                0px 1px 0px 0px rgba(0, 0, 0, 0.14), 
+                0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  .cont-address {
+    width: 450px;
+    box-shadow: none;
+    margin: 0px auto;
+  }
+/* address -- final */  
+
+@media(min-width: 576px) {
+    .margin-button {
+        width: auto;
+    }
+
+    .position-button {
+        text-align: right;
+        margin-bottom: 0px;
+    }
+
+    /* .init-border {
+        border-right: solid grey 2px;
+    }
+ */
+    .border-table {
+        padding: 10px;
+        /* border-bottom: none; */
+    }
+
+    .super-border {
+        border-top: solid grey 2px;
+        border-bottom: solid grey 2px;
+    }
+
+    .final-border {
+        border-top: solid grey 2px;
+        border-bottom: solid grey 2px;
+        border-right: solid grey 2px;
+        border-radius: 0 10px 10px 0;
+    }
+}

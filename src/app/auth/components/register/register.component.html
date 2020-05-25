@@ -1,0 +1,119 @@
+<!-- <form [formGroup]="form" (ngSubmit)="register($event)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Registro</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <input placeholder="email" formControlName="email" matInput type="email">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <input placeholder="password" formControlName="password" matInput type="password">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [disabled]="form.invalid" mat-raised-button type="submit">Registro</button>
+      </mat-card-actions>
+    </mat-card>
+    
+  </form>
+ -->
+
+ <div class="container-login">
+  <form [formGroup]="form" (ngSubmit)="register($event)">
+      <mat-card>
+        <mat-card-header style="display: inline-flex;">
+          <mat-card-title style="padding-bottom: 40px;">Registro</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field style="width: 100%;">
+                <input placeholder="Nombre de ususario" 
+                  formControlName="user_name" 
+                  matInput 
+                  type="email">
+                <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field style="width: 100%;">
+                <input placeholder="email" 
+                  formControlName="email" 
+                  matInput 
+                  type="email">
+                <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field style="width: 100%;">
+                <input placeholder="contraseña" 
+                  formControlName="password" 
+                  matInput 
+                  type="password">
+                <mat-icon matSuffix style="color: #e0e0e0;">lock</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field style="width: 100%;">
+                <input placeholder="Repita contraseña"
+                  formControlName="password2"
+                  matInput 
+                  type="password">
+                <mat-icon matSuffix style="color: #e0e0e0;">lock</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button [disabled]="form.invalid" 
+            mat-raised-button 
+            type="submit"
+            style="width: 100%; border-radius: 20px;">
+              Ingresar
+          </button>
+          <!-- <mat-card-subtitle class="hover-register" style="margin: 16px 0px;">
+            Registrate con
+          </mat-card-subtitle>
+          <button 
+            mat-raised-button
+            style="width: 100%; 
+            border-radius: 20px; 
+            margin: 0px; 
+            background-color: #395795; 
+            color: white;">
+              Facebook
+          </button>
+          <mat-card-subtitle class="hover-register" style="margin: 8px 0px;">
+            ó
+          </mat-card-subtitle>
+          <button 
+            mat-raised-button
+            style="width: 100%; 
+            border-radius: 20px; 
+            margin: 0px; 
+            background-color: #5080ef; 
+            color: white;">
+              Google
+          </button> -->
+        </mat-card-actions>
+        <mat-card-footer>
+          
+        </mat-card-footer>
+      </mat-card>
+    </form>
+</div>

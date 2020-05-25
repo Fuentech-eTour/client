@@ -1,0 +1,119 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Sus productos</ng-template>
+      <div class="position-button">
+        <button class="margin-button" mat-flat-button color="primary" matStepperNext>
+          Continuar
+          <mat-icon>
+            navigate_next
+          </mat-icon>
+        </button>
+      </div>
+      <mat-form-field style="display: none;">
+        <input matInput formControlName="firstCtrl">
+      </mat-form-field>
+      <!-- List of products -- init -->
+      <div class="aline-product" *ngIf="(products$ | async) as products">
+        <p *ngIf="products.length === 0">no hay productos</p>
+        <div class="row border-table middle-xs" *ngFor="let product of products">
+          <div class="col-xs-12 col-sm-2 col-md-2 init-border">
+            <div class="box">
+              <img style="width: 100%;" class="image" [src]="product.image" alt="">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3">
+            <div class="box">
+              <mat-card-subtitle>{{ product.title }}</mat-card-subtitle>
+            </div>
+            <div class="box">
+              <mat-card-subtitle>{{ product.description }}</mat-card-subtitle>
+            </div>
+            <div class="box">
+              <mat-card-subtitle>Precio/und: {{ product.price }}</mat-card-subtitle>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <div class="box">
+              <mat-card-subtitle>Cant: {{ product.cant }}</mat-card-subtitle>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <div class="box">
+              <mat-card-title>{{ product.price * product.cant | currency}}</mat-card-title>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- List of products -- final -->
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Datos de entrega</ng-template>
+      <div class="position-button">
+        <button class="margin-button" mat-flat-button color="primary" matStepperNext>
+          Continuar
+          <mat-icon>
+            navigate_next
+          </mat-icon>
+        </button>
+      </div>
+      <!-- <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+      </mat-form-field> -->
+      <mat-card class="cont-address">
+        <mat-card class="shipping-card">
+          <mat-card-header class="row between-xs middled-xs" style="align-items: center;">
+            <div class="col">
+              <mat-card-title>
+                  Dirección de entrega
+              </mat-card-title>
+            </div>
+            <div class="col">
+              <mat-card-title>
+                <a mat-button style="padding: 0px;" 
+                (click)="openDialog()">
+                  Agregar dirección 
+                  <mat-icon style="color:#80ad55;">
+                    add_circle
+                  </mat-icon>
+                </a>
+              </mat-card-title>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col">
+                <mat-radio-group formControlName="secondCtrl" required>
+                  <mat-card class="address-shadow">
+                    <mat-radio-button value="free">Carrera 6a #15b-18 b/rio Villagranda</mat-radio-button>
+                  </mat-card>
+                  <mat-card class="address-shadow">
+                    <mat-radio-button value="priority">Priority Shipping</mat-radio-button>
+                  </mat-card>
+                  <mat-card class="address-shadow">
+                    <mat-radio-button value="nextday">Next Day Shipping</mat-radio-button>
+                  </mat-card>
+                </mat-radio-group>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-card>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Metodo de pago</ng-template>
+    <div class="position-button">
+      <button class="margin-button" mat-flat-button color="primary" matStepperNext>
+        Finalizar
+        <mat-icon>
+          turned_in_not
+        </mat-icon>
+      </button>
+    </div>
+    <p>You are now done.</p>
+  </mat-step>
+</mat-horizontal-stepper>

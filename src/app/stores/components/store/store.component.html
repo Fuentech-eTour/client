@@ -1,0 +1,13 @@
+<div ClassName="container" class="cont-name-store">
+    <mat-card-title>
+        {{ nameStore }}
+    </mat-card-title>
+</div>
+<div *ngIf="(products$ | async) as products"
+    class="product-grid" 
+    ClassName="container">
+    <app-product
+        *ngFor="let product of products"
+        [product]="product">
+    </app-product>
+</div>

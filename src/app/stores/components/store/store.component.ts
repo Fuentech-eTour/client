@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { StoresService } from '@core/services/stores.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-store',
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.scss']
+})
+export class StoreComponent implements OnInit {
+
+  products$: Observable<any>;
+  nameStore: string;
+
+
+  constructor(
+    private storesService: StoresService,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    this.products$ = this.route.params
+    .pipe(
+      switchMap((params: Params) => {
+        return this.storesService.getProductsOneStore(params.id);
+      })
+    );
+    this.products$.subscribe(product => {
+      this.nameStore = product[0].user_name;
+    });
+  }
+
+}

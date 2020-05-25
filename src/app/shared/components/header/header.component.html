@@ -1,0 +1,48 @@
+<div class="navbar-margin">
+    <mat-toolbar class="navbar-fixed-top" style="background-color: white;">
+        <mat-toolbar-row class="border-toolbar">
+            <div class="row between-xs middled-xs header-row">
+                <nav class="row">
+                    <!-- <div mat-card-avatar
+                    style="background-image: url(./../../../../assets/images/icon.png);
+                    background-size: cover;">
+                </div> -->
+                    <button mat-icon-button (click)="toggleSideBarIzq()">
+                        <mat-icon style="color: #73726c;">menu</mat-icon>
+                    </button>
+                    <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
+                    <a mat-button (click)="installByUser()" *ngIf="installEvent">Install App</a>
+                    <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
+                </nav>
+                <div class="row between-xs middled-xs cart-content">
+                    <a mat-button routerLink="/stores" routerLinkActive="active" mat-button style="padding: 0px 10px; font-size: 12px;">
+                        Tiendas
+                        <mat-icon style="color: #73726c;">storefront</mat-icon></a>
+                    <a mat-button routerLink="/products" routerLinkActive="active" mat-button style="padding: 0px 10px; font-size: 12px;">
+                        Productos
+                        <mat-icon style="color: #73726c;">widgets</mat-icon></a>
+                    <a mat-button routerLink="/admin" routerLinkActive="active" style="padding: 0px 10px; font-size: 12px;">
+                        {{userName}}
+                        <mat-icon style="color: #73726c;">account_circle</mat-icon>
+                        <mat-icon style="color: #4d90d3;">arrow_drop_down</mat-icon>
+                    </a>
+                    <a (click)="toggleSideBar()" routerLinkActive="active" mat-button style="padding: 0px 10px; font-size: 12px;">
+                        Total: {{ totalCompra$ | async | currency:'$':'symbol':'1.0-0' }}
+                        <mat-icon [matBadge]="total$ | async" matBadgeColor="warn"
+                            [matBadgeHidden]="matBageShow$ | async" style="color: #73726c;">
+                            shopping_cart
+                        </mat-icon>
+                    </a>
+                    <!-- <a mat-button
+                style="padding: 0px 10px;">
+                    <div mat-card-avatar
+                        routerLink="/admin"
+                        style="background-image: url(./../../../../assets/images/user.png);
+                        background-size: cover;">
+                    </div>
+                </a> -->
+                </div>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>

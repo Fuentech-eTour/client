@@ -1,0 +1,24 @@
+<mat-sidenav-container class="example-container" hasBackdrop="false" autosize>
+    <mat-sidenav-content>
+        <app-header></app-header>
+        <!-- <div *ngIf="windowWidth >= 475">
+            <div class="aline-product" *ngIf="(sideBarOpen$ | async) as sideBarOpen">
+                <div class="container-shown" *ngIf="sideBarOpen === true" (click)="toggleSideBar()">
+                </div>
+            </div>
+        </div> -->
+
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+
+        <!-- <app-footer></app-footer> -->
+    </mat-sidenav-content>
+    <mat-sidenav
+    position="end"  
+    [opened]="sideBarOpen$ | async"
+    class="example-sidenav" 
+    mode="over">
+    <app-cart></app-cart>
+    </mat-sidenav>
+</mat-sidenav-container>

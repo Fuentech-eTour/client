@@ -1,0 +1,69 @@
+<!-- Swiper -->
+<div class="swiper-container general">
+    
+    <!-- header -->
+    <div class="row between-xs middled-xs" style="padding: 10px 10px 0px 20px;">
+        <mat-card-title 
+        class="title-slide" 
+        style="padding: 8px 0px; margin: 0px;">
+            {{store.name}}
+        </mat-card-title>
+        <div class="row show-hover title-slide">
+            <div class="row" style="padding: 0px 20px 0px 0px">
+                <a mat-button [matMenuTriggerFor]="aboveMenu" class="btn-style">
+                    <mat-icon style="color: #73726c;">star_border</mat-icon></a>
+                <mat-card-subtitle [routerLink]="['/stores', store.id]"
+                class="title-slide"
+                style="padding: 8px 8px 4px 0px; margin: 0px;">
+                    ver mas
+                </mat-card-subtitle>
+            </div>
+        </div>
+    </div>
+    <!-- swiper wrapper -->
+    <div class="swiper-wrapper">
+        <div *ngFor = "let storeProduct of store.products"
+            class="swiper-slide">
+            <app-product-store [product]="storeProduct">
+            </app-product-store>
+        </div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+
+    <!-- footer -->
+    <div class="row between-xs middled-xs" style="padding: 10px 10px 5px 20px;">
+        <div class="row title-slide">
+            <div class="row" style="padding: 0px 20px 0px 0px">
+                <a mat-button routerLinkActive="active" class="btn-style">
+                    Suscripción
+                    <mat-icon style="color: #73726c;">favorite_border</mat-icon></a>
+                <a mat-button routerLinkActive="active" class="btn-style">
+                    Comentar
+                    <mat-icon style="color: #73726c;">insert_comment</mat-icon></a>
+                <a mat-button routerLinkActive="active" class="btn-style">
+                    Compartir
+                    <mat-icon style="color: #73726c;">reply</mat-icon></a>
+            </div>
+        </div>
+        <div class="row title-slide">
+            <div class="row" style="padding: 0px 20px 0px 0px">
+                <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
+                    <mat-icon style="color: #73726c;">more_horiz</mat-icon></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="background-color: #f9fafc; width: 100%; height: 10px;"></div>
+
+<!-- menu qualification -->
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+    <a mat-button class="btn-style">
+        <mat-icon style="color: #73726c;">star_border</mat-icon>
+        <mat-icon style="color: #73726c;">star_border</mat-icon>
+        <mat-icon style="color: #73726c;">star_border</mat-icon>
+        <mat-icon style="color: #73726c;">star_border</mat-icon>
+        <mat-icon style="color: #73726c;">star_border</mat-icon>
+    </a>
+</mat-menu>
+

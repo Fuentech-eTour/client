@@ -1,0 +1,95 @@
+<!--Derecho sidenav desplegable -- init -->
+<!-- button of close -- init -->
+<div class="row between-xs middled-xs position-bar-top2">
+
+    <div class="box">
+        <a mat-raised-button disabled="false" (click)="toggleSideBar()"
+            style="color: white; border-radius: 20px; background-color: #6ee200;">
+            Cerrar
+        </a>
+    </div>
+
+    <div class="box">
+        <mat-card-title style="color: white; padding: 8px; margin-bottom: 0px;">
+            Carrito de compra
+        </mat-card-title>
+    </div>
+
+</div>
+<!-- button of close -- final -->
+
+<!-- List of products -- init -->
+<div class="position-sidenav">
+    <div class="aline-product" *ngIf="(store$ | async) as store">
+        <div class="position-message-center" *ngIf="store.length === 0">
+            <mat-card-title>aun no agregas productos!</mat-card-title>
+        </div>
+        <div class="position-message-center" *ngIf="store.length !== 0">
+            <mat-card-title>Lista de tiendas</mat-card-title>
+        </div>
+        <div style="margin-top: 20px;">
+            <mat-accordion *ngFor="let orderLists of store">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ orderLists.name }}
+                        </mat-panel-title>
+                        <mat-panel-description style="flex-direction: row-reverse;">
+                            {{ orderLists.total | currency:'$':'symbol':'1.0-0'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-grid-list cols="3" rowHeight="42px" *ngFor="let list of orderLists.products"
+                        class="container-list-product">
+                        <mat-grid-tile colspan="1" rowspan="3" style.background="white">
+                            <div class="crop-image" [routerLink]="['/products', list.id]" (click)="toggleSideBar()">
+                                <img *ngIf="list.image !== ''"
+                                    onerror="this.src = './../../../../assets/images/not-image.png'" [src]="list.image">
+                                <img *ngIf="list.image ===''" src="./../../../../assets/images/not-image.png">
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="2" rowspan="3" style.background="white">
+                            <mat-card-subtitle>
+                                <strong>{{ list.title | uppercase | slice:0:20 }}</strong> <br>
+                                {{list.description | slice:0:30}} <br>
+                                precio/und: {{ list.price | currency:'COP$':'symbol':'1.0-0' }}
+                            </mat-card-subtitle>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="2" rowspan="1" style.background="white">
+                            <mat-card-subtitle>
+                                <strong>subTotal:
+                                    {{ list.price * list.cant| currency:'$':'symbol':'1.0-0' }}</strong>
+                            </mat-card-subtitle>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1" style.background="white">
+                            <app-count-products style="cursor: pointer;" [product]="list">
+                            </app-count-products>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+<!-- List of products -- final -->
+
+<!-- button of pay -- init -->
+<div *ngIf="(products$ | async) as products">
+    <div *ngIf="products.length > 0" class="row between-xs middled-xs position-bar-bottom">
+
+        <div class="box">
+            <a mat-raised-button disabled="false" routerLink="/order" routerLinkActive="active"
+                (click)="toggleSideBar()" style="color: white; border-radius: 20px; background-color: #6ee200;">
+                Ir a pagar
+            </a>
+        </div>
+
+        <div class="box">
+            <mat-card-title style="color: white; padding: 8px; margin-bottom: 0px;">
+                Total: {{ totalCompra$ | async | currency:'$':'symbol':'1.0-0' }}
+            </mat-card-title>
+        </div>
+
+    </div>
+</div>
+<!-- button of pay -- final -->
+<!--Derecho sidenav desplegable -- final -->

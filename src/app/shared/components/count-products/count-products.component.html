@@ -1,0 +1,22 @@
+<div *ngIf="(addProduct$ | async) as addProduct">
+    <div class="position-counter" 
+    *ngFor="let addProduct of addProduct">
+        <div *ngIf="addProduct.id === product.id && addProduct.cant > 0">
+            <mat-icon *ngIf="addProduct.cant > 1" style="margin-right: 10px;" 
+            (click)="removeCart()">
+                remove_circle_outline
+            </mat-icon>
+            <mat-icon *ngIf="addProduct.cant === 1" style="margin-right: 8px;" 
+            (click)="removeCart()">
+                delete_outline
+            </mat-icon>
+            <a [matBadge]="addProduct.cant" 
+            matBadgePosition="before" 
+            matBadgeColor="accent" ></a>
+            <mat-icon style="margin-left: 10px;" 
+            (click)="addCart()">
+                add_circle_outline
+            </mat-icon>
+        </div>
+    </div>
+</div>
