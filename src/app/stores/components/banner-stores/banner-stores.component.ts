@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Store } from '../../../core/models/store.model';
 
 import { CartService } from './../../../core/services/cart.service';
+import { StoresService } from './../../../core/services/stores.service';
 
 import Swiper from 'swiper';
 
@@ -18,9 +19,11 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   showFiller = false;
   slidesPerView: number;
   windowWidth: number = window.screen.width;
+  subscribeBtn = false;
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private storesService: StoresService
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +68,12 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         this.cartService.addPrice(this.store.products[i].price);
       }
     }
-}
+  }
+
+  subscribe(store: Store) {
+    if (this.subscribeBtn === false) {
+      this.storesService.createSubscription(store);
+    }
+  }
 
 }

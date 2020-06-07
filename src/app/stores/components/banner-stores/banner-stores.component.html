@@ -35,9 +35,12 @@
     <div class="row between-xs middled-xs" style="padding: 10px 10px 5px 20px;">
         <div class="row title-slide">
             <div class="row" style="padding: 0px 20px 0px 0px">
-                <a mat-button routerLinkActive="active" class="btn-style">
-                    Suscripción
-                    <mat-icon style="color: #73726c;">favorite_border</mat-icon></a>
+                <a mat-button routerLinkActive="active" class="btn-style"  *ngIf="subscribeBtn===false" (click)="subscribe(store)">
+                    Suscribirse
+                    <mat-icon style="color: #73726c;">notifications_none</mat-icon></a>
+                <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn===true" (click)="subscribe(store)">
+                    Suscrito
+                    <mat-icon style="color: #f44336;">notifications_active</mat-icon></a>
                 <a mat-button routerLinkActive="active" class="btn-style">
                     Comentar
                     <mat-icon style="color: #73726c;">insert_comment</mat-icon></a>
