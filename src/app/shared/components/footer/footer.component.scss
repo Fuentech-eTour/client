@@ -1,42 +1,40 @@
 @import '~@angular/material/theming';
-
 $primary: mat-palette($mat-indigo);
-
 footer {
-  padding: 50px 0px 0px 0px;
-  margin-top: 20px;
-  border-top: solid 1px #dbdcdd;
-  /* background-color: mat-color($primary); */
-  background-color: white;
-  .box {
-    h3 {
-      color: rgba(0, 0, 0, .54);
-    }
-    input{
-      color: rgba(0, 0, 0, .54);
-    }
-    ul {
-      list-style: none;
-      margin: 0px;
-      padding: 0px;
-      li {
-        margin: 10px 0px;
-        a {
-          text-decoration: none;
-          color: rgba(0, 0, 0, .54);
+    padding: 50px 0px 0px 0px;
+    margin-top: 20px;
+    border-top: solid 1px #dbdcdd;
+    /* background-color: mat-color($primary); */
+    background-color: white;
+    .box {
+        h3 {
+            color: rgba(0, 0, 0, .54);
         }
-      }
+        input {
+            color: rgba(0, 0, 0, .54);
+        }
+        ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            li {
+                margin: 3px 0px;
+                a {
+                    text-decoration: none;
+                    color: rgba(0, 0, 0, .54);
+                }
+            }
+        }
     }
-  }
 }
+
 .cont-back-color {
-  background-color: white;
+    background-color: white;
 }
 
 .copyright {
-  display: inline;
-  text-align: center;
-  align-items: center;
-  padding: 20px 0px;
-  border-top: solid 1px #dbdcdd;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    padding: 20px 0px;
 }

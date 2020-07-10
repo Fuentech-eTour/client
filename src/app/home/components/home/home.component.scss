@@ -1,0 +1,58 @@
+/* input search -- init -- */
+
+.form-btn-search {
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+}
+
+.cont-btn-search {
+    border: solid 2px #b1b1b1;
+    border-radius: 20px;
+    height: 45px;
+    width: 525px;
+    display: inline-block;
+    text-align: left;
+}
+
+.btn-search {
+    text-decoration: none;
+    height: 40px;
+    width: 450px;
+    font-size: 20px;
+    outline: none;
+    outline-width: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border: none;
+    margin: 2px 2px 2px 20px;
+    background-color: #f9fafc;
+}
+
+.label-btn-search {
+    margin-left: 0px;
+    margin-top: 6px;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+
+/* input search -- final -- */
+
+
+/* sistemas de grillas para las tarjetas de las suscripciones -- init -- */
+
+.subscription-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+
+/* sistemas de grillas para las tarjetas de las suscripciones -- final -- */

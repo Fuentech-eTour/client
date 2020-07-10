@@ -1,0 +1,18 @@
+<div class="cont-category">
+    <h1 class="title" routerLink="/stores" (click)="mostrar2.toggle()">Tiendas
+        <img class="icon-category" src="./../../../../assets/images/Shop128x128.png" width="20px" height="20px" alt="categoria tienda">
+        <!-- <mat-icon>storefront</mat-icon> -->
+    </h1>
+    <div class="category">
+        <p *ngFor="let catTienda of categoriasTiendas">{{catTienda}}</p>
+        <p><b>Ver mas...</b></p>
+    </div>
+    <h1 class="title" routerLink="/products" (click)="mostrar2.toggle()">Productos
+        <img class="icon-category" src="./../../../../assets/images/Supermarket128x128.png" width="20px" height="20px" alt="categoria tienda">
+        <!-- <mat-icon class="icon-category">category</mat-icon> -->
+    </h1>
+    <div class="category">
+        <p *ngFor="let catProd of categoriasProductos">{{catProd}}</p>
+        <p><b>Ver mas...</b></p>
+    </div>
+</div>

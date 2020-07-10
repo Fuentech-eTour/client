@@ -1,0 +1,32 @@
+<mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
+    <mat-card-header style="text-align: left;">
+        <mat-card-title style="font-size: 25px;">{{subs.nameProduct}}</mat-card-title>
+        <mat-card-subtitle>{{subs.nivel}}</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+        <ul style="list-style: none; text-align: left;">
+            <li style="display: flex; align-items: center;">
+                <mat-icon style="color: yellowgreen;">check</mat-icon>
+                <mat-card-subtitle style="margin: 0px;">Incluye esto</mat-card-subtitle>
+            </li>
+            <li style="display: flex; align-items: center;">
+                <mat-icon style="color: yellowgreen;">check</mat-icon>
+                <mat-card-subtitle style="margin: 0px;">Incluye esto</mat-card-subtitle>
+            </li>
+            <li style="display: flex; align-items: center;">
+                <mat-icon style="color: yellowgreen;">check</mat-icon>
+                <mat-card-subtitle style="margin: 0px;">Incluye esto</mat-card-subtitle>
+            </li>
+            <li style="display: flex; align-items: center;">
+                <mat-icon style="color: yellowgreen;">check</mat-icon>
+                <mat-card-subtitle style="margin: 0px;">Incluye esto</mat-card-subtitle>
+            </li>
+        </ul>
+        <h1>{{subs.price | currency:'COP$':'symbol':'1.0-0'}}/MES</h1>
+        <p style="padding: 20px;">FuenTech S.A.S. es una compañía que desarrolla software escalable a la medida según la necesidad de tu empresa o negocio. Estamos comprometidos con nuestros clientes para llevar a cabo los proyectos.</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-stroked-button style="color: #d0006f;">VER DETALLES</button>
+    </mat-card-actions>
+</mat-card>

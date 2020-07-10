@@ -19,6 +19,8 @@ import { MatListModule } from '@angular/material/list';
 import { MoreContentPipe } from './pipes/more-content/more-content.pipe';
 import { CountProductPipe } from './pipes/count-product/count-product.pipe';
 import { CountProductsComponent } from './components/count-products/count-products.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AddressOptionsComponent } from './components/address-options/address-options.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { CountProductsComponent } from './components/count-products/count-produc
     CountProductPipe,
     CartComponent,
     CountProductsComponent,
+    SidenavComponent,
+    AddressOptionsComponent,
   ],
   exports: [
     ExponentialPipe,
@@ -37,7 +41,8 @@ import { CountProductsComponent } from './components/count-products/count-produc
     HeaderComponent,
     FooterComponent,
     CountProductPipe,
-    CartComponent
+    CartComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,

@@ -15,13 +15,13 @@ import Swiper from 'swiper';
 })
 export class ProductsComponent implements OnInit, AfterViewInit {
 
-  products: Product[] = [];
-  mySwiper: Swiper;
   totalCompra$: Observable<number>;
   products$: Observable<AddProduct[]>;
   store$: Observable<Store[]>;
   sideBarOpen$: Observable<boolean>;
   sideBarOpenIzq$: Observable<boolean>;
+  products: Product[] = [];
+  mySwiper: Swiper;
   showFiller = false;
   slidesPerView: number;
   windowWidth: number = window.screen.width;
@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
   ) {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
@@ -44,12 +44,29 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (window.screen.width <= 425) {
+    /* if (this.window$.subscribe() as any <= 425) {
       this.slidesPerView = 2;
-    } else if (window.screen.width <= 768) {
+    } else if (this.window$.subscribe() as any <= 768) {
       this.slidesPerView = 3;
     } else {
       this.slidesPerView = 6;
+    } */
+
+    if (window.matchMedia('(max-width: 375px)').matches) {
+      this.slidesPerView = 2;
+      console.log('dos card');
+    } else if (window.matchMedia('(max-width: 516px)').matches) {
+      this.slidesPerView = 3;
+      console.log('tres card');
+    } else if (window.matchMedia('(max-width: 668px)').matches) {
+      this.slidesPerView = 4;
+      console.log('cuatro card');
+    } else if (window.matchMedia('(max-width: 860px)').matches) {
+      this.slidesPerView = 5;
+      console.log('cinco card');
+    } else {
+      this.slidesPerView = 6;
+      console.log('seis card');
     }
 
     this.mySwiper = new Swiper('.swiper-container', {

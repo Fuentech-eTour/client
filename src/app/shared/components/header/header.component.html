@@ -2,47 +2,94 @@
     <mat-toolbar class="navbar-fixed-top" style="background-color: white;">
         <mat-toolbar-row class="border-toolbar">
             <div class="row between-xs middled-xs header-row">
-                <nav class="row">
-                    <!-- <div mat-card-avatar
-                    style="background-image: url(./../../../../assets/images/icon.png);
-                    background-size: cover;">
-                </div> -->
-                    <button mat-icon-button (click)="toggleSideBarIzq()">
+                <nav class="row" style="align-items: center;">
+                    <button mat-icon-button (click)="mostrar2.toggle()" (click)="showIconMenu()">
                         <mat-icon style="color: #73726c;">menu</mat-icon>
+                        <!-- <mat-icon *ngIf="!stateIconMenu" style="color: #73726c;">menu</mat-icon>
+                        <mat-icon *ngIf="stateIconMenu" style="color: #73726c;">close</mat-icon> -->
                     </button>
-                    <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
+                    <!-- <div mat-card-avatar routerLink="/home" style="background-image: url(./../../../../assets/images/icon.png);
+                    background-size: cover;">
+                    </div> -->
+                    <a mat-icon-button style="width: 75px;">
+                        <img src="./../../../../assets/images/logo1.png" routerLink="/home" style="cursor: pointer;" alt="logo">
+                    </a>
+                    <!-- <a mat-button routerLink="/home" routerLinkActive="active" style="font-family: cursive; font-style: italic; font-size: 30px; color: #d0006f;">ema</a> -->
+                    <!-- <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a> -->
+                    <div class="row" mat-icon-button style="height: 40px; padding: 0px 10px; margin: 0px 10px;">
+                        <mat-icon class="col" style="color: #d0006f; font-size: 40px; width: 42px;">place</mat-icon>
+                        <div class="col" (click)="openDialog()">
+                            <p style="font-size: 12px; color: #73726c;">enviar a:</p>
+                            <p style="font-size: 14px; margin: -30px 0px 0px 0px; cursor: pointer;">cra 6a #15b-18
+                                <mat-icon style="color: #4d90d3;">arrow_drop_down</mat-icon>
+                            </p>
+                        </div>
+                    </div>
                     <a mat-button (click)="installByUser()" *ngIf="installEvent">Install App</a>
-                    <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
                 </nav>
-                <div class="row between-xs middled-xs cart-content">
-                    <a mat-button routerLink="/stores" routerLinkActive="active" mat-button style="padding: 0px 10px; font-size: 12px;">
+                <div class="cont-btn-search">
+                    <input class="btn-search" type="text" matInput placeholder="Buscar...">
+                    <mat-label class="label-btn-search">
+                        <mat-icon style="color: #73726c; font-size: 25px;">search</mat-icon>
+                    </mat-label>
+                </div>
+                <div class="row between-xs middled-xs card-content">
+                    <!-- <a mat-button routerLink="/stores" routerLinkActive="active" mat-button>
                         Tiendas
                         <mat-icon style="color: #73726c;">storefront</mat-icon></a>
-                    <a mat-button routerLink="/products" routerLinkActive="active" mat-button style="padding: 0px 10px; font-size: 12px;">
+                    <a mat-button routerLink="/products" routerLinkActive="active" mat-button>
                         Productos
-                        <mat-icon style="color: #73726c;">widgets</mat-icon></a>
-                    <a mat-button routerLink="/admin" routerLinkActive="active" style="padding: 0px 10px; font-size: 12px;">
-                        {{userName}}
+                        <mat-icon style="color: #73726c;">widgets</mat-icon></a> -->
+                    <a mat-button [matMenuTriggerFor]="menu">
                         <mat-icon style="color: #73726c;">account_circle</mat-icon>
+                        Hola, {{ userName.split(' ')[0] | titlecase }}
                         <mat-icon style="color: #4d90d3;">arrow_drop_down</mat-icon>
                     </a>
-                    <a (click)="toggleSideBar()" routerLinkActive="active" mat-button style="padding: 0px 10px; font-size: 12px;">
+                    <a (click)="mostrar.toggle()" routerLinkActive="active" mat-button>
                         Total: {{ totalCompra$ | async | currency:'$':'symbol':'1.0-0' }}
                         <mat-icon [matBadge]="total$ | async" matBadgeColor="warn"
                             [matBadgeHidden]="matBageShow$ | async" style="color: #73726c;">
                             shopping_cart
                         </mat-icon>
                     </a>
-                    <!-- <a mat-button
-                style="padding: 0px 10px;">
-                    <div mat-card-avatar
-                        routerLink="/admin"
-                        style="background-image: url(./../../../../assets/images/user.png);
-                        background-size: cover;">
-                    </div>
-                </a> -->
+                    <!-- <a mat-button style="padding: 0px 10px;">
+                        <div mat-card-avatar routerLink="/admin" class="avatar-header-image">
+                        </div>
+                    </a> -->
                 </div>
             </div>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
+
+<!-- menu user --init-- -->
+
+<mat-menu #menu="matMenu">
+    <div class="row" style="border-bottom: solid 1px rgba(0,0,0,.25); margin-right: 0rem;">
+        <div class="col-xs-12 col-md-4" style="text-align: center;">
+            <mat-icon style="font-size: 35px; color: rgba(0,0,0,.54);">sentiment_satisfied_alt</mat-icon>
+        </div>
+        <div class="col-xs-12 col-md-8" style="padding: 0px;">
+            <span style="color: rgba(0,0,0,.87);">Hola, Ema</span><br>
+            <span style="font-size: 12px; color: rgba(0,0,0,.87); cursor: pointer;">ver Perfil</span>
+        </div>
+    </div>
+    <button mat-menu-item>
+      <mat-icon>list_alt</mat-icon>
+      <span>Listas guardadas</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>location_on</mat-icon>
+      <span>Direcciones</span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>loyalty</mat-icon>
+        <span>Pedidos</span>
+      </button>
+    <button mat-menu-item style="border-top: solid 1px rgba(0,0,0,.25);">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+</mat-menu>
+
+<!-- menu user --final-- -->

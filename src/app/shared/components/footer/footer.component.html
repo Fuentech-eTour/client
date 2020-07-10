@@ -1,51 +1,61 @@
 <footer>
     <div class="container cont-back-color">
-      <div class="row">
-        <div class="col-xs-12 col-md-4">
-          <div class="box">
-            <h3>Productos</h3>
-            <ul>
-              <li>
-                <a routerLink="/products" [queryParams]="{ type: 'news' }"
-                  >Nuevos Productos</a
-                >
-              </li>
-              <li>
-                <a routerLink="/products" [queryParams]="{ type: 'offer' }"
-                  >En oferta</a
-                >
-              </li>
-              <li>
-                <a routerLink="/products" [queryParams]="{ type: 'latest' }"
-                  >Últimos productos</a
-                >
-              </li>
-            </ul>
-          </div>
+        <div class="row">
+            <div class="col-xs-10 col-md-2" style="align-items: center; text-align: center;">
+                <div class="box">
+                    <div style="width: 75px;">
+                        <img src="./../../../../assets/images/logo1.png" routerLink="/home" style="padding: 45px 30px;" alt="logo">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-10 col-md-2">
+                <div class="box">
+                    <h3><b>Ayuda</b></h3>
+                    <ul>
+                        <li><a routerLink="/products">Vender</a></li>
+                        <li><a routerLink="/products">Comprar</a></li>
+                        <li><a routerLink="/products">Contáctanos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-10 col-md-2">
+                <div class="box">
+                    <h3><b>Acerca de</b></h3>
+                    <ul>
+                        <li><a routerLink="/about-us">ema</a></li>
+                        <li><a routerLink="/stores">Fuentech</a></li>
+                        <li><a routerLink="/stores">Políticas</a></li>
+                        <li><a routerLink="/stores">Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-10 col-md-2">
+                <div class="box">
+                    <h3><b>Mi cuenta</b></h3>
+                    <ul>
+                        <li><a routerLink="/about-us">Perfil</a></li>
+                        <li><a routerLink="/stores">Favoritos</a></li>
+                        <li><a routerLink="/stores">Seguridad</a></li>
+                        <li><a routerLink="/stores">Historial</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-10 col-md-2">
+                <div class="box" style="text-align: center; align-items: center;">
+                    <div class="row" style="padding: 45px 25px;">
+                        <img src="./../../../../assets/images/FB128x128.png" routerLink="#" style="padding: 5px 5px;" width="30px" height="30px" alt="redes">
+                        <img src="./../../../../assets/images/INS128x128.png" routerLink="#" style="padding: 5px 5px;" width="30px" height="30px" alt="redes">
+                        <img src="./../../../../assets/images/WA128x128.png" routerLink="#" style="padding: 5px 5px;" width="30px" height="30px" alt="redes">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-12 col-md-4">
-          <div class="box">
-            <h3>Acerca de ema</h3>
-            <ul>
-              <li><a routerLink="/about-us">Sobre nosotros</a></li>
-              <li><a routerLink="/stores">Nuestras tiendas</a></li>
-            </ul>
-          </div>
+        <div>
+            <div class="row">
+                <div class="copyright">
+                    <mat-card-subtitle>© 2020 ema, Inc. All rights reserved·Privacidad·Términos</mat-card-subtitle>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-12 col-md-4">
-          <div class="box">
-            <h3>Contacto</h3>
-            <mat-form-field>
-              <input matInput placeholder="Digite su correo" [formControl]="emailField" type="email">
-            </mat-form-field>
-            <button mat-button [disabled]="emailField.invalid" (click)="sendMail()">enviar</button>
-          </div>
-        </div>
-      </div>
-      <footer>
-        <div class="row copyright">
-          <mat-card-subtitle>© 2020 ema, Inc. All rights reserved·Privacidad·Términos</mat-card-subtitle>
-        </div>
-    </footer>
     </div>
-  </footer>
+</footer>

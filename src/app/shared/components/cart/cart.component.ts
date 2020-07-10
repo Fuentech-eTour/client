@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '@core/models/product.model';
 import { AddProduct } from '@core/models/addProduct.model';
 import { Store } from '@core/models/store.model';
@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+
+  @Input() mostrar: any;
 
   products: Product[] = [];
   totalCompra$: Observable<number>;

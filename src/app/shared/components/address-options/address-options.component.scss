@@ -1,0 +1,44 @@
+/* address -- init */
+
+.full-width {
+    width: 100%;
+}
+
+.shipping-card {
+    width: 450px;
+    min-width: 120px;
+    margin: 20px auto;
+}
+
+.mat-radio-button {
+    display: block;
+    margin: 5px 0;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.col:last-child {
+    margin-right: 0;
+}
+
+.address-shadow {
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+}
+
+.cont-address {
+    width: 450px;
+    box-shadow: none;
+    margin: 0px auto;
+}
+
+
+/* address -- final */

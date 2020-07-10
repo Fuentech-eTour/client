@@ -1,4 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import { AddressOptionsComponent } from '../address-options/address-options.component';
 
 import { map } from 'rxjs/operators';
 
@@ -13,6 +16,9 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() mostrar: any;
+  @Input() mostrar2: any;
+
   total$: Observable<number>;
   contByProduct$: Observable<number[]>;
   totalCompra$: Observable<number>;
@@ -21,9 +27,11 @@ export class HeaderComponent implements OnInit {
   matBageShow$: Observable<boolean>;
   installEvent;
   userName: string = localStorage.getItem('user_name');
+  stateIconMenu = false;
 
   constructor(
     private cartService: CartService,
+    private dialog: MatDialog,
   ) {
     this.total$ = this.cartService.numProductsCart$
     .pipe(map(products => products.length));
@@ -49,6 +57,21 @@ export class HeaderComponent implements OnInit {
 
   toggleSideBarIzq() {
     this.cartService.sideBarTogglerIzq();
+  }
+
+  showIconMenu() {
+    this.stateIconMenu = !this.stateIconMenu;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddressOptionsComponent, {
+      width: '550px',
+      // data: {name: this.isLinear, animal: this.isLinear}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])

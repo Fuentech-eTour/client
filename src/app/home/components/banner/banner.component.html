@@ -1,7 +1,26 @@
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" *ngFor = "let img of images">
-            <img [src]="img" alt="imagen de banner">
+        <div class="swiper-slide" *ngFor="let img of images">
+            <div style="margin: 20px 0px; text-align: center;">
+                <!-- <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Shiba Inu</mat-card-title>
+                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                </mat-card-header> -->
+                <img [src]="img" alt="imagen de banner" style="border-radius: 20px 20px 0px 0px;">
+                <div style="border-radius: 0px 0px 20px 20px; border-left: solid 1px rgb(199, 199, 199);
+                    border-right: solid 1px rgb(199, 199, 199); border-bottom: solid 1px rgb(199, 199, 199); margin-top: -8px;">
+                    <img src="../../../assets/images/logoTienda.png" alt="logo tienda" style="width: 33%; margin-top: -50px; cursor: pointer;">
+                    <h1 style="cursor: pointer;">EL GANGAZO</h1>
+                    <mat-card-subtitle>Ropa</mat-card-subtitle>
+                    <!-- <mat-card-actions>
+                        <button mat-stroked-button style="color: #d0006f;">ir a TIENDA</button>
+                    </mat-card-actions> -->
+                </div>
+            </div>
         </div>
+        <!-- Add Arrows -->
     </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
 </div>
