@@ -3,9 +3,16 @@
 
     <!-- header -->
     <div class="row between-xs middled-xs" style="padding: 10px 10px 0px 20px;">
-        <mat-card-title class="title-slide" style="padding: 8px 0px; margin: 0px;">
-            {{store.razonsocial | titlecase}}
-        </mat-card-title>
+        <div style="display: flex; align-items: center;">
+            <div mat-card-avatar style="background-image: url({{store.imagen}});
+                background-size: cover;">
+                <img *ngIf="store.imagen ==='' || store.imagen === null || store.imagen === undefined" src="./../../../../assets/images/icon-store.png">
+            </div>
+            <mat-card-title class="title-slide" style="padding: 8px; margin: 0px;">
+                {{store.razonsocial | titlecase}}
+            </mat-card-title>
+        </div>
+
         <div class="row show-hover title-slide">
             <div class="row" style="padding: 0px 20px 0px 0px">
                 <!-- menu qualification display: none; a espera de implementacion -->
