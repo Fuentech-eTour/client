@@ -32,7 +32,7 @@
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            {{ orderLists.name }}
+                            {{ orderLists.razonsocial }}
                         </mat-panel-title>
                         <mat-panel-description style="flex-direction: row-reverse;">
                             {{ orderLists.total | currency:'$':'symbol':'1.0-0'}}
@@ -41,19 +41,19 @@
                     <mat-grid-list cols="3" rowHeight="42px" *ngFor="let list of orderLists.products" class="container-list-product">
                         <mat-grid-tile colspan="1" rowspan="3" style.background="white">
                             <div class="crop-image" [routerLink]="['/products', list.id]" (click)="toggleSideBar()">
-                                <img *ngIf="list.image !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="list.image">
-                                <img *ngIf="list.image ===''" src="./../../../../assets/images/not-image.png">
+                                <img *ngIf="list.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="list.imagen">
+                                <img *ngIf="list.imagen ===''" src="./../../../../assets/images/not-image.png">
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="2" rowspan="3" style.background="white">
                             <mat-card-subtitle>
-                                <strong>{{ list.title | uppercase | slice:0:20 }}</strong> <br> {{list.description | slice:0:30}} <br> precio/und: {{ list.price | currency:'COP$':'symbol':'1.0-0' }}
+                                <strong>{{ list.nombrearticulo | uppercase | slice:0:20 }}</strong> <br> {{list.descripcion | slice:0:30}} <br> precio/und: {{ list.valorventa | currency:'COP$':'symbol':'1.0-0' }}
                             </mat-card-subtitle>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="2" rowspan="1" style.background="white">
                             <mat-card-subtitle>
                                 <strong>subTotal:
-                                    {{ list.price * list.cant| currency:'$':'symbol':'1.0-0' }}</strong>
+                                    {{ list.valorventa * list.cant| currency:'$':'symbol':'1.0-0' }}</strong>
                             </mat-card-subtitle>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="1" rowspan="1" style.background="white">

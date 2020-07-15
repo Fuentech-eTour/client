@@ -68,10 +68,6 @@ export class HeaderComponent implements OnInit {
       width: '550px',
       // data: {name: this.isLinear, animal: this.isLinear}
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])

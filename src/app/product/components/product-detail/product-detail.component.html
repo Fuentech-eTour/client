@@ -9,27 +9,25 @@
         <div class="row border-table middle-xs">
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <div>
-                    <img [src]="product.image" alt="" style="border-radius: 20px;">
+                    <img [src]="product.imagen" alt="" style="border-radius: 20px;">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <div>
                     <ul>
                         <li>
-                            <mat-card-title>Nombre: {{ product.title }}</mat-card-title>
+                            <mat-card-title>Nombre: {{ product.nombrearticulo }}</mat-card-title>
                         </li>
                         <li>
-                            <mat-card-subtitle>Precio/unid: {{ product.price | currency }}</mat-card-subtitle>
+                            <mat-card-subtitle>Precio/unid: {{ product.valorventa | currency }}</mat-card-subtitle>
                         </li>
                     </ul>
-                    <p>{{ product.description }}</p>
+                    <p>{{ product.descripcion }}</p>
                 </div>
                 <button (click)="addCart()" mat-raised-button class="btn-add">
                     agregar
                 </button>
-                <app-counter-products 
-                    style="cursor: pointer;"
-                    [product]="product">
+                <app-counter-products style="cursor: pointer;" [product]="product">
                 </app-counter-products>
             </div>
         </div>

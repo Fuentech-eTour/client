@@ -1,0 +1,21 @@
+<div>
+    <mat-card class="cont-category">
+        <mat-card-header>
+            <div mat-card-avatar style="background-image: url(./../../../../assets/images/icon-store.png); background-size: cover;">
+                <img src="./../../../../assets/images/icon-store.png">
+            </div>
+            <mat-card-title style="font-size: 20px;" class="title-style">
+                Fuentech
+            </mat-card-title>
+        </mat-card-header>
+
+        <h1 class="title" routerLink="/products">Categorias
+            <img class="icon-category" src="./../../../../assets/images/Supermarket128x128.png" width="20px" height="20px" alt="categoria tienda">
+            <!-- <mat-icon class="icon-category">category</mat-icon> -->
+        </h1>
+        <div class="category">
+            <p *ngFor="let catProd of categoriasProductos">{{catProd}}</p>
+            <p><b>Ver mas...</b></p>
+        </div>
+    </mat-card>
+</div>

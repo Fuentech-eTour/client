@@ -1,0 +1,41 @@
+.cont-category {
+    position: fixed;
+    width: 225px;
+    height: auto;
+    display: inline-block;
+    margin-top: 10px;
+    mat-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0px;
+    }
+    .title {
+        color: white;
+        font-size: 16px;
+        margin-bottom: 0px;
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        padding: 0% 25%;
+        background-color: #c6c6c6;
+        cursor: pointer;
+        .icon-category {
+            color: white;
+            display: flex;
+            padding: 0px 10px;
+        }
+    }
+    .category {
+        margin: 20px 0px;
+        p {
+            margin: 10px 10px 0px 10px;
+            padding: 5px 0px;
+            font-size: 16px;
+            border-bottom: solid 1px #c6c6c6;
+            color: #555555;
+            cursor: pointer;
+        }
+    }
+}

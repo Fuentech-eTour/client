@@ -1,20 +1,18 @@
 <!-- Swiper -->
 <div class="swiper-container general">
-    
+
     <!-- header -->
     <div class="row between-xs middled-xs" style="padding: 10px 10px 0px 20px;">
-        <mat-card-title 
-        class="title-slide" 
-        style="padding: 8px 0px; margin: 0px;">
-            {{store.name}}
+        <mat-card-title class="title-slide" style="padding: 8px 0px; margin: 0px;">
+            {{store.razonsocial | titlecase}}
         </mat-card-title>
         <div class="row show-hover title-slide">
             <div class="row" style="padding: 0px 20px 0px 0px">
-                <a mat-button [matMenuTriggerFor]="aboveMenu" class="btn-style">
-                    <mat-icon style="color: #73726c;">star_border</mat-icon></a>
-                <mat-card-subtitle [routerLink]="['/stores', store.id]"
-                class="title-slide"
-                style="padding: 8px 8px 4px 0px; margin: 0px;">
+                <!-- menu qualification display: none; a espera de implementacion -->
+                <a mat-button [matMenuTriggerFor]="aboveMenu" class="btn-style" style="display: none;">
+                    <mat-icon style="color: #73726c;">star_border</mat-icon>
+                </a>
+                <mat-card-subtitle [routerLink]="['/stores', store.id]" class="title-slide" style="padding: 8px 8px 4px 0px; margin: 0px;">
                     ver mas
                 </mat-card-subtitle>
             </div>
@@ -22,8 +20,7 @@
     </div>
     <!-- swiper wrapper -->
     <div class="swiper-wrapper">
-        <div *ngFor = "let storeProduct of store.products"
-            class="swiper-slide">
+        <div *ngFor="let storeProduct of store.products" class="swiper-slide">
             <app-product-store [product]="storeProduct">
             </app-product-store>
         </div>
@@ -31,11 +28,11 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 
-    <!-- footer -->
-    <div class="row between-xs middled-xs" style="padding: 10px 10px 5px 20px;">
+    <!-- footer state: none; ha espera de implementacion-->
+    <div class="row between-xs middled-xs" style="padding: 10px 10px 5px 20px; display: none;">
         <div class="row title-slide">
             <div class="row" style="padding: 0px 20px 0px 0px">
-                <a mat-button routerLinkActive="active" class="btn-style"  *ngIf="subscribeBtn===false" (click)="subscribe(store)">
+                <a mat-button routerLinkActive="active" class="btn-style" *ngIf="subscribeBtn===false" (click)="subscribe(store)">
                     Suscribirse
                     <mat-icon style="color: #73726c;">notifications_none</mat-icon></a>
                 <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn===true" (click)="subscribe(store)">
@@ -52,7 +49,8 @@
         <div class="row title-slide">
             <div class="row" style="padding: 0px 20px 0px 0px">
                 <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
-                    <mat-icon style="color: #73726c;">more_horiz</mat-icon></a>
+                    <mat-icon style="color: #73726c;">more_horiz</mat-icon>
+                </a>
             </div>
         </div>
     </div>
@@ -69,4 +67,3 @@
         <mat-icon style="color: #73726c;">star_border</mat-icon>
     </a>
 </mat-menu>
-

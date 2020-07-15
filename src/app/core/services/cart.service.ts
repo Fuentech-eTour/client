@@ -64,12 +64,12 @@ export class CartService {
 
     this.newProduct = {
       id: product.id,
-      title: product.title,
-      image: product.image,
-      price: product.price,
-      description: product.description,
-      id_user: product.id_user,
-      user_name: product.user_name,
+      nombrearticulo: product.nombrearticulo,
+      imagen: product.imagen,
+      valorventa: product.valorventa,
+      descripcion: product.descripcion,
+      idststore: product.idststore,
+      razonsocial: product.razonsocial,
       cant: this.contProduct,
     };
 
@@ -86,21 +86,21 @@ export class CartService {
       }
     }
 
-    this.verifyExistStore(product.id_user);
+    this.verifyExistStore(product.idststore);
 
     if (!this.idStoreState) {
       this.storeList = {
-        id: product.id_user,
-        name: product.user_name,
+        id: product.idststore,
+        razonsocial: product.razonsocial,
         products: [this.newProduct],
-        total: product.price,
+        total: product.valorventa,
       };
       this.orderLists = [...this.orderLists, this.storeList];
     } else {
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.orderLists.length; i++) {
-        if (this.orderLists[i].id === product.id_user) {
-          this.orderLists[i].total += product.price;
+        if (this.orderLists[i].id === product.idststore) {
+          this.orderLists[i].total += product.valorventa;
           if (this.contProduct <= 1) {
             this.orderLists[i].products = [...this.orderLists[i].products, this.newProduct];
             break;
@@ -149,7 +149,7 @@ export class CartService {
       // remueve productos de la orderLists
       // tslint:disable-next-line: prefer-for-of
       for (let j = 0; j < this.orderLists.length; j++) {
-        if (this.orderLists[j].id === product.id_user) {
+        if (this.orderLists[j].id === product.idststore) {
           // tslint:disable-next-line: prefer-for-of
           for (let k = 0; k < this.orderLists[j].products.length; k++) {
             if (this.orderLists[j].products[k].id === product.id) {
@@ -166,8 +166,8 @@ export class CartService {
 
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.orderLists.length; i++) {
-      if (this.orderLists[i].id === product.id_user) {
-        this.orderLists[i].total -= product.price;
+      if (this.orderLists[i].id === product.idststore) {
+        this.orderLists[i].total -= product.valorventa;
         // tslint:disable-next-line: prefer-for-of
         for (let j = 0; j < this.orderLists[i].products.length; j++) {
           if (this.orderLists[i].products[j].id === product.id) {
@@ -178,7 +178,7 @@ export class CartService {
         if (this.orderLists[i].products.length === 0) {
           this.orderLists.splice(i, 1);
           for (let y = 0; y < this.idStore.length; y++) {
-            if (this.idStore[y] === product.id_user) {
+            if (this.idStore[y] === product.idststore) {
               this.idStore.splice(y, 1);
             }
           }

@@ -20,7 +20,7 @@ export class StoresService {
   ) { }
 
   getAllStores() {
-    return this.http.get<Store[]>(`${environment.url_api}/stores`)
+    return this.http.get<Store[]>(`${environment.url_api}/products/obtenerproducts`)
     .pipe(
       retry(3),
       catchError(this.handleError),

@@ -31,7 +31,7 @@ export class ProductStoreComponent implements OnInit {
 
     addCart() {
         this.cartService.addCart(this.product);
-        this.cartService.addPrice(this.product.price);
+        this.cartService.addPrice(this.product.valorventa);
     }
 
 }

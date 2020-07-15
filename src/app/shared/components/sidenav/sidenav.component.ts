@@ -11,7 +11,7 @@ export class SidenavComponent implements OnInit {
     'Abarrotes',
     'Farmacias',
     'Hoteles',
-    'Restaurantes'
+    'Restaurantes',
   ];
   categoriasProductos = [
     'Aseo',

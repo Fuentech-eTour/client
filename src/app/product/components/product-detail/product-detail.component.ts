@@ -71,7 +71,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
       this.cartService.addCart(product);
     });
     this.product$.subscribe((product) => {
-      this.cartService.addPrice(product.price);
+      this.cartService.addPrice(product.valorventa);
     });
   }
 

@@ -27,12 +27,12 @@ export class CounterProductsComponent implements OnInit {
 
   addCart() {
     this.cartService.addCart(this.product);
-    this.cartService.addPrice(this.product.price);
+    this.cartService.addPrice(this.product.valorventa);
   }
 
   removeCart() {
       this.cartService.removeCart(this.product);
-      this.cartService.removePrice(this.product.price);
+      this.cartService.removePrice(this.product.valorventa);
   }
 
 }

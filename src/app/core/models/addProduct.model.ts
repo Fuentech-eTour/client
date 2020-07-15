@@ -1,10 +1,10 @@
 export interface AddProduct {
     id: number;
-    title: string;
-    image: string;
-    price: number;
-    description: string;
+    nombrearticulo: string;
+    imagen: string;
+    valorventa: number;
+    descripcion: string;
     cant: number;
-    id_user: number;
-    user_name: string;
+    idststore: number;
+    razonsocial: string;
 }

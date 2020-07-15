@@ -1,6 +1,13 @@
 .position-counter {
-    position: absolute; 
-    z-index: 500; 
-    right: 5px; 
+    position: absolute;
+    z-index: 500;
+    right: 5px;
     top: 2px;
+}
+
+.non-selectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
