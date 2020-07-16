@@ -28,7 +28,7 @@ export class StoresService {
   }
 
   getProductsOneStore(id: number) {
-    return this.http.get<Product[]>(`${environment.url_api}/stores/${id}`)
+    return this.http.get<Product[]>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
     .pipe(
       retry(3),
       catchError(this.handleError),

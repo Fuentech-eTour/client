@@ -1,12 +1,12 @@
 <div ClassName="container" class="cont-name-store">
-    <mat-card-title>
+    <!-- <mat-card-title>
         {{ nameStore }}
-    </mat-card-title>
+    </mat-card-title> -->
 </div>
 <div class="cont-store-grid">
-    <app-sidebar-store></app-sidebar-store>
-    <div *ngIf="products$  as products" class="store-products-grid container">
-        <app-product-store *ngFor="let product of products" [product]="product">
+    <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
+    <div *ngIf="(store$ | async)  as store" class="store-products-grid container">
+        <app-product-store *ngFor="let product of store[0].products" [product]="product" [razonsocial]="nameStore">
         </app-product-store>
     </div>
 </div>

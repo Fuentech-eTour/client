@@ -1,25 +1,25 @@
 <!-- Swiper -->
 <div class="swiper-container general">
-
+    <div></div>
     <!-- header -->
-    <div class="row between-xs middled-xs" style="padding: 10px 10px 0px 20px;">
-        <div style="display: flex; align-items: center;">
+    <div class="row between-xs middled-xs header-cont">
+        <div class="title-cont">
             <div mat-card-avatar style="background-image: url({{store.imagen}});
                 background-size: cover;">
                 <img *ngIf="store.imagen ==='' || store.imagen === null || store.imagen === undefined" src="./../../../../assets/images/icon-store.png">
             </div>
-            <mat-card-title class="title-slide" style="padding: 8px; margin: 0px;">
+            <mat-card-title>
                 {{store.razonsocial | titlecase}}
             </mat-card-title>
         </div>
 
-        <div class="row show-hover title-slide">
-            <div class="row" style="padding: 0px 20px 0px 0px">
+        <div class="row show-hover nav-cont">
+            <div class="row">
                 <!-- menu qualification display: none; a espera de implementacion -->
                 <a mat-button [matMenuTriggerFor]="aboveMenu" class="btn-style" style="display: none;">
                     <mat-icon style="color: #73726c;">star_border</mat-icon>
                 </a>
-                <mat-card-subtitle [routerLink]="['/stores', store.id]" class="title-slide" style="padding: 8px 8px 4px 0px; margin: 0px;">
+                <mat-card-subtitle [routerLink]="['/stores', store.id]">
                     ver mas
                 </mat-card-subtitle>
             </div>
@@ -35,10 +35,10 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 
-    <!-- footer state: none; ha espera de implementacion-->
-    <div class="row between-xs middled-xs" style="padding: 10px 10px 5px 20px; display: none;">
-        <div class="row title-slide">
-            <div class="row" style="padding: 0px 20px 0px 0px">
+    <!-- footer display: none; ha espera de implementacion-->
+    <div class="row between-xs middled-xs footer-cont">
+        <div class="row btn-cont">
+            <div class="row">
                 <a mat-button routerLinkActive="active" class="btn-style" *ngIf="subscribeBtn===false" (click)="subscribe(store)">
                     Suscribirse
                     <mat-icon style="color: #73726c;">notifications_none</mat-icon></a>

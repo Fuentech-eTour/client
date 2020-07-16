@@ -7,6 +7,14 @@ footer {
     /* background-color: mat-color($primary); */
     background-color: white;
     .box {
+        div {
+            img {
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
         h3 {
             color: rgba(0, 0, 0, .54);
         }

@@ -4,9 +4,9 @@
         <div class="container">
             <router-outlet></router-outlet>
         </div>
-        <app-footer></app-footer>
+        <!-- <app-footer></app-footer> -->
     </mat-sidenav-content>
-    <mat-sidenav #show position="end" class="example-sidenav" mode="over">
+    <mat-sidenav #show position="end" class="sidenav" mode="over">
         <app-cart [mostrar]="show" #show></app-cart>
     </mat-sidenav>
     <mat-sidenav #show2 class="sidenav-izq" mode="side">

@@ -1,6 +1,6 @@
-<div class="navbar-margin">
-    <mat-toolbar class="navbar-fixed-top" style="background-color: white;">
-        <mat-toolbar-row class="border-toolbar">
+<div class="navbar-cont">
+    <mat-toolbar>
+        <mat-toolbar-row>
             <div class="row between-xs middled-xs header-row">
                 <nav class="row" style="align-items: center;">
                     <button mat-icon-button (click)="mostrar2.toggle()" (click)="showIconMenu()">
@@ -16,20 +16,21 @@
                     </a>
                     <!-- <a mat-button routerLink="/home" routerLinkActive="active" style="font-family: cursive; font-style: italic; font-size: 30px; color: #d0006f;">ema</a> -->
                     <!-- <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a> -->
-                    <div class="row" mat-icon-button style="height: 40px; padding: 0px 10px; margin: 0px 10px;">
-                        <mat-icon class="col" style="color: #d0006f; font-size: 40px; width: 42px;">place</mat-icon>
+                    <div class="row" mat-icon-button>
+                        <mat-icon class="col">place</mat-icon>
                         <div class="col" (click)="openDialog()">
-                            <p style="font-size: 12px; color: #73726c;">enviar a:</p>
-                            <p style="font-size: 14px; margin: -30px 0px 0px 0px; cursor: pointer;">cra 6a #15b-18
-                                <mat-icon style="color: #4d90d3;">arrow_drop_down</mat-icon>
+                            <p class="label-title">enviar a:</p>
+                            <p class="title">cra 6a #15b-18
+
                             </p>
                         </div>
+                        <mat-icon class="col icon-2" style="color: #4d90d3; font-size: 25px; margin-top: 10px;">arrow_drop_down</mat-icon>
                     </div>
                     <a mat-button (click)="installByUser()" *ngIf="installEvent">Install App</a>
                 </nav>
                 <div class="cont-btn-search">
-                    <input class="btn-search" type="text" matInput placeholder="Buscar...">
-                    <mat-label class="label-btn-search">
+                    <input type="text" matInput placeholder="Buscar...">
+                    <mat-label>
                         <mat-icon style="color: #73726c; font-size: 25px;">search</mat-icon>
                     </mat-label>
                 </div>
@@ -40,7 +41,7 @@
                     <a mat-button routerLink="/products" routerLinkActive="active" mat-button>
                         Productos
                         <mat-icon style="color: #73726c;">widgets</mat-icon></a> -->
-                    <a mat-button [matMenuTriggerFor]="menu">
+                    <a class="name-user" mat-button [matMenuTriggerFor]="menu">
                         <mat-icon style="color: #73726c;">account_circle</mat-icon>
                         Hola, {{ userName.split(' ')[0] | titlecase }}
                         <mat-icon style="color: #4d90d3;">arrow_drop_down</mat-icon>

@@ -12,6 +12,7 @@ import { CartService } from './../../../core/services/cart.service';
 export class ProductStoreComponent implements OnInit {
 
   @Input() product: Product;
+  @Input() razonsocial: string;
     estadoHover = false;
 
     constructor(
@@ -30,8 +31,11 @@ export class ProductStoreComponent implements OnInit {
     }
 
     addCart() {
-        this.cartService.addCart(this.product);
-        this.cartService.addPrice(this.product.valorventa);
+      this.product.razonsocial = this.razonsocial;
+      console.log(this.product);
+      console.log(this.razonsocial);
+      this.cartService.addCart(this.product);
+      this.cartService.addPrice(this.product.valorventa);
     }
 
 }
