@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       this.slidesPerView = 6;
     } */
 
-    /* if (window.matchMedia('(max-width: 375px)').matches) {
+    if (window.matchMedia('(max-width: 375px)').matches) {
       this.slidesPerView = 2;
       console.log('dos card');
     } else if (window.matchMedia('(max-width: 516px)').matches) {
@@ -80,7 +80,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-    }); */
+    });
   }
 
   fetchProducts() {

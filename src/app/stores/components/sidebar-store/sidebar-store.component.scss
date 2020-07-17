@@ -2,9 +2,12 @@
     position: fixed;
     width: 225px;
     height: auto;
-    display: inline-block;
+    display: none;
     margin-top: 5px;
     border-radius: 20px;
+    @media (min-width: 425px) {
+        display: inline-block;
+    }
     mat-card-header {
         display: flex;
         align-items: center;

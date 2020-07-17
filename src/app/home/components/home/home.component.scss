@@ -3,42 +3,48 @@
 .form-btn-search {
     padding: 20px 20px 20px 20px;
     text-align: center;
-}
-
-.cont-btn-search {
-    border: solid 2px #b1b1b1;
-    border-radius: 20px;
-    height: 45px;
-    width: 525px;
-    display: inline-block;
-    text-align: left;
-    &:focus {
-        box-shadow: 0px 0px 4px 2px grey;
+    .cont-btn-search {
+        border: solid 2px #b1b1b1;
+        border-radius: 20px;
+        height: 45px;
+        width: 290px;
+        display: inline-block;
+        text-align: left;
+        @media (min-width: 360px) {
+            width: 315px;
+        }
+        @media (min-width: 578px) {
+            width: 525px;
+        }
+        .btn-search {
+            text-decoration: none;
+            height: 40px;
+            width: 215px;
+            font-size: 20px;
+            outline: none;
+            outline-width: 0;
+            box-shadow: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            border: none;
+            margin: 2px 2px 2px 20px;
+            background-color: #f9fafc;
+            @media (min-width: 360px) {
+                width: 240px;
+            }
+            @media (min-width: 578px) {
+                width: 450px;
+            }
+        }
+        .label-btn-search {
+            margin-left: 0px;
+            margin-top: 6px;
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+        }
     }
-}
-
-.btn-search {
-    text-decoration: none;
-    height: 40px;
-    width: 450px;
-    font-size: 20px;
-    outline: none;
-    outline-width: 0;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    border: none;
-    margin: 2px 2px 2px 20px;
-    background-color: #f9fafc;
-}
-
-.label-btn-search {
-    margin-left: 0px;
-    margin-top: 6px;
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
 }
 
 
@@ -49,12 +55,18 @@
 
 .subscription-product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px 20px;
     margin-top: 20px;
     margin-right: 20px;
     margin-left: 20px;
     padding-bottom: 20px;
+    @media (min-width: 578px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 

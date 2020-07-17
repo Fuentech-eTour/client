@@ -17,8 +17,8 @@
                     margin-right: 2px;
                     text-decoration: none;
                     align-items: center;
-                    a {
-                        @media (max-width: 478px) {
+                    button {
+                        @media (max-width: 600px) {
                             display: none;
                         }
                     }
@@ -85,7 +85,7 @@
                 .card-content {
                     padding: 0px 4px;
                     .name-user {
-                        @media (max-width: 478px) {
+                        @media (max-width: 600px) {
                             display: none;
                         }
                     }

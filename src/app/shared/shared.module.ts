@@ -21,6 +21,7 @@ import { CountProductPipe } from './pipes/count-product/count-product.pipe';
 import { CountProductsComponent } from './components/count-products/count-products.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AddressOptionsComponent } from './components/address-options/address-options.component';
+import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AddressOptionsComponent } from './components/address-options/address-op
     CountProductsComponent,
     SidenavComponent,
     AddressOptionsComponent,
+    NavMovilComponent,
   ],
   exports: [
     ExponentialPipe,
@@ -42,7 +44,8 @@ import { AddressOptionsComponent } from './components/address-options/address-op
     FooterComponent,
     CountProductPipe,
     CartComponent,
-    SidenavComponent
+    SidenavComponent,
+    NavMovilComponent,
   ],
   imports: [
     CommonModule,
