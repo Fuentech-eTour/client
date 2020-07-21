@@ -74,6 +74,14 @@ img {
     max-width: 100%;
 }
 
+mat-card-subtitle,
+h1,
+button {
+    &:focus {
+        outline: none;
+    }
+}
+
 
 /* botones next y prev de los componente banner --init-- */
 

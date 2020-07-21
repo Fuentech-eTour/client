@@ -10,6 +10,7 @@ import { BannerStoresComponent } from './components/banner-stores/banner-stores.
 import { MaterialModule } from '../material/material.module';
 import { ProductStoreComponent } from './components/product-store/product-store.component';
 import { SidebarStoreComponent } from './components/sidebar-store/sidebar-store.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SidebarStoreComponent } from './components/sidebar-store/sidebar-store.
     CommonModule,
     StoresRoutingModule,
     ProductModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule,
   ]
 })
 export class StoresModule { }

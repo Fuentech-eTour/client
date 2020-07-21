@@ -27,6 +27,7 @@ export class OrderComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  displayedColumns: string[] = ['imagen', 'nombre', 'cantidad', 'total'];
 
   constructor(
     private cartService: CartService,

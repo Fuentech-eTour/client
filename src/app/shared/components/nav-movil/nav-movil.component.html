@@ -18,7 +18,11 @@
                     <mat-icon style="color: #73726c;">widgets</mat-icon>
                     <span>Productos</span> 
                 </button>
-                <button mat-icon-button [matMenuTriggerFor]="menu">
+                <button mat-icon-button *ngIf="(nameUser$ | async) !== null" [matMenuTriggerFor]="menu">
+                    <mat-icon style="color: #73726c;">account_circle</mat-icon>
+                    <span>Usuario</span> 
+                </button>
+                <button mat-icon-button *ngIf="(nameUser$ | async) === null" [matMenuTriggerFor]="menu2">
                     <mat-icon style="color: #73726c;">account_circle</mat-icon>
                     <span>Usuario</span> 
                 </button>
@@ -35,7 +39,7 @@
             <mat-icon style="font-size: 40px;color: grey; width: 41px; padding: 0px 6px 0px 0px;">sentiment_satisfied_alt</mat-icon>
         </div>
         <div class="content-user">
-            <span class="name-user">Hola, Ema</span><br>
+            <span class="name-user">Hola, {{ nameUser$ | async | titlecase }}</span><br>
             <span class="btn-perfil" style="font-size: 12px;">ver Perfil</span>
         </div>
     </div>
@@ -51,10 +55,21 @@
         <mat-icon>loyalty</mat-icon>
         <span>Pedidos</span>
       </button>
-    <button mat-menu-item style="border-top: solid 1px rgba(0,0,0,.25);">
+    <button mat-menu-item (click)="logout()" style="border-top: solid 1px rgba(0,0,0,.25);">
         <mat-icon>exit_to_app</mat-icon>
         <span>Cerrar sesión</span>
       </button>
+</mat-menu>
+
+<mat-menu class="mat-menu" #menu2="matMenu">
+    <button mat-menu-item (click)="openDialogLogin()">
+        <mat-icon>account_circle</mat-icon>
+        <span>Iniciar sesión</span>
+      </button>
+    <button mat-menu-item (click)="openDialogRegister()">
+      <mat-icon>person_add_alt_1</mat-icon>
+      <span>Obtener cuenta</span>
+    </button>
 </mat-menu>
 
 <!-- menu user --final-- -->

@@ -31,14 +31,17 @@
             <mat-accordion *ngFor="let orderLists of store">
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{ orderLists.razonsocial }}
+                        <mat-panel-title style="display: flex; align-items: center;">
+                            <div mat-card-avatar style="background-image: url({{orderLists.imagen}}); background-size: cover;">
+                                <img *ngIf="orderLists.imagen ==='' || orderLists.imagen === null || orderLists.imagen === undefined" src="./../../../../assets/images/icon-store.png">
+                            </div>
+                            <mat-card-title style="margin: 0px 10px; font-size: 15px;">{{ orderLists.razonsocial }}</mat-card-title>
                         </mat-panel-title>
-                        <mat-panel-description style="flex-direction: row-reverse;">
+                        <mat-panel-description style="flex-direction: row-reverse; align-items: center;">
                             {{ orderLists.total | currency:'$':'symbol':'1.0-0'}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <mat-grid-list cols="3" rowHeight="42px" *ngFor="let list of orderLists.products" class="container-list-product">
+                    <!-- <mat-grid-list cols="3" rowHeight="42px" *ngFor="let list of orderLists.products" class="container-list-product">
                         <mat-grid-tile colspan="1" rowspan="3" style.background="white">
                             <div class="crop-image" [routerLink]="['/products', list.id]" (click)="toggleSideBar()">
                                 <img *ngIf="list.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="list.imagen">
@@ -60,6 +63,26 @@
                             <app-count-products style="cursor: pointer;" [product]="list">
                             </app-count-products>
                         </mat-grid-tile>
+                    </mat-grid-list> -->
+                    <mat-grid-list cols="4" rowHeight="90px" *ngFor="let list of orderLists.products" class="container-list-product">
+                        <mat-grid-tile colspan="1" rowspan="1" style.background="white" style="justify-content: left; display: flex;">
+                            <div class="crop-image" [routerLink]="['/products', list.id]" (click)="toggleSideBar()">
+                                <img *ngIf="list.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="list.imagen">
+                                <img *ngIf="list.imagen ===''" src="./../../../../assets/images/not-image.png">
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="2" rowspan="1" style.background="white" style="display: flex; justify-content: left; margin: 0px;">
+                            <div style="justify-content: left; width: 100%; margin-left: 10px;">
+                                <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>{{ list.nombrearticulo | uppercase | slice:0:25 | moreContent:24 }}</strong></mat-card-subtitle>
+                                <mat-card-subtitle style="margin: 0px; font-size: 12px;">{{list.descripcion | slice:0:20 | moreContent:19}}</mat-card-subtitle>
+                                <mat-card-subtitle style="margin: 0px; font-size: 12px;">precio/und: {{ list.valorventa | currency:'COP$':'symbol':'1.0-0' }}</mat-card-subtitle>
+                                <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>subTotal: {{ list.valorventa * list.cant| currency:'$':'symbol':'1.0-0' }}</strong></mat-card-subtitle>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1" style.background="white">
+                            <app-count-products style="cursor: pointer;" [product]="list">
+                            </app-count-products>
+                        </mat-grid-tile>
                     </mat-grid-list>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -73,7 +96,7 @@
     <div *ngIf="products.length > 0" class="row between-xs middled-xs position-bar-bottom">
 
         <div class="box">
-            <a mat-raised-button disabled="false" routerLink="/order" routerLinkActive="active" (click)="toggleSideBar()" style="color: white; border-radius: 20px; background-color: #f3006d;">
+            <a mat-raised-button disabled="false" routerLink="/order" (click)="mostrar.toggle()" routerLinkActive="active" style="color: white; border-radius: 20px; background-color: #f3006d;">
                 Ir a pagar
             </a>
         </div>

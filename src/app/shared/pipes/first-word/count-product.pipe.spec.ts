@@ -1,8 +1,8 @@
-import { CountProductPipe } from './count-product.pipe';
+import { FirstWordPipe } from './first-word.pipe';
 
 describe('CountProductPipe', () => {
   it('create an instance', () => {
-    const pipe = new CountProductPipe();
+    const pipe = new FirstWordPipe();
     expect(pipe).toBeTruthy();
   });
 });

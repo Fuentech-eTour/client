@@ -14,3 +14,27 @@
         </div>
     </div>
 </div>
+
+<!-- <div *ngIf="(addProduct$ | async) as addProduct">
+    <mat-card-actions *ngIf="addProduct.length === 0" class="cont-actions">
+        <button (click)="addCart()" mat-raised-button class="btn-add">agregar</button>
+    </mat-card-actions>
+    <div *ngFor="let addProduct of addProduct">
+        <mat-card-actions *ngIf="addProduct.id === product.id && addProduct.cant === 0" class="cont-actions">
+            <button (click)="addCart()" mat-raised-button class="btn-add">agregar</button>
+        </mat-card-actions>
+        <mat-card-actions *ngIf="addProduct.id === product.id && addProduct.cant > 0">
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                <div style="width: 100%; text-align: right;">
+                    <mat-icon style="font-size: 36px; color: #4d90d3; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle</mat-icon>
+                </div>
+                <div style="width: 100%; justify-content: center;">
+                    <strong>{{ addProduct.cant }}</strong>
+                </div>
+                <div style="width: 100%; text-align: left;">
+                    <mat-icon style="font-size: 36px; color: #4d90d3;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle</mat-icon>
+                </div>
+            </div>
+        </mat-card-actions>
+    </div>
+</div> -->

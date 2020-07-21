@@ -49,7 +49,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
     this.mySwiper = new Swiper('.swiper-container', {
       slidesPerView: this.slidesPerView, // para movil 2, para tablet 3, para portatil 6
-      spaceBetween: 15,
+      spaceBetween: 1,
       slidesPerGroup: 1,
       loop: false,
       loopFillGroupWithBlank: false,

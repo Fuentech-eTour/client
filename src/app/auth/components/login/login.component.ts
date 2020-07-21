@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { AuthService } from './../../../core/services/auth.service';
+import { WindowService } from './../../../core/services/window.service';
 
 
 @Component({
@@ -17,7 +19,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private windowService: WindowService,
+    public dialogRef: MatDialogRef<LoginComponent>
   ) {
     this.buildForm();
   }
@@ -47,9 +51,14 @@ export class LoginComponent implements OnInit {
         .subscribe( (res: any) => {
           localStorage.setItem('token', res.data.accessToken);
           localStorage.setItem('user_name', res.data.user_name);
-          this.router.navigate(['./admin/products']);
+          this.windowService.addUserName(res.data.user_name.split(' ')[0]);
+          this.router.navigate(['./stores']);
         });
     }
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   private buildForm() {

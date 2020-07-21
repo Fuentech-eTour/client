@@ -28,10 +28,14 @@ export class AuthService {
   logout(): any {
     localStorage.removeItem('token');
     localStorage.removeItem('user_name');
-    this.router.navigate(['/products']);
+    this.router.navigate(['/stores']);
   }
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getUserName() {
+    return localStorage.getItem('user_name');
   }
 }

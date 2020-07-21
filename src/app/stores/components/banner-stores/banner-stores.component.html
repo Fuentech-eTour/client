@@ -1,11 +1,9 @@
-<!-- Swiper -->
-<div class="swiper-container general">
-    <div></div>
+<div class="store-cont">
     <!-- header -->
     <div class="row between-xs middled-xs header-cont">
         <div class="title-cont">
             <div mat-card-avatar style="background-image: url({{store.imagen}});
-                background-size: cover;">
+            background-size: cover;">
                 <img *ngIf="store.imagen ==='' || store.imagen === null || store.imagen === undefined" src="./../../../../assets/images/icon-store.png">
             </div>
             <mat-card-title>
@@ -25,39 +23,42 @@
             </div>
         </div>
     </div>
-    <!-- swiper wrapper -->
-    <div class="swiper-wrapper">
-        <div *ngFor="let storeProduct of store.products" class="swiper-slide">
-            <app-product-store [product]="storeProduct">
-            </app-product-store>
-        </div>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-
-    <!-- footer display: none; ha espera de implementacion-->
-    <div class="row between-xs middled-xs footer-cont">
-        <div class="row btn-cont">
-            <div class="row">
-                <a mat-button routerLinkActive="active" class="btn-style" *ngIf="subscribeBtn===false" (click)="subscribe(store)">
-                    Suscribirse
-                    <mat-icon style="color: #73726c;">notifications_none</mat-icon></a>
-                <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn===true" (click)="subscribe(store)">
-                    Suscrito
-                    <mat-icon style="color: #f44336;">notifications_active</mat-icon></a>
-                <a mat-button routerLinkActive="active" class="btn-style">
-                    Comentar
-                    <mat-icon style="color: #73726c;">insert_comment</mat-icon></a>
-                <a mat-button routerLinkActive="active" class="btn-style">
-                    Compartir
-                    <mat-icon style="color: #73726c;">reply</mat-icon></a>
+    <!-- Swiper -->
+    <div class="swiper-container general">
+        <!-- swiper wrapper -->
+        <div class="swiper-wrapper">
+            <div *ngFor="let storeProduct of store.products" class="swiper-slide">
+                <app-product-store [product]="storeProduct" [razonsocial]="store.razonsocial">
+                </app-product-store>
             </div>
         </div>
-        <div class="row title-slide">
-            <div class="row" style="padding: 0px 20px 0px 0px">
-                <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
-                    <mat-icon style="color: #73726c;">more_horiz</mat-icon>
-                </a>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- footer display: none; ha espera de implementacion-->
+        <div class="row between-xs middled-xs footer-cont">
+            <div class="row btn-cont">
+                <div class="row">
+                    <a mat-button routerLinkActive="active" class="btn-style" *ngIf="subscribeBtn===false" (click)="subscribe(store)">
+                    Suscribirse
+                    <mat-icon style="color: #73726c;">notifications_none</mat-icon></a>
+                    <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn===true" (click)="subscribe(store)">
+                    Suscrito
+                    <mat-icon style="color: #f44336;">notifications_active</mat-icon></a>
+                    <a mat-button routerLinkActive="active" class="btn-style">
+                    Comentar
+                    <mat-icon style="color: #73726c;">insert_comment</mat-icon></a>
+                    <a mat-button routerLinkActive="active" class="btn-style">
+                    Compartir
+                    <mat-icon style="color: #73726c;">reply</mat-icon></a>
+                </div>
+            </div>
+            <div class="row title-slide">
+                <div class="row" style="padding: 0px 20px 0px 0px">
+                    <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
+                        <mat-icon style="color: #73726c;">more_horiz</mat-icon>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url_api: 'https://platzi-store.herokuapp.com',
+  url_api: 'https://salty-savannah-34168.herokuapp.com/api',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',
     authDomain: 'platzi-store-749d0.firebaseapp.com',

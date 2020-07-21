@@ -5,9 +5,10 @@
         width: 100%;
         z-index: 1000;
         background-color: white;
+        box-shadow: 0px 0px 10px 0px #c7c7c7;
         mat-toolbar-row {
-            border-top: solid 1px rgb(192, 192, 192);
-            border-bottom: solid 1px rgb(192, 192, 192);
+            // border-top: solid 1px rgb(192, 192, 192);
+            // border-bottom: solid 1px rgb(192, 192, 192);
             .header-row {
                 width: 100%;
                 nav {
@@ -49,13 +50,14 @@
                     }
                 }
                 .cont-btn-search {
-                    border: solid 1px #b1b1b1;
+                    // border: solid 1px #b1b1b1;
                     border-radius: 20px;
                     height: 35px;
                     width: 300px;
                     display: inline-block;
                     text-align: left;
                     background-color: #f9fafc;
+                    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
                     @media (max-width: 1000px) {
                         display: none;
                     }
@@ -85,6 +87,7 @@
                 .card-content {
                     padding: 0px 4px;
                     .name-user {
+                        margin: 0px 10px;
                         @media (max-width: 600px) {
                             display: none;
                         }

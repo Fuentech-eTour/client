@@ -2,6 +2,11 @@ import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { AddressOptionsComponent } from '../address-options/address-options.component';
+import { LoginComponent } from '../../../auth/components/login/login.component';
+import { RegisterComponent } from '../../../auth/components/register/register.component';
+
+import { AuthService } from '@core/services/auth.service';
+import { WindowService } from '@core/services/window.service';
 
 import { map } from 'rxjs/operators';
 
@@ -28,10 +33,13 @@ export class NavMovilComponent implements OnInit {
   installEvent;
   userName: string = localStorage.getItem('user_name');
   stateIconMenu = false;
+  nameUser$: Observable<any>;
 
   constructor(
     private cartService: CartService,
     private dialog: MatDialog,
+    private authService: AuthService,
+    private windowService: WindowService,
   ) {
     this.total$ = this.cartService.numProductsCart$
     .pipe(map(products => products.length));
@@ -46,6 +54,7 @@ export class NavMovilComponent implements OnInit {
     this.contByProduct$ = this.cartService.numProductsCart$;
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
+    this.nameUser$ = this.windowService.userName$;
   }
 
   ngOnInit() {
@@ -66,13 +75,36 @@ export class NavMovilComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddressOptionsComponent, {
       width: '550px',
-      // data: {name: this.isLinear, animal: this.isLinear}
     });
+  }
+
+  openDialogLogin(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openDialogRegister(): void {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  logout() {
+    this.windowService.addUserName(null);
+    this.authService.logout();
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(event: Event) {
-    console.log(event);
     event.preventDefault();
     this.installEvent = event;
   }

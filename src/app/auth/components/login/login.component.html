@@ -1,45 +1,37 @@
 <div class="container-login">
-  <form [formGroup]="form" (ngSubmit)="login($event)">
-      <mat-card>
-        <mat-card-header style="display: inline-flex;">
-          <mat-card-title style="padding-bottom: 40px;">Iniciar sesión</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="row">
-            <div class="col-xs">
-              <mat-form-field style="width: 100%;">
-                <input placeholder="email" 
-                  formControlName="email" 
-                  matInput 
-                  type="email">
-                <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs">
-              <mat-form-field style="width: 100%;">
-                <input placeholder="contraseña" 
-                  formControlName="password" 
-                  matInput type="password">
-                <mat-icon matSuffix style="color: #e0e0e0;">lock</mat-icon>
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button [disabled]="form.invalid" 
-            mat-raised-button 
-            type="submit"
-            style="width: 100%; border-radius: 20px;">
+    <form [formGroup]="form" (ngSubmit)="login($event)">
+        <mat-card>
+            <mat-card-header style="display: inline-flex;">
+                <mat-card-title style="padding-bottom: 40px;">Iniciar sesión</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-xs">
+                        <mat-form-field style="width: 100%;">
+                            <input placeholder="email" formControlName="email" matInput type="email">
+                            <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs">
+                        <mat-form-field style="width: 100%;">
+                            <input placeholder="contraseña" formControlName="password" matInput type="password">
+                            <mat-icon matSuffix style="color: #e0e0e0;">lock</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button [disabled]="form.invalid" mat-raised-button type="submit" (click)="onNoClick()" style="width: 100%; border-radius: 20px;">
               Ingresar
           </button>
-        </mat-card-actions>
-        <mat-card-footer>
-          <mat-card-subtitle class="hover-register">
-            ¿Todavía no tienes cuenta? <span routerLink="/auth/register">Registrate</span>
-          </mat-card-subtitle>
-        </mat-card-footer>
-      </mat-card>
+            </mat-card-actions>
+            <!-- <mat-card-footer>
+                <mat-card-subtitle class="hover-register">
+                    ¿Todavía no tienes cuenta? <span routerLink="/auth/register">Registrate</span>
+                </mat-card-subtitle>
+            </mat-card-footer> -->
+        </mat-card>
     </form>
 </div>

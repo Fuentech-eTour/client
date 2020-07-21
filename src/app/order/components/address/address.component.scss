@@ -1,27 +1,36 @@
+button {
+    width: 100%;
+    background-color: #4d90d3;
+    color: white;
+    &:hover {
+        background-color: #396a9b;
+    }
+}
+
 .full-width {
-  width: 100%;
+    width: 100%;
 }
 
 .shipping-card {
-  min-width: 120px;
-  margin: 20px auto;
+    min-width: 120px;
+    margin: 20px auto;
 }
 
 .mat-radio-button {
-  display: block;
-  margin: 5px 0;
+    display: block;
+    margin: 5px 0;
 }
 
 .row {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .col {
-  flex: 1;
-  margin-right: 20px;
+    flex: 1;
+    margin-right: 20px;
 }
 
 .col:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }

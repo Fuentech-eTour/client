@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Product } from '../../../core/models/product.model';
+import { AddProduct } from '../../../core/models/addProduct.model';
 
 import { CartService } from './../../../core/services/cart.service';
 
@@ -13,11 +15,14 @@ export class ProductStoreComponent implements OnInit {
 
   @Input() product: Product;
   @Input() razonsocial: string;
-    estadoHover = false;
+  estadoHover = false;
+  addProduct$: Observable<AddProduct[]>;
 
     constructor(
         private cartService: CartService
-    ) {}
+    ) {
+      this.addProduct$ = this.cartService.cart$;
+    }
 
     ngOnInit() {
     }
@@ -32,10 +37,13 @@ export class ProductStoreComponent implements OnInit {
 
     addCart() {
       this.product.razonsocial = this.razonsocial;
-      console.log(this.product);
-      console.log(this.razonsocial);
       this.cartService.addCart(this.product);
       this.cartService.addPrice(this.product.valorventa);
+    }
+
+    removeCart() {
+        this.cartService.removeCart(this.product);
+        this.cartService.removePrice(this.product.valorventa);
     }
 
 }

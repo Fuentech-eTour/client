@@ -4,6 +4,17 @@
     height: 100%;
     display: inline-block;
     background-color: white;
+    mat-card-header {
+        display: flex;
+        align-items: center;
+        margin: 10px 0px;
+        mat-card-title {
+            margin: 10px 0px;
+            font-size: 20px;
+            margin: 0px;
+            padding: 0px;
+        }
+    }
     .title {
         color: white;
         font-size: 16px;

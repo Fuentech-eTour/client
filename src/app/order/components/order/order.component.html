@@ -14,23 +14,23 @@
         <input matInput formControlName="firstCtrl">
       </mat-form-field>
       <!-- List of products -- init -->
-      <div class="aline-product" *ngIf="(products$ | async) as products">
+      <!-- <div class="aline-product" *ngIf="(products$ | async) as products">
         <p *ngIf="products.length === 0">no hay productos</p>
         <div class="row border-table middle-xs" *ngFor="let product of products">
           <div class="col-xs-12 col-sm-2 col-md-2 init-border">
             <div class="box">
-              <img style="width: 100%;" class="image" [src]="product.image" alt="">
+              <img style="width: 100%;" class="image" [src]="product.imagen" alt="">
             </div>
           </div>
           <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="box">
-              <mat-card-subtitle>{{ product.title }}</mat-card-subtitle>
+              <mat-card-subtitle>{{ product.nombrearitulo }}</mat-card-subtitle>
             </div>
             <div class="box">
-              <mat-card-subtitle>{{ product.description }}</mat-card-subtitle>
+              <mat-card-subtitle>{{ product.descripcion }}</mat-card-subtitle>
             </div>
             <div class="box">
-              <mat-card-subtitle>Precio/und: {{ product.price }}</mat-card-subtitle>
+              <mat-card-subtitle>Precio/und: {{ product.valorventa }}</mat-card-subtitle>
             </div>
           </div>
           <div class="col-xs-12 col-sm-2 col-md-2">
@@ -40,11 +40,41 @@
           </div>
           <div class="col-xs-12 col-sm-2 col-md-2">
             <div class="box">
-              <mat-card-title>{{ product.price * product.cant | currency}}</mat-card-title>
+              <mat-card-title>{{ product.valorventa * product.cant | currency}}</mat-card-title>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+
+<mat-table [dataSource]="products$" class="mat-elevation-z8" style="border-radius: 20px">
+  <!-- Position Column -->
+  <ng-container matColumnDef="imagen">
+    <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
+    <mat-cell *matCellDef="let products"><img style="margin: 10px 0px" width="80px" [src]="products.imagen"></mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+    <mat-cell *matCellDef="let products"> {{products.nombrearticulo}} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="cantidad">
+    <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+    <mat-cell *matCellDef="let products"> {{products.cant}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="total">
+    <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+    <mat-cell *matCellDef="let products"> {{products.valorventa * products.cant | currency}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
       <!-- List of products -- final -->
     </form>
   </mat-step>

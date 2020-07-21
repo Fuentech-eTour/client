@@ -17,7 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MoreContentPipe } from './pipes/more-content/more-content.pipe';
-import { CountProductPipe } from './pipes/count-product/count-product.pipe';
+import { FirstWordPipe } from './pipes/first-word/first-word.pipe';
 import { CountProductsComponent } from './components/count-products/count-products.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AddressOptionsComponent } from './components/address-options/address-options.component';
@@ -30,7 +30,7 @@ import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
     HeaderComponent,
     FooterComponent,
     MoreContentPipe,
-    CountProductPipe,
+    FirstWordPipe,
     CartComponent,
     CountProductsComponent,
     SidenavComponent,
@@ -42,7 +42,8 @@ import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
     HighlightDirective,
     HeaderComponent,
     FooterComponent,
-    CountProductPipe,
+    MoreContentPipe,
+    FirstWordPipe,
     CartComponent,
     SidenavComponent,
     NavMovilComponent,

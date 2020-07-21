@@ -1,7 +1,11 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { AddressOptionsComponent } from '../address-options/address-options.component';
+import { LoginComponent } from '../../../auth/components/login/login.component';
+import { RegisterComponent } from '../../../auth/components/register/register.component';
+import { AuthService } from '../../../core/services/auth.service';
+import { WindowService } from '../../../core/services/window.service';
 
 import { map } from 'rxjs/operators';
 
@@ -14,7 +18,7 @@ import { Observable } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
 
   @Input() mostrar: any;
   @Input() mostrar2: any;
@@ -26,12 +30,15 @@ export class HeaderComponent implements OnInit {
   showFiller = false;
   matBageShow$: Observable<boolean>;
   installEvent;
-  userName: string = localStorage.getItem('user_name');
   stateIconMenu = false;
+  nameUser$: Observable<any>;
+  // newUserName: string = this.userName.split(' ')[0];
 
   constructor(
     private cartService: CartService,
     private dialog: MatDialog,
+    private authService: AuthService,
+    private windowService: WindowService,
   ) {
     this.total$ = this.cartService.numProductsCart$
     .pipe(map(products => products.length));
@@ -46,9 +53,19 @@ export class HeaderComponent implements OnInit {
     this.contByProduct$ = this.cartService.numProductsCart$;
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
+    this.nameUser$ = this.windowService.userName$;
   }
 
   ngOnInit() {
+    this.nameUser$.subscribe(name => {
+      console.log(name);
+    });
+  }
+
+  ngOnChanges() {
+    this.nameUser$.subscribe(name => {
+      console.log(name);
+    });
   }
 
   toggleSideBar() {
@@ -65,9 +82,33 @@ export class HeaderComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddressOptionsComponent, {
-      width: '550px',
-      // data: {name: this.isLinear, animal: this.isLinear}
+      width: 'auto'
     });
+  }
+
+  openDialogLogin(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openDialogRegister(): void {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  logout() {
+    this.windowService.addUserName(null);
+    this.authService.logout();
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])
