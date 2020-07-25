@@ -21,6 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -46,6 +47,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatExpansionModule,
     MatDialogModule,
     MatChipsModule,
+    MatProgressBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -68,6 +70,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatExpansionModule,
     MatDialogModule,
     MatChipsModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule { }

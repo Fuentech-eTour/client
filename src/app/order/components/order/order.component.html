@@ -50,7 +50,7 @@
   <!-- Position Column -->
   <ng-container matColumnDef="imagen">
     <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
-    <mat-cell *matCellDef="let products"><img style="margin: 10px 0px" width="80px" [src]="products.imagen"></mat-cell>
+    <mat-cell *matCellDef="let products"><img style="margin: 10px;" width="40px" [src]="products.imagen"></mat-cell>
   </ng-container>
 
   <!-- Name Column -->
@@ -61,8 +61,8 @@
 
   <!-- Weight Column -->
   <ng-container matColumnDef="cantidad">
-    <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
-    <mat-cell *matCellDef="let products"> {{products.cant}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef style="justify-content: center;"> Cantidad </mat-header-cell>
+    <mat-cell *matCellDef="let products" style="justify-content: center;"> {{products.cant}} </mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->

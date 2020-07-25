@@ -27,9 +27,9 @@
         <div class="position-message-center" *ngIf="store.length !== 0">
             <mat-card-title>Lista de tiendas</mat-card-title>
         </div>
-        <div style="margin-top: 20px;">
+        <div>
             <mat-accordion *ngFor="let orderLists of store">
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" style="margin-top: 10px;">
                     <mat-expansion-panel-header>
                         <mat-panel-title style="display: flex; align-items: center;">
                             <div mat-card-avatar style="background-image: url({{orderLists.imagen}}); background-size: cover;">
@@ -73,7 +73,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile colspan="2" rowspan="1" style.background="white" style="display: flex; justify-content: left; margin: 0px;">
                             <div style="justify-content: left; width: 100%; margin-left: 10px;">
-                                <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>{{ list.nombrearticulo | uppercase | slice:0:25 | moreContent:24 }}</strong></mat-card-subtitle>
+                                <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>{{ list.nombrearticulo | titlecase | slice:0:25 | moreContent:24 }}</strong></mat-card-subtitle>
                                 <mat-card-subtitle style="margin: 0px; font-size: 12px;">{{list.descripcion | slice:0:20 | moreContent:19}}</mat-card-subtitle>
                                 <mat-card-subtitle style="margin: 0px; font-size: 12px;">precio/und: {{ list.valorventa | currency:'COP$':'symbol':'1.0-0' }}</mat-card-subtitle>
                                 <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>subTotal: {{ list.valorventa * list.cant| currency:'$':'symbol':'1.0-0' }}</strong></mat-card-subtitle>

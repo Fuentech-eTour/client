@@ -94,6 +94,7 @@ export class CartService {
         razonsocial: product.razonsocial,
         products: [this.newProduct],
         total: product.valorventa,
+        imagen: product.imagent,
       };
       this.orderLists = [...this.orderLists, this.storeList];
     } else {

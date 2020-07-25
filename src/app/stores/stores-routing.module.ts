@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { StoresComponent } from './components/stores/stores.component';
 import { StoreComponent } from './components/store/store.component';
+import { TagsProductsComponent } from './components/tags-products/tags-products.component';
+import { SearchStoresComponent } from './components/search-stores/search-stores.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,14 @@ const routes: Routes = [
   {
     path: ':id',
     component: StoreComponent
+  },
+  {
+    path: 'tagsproducts/:id',
+    component: TagsProductsComponent
+  },
+  {
+    path: 'searchstores/:name',
+    component: SearchStoresComponent
   }
 ];
 

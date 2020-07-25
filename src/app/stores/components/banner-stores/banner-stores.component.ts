@@ -32,19 +32,14 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (window.matchMedia('(max-width: 375px)').matches) {
       this.slidesPerView = 2;
-      console.log('dos card');
     } else if (window.matchMedia('(max-width: 516px)').matches) {
       this.slidesPerView = 3;
-      console.log('tres card');
     } else if (window.matchMedia('(max-width: 668px)').matches) {
       this.slidesPerView = 4;
-      console.log('cuatro card');
     } else if (window.matchMedia('(max-width: 860px)').matches) {
       this.slidesPerView = 5;
-      console.log('cinco card');
     } else {
       this.slidesPerView = 6;
-      console.log('seis card');
     }
 
     this.mySwiper = new Swiper('.swiper-container', {

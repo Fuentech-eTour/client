@@ -11,6 +11,9 @@ import { MaterialModule } from '../material/material.module';
 import { ProductStoreComponent } from './components/product-store/product-store.component';
 import { SidebarStoreComponent } from './components/sidebar-store/sidebar-store.component';
 import { SharedModule } from '../shared/shared.module';
+import { ProductStoreMovilComponent } from './components/product-store-movil/product-store-movil.component';
+import { TagsProductsComponent } from './components/tags-products/tags-products.component';
+import { SearchStoresComponent } from './components/search-stores/search-stores.component';
 
 
 @NgModule({
@@ -20,6 +23,9 @@ import { SharedModule } from '../shared/shared.module';
     BannerStoresComponent,
     ProductStoreComponent,
     SidebarStoreComponent,
+    ProductStoreMovilComponent,
+    TagsProductsComponent,
+    SearchStoresComponent,
   ],
   imports: [
     CommonModule,

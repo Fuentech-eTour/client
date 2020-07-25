@@ -28,7 +28,7 @@
         <!-- swiper wrapper -->
         <div class="swiper-wrapper">
             <div *ngFor="let storeProduct of store.products" class="swiper-slide">
-                <app-product-store [product]="storeProduct" [razonsocial]="store.razonsocial">
+                <app-product-store [product]="storeProduct" [razonsocial]="store.razonsocial" [imagen]="store.imagen">
                 </app-product-store>
             </div>
         </div>

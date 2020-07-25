@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TagsService } from '@core/services/tags.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,24 +8,32 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  categoriasTiendas = [
-    'Abarrotes',
-    'Farmacias',
-    'Hoteles',
-    'Restaurantes',
-  ];
-  categoriasProductos = [
-    'Aseo',
-    'Deportes',
-    'Electrodomesticos',
-    'Juguetes'
-  ];
+  tagsStores: any;
+  tagsProducts: any;
 
   @Input() mostrar2: any;
 
-  constructor() { }
+  constructor(
+    private tagsService: TagsService,
+  ) { }
 
   ngOnInit(): void {
+    this.fetchTagsProducts();
+    this.fetchTagsStores();
+  }
+
+  fetchTagsProducts() {
+    this.tagsService.getAllTagsProducts()
+    .subscribe(tags => {
+      this.tagsProducts = tags;
+    });
+  }
+
+  fetchTagsStores() {
+    this.tagsService.getAllTagsStores()
+    .subscribe(tags => {
+      this.tagsStores = tags;
+    });
   }
 
 }

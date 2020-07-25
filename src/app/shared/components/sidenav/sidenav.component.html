@@ -4,7 +4,7 @@
         <!-- <mat-icon>storefront</mat-icon> -->
     </h1>
     <div class="category">
-        <p *ngFor="let catTienda of categoriasTiendas">{{catTienda}}</p>
+        <p *ngFor="let catStores of tagsStores" [routerLink]="['/tagstores', catStores.id]" (click)="mostrar2.toggle()">{{ catStores.descripcion | titlecase }}</p>
         <p><b>Ver mas...</b></p>
     </div>
     <h1 class="title" routerLink="/products" (click)="mostrar2.toggle()">Productos
@@ -12,7 +12,7 @@
         <!-- <mat-icon class="icon-category">category</mat-icon> -->
     </h1>
     <div class="category">
-        <p *ngFor="let catProd of categoriasProductos">{{catProd}}</p>
+        <p *ngFor="let catProd of tagsProducts" [routerLink]="['/stores/tagsproducts', catProd.id]" (click)="mostrar2.toggle()">{{ catProd.descripcion | titlecase }}</p>
         <p><b>Ver mas...</b></p>
     </div>
 </div>

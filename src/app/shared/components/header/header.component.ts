@@ -1,11 +1,12 @@
 import { Component, OnInit, HostListener, Input, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { AddressOptionsComponent } from '../address-options/address-options.component';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { RegisterComponent } from '../../../auth/components/register/register.component';
-import { AuthService } from '../../../core/services/auth.service';
-import { WindowService } from '../../../core/services/window.service';
+import { AuthService } from '@core//services/auth.service';
+import { WindowService } from '@core//services/window.service';
 
 import { map } from 'rxjs/operators';
 
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     private dialog: MatDialog,
     private authService: AuthService,
     private windowService: WindowService,
+    private router: Router,
   ) {
     this.total$ = this.cartService.numProductsCart$
     .pipe(map(products => products.length));
@@ -53,19 +55,12 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.contByProduct$ = this.cartService.numProductsCart$;
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
-    this.nameUser$ = this.windowService.userName$;
   }
 
   ngOnInit() {
-    this.nameUser$.subscribe(name => {
-      console.log(name);
-    });
   }
 
   ngOnChanges() {
-    this.nameUser$.subscribe(name => {
-      console.log(name);
-    });
   }
 
   toggleSideBar() {
@@ -107,13 +102,19 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   logout() {
-    this.windowService.addUserName(null);
     this.authService.logout();
+  }
+
+  searchStore(value: string) {
+    if (value !== '') {
+      this.router.navigate(['/stores/searchstores/', value]);
+    } else {
+      this.router.navigate(['/stores']);
+    }
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(event: Event) {
-    console.log(event);
     event.preventDefault();
     this.installEvent = event;
   }

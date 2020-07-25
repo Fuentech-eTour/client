@@ -2,9 +2,9 @@
     <app-counter-products style="cursor: pointer;" [product]="product">
     </app-counter-products>
     <mat-card-header>
-        <div mat-card-avatar style="background-image: url({{product.imagen}});
+        <div mat-card-avatar style="background-image: url({{product.imagent}});
             background-size: cover;">
-            <img *ngIf="product.imagen ===''" src="./../../../../assets/images/icon-store.png">
+            <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined" src="./../../../../assets/images/icon-store.png">
         </div>
         <mat-card-title style="font-size: 15px;" class="title-style" [routerLink]="['/products', product.id]">
             {{product.nombrearticulo | uppercase | slice:0:20 }}

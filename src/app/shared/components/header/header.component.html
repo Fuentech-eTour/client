@@ -29,7 +29,7 @@
                     <a mat-button (click)="installByUser()" *ngIf="installEvent">Install App</a>
                 </nav>
                 <div class="cont-btn-search">
-                    <input type="text" autocomplete="off" matInput placeholder="Buscar...">
+                    <input matInput #termino type="text" (keyup)="searchStore(termino.value)" autocomplete="off" placeholder="Buscar...">
                     <mat-label>
                         <mat-icon style="color: #73726c; font-size: 25px;">search</mat-icon>
                     </mat-label>
@@ -64,7 +64,7 @@
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
-
+<mat-progress-bar mode="indeterminate" style="display: none;"></mat-progress-bar>
 <!-- menu user --init-- -->
 
 <mat-menu class="mat-menu" #menu="matMenu">

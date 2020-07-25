@@ -13,6 +13,7 @@ export class StoreComponent implements OnInit {
 
   store$: Observable<any>;
   nameStore: string;
+  imagent: string;
 
   constructor(
     private storesService: StoresService,
@@ -28,6 +29,7 @@ export class StoreComponent implements OnInit {
     );
     this.store$.subscribe(store => {
       this.nameStore = store[0].razonsocial;
+      this.imagent = store[0].imagen;
     });
   }
 

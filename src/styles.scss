@@ -76,7 +76,8 @@ img {
 
 mat-card-subtitle,
 h1,
-button {
+button,
+p {
     &:focus {
         outline: none;
     }

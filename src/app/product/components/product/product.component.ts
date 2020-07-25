@@ -12,6 +12,7 @@ import { CartService } from './../../../core/services/cart.service';
 export class ProductComponent implements OnInit {
     @Input() product: Product;
     estadoHover = false;
+    idp: number;
 
     constructor(
         private cartService: CartService

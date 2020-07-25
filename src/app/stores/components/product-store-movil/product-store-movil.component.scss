@@ -1,0 +1,16 @@
+.container-list-product {
+    border-bottom: solid 1px rgb(194, 194, 194);
+}
+
+.crop-image {
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100%;
+    }
+}

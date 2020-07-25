@@ -1,4 +1,4 @@
-<mat-sidenav-container class="example-container" hasBackdrop="false" autosize> 
+<mat-sidenav-container class="example-container" hasBackdrop="false" autosize>
 
     <!--Content component -- init -->
     <mat-sidenav-content>
@@ -11,82 +11,11 @@
                 </div>
             </div>
         </div> -->
-        <app-banner-products
-            [nameBanner]="nameBanner">
+        <app-banner-products [nameBanner]="nameBanner">
         </app-banner-products>
         <div class="product-grid" ClassName="container">
-            <app-product
-                *ngFor="let product of products"
-                [product]="product">
+            <app-product *ngFor="let product of products" [product]="product">
             </app-product>
         </div>
     </mat-sidenav-content>
     <!--Content component -- final -->
-
-    <!--Izquierdo sidenav desplegable -- init -->
-    <mat-sidenav
-    [opened]="sideBarOpenIzq$ | async"
-    class="example-sidenav cont-sidenav" 
-    mode="over">
-        <!-- button of close -- init -->
-        <div class="row between-xs middled-xs position-bar-top2">
-            <div class="box">
-                <mat-card-title style="color: white; padding: 8px; margin-bottom: 0px;">
-                    Lista de tiendas
-                </mat-card-title>
-            </div>
-            <div class="box">
-                <a  mat-raised-button
-                    disabled="false"
-                    (click)="toggleSideBarIzq()"
-                    style="color: white; border-radius: 20px; background-color: #6ee200;">
-                    Cerrar
-                </a>
-            </div>
-        </div>
-        <!-- button of close -- final -->
-
-        <!-- content -- init -->
-        <form class="form-btn-search">
-            <div class="cont-btn-search">
-                <input class="btn-search"
-                type="text" 
-                matInput 
-                placeholder="Buscar">
-                <mat-label class="label-btn-search">
-                    <mat-icon style="color: #b1b1b1;">search</mat-icon>
-                </mat-label>
-            </div>
-        </form>
-        <div class="cont-list-store">
-            
-        </div>
-        <!-- content -- final -->
-            
-        <!-- button of pay -- init -->
-        <div>
-            <div class="row between-xs middled-xs position-bar-bottom">
-            
-                <div class="box">
-                    <mat-card-title style="color: white; padding: 8px; margin-bottom: 0px;">
-                        Descarga la App
-                    </mat-card-title>
-                </div>
-
-                <div class="box">
-                    <a  mat-raised-button
-                        disabled="false"
-                        routerLink="" 
-                        routerLinkActive="active"
-                        (click)="toggleSideBar()"
-                        style="color: white; border-radius: 20px; background-color: #6ee200;">
-                        Instalar
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-        <!-- button of pay -- final -->
-    </mat-sidenav>
-    <!--Izquierdo sidenav desplegable -- final -->
-</mat-sidenav-container>

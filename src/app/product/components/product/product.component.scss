@@ -1,58 +1,56 @@
 mat-card {
-  padding-top: 24px;
-  border-radius: 20px;
+    padding-top: 24px;
+    border-radius: 20px;
 }
 
 mat-card-header {
-  height: 80px;
+    height: 80px;
 }
 
 mat-card-content {
-  text-align: center;
-  height: 40px;
-  margin-top: 10px;
+    text-align: center;
+    height: 40px;
+    margin-top: 10px;
 }
 
-mat-card-actions > button {
-  border-radius: 20px;
+mat-card-actions>button {
+    border-radius: 20px;
 }
 
 .show {
-  box-shadow: 0px 0px 4px 2px rgba(115, 114, 108, 0.4);
+    box-shadow: 0px 0px 4px 2px rgba(115, 114, 108, 0.4);
 }
 
 .title-style {
-  cursor: pointer;
-}
-
-.cont-actions > button {
-  bottom: 0px;
-  width: 100%;
-}
-
-.crop-image{
-  height: 125px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     cursor: pointer;
-  }
+}
+
+.cont-actions>button {
+    bottom: 0px;
+    width: 100%;
+}
+
+.crop-image {
+    height: 125px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        height: 100%;
+    }
 }
 
 .btn-add {
-  background-color: #4d90d3;
-  color: white;
+    background-color: #4d90d3;
+    color: white;
 }
 
 .cont-actions :hover {
-  background-color: #396a9b;
-  color: white;
+    background-color: #396a9b;
+    color: white;
 }
-
-
-

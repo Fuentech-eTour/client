@@ -1,0 +1,15 @@
+<mat-grid-list cols="3" rowHeight="35px" class="container-list-product">
+    <mat-grid-tile colspan="1" rowspan="2" style.background="white">
+        <div class="crop-image" [routerLink]="['/products', product.id]">
+            <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product.imagen">
+            <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="3" style.background="white">
+        <mat-card-subtitle style="width: 100%; text-align: left; margin-left: 10px;">
+            <strong>{{ product.nombrearticulo | titlecase | slice:0:20 | moreContent:19 }}</strong> <br> {{ product.descripcion | lowercase| slice:0:25 | moreContent:24 }} <br> {{ product.valorventa | currency:'COP$':'symbol':'1.0-0' }}
+            <br><button mat-stroked-button color="accent" (click)="addCart()">Agregar</button>
+        </mat-card-subtitle>
+    </mat-grid-tile>
+
+</mat-grid-list>
