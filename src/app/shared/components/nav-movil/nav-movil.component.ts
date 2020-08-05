@@ -31,7 +31,6 @@ export class NavMovilComponent implements OnInit {
   showFiller = false;
   matBageShow$: Observable<boolean>;
   installEvent;
-  userName: string = localStorage.getItem('user_name');
   stateIconMenu = false;
   nameUser$: Observable<any>;
 

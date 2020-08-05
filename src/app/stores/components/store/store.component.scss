@@ -4,8 +4,8 @@
 
 .cont-store-grid {
     margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
+    //margin-right: 20px;
+    //margin-left: 20px;
     padding-bottom: 20px;
     @media (min-width: 700px) {
         display: grid;
@@ -28,6 +28,7 @@ app-product-store {
 }
 
 app-product-store-movil {
+    border-bottom: solid 1px #e0e0e0;
     @media (min-width: 700px) {
         display: none;
     }
@@ -55,7 +56,7 @@ app-product-store-movil {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 890px) {
     .store-products-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -66,7 +67,7 @@ app-product-store-movil {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1080px) {
     .store-products-grid {
         grid-template-columns: repeat(4, 1fr);
     }

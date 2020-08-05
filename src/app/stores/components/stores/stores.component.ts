@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StoresService } from '@core/services/stores.service';
+import { WindowService } from '@core/services/window.service';
 import { Store } from '@core/models/store.model';
 
 
@@ -14,6 +15,7 @@ export class StoresComponent implements OnInit {
 
   constructor(
     private storesService: StoresService,
+    private windowService: WindowService,
   ) { }
 
   ngOnInit(): void {
@@ -21,9 +23,11 @@ export class StoresComponent implements OnInit {
   }
 
   fetchStores() {
+    this.windowService.loadingTrue();
     this.storesService.getAllStores()
     .subscribe(stores => {
       this.stores = stores;
+      this.windowService.loadingFalse();
     });
   }
 

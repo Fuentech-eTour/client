@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="35px" class="container-list-product">
+<!-- <mat-grid-list cols="3" rowHeight="35px" class="container-list-product">
     <mat-grid-tile colspan="1" rowspan="2" style.background="white">
         <div class="crop-image" [routerLink]="['/products', product.id]">
             <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product.imagen">
@@ -11,5 +11,43 @@
             <br><button mat-stroked-button color="accent" (click)="addCart()">Agregar</button>
         </mat-card-subtitle>
     </mat-grid-tile>
+</mat-grid-list> -->
 
-</mat-grid-list>
+<div class="product-movil-cont">
+    <div class="img-cont">
+        <div class="crop-image" [routerLink]="['/products', product.id]">
+            <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'"
+                [src]="product.imagen">
+            <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
+        </div>
+    </div>
+    <div class="text-cont">
+        <mat-card-subtitle>
+            <strong class="title">{{ product.nombrearticulo | titlecase | slice:0:40 | moreContent:39 }}</strong> <br>
+            <span class="inf-cont-1">{{ product.descripcion | lowercase| slice:0:60 | moreContent:59 }}</span> <br>
+            <h2 class="inf-cont-2">{{ product.valorventa | currency:'COP$':'symbol':'1.0-0' }}</h2>
+            <div class="actions-cont" *ngIf="(addProduct$ | async) as addProduct">
+                <mat-card-actions *ngIf="addState">
+                    <button (click)="addCart()" mat-stroked-button color="accent" class="btn-add">agregar
+                        <mat-icon style="color: #ff4081;">add</mat-icon>
+                    </button>
+                </mat-card-actions>
+                <div *ngFor="let addProd of addProduct">
+                    <mat-card-actions *ngIf="addProd.id === product.id">
+                        <div style="display: flex; align-items: center; width: 100%; height: 36px;">
+                            <div style="text-align: right; height: 36px;">
+                                <mat-icon style="font-size: 36px; color: #9c9c9cde; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle_outline</mat-icon>
+                            </div>
+                            <div style="width: 40px; text-align: center;">
+                                <strong style="color: #ff4081;">{{ addProd.cant }}</strong>
+                            </div>
+                            <div style="text-align: left; height: 36px;">
+                                <mat-icon style="font-size: 36px; color: #9c9c9cde;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle_outline</mat-icon>
+                            </div>
+                        </div>
+                    </mat-card-actions>
+                </div>
+            </div>
+        </mat-card-subtitle>
+    </div>
+</div>

@@ -1,40 +1,34 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/admin/home">Estadisticas</a>
-      <a mat-list-item routerLink="/admin/inventory">Inventario</a>
-      <a mat-list-item routerLink="/admin/products">Productos</a>
-      <a mat-list-item (click)="logout()">Cerrar sesión</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar class="navbar-fixed-top" color="primary">
-      <mat-toolbar-row>
-          <div class="row between-xs middled-xs header-row">
-              <nav>
-                <button
-                  type="button"
-                  aria-label="Toggle sidenav"
-                  mat-icon-button
-                  (click)="drawer.toggle()"
-                  *ngIf="isHandset$ | async">
-                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-                </button>
-              <span>ema</span>
-              </nav>
-              <div class="row between-xs middled-xs">
-                  <a mat-button routerLink="/products" routerLinkActive="active">Store</a>
-                  <a mat-button routerLink="/admin" routerLinkActive="active">{{userName}}</a>
-                  <div mat-card-avatar class="example-header-image"></div>
-              </div>
-          </div>
-      </mat-toolbar-row>
-  </mat-toolbar>
-    <!-- Add Content Here -->
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
+    <mat-sidenav #drawerAdmin class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
+            <a mat-list-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a>
+            <a mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
+            <a mat-list-item (click)="logout()">Cerrar sesión</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar class="navbar-fixed-top" color="primary" style="background-color: white; color: gray;">
+            <mat-toolbar-row style="border-bottom: solid 1px #e0e0e0;">
+                <div class="row between-xs middled-xs header-row">
+                    <nav>
+                        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawerAdmin.toggle()"
+                            *ngIf="isHandset$ | async">
+                            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                        </button>
+                        <span style="color: #f3006d;">ema</span>
+                    </nav>
+                    <div class="row between-xs middled-xs">
+                        <a mat-button routerLink="/admin">{{userName}}</a>
+                        <div mat-card-avatar class="example-header-image"></div>
+                    </div>
+                </div>
+            </mat-toolbar-row>
+            <mat-progress-bar mode="indeterminate" [ngStyle]="{'display': (isLoading$ | async) ? 'flex' : 'none' }" style="bottom: 0px; position: absolute;"></mat-progress-bar>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
 </mat-sidenav-container>

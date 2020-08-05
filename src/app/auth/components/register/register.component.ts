@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
-import { AuthService } from './../../../core/services/auth.service';
+import { AuthService } from '@core/services/auth.service';
+import { WindowService } from '@core/services/window.service';
 
 @Component({
   selector: 'app-register',
@@ -12,11 +14,14 @@ import { AuthService } from './../../../core/services/auth.service';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+  passwordVerify: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private windowService: WindowService,
+    public dialogRef: MatDialogRef<RegisterComponent>
   ) {
     this.buildForm();
   }
@@ -26,27 +31,57 @@ export class RegisterComponent implements OnInit {
 
   register(event: Event) {
     event.preventDefault();
+    const check = this.form.value;
+    if (check.clave !== check.clave2) {
+      return;
+    }
+    this.form.value.correoverifica = this.form.get('email').value;
+    this.form.value.password = this.form.get('clave').value;
     if (this.form.valid) {
-      const check = this.form.value;
-      if (check.password !== check.password2) {
-        alert('Las contraseñas no coinsiden');
-      } else {
-        const user = this.form.value;
-        this.authService.createUser(user)
-        .subscribe( () => {
-          this.router.navigate(['./auth/login']);
-        });
-      }
+      this.windowService.loadingTrue();
+      this.authService.createUser(this.form.value)
+      .subscribe( (res: any) => {
+        this.windowService.loadingFalse();
+        if (res.status === 'OK') {
+          this.windowService.loadingTrue();
+          this.dialogRef.close();
+          this.authService.login(this.form.value).subscribe((resLogin: any) => {
+            localStorage.setItem('token', resLogin.data.accessToken);
+            localStorage.setItem('user_name', resLogin.data.user_name);
+            this.windowService.addUserName(resLogin.data.user_name.split(' ')[0]);
+            this.router.navigate(['./stores']);
+            this.windowService.loadingFalse();
+          });
+        }
+      });
     }
   }
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      user_name: ['', [Validators.required]],
+      nombres: ['', [Validators.required]],
+      apellidos: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      password2: ['', [Validators.required]],
+      correoverifica: '',
+      identificacion: '',
+      telefono: '',
+      clave: ['', [Validators.required]],
+      clave2: ['', [Validators.required]],
+      password: '',
     });
+  }
+
+  get claveField() {
+    return this.form.get('clave2');
+  }
+
+  validatorPassword() {
+    const check = this.form.value;
+    if (check.clave !== check.clave2) {
+      this.passwordVerify = true;
+    } else {
+      this.passwordVerify = false;
+    }
   }
 
 }

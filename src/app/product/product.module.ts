@@ -12,6 +12,7 @@ import { MaterialModule } from '../material/material.module';
 import { BannerProductsComponent } from './components/banner-products/banner-products.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CounterProductsComponent } from './components/counter-products/counter-products.component';
+import { ProductMovilComponent } from './components/product-movil/product-movil.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { CounterProductsComponent } from './components/counter-products/counter-
         ProductDetailComponent,
         ProductsComponent,
         BannerProductsComponent,
-        CounterProductsComponent
+        CounterProductsComponent,
+        ProductMovilComponent
     ],
     imports: [
         CommonModule,

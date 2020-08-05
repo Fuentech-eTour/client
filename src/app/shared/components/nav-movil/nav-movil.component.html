@@ -18,11 +18,11 @@
                     <mat-icon style="color: #73726c;">widgets</mat-icon>
                     <span>Productos</span> 
                 </button>
-                <button mat-icon-button *ngIf="(nameUser$ | async) !== null" [matMenuTriggerFor]="menu">
+                <button mat-icon-button *ngIf="(nameUser$ | async)" [matMenuTriggerFor]="menu">
                     <mat-icon style="color: #73726c;">account_circle</mat-icon>
                     <span>Usuario</span> 
                 </button>
-                <button mat-icon-button *ngIf="(nameUser$ | async) === null" [matMenuTriggerFor]="menu2">
+                <button mat-icon-button *ngIf="!(nameUser$ | async)" [matMenuTriggerFor]="menu2">
                     <mat-icon style="color: #73726c;">account_circle</mat-icon>
                     <span>Usuario</span> 
                 </button>
@@ -40,7 +40,7 @@
         </div>
         <div class="content-user">
             <span class="name-user">Hola, {{ nameUser$ | async | titlecase }}</span><br>
-            <span class="btn-perfil" style="font-size: 12px;">ver Perfil</span>
+            <span class="btn-perfil" routerLink="/user" style="font-size: 12px;">ver Perfil</span>
         </div>
     </div>
     <button mat-menu-item>

@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   } */
 
   login(event: Event) {
+    this.windowService.loadingTrue();
     event.preventDefault();
     if (this.form.valid) {
       const user = this.form.value;
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user_name', res.data.user_name);
           this.windowService.addUserName(res.data.user_name.split(' ')[0]);
           this.router.navigate(['./stores']);
+          this.windowService.loadingFalse();
         });
     }
   }

@@ -1,6 +1,4 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
-    <app-counter-products style="cursor: pointer;" [product]="product">
-    </app-counter-products>
     <mat-card-header>
         <div mat-card-avatar style="background-image: url({{product.imagent}});
             background-size: cover;">
@@ -20,9 +18,5 @@
     <mat-card-content>
         <p>{{product.descripcion | slice:0:40}}</p>
     </mat-card-content>
-    <mat-card-actions class="cont-actions">
-        <button (click)="addCart()" mat-raised-button class="btn-add">
-            agregar
-        </button>
-    </mat-card-actions>
+    <app-btn-add-count [product]="product"></app-btn-add-count>
 </mat-card>

@@ -16,6 +16,7 @@
         <div class="product-grid" ClassName="container">
             <app-product *ngFor="let product of products" [product]="product">
             </app-product>
+            <app-product-movil *ngFor="let product of products" [product]="product"></app-product-movil>
         </div>
     </mat-sidenav-content>
     <!--Content component -- final -->

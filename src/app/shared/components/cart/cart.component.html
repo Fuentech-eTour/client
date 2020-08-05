@@ -29,8 +29,8 @@
         </div>
         <div>
             <mat-accordion *ngFor="let orderLists of store">
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" style="margin-top: 10px;">
-                    <mat-expansion-panel-header>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" style="margin-top: 10px; margin: 5px;">
+                    <mat-expansion-panel-header style="margin-bottom: 5px;">
                         <mat-panel-title style="display: flex; align-items: center;">
                             <div mat-card-avatar style="background-image: url({{orderLists.imagen}}); background-size: cover;">
                                 <img *ngIf="orderLists.imagen ==='' || orderLists.imagen === null || orderLists.imagen === undefined" src="./../../../../assets/images/icon-store.png">
@@ -96,7 +96,7 @@
     <div *ngIf="products.length > 0" class="row between-xs middled-xs position-bar-bottom">
 
         <div class="box">
-            <a mat-raised-button disabled="false" routerLink="/order" (click)="mostrar.toggle()" routerLinkActive="active" style="color: white; border-radius: 20px; background-color: #f3006d;">
+            <a mat-raised-button disabled="false" routerLink="/order" (click)="mostrar.toggle()" style="color: white; border-radius: 20px; background-color: #ff4081;">
                 Ir a pagar
             </a>
         </div>

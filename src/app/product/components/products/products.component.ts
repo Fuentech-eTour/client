@@ -4,6 +4,7 @@ import { ProductsService } from '@core/services/products/products.service';
 import { AddProduct } from '@core/models/addProduct.model';
 import { Store } from '@core/models/store.model';
 import { CartService } from '@core/services/cart.service';
+import { WindowService } from '@core/services/window.service';
 import { Observable } from 'rxjs';
 
 import Swiper from 'swiper';
@@ -31,6 +32,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   constructor(
     private cartService: CartService,
     private productsService: ProductsService,
+    private windowService: WindowService,
   ) {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
@@ -54,19 +56,14 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     if (window.matchMedia('(max-width: 375px)').matches) {
       this.slidesPerView = 2;
-      console.log('dos card');
     } else if (window.matchMedia('(max-width: 516px)').matches) {
       this.slidesPerView = 3;
-      console.log('tres card');
     } else if (window.matchMedia('(max-width: 668px)').matches) {
       this.slidesPerView = 4;
-      console.log('cuatro card');
     } else if (window.matchMedia('(max-width: 860px)').matches) {
       this.slidesPerView = 5;
-      console.log('cinco card');
     } else {
       this.slidesPerView = 6;
-      console.log('seis card');
     }
 
     this.mySwiper = new Swiper('.swiper-container', {
@@ -84,9 +81,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   fetchProducts() {
+    this.windowService.loadingTrue();
     this.productsService.getAllProducts()
     .subscribe(products => {
       this.products = products;
+      this.windowService.loadingFalse();
     });
   }
 

@@ -5,8 +5,8 @@ import { Store } from '../models/store.model';
 import { Product } from '../models/product.model';
 import { environment } from '../../../environments/environment';
 
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, retry } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 import * as Sentry from '@sentry/browser';
 
@@ -46,6 +46,14 @@ export class StoresService {
 
   getStoreByName(name: string) {
     return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystorename/${name}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  createStore(store: any) {
+    return this.http.post(`${environment.url_api}/stores/crearstore`, store)
     .pipe(
       retry(3),
       catchError(this.handleError),

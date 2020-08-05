@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { StoresService } from '@core/services/stores.service';
+import { WindowService } from '@core/services/window.service';
 
 @Component({
   selector: 'app-search-stores',
@@ -11,20 +12,39 @@ import { StoresService } from '@core/services/stores.service';
 })
 export class SearchStoresComponent implements OnInit {
 
-  stores$: Observable<any>;
+  stores: [];
+  message: boolean;
+  state$: Observable<any>;
+  isLoading$: Observable<boolean>;
 
   constructor(
     private storesService: StoresService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private windowService: WindowService,
+  ) {
+    this.windowService.loadingTrue();
+    this.state$ = this.route.params
+          .pipe(
+            switchMap((params: Params) => {
+              return this.storesService.getStoreByName(params.name);
+            })
+          );
+    this.stores = [];
+    this.message = false;
+   }
 
   ngOnInit(): void {
-    this.stores$ = this.route.params
-    .pipe(
-      switchMap((params: Params) => {
-        return this.storesService.getStoreByName(params.name);
-      })
-    );
+    this.state$.subscribe((state: any) => {
+      console.log(state);
+      if (state.status === '402') {
+        this.message = true;
+        this.windowService.loadingFalse();
+      } else {
+        if (state.length !== 0 || this.isLoading$) {
+          this.stores = state;
+          this.windowService.loadingFalse();
+        }
+      }
+    });
   }
-
 }

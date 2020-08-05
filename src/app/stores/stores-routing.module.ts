@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StoresComponent } from './components/stores/stores.component';
 import { StoreComponent } from './components/store/store.component';
 import { TagsProductsComponent } from './components/tags-products/tags-products.component';
+import { TagsStoresComponent } from './components/tags-stores/tags-stores.component';
 import { SearchStoresComponent } from './components/search-stores/search-stores.component';
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'tagsproducts/:id',
     component: TagsProductsComponent
+  },
+  {
+    path: 'tagsstores/:id',
+    component: TagsStoresComponent
   },
   {
     path: 'searchstores/:name',

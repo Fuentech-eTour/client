@@ -9,6 +9,13 @@ mat-card {
         min-width: 140px;
         max-width: 160px;
     }
+    .actions-cont {
+        // non-selectable
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 }
 
 mat-card-header {
@@ -21,6 +28,11 @@ mat-card-content {
     text-align: center;
     height: 40px;
     margin-top: 10px;
+}
+
+mat-card-actions {
+    margin: 0px;
+    padding: 8px 0px 0px;
 }
 
 mat-card-actions>button {
@@ -57,11 +69,9 @@ mat-card-actions>button {
 }
 
 .btn-add {
-    background-color: #4d90d3;
-    color: white;
-}
-
-.cont-actions :hover {
-    background-color: #396a9b;
-    color: white;
+    bottom: 0px;
+    width: 100%;
+    &:hover {
+        border: solid 1px #ff4081;
+    }
 }

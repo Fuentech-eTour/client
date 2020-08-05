@@ -1,3 +1,17 @@
+app-product {
+  display: none;
+  @media (min-width: 700px) {
+      display: flex;
+  }
+}
+
+app-product-movil {
+  border-bottom: solid 1px #e0e0e0;
+  @media (min-width: 700px) {
+      display: none;
+  }
+}  
+  
   /* fondo oscuro al abrir el sidenav del cart -- init -- */
   .container-shown {
     -webkit-animation-duration: 0.5s;

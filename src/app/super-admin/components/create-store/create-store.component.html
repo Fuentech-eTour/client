@@ -1,0 +1,121 @@
+<form [formGroup]="form" (ngSubmit)="saveStore($event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Crear Tienda</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-c3-1">
+                                <mat-label>Tipo</mat-label>
+                                <mat-select formControlName="tipodoc">
+                                  <mat-option value="CC">CC</mat-option>
+                                  <mat-option value="NIT">NIT</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="input-c3-2">
+                                <input placeholder="NIT ó CC" formControlName="identificacion" matInput type="text">
+                            </mat-form-field>
+                            <mat-form-field class="input-c3-3">
+                                <span matPrefix>-</span>
+                                <input placeholder="Digito verificación" formControlName="digito" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-c2-1 ">
+                                <input placeholder="Razón social" formControlName="razonsocial" matInput type="text">
+                            </mat-form-field>
+                            <mat-form-field class="input-c2-2">
+                                <mat-label>Tipo de sociedad</mat-label>
+                                <mat-select formControlName="tipo">
+                                  <mat-option value="Natural">Natural</mat-option>
+                                  <mat-option value="SAS">SAS</mat-option>
+                                  <mat-option value="Limitada">Limitada</mat-option>
+                                  <mat-option value="UP">UP</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <mat-label>Regimen</mat-label>
+                                <mat-select formControlName="regimen">
+                                  <mat-option value="comun">Común</mat-option>
+                                  <mat-option value="simplificado">Simplificado</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <mat-label>Municipio</mat-label>
+                                <mat-select formControlName="idutmunicipality">
+                                  <mat-option value=1>Caucasia</mat-option>
+                                  <mat-option value=2>Nechí</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Dirección" formControlName="direccion" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="E-mail" formControlName="email" matInput type="email">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Telefono" formControlName="telefono" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <mat-label>Zona</mat-label>
+                                <mat-select formControlName="zona">
+                                  <mat-option value="urbano">Urbano</mat-option>
+                                  <mat-option value="rural">Rural</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Digito clave" formControlName="digitoclave" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <img *ngIf="(image$ | async) as image" [src]="image" alt="">
+                            <input type="file" (change)="uploadFile($event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+
+

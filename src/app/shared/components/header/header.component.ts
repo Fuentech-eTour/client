@@ -1,12 +1,12 @@
-import { Component, OnInit, HostListener, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { AddressOptionsComponent } from '../address-options/address-options.component';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { RegisterComponent } from '../../../auth/components/register/register.component';
-import { AuthService } from '@core//services/auth.service';
-import { WindowService } from '@core//services/window.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { WindowService } from '../../../core/services/window.service';
 
 import { map } from 'rxjs/operators';
 
@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
   @Input() mostrar: any;
   @Input() mostrar2: any;
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   installEvent;
   stateIconMenu = false;
   nameUser$: Observable<any>;
-  // newUserName: string = this.userName.split(' ')[0];
+  isLoading$: Observable<boolean>;
 
   constructor(
     private cartService: CartService,
@@ -55,12 +55,11 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.contByProduct$ = this.cartService.numProductsCart$;
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
+    this.nameUser$ = this.windowService.userName$;
+    this.isLoading$ = this.windowService.isloading$;
   }
 
   ngOnInit() {
-  }
-
-  ngOnChanges() {
   }
 
   toggleSideBar() {
@@ -102,19 +101,22 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   logout() {
+    this.windowService.addUserName(null);
     this.authService.logout();
   }
 
   searchStore(value: string) {
     if (value !== '') {
-      this.router.navigate(['/stores/searchstores/', value]);
+      this.router.navigate(['/stores/searchstores', value]);
     } else {
+      this.windowService.loadingTrue();
       this.router.navigate(['/stores']);
     }
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(event: Event) {
+    console.log(event);
     event.preventDefault();
     this.installEvent = event;
   }

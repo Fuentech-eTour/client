@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductStoreMovilComponent } from './components/product-store-movil/product-store-movil.component';
 import { TagsProductsComponent } from './components/tags-products/tags-products.component';
 import { SearchStoresComponent } from './components/search-stores/search-stores.component';
+import { TagsStoresComponent } from './components/tags-stores/tags-stores.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SearchStoresComponent } from './components/search-stores/search-stores.
     ProductStoreMovilComponent,
     TagsProductsComponent,
     SearchStoresComponent,
+    TagsStoresComponent,
   ],
   imports: [
     CommonModule,

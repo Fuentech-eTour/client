@@ -1,0 +1,43 @@
+form {
+    mat-card {
+        margin: 10px;
+        mat-card-header {
+            justify-content: center;;
+        }
+        mat-card-content {
+            text-align: center;
+            .col-xs-cont {
+                padding-right: 1.5rem; 
+                padding-left: 1.5rem;
+                .input-g {
+                width: 100%;
+                }
+                .input-c2-1 {
+                    width: 65%;
+                }
+                .input-c2-2 {
+                    width: 34%;
+                    margin-left: 1%;
+                }
+                .input-c3-1 {
+                    width: 15%;
+                }
+                .input-c3-2 {
+                    width: 49%;
+                    margin-left: 1%;
+                }
+                .input-c3-3 {
+                    width: 34%;
+                    margin-left: 1%;
+                }
+            }
+            
+        }
+        mat-card-actions {
+            text-align: center;
+            button {
+                padding: 0px 20px;
+            } 
+        }
+    }
+}

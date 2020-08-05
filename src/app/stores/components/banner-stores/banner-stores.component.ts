@@ -43,7 +43,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     }
 
     this.mySwiper = new Swiper('.swiper-container', {
-      slidesPerView: this.slidesPerView, // para movil 2, para tablet 3, para portatil 6
+      slidesPerView: this.slidesPerView,
       spaceBetween: 1,
       slidesPerGroup: 1,
       loop: false,
@@ -54,6 +54,71 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         prevEl: '.swiper-button-prev',
       },
     });
+
+    /* this.mySwiper = new Swiper('.swiper-container-1', {
+      slidesPerView: 2,
+      spaceBetween: 1,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: false,
+      freeMode: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    this.mySwiper = new Swiper('.swiper-container-2', {
+      slidesPerView: 3,
+      spaceBetween: 1,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: false,
+      freeMode: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    this.mySwiper = new Swiper('.swiper-container-3', {
+      slidesPerView: 4,
+      spaceBetween: 1,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: false,
+      freeMode: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    this.mySwiper = new Swiper('.swiper-container-4', {
+      slidesPerView: 5,
+      spaceBetween: 1,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: false,
+      freeMode: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    this.mySwiper = new Swiper('.swiper-container-5', {
+      slidesPerView: 6,
+      spaceBetween: 1,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: false,
+      freeMode: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    }); */
   }
 
   mouseEnter() {

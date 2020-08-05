@@ -1,0 +1,22 @@
+<div class="actions-cont" *ngIf="(addProduct$ | async) as addProduct">
+    <mat-card-actions *ngIf="addState">
+        <button (click)="addCart()" mat-stroked-button color="accent" class="btn-add">agregar
+            <mat-icon style="color: #ff4081;">add</mat-icon>
+        </button>
+    </mat-card-actions>
+    <div *ngFor="let addProd of addProduct">
+        <mat-card-actions *ngIf="addProd.id === product.id">
+            <div class="count-cont">
+                <div class="btn-remove-count">
+                    <mat-icon style="font-size: 36px; color: #9c9c9cde; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle_outline</mat-icon>
+                </div>
+                <div class="count">
+                    <strong style="color: #ff4081;">{{ addProd.cant }}</strong>
+                </div>
+                <div class="btn-add-count">
+                    <mat-icon style="font-size: 36px; color: #9c9c9cde;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle_outline</mat-icon>
+                </div>
+            </div>
+        </mat-card-actions>
+    </div>
+</div>

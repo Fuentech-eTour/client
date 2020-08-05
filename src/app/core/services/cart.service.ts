@@ -117,8 +117,6 @@ export class CartService {
         }
       }
     }
-    console.log(this.orderLists);
-    console.log(this.idStore);
     this.order.next(this.orderLists);
   }
 
@@ -187,7 +185,6 @@ export class CartService {
         break;
       }
     }
-    console.log(this.orderLists);
     this.order.next(this.orderLists);
   }
 

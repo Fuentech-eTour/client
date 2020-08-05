@@ -22,6 +22,7 @@ import { CountProductsComponent } from './components/count-products/count-produc
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AddressOptionsComponent } from './components/address-options/address-options.component';
 import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
+import { BtnAddCountComponent } from './components/btn-add-count/btn-add-count.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
     SidenavComponent,
     AddressOptionsComponent,
     NavMovilComponent,
+    BtnAddCountComponent,
   ],
   exports: [
     ExponentialPipe,
@@ -47,6 +49,7 @@ import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
     CartComponent,
     SidenavComponent,
     NavMovilComponent,
+    BtnAddCountComponent,
   ],
   imports: [
     CommonModule,

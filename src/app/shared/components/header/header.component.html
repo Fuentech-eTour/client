@@ -62,9 +62,10 @@
                 </div>
             </div>
         </mat-toolbar-row>
+        <mat-progress-bar mode="indeterminate" [ngStyle]="{'display': (isLoading$ | async) ? 'flex' : 'none' }" style="bottom: 0px; position: absolute;"></mat-progress-bar>
     </mat-toolbar>
 </div>
-<mat-progress-bar mode="indeterminate" style="display: none;"></mat-progress-bar>
+
 <!-- menu user --init-- -->
 
 <mat-menu class="mat-menu" #menu="matMenu">
@@ -74,7 +75,7 @@
         </div>
         <div class="content-user">
             <span class="name-user">Hola, {{ nameUser$ | async | titlecase }}</span><br>
-            <span class="btn-perfil" style="font-size: 12px; cursor: pointer;">ver Perfil</span>
+            <span class="btn-perfil" routerLink="/user" style="font-size: 12px; cursor: pointer;">ver Perfil</span>
         </div>
     </div>
     <button mat-menu-item>

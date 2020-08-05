@@ -1,0 +1,52 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* nuevo */
+
+nav > a {
+  padding-left: 1px;
+  padding-right: 1px;
+  margin-left: 2px;
+  margin-right: 2px;
+  text-decoration: none;
+  align-items: center;
+}
+
+nav > a.active {
+  border-bottom: solid white;
+}
+
+.header-row {
+  width: 100%;
+}
+
+.navbar-fixed-top {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  
+}
+
+.navbar-margin {
+  padding-bottom: 64px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

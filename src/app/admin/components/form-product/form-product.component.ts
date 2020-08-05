@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
 
-import { ProductsService } from './../../../core/services/products/products.service';
+import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
 import { MyValidator } from './../../../utils/validators';
 
 import { Observable } from 'rxjs';
@@ -19,11 +20,16 @@ export class FormProductComponent implements OnInit {
 
   form: FormGroup;
   image$: Observable<any>;
-  date = new Date();
+  date = new Date().getDate();
+  title: string;
+  price: number;
+  description: string;
+  image: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private productsService: ProductsService,
+    private authService: AuthService,
     private router: Router,
     private angularFireStorage: AngularFireStorage
   ) {
@@ -39,15 +45,13 @@ export class FormProductComponent implements OnInit {
     this.productsService.createProduct(product)
       .subscribe((newProduct) => {
         this.router.navigate(['./admin/products']);
-        console.log(newProduct);
     });
   }
 
   uploadFile(event) {
+    const nameStore = this.authService.getUserName();
     const file = event.target.files[0];
-    console.log(file);
-    const name = `image-${this.date}.png`;
-    console.log(file);
+    const name = `product-${nameStore}-${this.date}.png`;
     const fileRef = this.angularFireStorage.ref(name);
     const task = this.angularFireStorage.upload(name, file);
 
@@ -56,7 +60,6 @@ export class FormProductComponent implements OnInit {
       finalize(() => {
         this.image$ = fileRef.getDownloadURL();
         this.image$.subscribe(url => {
-          console.log(url);
           this.form.get('image').setValue(url);
         });
       })

@@ -34,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        //canActivate: [ AdminGuard ],
+        // canActivate: [ AdminGuard ],
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
       },
       {
@@ -45,8 +45,18 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [ AdminGuard ],
+    // canActivate: [ AdminGuard ],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'user',
+    // canActivate: [ AdminGuard ],
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
+    path: 'super-admin',
+    // canActivate: [ AdminGuard ],
+    loadChildren: () => import('./super-admin/super-admin.module').then(m => m.SuperAdminModule)
   },
   {
     path: 'auth',

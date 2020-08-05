@@ -1,6 +1,6 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
-    <app-counter-products style="cursor: pointer;" [product]="product">
-    </app-counter-products>
+    <!-- <app-counter-products style="cursor: pointer;" [product]="product">
+    </app-counter-products> -->
     <mat-card-header>
         <mat-card-title style="font-size: 12px; width: 108px;" class="title-style" [routerLink]="['/products', product.id]">
             {{ product.nombrearticulo | uppercase | slice:0:20 | moreContent:19 }}
@@ -13,33 +13,29 @@
         <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product.imagen">
         <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
     </div>
-    <mat-card-content style="font-size: 12px; width: 100%; text-align: center;">
-        <p>{{ product.descripcion | slice:0:40 | moreContent:39 }}</p>
+    <mat-card-content style="font-size: 12px; width: 100%; text-align: center; margin-bottom: 0px;">
+        <p>{{ product.descripcion | lowercase | slice:0:40 | moreContent:39 }}</p>
     </mat-card-content>
-    <mat-card-actions class="cont-actions">
-        <button (click)="addCart()" mat-raised-button class="btn-add">agregar</button>
-    </mat-card-actions>
-    <!-- <div *ngIf="(addProduct$ | async) as addProduct">
-        <mat-card-actions *ngIf="addProduct.length === 0" class="cont-actions">
-            <button (click)="addCart()" mat-raised-button class="btn-add">agregar</button>
+    <div class="actions-cont" *ngIf="(addProduct$ | async) as addProduct">
+        <mat-card-actions *ngIf="addState">
+            <button (click)="addCart()" mat-stroked-button color="accent" class="btn-add">agregar
+                <mat-icon style="color: #ff4081;">add</mat-icon>
+            </button>
         </mat-card-actions>
-        <div *ngFor="let addProduct of addProduct">
-            <mat-card-actions *ngIf="addProduct.id === product.id && addProduct.cant > 0">
+        <div *ngFor="let addProd of addProduct">
+            <mat-card-actions *ngIf="addProd.id === product.id">
                 <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 36px;">
                     <div style="width: 100%; text-align: right; height: 36px;">
-                        <mat-icon style="font-size: 36px; color: #4d90d3; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle</mat-icon>
+                        <mat-icon style="font-size: 36px; color: #9c9c9cde; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle_outline</mat-icon>
                     </div>
                     <div style="width: 100%; justify-content: center;">
-                        <strong>{{ addProduct.cant }}</strong>
+                        <strong style="color: #ff4081;">{{ addProd.cant }}</strong>
                     </div>
                     <div style="width: 100%; text-align: left; height: 36px;">
-                        <mat-icon style="font-size: 36px; color: #4d90d3;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle</mat-icon>
+                        <mat-icon style="font-size: 36px; color: #9c9c9cde;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle_outline</mat-icon>
                     </div>
                 </div>
             </mat-card-actions>
-            <mat-card-actions class="cont-actions">
-                <button (click)="addCart()" mat-raised-button class="btn-add">agregar</button>
-            </mat-card-actions>
         </div>
-    </div> -->
+    </div>
 </mat-card>

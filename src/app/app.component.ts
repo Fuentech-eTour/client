@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   updatePWA() {
     this.swUpdate.available
     .subscribe(value => {
-      console.log('update', value);
       window.location.reload();
     });
   }
@@ -41,7 +40,6 @@ export class AppComponent implements OnInit {
   requestPermission() {
     this.messaging.requestToken
     .subscribe(token => {
-      console.log(token);
       this.tokensCollections.add({token});
     });
   }
@@ -49,7 +47,6 @@ export class AppComponent implements OnInit {
   listenNotifications() {
     this.messaging.messages
     .subscribe(message => {
-      console.log(message);
     });
   }
 }
