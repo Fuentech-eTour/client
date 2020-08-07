@@ -21,6 +21,10 @@ export class AuthService {
     return this.http.post(`${environment.url_api}/users/login`, user);
   }
 
+  loginUserStore(user: JSON) {
+    return this.http.post(`${environment.url_api}/users/loginstore`, user);
+  }
+
   loggedIn() {
     return !!localStorage.getItem('token');
   }

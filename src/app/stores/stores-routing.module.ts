@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: 'searchstores/:name',
     component: SearchStoresComponent
-  }
+  },
 ];
 
 @NgModule({

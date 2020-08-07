@@ -3,7 +3,7 @@
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Sus productos</ng-template>
       <div class="position-button">
-        <button class="margin-button" mat-flat-button color="primary" matStepperNext>
+        <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
           Continuar
           <mat-icon>
             navigate_next
@@ -46,9 +46,9 @@
         </div>
       </div> -->
 
-<mat-table [dataSource]="products$" class="mat-elevation-z8" style="border-radius: 20px">
+<mat-table [dataSource]="products$" class="mat-elevation-z8" style="border-radius: 20px; background: #ffffff00;">
   <!-- Position Column -->
-  <ng-container matColumnDef="imagen">
+  <ng-container class="img-cont" matColumnDef="imagen">
     <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
     <mat-cell *matCellDef="let products"><img style="margin: 10px;" width="40px" [src]="products.imagen"></mat-cell>
   </ng-container>
@@ -56,19 +56,19 @@
   <!-- Name Column -->
   <ng-container matColumnDef="nombre">
     <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-    <mat-cell *matCellDef="let products"> {{products.nombrearticulo}} </mat-cell>
+    <mat-cell *matCellDef="let products"> {{ products.nombrearticulo | lowercase }} </mat-cell>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="cantidad">
     <mat-header-cell *matHeaderCellDef style="justify-content: center;"> Cantidad </mat-header-cell>
-    <mat-cell *matCellDef="let products" style="justify-content: center;"> {{products.cant}} </mat-cell>
+    <mat-cell *matCellDef="let products" style="justify-content: center;"> {{ products.cant }} </mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="total">
     <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-    <mat-cell *matCellDef="let products"> {{products.valorventa * products.cant | currency}} </mat-cell>
+    <mat-cell *matCellDef="let products"> {{ products.valorventa * products.cant | currency }} </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -82,7 +82,7 @@
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Datos de entrega</ng-template>
       <div class="position-button">
-        <button class="margin-button" mat-flat-button color="primary" matStepperNext>
+        <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
           Continuar
           <mat-icon>
             navigate_next
@@ -97,12 +97,12 @@
         <mat-card class="shipping-card">
           <mat-card-header class="row between-xs middled-xs" style="align-items: center;">
             <div class="col">
-              <mat-card-title>
-                  Dirección de entrega
+              <mat-card-title style="text-align: center;">
+                  Dirección
               </mat-card-title>
             </div>
             <div class="col">
-              <mat-card-title>
+              <mat-card-title style="text-align: center;">
                 <a mat-button style="padding: 0px;" 
                 (click)="openDialog()">
                   Agregar dirección 
@@ -118,13 +118,13 @@
               <div class="col">
                 <mat-radio-group formControlName="secondCtrl" required>
                   <mat-card class="address-shadow">
-                    <mat-radio-button value="free">Carrera 6a #15b-18 b/rio Villagranda</mat-radio-button>
+                    <mat-radio-button value="free">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
                   </mat-card>
                   <mat-card class="address-shadow">
-                    <mat-radio-button value="priority">Priority Shipping</mat-radio-button>
+                    <mat-radio-button value="priority">{{'Carrera 6a #15b-18'}} <br/> {{'El camello'}}</mat-radio-button>
                   </mat-card>
                   <mat-card class="address-shadow">
-                    <mat-radio-button value="nextday">Next Day Shipping</mat-radio-button>
+                    <mat-radio-button value="nextday">{{'Calle 16 #00-00'}} <br/> {{'Clemente arrieta'}}</mat-radio-button>
                   </mat-card>
                 </mat-radio-group>
               </div>
@@ -137,7 +137,7 @@
   <mat-step>
     <ng-template matStepLabel>Metodo de pago</ng-template>
     <div class="position-button">
-      <button class="margin-button" mat-flat-button color="primary" matStepperNext>
+      <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
         Finalizar
         <mat-icon>
           turned_in_not

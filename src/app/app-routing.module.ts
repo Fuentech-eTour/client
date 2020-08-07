@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { LayoutComponent } from './layout/layout.component';
 import { AdminGuard } from './admin.guard';
+import { AdminStoreGuard } from './shared/guards/admin-store.guard';
 
 const routes: Routes = [
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        // canActivate: [ AdminGuard ],
+        canActivate: [ AdminGuard ],
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
       },
       {
@@ -45,12 +46,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    // canActivate: [ AdminGuard ],
+    canActivate: [ AdminStoreGuard ],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'user',
-    // canActivate: [ AdminGuard ],
+    canActivate: [ AdminGuard ],
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {

@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 // import { map, tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 
-import { AuthService } from './core/services/auth.service';
+import { LoginComponent } from './auth/components/login/login.component';
+import { AuthService } from '@core/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class AdminGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) {
 
   }
@@ -32,7 +35,13 @@ export class AdminGuard implements CanActivate {
     if (this.authService.loggedIn()) {
       return true;
     }
-    this.router.navigate(['/auth/login']);
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['/stores']);
+    });
     return false;
   }
 

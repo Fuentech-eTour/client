@@ -11,20 +11,7 @@ export class BannerProductsComponent implements OnInit {
   @Input() nameBanner: string;
   estadoHover = false;
 
-  images: string[] = [
-    './../../assets/images/product-1.jpg',
-    './../../assets/images/product-2.jpg',
-    './../../assets/images/product-3.jpg',
-    './../../assets/images/product-4.jpg',
-    './../../assets/images/product-5.jpg',
-    './../../assets/images/product-6.jpg',
-    './../../assets/images/product-1.png',
-    './../../assets/images/product-2.png',
-    './../../assets/images/product-3.png',
-    './../../assets/images/product-4.png',
-    './../../assets/images/product-5.png',
-    './../../assets/images/product-6.png'
-  ];
+  images: string[] = [];
 
   constructor() {
   }

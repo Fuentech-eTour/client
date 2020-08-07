@@ -1,19 +1,11 @@
-.container-login {
-    width: auto;
-    height: 80%;
-    text-align: center;
-    align-items: center;
-}
-
-form {
-    padding: 0px;
-    @media (min-width: 600px) {
-        padding: 20px;
-    }
-}
-
 mat-card {
+    width: 250px;
     border-radius: 20px;
+}
+
+mat-card-header {
+    width: 100%;
+    justify-content: center;
 }
 
 mat-card-subtitle {
@@ -29,20 +21,10 @@ button {
     }
 }
 
-@media (min-width: 475px) {
-    .container-login {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        align-items: center;
-    }
-    form {
-        position: absolute;
-        width: 300px;
-        top: 20%;
-        left: 20%;
-        text-align: center;
-        align-items: center;
+.btn-register {
+    cursor: pointer;
+    &:hover {
+        color: black;
     }
 }
 

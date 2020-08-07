@@ -24,6 +24,14 @@ export class UsersService {
     );
   }
 
+  createPermisionUserStore(userPermission: any) {
+    return this.http.post(`${environment.url_api}/users/createpermisionuserstore/${userPermission.id}`, userPermission)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
     console.log(error);

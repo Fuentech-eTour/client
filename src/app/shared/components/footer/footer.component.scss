@@ -6,8 +6,28 @@ footer {
     border-top: solid 1px #dbdcdd;
     /* background-color: mat-color($primary); */
     background-color: white;
-    .box {
+    div {
         div {
+            .col-cont-1 {
+                padding: 0px 20px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                @media (min-width: 700px) {
+                    padding: 0px;
+                    width: 20%;
+                    align-items: center;
+                }
+            }
+            .col-cont {
+                text-align: center;
+                width: 50%;
+                @media (min-width: 700px) {
+                    text-align: left;
+                    padding: 0px;
+                    width: 20%;
+                }
+            }
             img {
                 cursor: pointer;
                 &:focus {
@@ -30,6 +50,7 @@ footer {
                 a {
                     text-decoration: none;
                     color: rgba(0, 0, 0, .54);
+                    cursor: pointer;
                 }
             }
         }

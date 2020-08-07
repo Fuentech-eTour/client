@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
-import { RegisterComponent } from '../register/register.component';
-
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-user-store',
+  templateUrl: './login-user-store.component.html',
+  styleUrls: ['./login-user-store.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginUserStoreComponent implements OnInit {
 
   form: FormGroup;
 
@@ -22,41 +20,25 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private windowService: WindowService,
-    public dialogRef: MatDialogRef<LoginComponent>,
-    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<LoginUserStoreComponent>
   ) {
     this.buildForm();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-
-  /* login(event: Event) {
-    event.preventDefault();
-    if (this.form.valid) {
-      const value = this.form.value;
-      this.authService.login(value.email, value.password)
-      .then(() => {
-        this.router.navigate(['/admin']);
-      })
-      .catch(() => {
-        alert('no es valido');
-      });
-    }
-  } */
 
   login(event: Event) {
     this.windowService.loadingTrue();
     event.preventDefault();
     if (this.form.valid) {
       const user = this.form.value;
-      this.authService.login(user)
+      this.authService.loginUserStore(user)
         .subscribe( (res: any) => {
-          console.log(res);
           localStorage.setItem('token', res.data.accessToken);
           localStorage.setItem('user_name', res.data.user_name);
           this.windowService.addUserName(res.data.user_name.split(' ')[0]);
-          this.router.navigate(['./stores']);
+          this.router.navigate(['./admin']);
           this.windowService.loadingFalse();
         });
     }
@@ -68,15 +50,10 @@ export class LoginComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
+      digitoclave: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
-  openComponentRegister() {
-    this.dialog.open(RegisterComponent, {
-      width: 'auto'
-    });
-    this.onNoClick();
-  }
 }

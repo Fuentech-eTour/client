@@ -9,7 +9,7 @@
                     <mat-form-field class="full-width">
                         <textarea matInput placeholder="Dirección" formControlName="address"></textarea>
                         <mat-error *ngIf="form.controls['address'].hasError('required')">
-                            Address is <strong>required</strong>
+                            Dirección es <strong>requerida</strong>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -19,7 +19,7 @@
                     <mat-form-field class="full-width">
                         <input matInput placeholder="Municipio" formControlName="city">
                         <mat-error *ngIf="form.controls['city'].hasError('required')">
-                            City is <strong>required</strong>
+                            Municipio es <strong>requerido</strong>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -31,7 +31,7 @@
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="form.controls['state'].hasError('required')">
-                            State is <strong>required</strong>
+                            Departamento es <strong>requerido</strong>
                         </mat-error>
                     </mat-form-field>
                 </div>

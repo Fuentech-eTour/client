@@ -31,7 +31,7 @@
   }
   
   .shipping-card {
-    width: 450px;
+    max-width: 450px;
     min-width: 120px;
     margin: 20px auto;
   }
@@ -63,7 +63,7 @@
   }
 
   .cont-address {
-    width: 450px;
+    max-width: 450px;
     box-shadow: none;
     margin: 0px auto;
   }
@@ -107,5 +107,11 @@ mat-table {
 }
 
 mat-row, mat-header-row {
-  border-radius: 20px;
+  margin: 0px 20px;
+}
+
+mat-cell, mat-header-cell {
+  font-size: 12px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }

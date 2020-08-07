@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UsersService } from '@core/services/users.service';
+import { WindowService } from '@core/services/window.service';
 import { MyValidator } from './../../../utils/validators';
-
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-user-store',
@@ -15,13 +14,12 @@ import { Observable } from 'rxjs';
 export class CreateUserStoreComponent implements OnInit {
 
   form: FormGroup;
-  image$: Observable<any>;
-  date = new Date().getDate();
   passwordVerify: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private usersService: UsersService,
+    private windowService: WindowService,
     private router: Router,
   ) {
     this.buildForm();
@@ -32,12 +30,30 @@ export class CreateUserStoreComponent implements OnInit {
 
   saveUserStore(event: Event) {
     event.preventDefault();
-    this.form.value.userlog = this.form.get('usuario').value;
-    const userStore = this.form.value;
-    this.usersService.createUserStore(userStore)
-      .subscribe(() => {
-        this.router.navigate(['/super-admin/create-user-store']);
-    });
+    console.log(this.form.get('urol').value);
+    if (this.form.valid) {
+      this.windowService.loadingTrue();
+      this.form.value.userlog = this.form.get('usuario').value;
+      this.usersService.createUserStore(this.form.value)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.windowService.loadingFalse();
+          if (res.status === 'OK') {
+            this.windowService.loadingTrue();
+            const createPermission = {
+              urol: this.form.get('urol').value,
+              id: res.userid,
+            };
+            this.usersService.createPermisionUserStore(createPermission)
+              .subscribe(resPermission => {
+                console.log(resPermission);
+                this.windowService.loadingFalse();
+                this.form.reset();
+                this.router.navigate(['/super-admin/create-user-store']);
+              });
+          }
+      });
+    }
   }
 
   private buildForm() {
@@ -51,6 +67,7 @@ export class CreateUserStoreComponent implements OnInit {
       apellidos: ['', [Validators.required]],
       identificacion: ['', [Validators.required]],
       cargo: ['', [Validators.required, MyValidator.isPreciValid]],
+      urol: ['', [Validators.required]],
     });
   }
 
