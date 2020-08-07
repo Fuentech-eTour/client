@@ -1,6 +1,6 @@
 <div class="product-movil-cont">
     <div class="img-cont">
-        <div class="crop-image" [routerLink]="['/products', product.id]">
+        <div class="crop-image" (click)="openDialogDetailProduct()">
             <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'"
                 [src]="product.imagen">
             <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
@@ -12,7 +12,7 @@
                 <div class="logo-cont" style="background-image: url({{product.imagent}});">
                     <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined" src="./../../../../assets/images/icon-store.png">
                 </div>
-                <strong class="title">{{ product.nombrearticulo | titlecase | slice:0:40 | moreContent:39 }}</strong>
+                <strong (click)="openDialogDetailProduct()" class="title">{{ product.nombrearticulo | titlecase | slice:0:40 | moreContent:39 }}</strong>
             </div><br>
             
             <span class="inf-cont-1">{{ product.descripcion | lowercase | slice:0:60 | moreContent:59 }}</span> <br>

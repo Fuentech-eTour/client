@@ -36,7 +36,7 @@ export class ProductsService {
   }
 
   getProduct(id: number) {
-    return this.http.get<Product>(`${environment.url_api}/products/${id}`)
+    return this.http.get<Product>(`${environment.url_api}/products/obtenerproductbyid/${id}`)
     .pipe(
       retry(3),
       catchError(this.handleError),

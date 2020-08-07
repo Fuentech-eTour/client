@@ -15,7 +15,7 @@
 
 <div class="product-movil-cont">
     <div class="img-cont">
-        <div class="crop-image" [routerLink]="['/products', product.id]">
+        <div class="crop-image" (click)="openDialogDetailProduct()">
             <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'"
                 [src]="product.imagen">
             <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
@@ -23,7 +23,7 @@
     </div>
     <div class="text-cont">
         <mat-card-subtitle>
-            <strong class="title">{{ product.nombrearticulo | titlecase | slice:0:40 | moreContent:39 }}</strong> <br>
+            <strong (click)="openDialogDetailProduct()" class="title">{{ product.nombrearticulo | titlecase | slice:0:40 | moreContent:39 }}</strong> <br>
             <span class="inf-cont-1">{{ product.descripcion | lowercase| slice:0:60 | moreContent:59 }}</span> <br>
             <h2 class="inf-cont-2">{{ product.valorventa | currency:'COP$':'symbol':'1.0-0' }}</h2>
             <div class="actions-cont" *ngIf="(addProduct$ | async) as addProduct">

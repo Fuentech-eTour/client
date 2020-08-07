@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
+import { ProductDetailComponent } from '../../../product/components/product-detail/product-detail.component';
 import { Product } from '../../../core/models/product.model';
 import { AddProduct } from '../../../core/models/addProduct.model';
 
@@ -24,6 +26,7 @@ export class ProductStoreComponent implements OnInit {
     constructor(
         private cartService: CartService,
         private windowService: WindowService,
+        private dialog: MatDialog,
     ) {
       this.addState = true;
       this.addProduct$ = this.cartService.cart$;
@@ -50,6 +53,17 @@ export class ProductStoreComponent implements OnInit {
         if (products.length === 0) {
           this.addState = true;
         }
+      });
+    }
+
+    openDialogDetailProduct(): void {
+      const dialogRef = this.dialog.open(ProductDetailComponent, {
+        width: 'auto',
+        data: {id: this.product.id}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
       });
     }
 

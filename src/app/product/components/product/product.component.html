@@ -2,21 +2,22 @@
     <mat-card-header>
         <div mat-card-avatar style="background-image: url({{product.imagent}});
             background-size: cover;">
-            <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined" src="./../../../../assets/images/icon-store.png">
+            <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined"
+                src="./../../../../assets/images/icon-store.png">
         </div>
-        <mat-card-title style="font-size: 15px;" class="title-style" [routerLink]="['/products', product.id]">
-            {{product.nombrearticulo | uppercase | slice:0:20 }}
+        <mat-card-title style="font-size: 15px;" class="title-style" (click)="openDialogDetailProduct()">
+            {{ product.nombrearticulo | uppercase | slice:0:30 | moreContent:29 }}
         </mat-card-title>
         <mat-card-subtitle [routerLink]="['/products', product.id]">
-            {{product.valorventa | currency:'$':'symbol':'1.0-0'}}
+            {{ product.valorventa | currency:'$':'symbol':'1.0-0' }}
         </mat-card-subtitle>
     </mat-card-header>
-    <div [routerLink]="['/products', product.id]" class="crop-image">
+    <div (click)="openDialogDetailProduct()" class="crop-image">
         <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product.imagen">
         <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
     </div>
     <mat-card-content>
-        <p>{{product.descripcion | slice:0:40}}</p>
+        <p>{{ product.descripcion | lowercase | slice:0:40 | moreContent:39 }}</p>
     </mat-card-content>
     <app-btn-add-count [product]="product"></app-btn-add-count>
 </mat-card>

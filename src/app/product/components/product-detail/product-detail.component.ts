@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductsService } from '@core/services/products/products.service';
 import { Product } from '@core/models/product.model';
 import { Observable } from 'rxjs';
@@ -27,16 +28,13 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private cartService: CartService
+    private cartService: CartService,
+    public dialogRef: MatDialogRef<ProductDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
-    this.product$ = this.route.params
-    .pipe(
-      switchMap((params: Params) => {
-        return this.productsService.getProduct(params.id);
-      })
-    );
+    this.product$ = this.productsService.getProduct(this.data.id);
   }
 
   ngAfterViewInit() {
@@ -55,10 +53,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
       loop: false,
       loopFillGroupWithBlank: false,
       freeMode: true,
-      /* pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      }, */
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -75,40 +69,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     });
   }
 
-  /* createProduct() {
-    const newProduct: Product = {
-      id: '230',
-      title: 'Lo mejor',
-      image: 'assets\images\banner-1.jpg',
-      price: 3000,
-      description: 'Este es un nuevo producto'
-    };
-
-    this.productsService.createProduct(newProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
-  }
-
-  updateProduct() {
-    const updateProduct: Partial<Product> = {
-      price: 45000,
-      description: 'Producto editado exitosamente'
-    };
-
-    this.productsService.updateProduct('2', updateProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
-  }
-
-  deleteProduct() {
-    this.productsService.deleteProduct('2255')
-    .subscribe(rta => {
-      console.log(rta);
-    });
-  }
-
+  /*
   getFile() {
     this.productsService.getFile()
     .subscribe(content => {

@@ -1,5 +1,21 @@
-.btn-add {
-    background-color: #4d90d3;
-    color: white;
-    border-radius: 20px;
+div {
+  mat-card {
+    box-shadow: none !important;
+    .img-cont {
+      text-align: center;
+      img {
+      height: 200px;
+      @media (min-width: 768px) {
+        height: 250px;
+      }
+    }
+    }
+    
+    .actions-cont {
+      width: 100%;
+      @media (min-width: 768px) {
+        width: 150px;
+      }
+    }
   }
+}

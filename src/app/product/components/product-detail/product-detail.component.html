@@ -1,37 +1,29 @@
 <div *ngIf="(product$ | async) as product">
-    <a routerLink="/products" routerLinkActive="active">
-        <mat-icon style="padding-top: 20px; 
-            cursor: pointer;">
-            arrow_back
-        </mat-icon>
-    </a>
     <mat-card style="padding: 20px; margin: 20px 0px;">
-        <div class="row border-table middle-xs">
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <div>
-                    <img [src]="product.imagen" alt="" style="border-radius: 20px;">
+        <mat-dialog-content style="margin: 0px;">
+            <div class="row border-table middle-xs">
+                <div class="col-xs-12 col-sm-6 col-md-6 img-cont">
+                    <div>
+                        <img [src]="product[0]?.imagen" alt="" style="border-radius: 20px;">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div>
+                        <ul>
+                            <li>
+                                <mat-card-title>Nombre: {{ product[0]?.nombrearticulo }}</mat-card-title>
+                            </li>
+                            <li>
+                                <mat-card-subtitle>Precio/unid: {{ product[0]?.valorventa | currency }}</mat-card-subtitle>
+                            </li>
+                        </ul>
+                        <p>{{ product[0]?.descripcion }}</p>
+                    </div>
+                    <div class="actions-cont">
+                       <app-btn-add-count [product]="product[0]"></app-btn-add-count> 
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <div>
-                    <ul>
-                        <li>
-                            <mat-card-title>Nombre: {{ product.nombrearticulo }}</mat-card-title>
-                        </li>
-                        <li>
-                            <mat-card-subtitle>Precio/unid: {{ product.valorventa | currency }}</mat-card-subtitle>
-                        </li>
-                    </ul>
-                    <p>{{ product.descripcion }}</p>
-                </div>
-                <button (click)="addCart()" mat-raised-button class="btn-add">
-                    agregar
-                </button>
-                <app-counter-products style="cursor: pointer;" [product]="product">
-                </app-counter-products>
-            </div>
-        </div>
+        </mat-dialog-content>
     </mat-card>
 </div>
-<app-banner-products [nameBanner]="nameBannerOne"></app-banner-products>
-<app-banner-products [nameBanner]="nameBannerTwo"></app-banner-products>
