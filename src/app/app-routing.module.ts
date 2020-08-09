@@ -34,6 +34,10 @@ const routes: Routes = [
         loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
       },
       {
+        path: 'search',
+        loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+      },
+      {
         path: 'order',
         canActivate: [ AdminGuard ],
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule)

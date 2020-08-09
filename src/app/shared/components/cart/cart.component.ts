@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import { ProductDetailComponent } from '../../../product/components/product-detail/product-detail.component';
 import { Product } from '@core/models/product.model';
 import { AddProduct } from '@core/models/addProduct.model';
 import { Store } from '@core/models/store.model';
@@ -25,7 +28,8 @@ export class CartComponent implements OnInit {
   panelOpenState = false;
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private dialog: MatDialog,
   ) {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
@@ -35,6 +39,17 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  openDialogDetailProduct(idp: number): void {
+    const dialogRef = this.dialog.open(ProductDetailComponent, {
+      width: 'auto',
+      data: {id: idp}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   toggleSideBar() {

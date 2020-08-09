@@ -107,7 +107,7 @@ export class HeaderComponent implements OnInit {
 
   searchStore(value: string) {
     if (value !== '') {
-      this.router.navigate(['/stores/searchstores', value]);
+      this.router.navigate(['/search', value]);
     } else {
       this.windowService.loadingTrue();
       this.router.navigate(['/stores']);

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { StoresService } from '@core/services/stores.service';
 import { WindowService } from '@core/services/window.service';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -10,7 +11,7 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.scss']
 })
-export class StoreComponent implements OnInit {
+export class StoreComponent implements OnInit, OnDestroy {
 
   store$: Observable<any>;
   nameStore: string;
@@ -20,7 +21,10 @@ export class StoreComponent implements OnInit {
     private storesService: StoresService,
     private route: ActivatedRoute,
     private windowService: WindowService,
-  ) { }
+    private router: Router,
+  ) {
+    this.windowService.stateFooterFalse();
+  }
 
   ngOnInit(): void {
     this.windowService.loadingTrue();
@@ -35,6 +39,14 @@ export class StoreComponent implements OnInit {
       this.imagent = store[0].imagen;
       this.windowService.loadingFalse();
     });
+  }
+
+  backHistory() {
+    window.history.back();
+  }
+
+  ngOnDestroy() {
+    this.windowService.stateFooterTrue();
   }
 
 }

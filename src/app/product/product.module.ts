@@ -21,7 +21,7 @@ import { ProductMovilComponent } from './components/product-movil/product-movil.
         ProductsComponent,
         BannerProductsComponent,
         CounterProductsComponent,
-        ProductMovilComponent
+        ProductMovilComponent,
     ],
     imports: [
         CommonModule,
@@ -33,7 +33,8 @@ import { ProductMovilComponent } from './components/product-movil/product-movil.
     exports: [
         ProductComponent,
         CounterProductsComponent,
-        BannerProductsComponent
+        BannerProductsComponent,
+        ProductMovilComponent,
     ]
 })
 export class ProductModule {}

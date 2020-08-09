@@ -72,7 +72,6 @@ export class ProductStoreMovilComponent implements OnInit {
       this.product.imagent = this.imagen;
       this.cartService.addCart(this.product);
       this.cartService.addPrice(this.product.valorventa);
-      console.log(this.product);
     }
 
     removeCart() {

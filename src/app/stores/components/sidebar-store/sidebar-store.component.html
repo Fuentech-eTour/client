@@ -1,5 +1,17 @@
 <mat-card class="cont-category">
+    <img *ngIf="store[0].imagen ===''       || 
+                store[0].imagen === null    || 
+                store[0].imagen === undefined; else imgstore" 
+                src="./../../../../assets/images/icon-store.png">
+    <ng-template #imgstore>
+        <img [src]="store[0].imagen">
+    </ng-template>
     <mat-card-header>
+        <mat-card-title>
+            {{ store[0].razonsocial | titlecase | slice:0:20 | moreContent:19 }}
+        </mat-card-title>
+    </mat-card-header>
+    <!-- <mat-card-header>
         <div mat-card-avatar style="background-image: url({{store[0].imagen}});
         background-size: cover;">
             <img *ngIf="store[0].imagen ==='' || store[0].imagen === null || store[0].imagen === undefined" src="./../../../../assets/images/icon-store.png">
@@ -7,7 +19,7 @@
         <mat-card-title>
             {{ store[0].razonsocial | titlecase }}
         </mat-card-title>
-    </mat-card-header>
+    </mat-card-header> -->
 
     <h1 class="title" routerLink="/products">Categorias
         <mat-icon class="icon-category">category</mat-icon>

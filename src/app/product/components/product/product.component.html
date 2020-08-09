@@ -1,7 +1,7 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
     <mat-card-header>
-        <div mat-card-avatar style="background-image: url({{product.imagent}});
-            background-size: cover;">
+        <div [routerLink]="['/stores', product.idststore]" mat-card-avatar style="background-image: url({{product.imagent}});
+            background-size: cover; cursor: pointer;">
             <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined"
                 src="./../../../../assets/images/icon-store.png">
         </div>

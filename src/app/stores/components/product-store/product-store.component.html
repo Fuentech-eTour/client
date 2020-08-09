@@ -5,7 +5,7 @@
         <mat-card-title style="font-size: 12px; width: 108px;" class="title-style" (click)="openDialogDetailProduct()">
             {{ product.nombrearticulo | uppercase | slice:0:20 | moreContent:19 }}
         </mat-card-title>
-        <mat-card-subtitle [routerLink]="['/products', product.id]">
+        <mat-card-subtitle>
             {{ product.valorventa | currency:'$':'symbol':'1.0-0' }}
         </mat-card-subtitle>
     </mat-card-header>
@@ -17,25 +17,27 @@
         <p>{{ product.descripcion | lowercase | slice:0:40 | moreContent:39 }}</p>
     </mat-card-content>
     <div class="actions-cont" *ngIf="(addProduct$ | async) as addProduct">
-        <mat-card-actions *ngIf="addState">
+        <mat-card-actions *ngIf="addState; else countIf">
             <button (click)="addCart()" mat-stroked-button color="accent" class="btn-add">agregar
                 <mat-icon style="color: #ff4081;">add</mat-icon>
             </button>
         </mat-card-actions>
-        <div *ngFor="let addProd of addProduct">
-            <mat-card-actions *ngIf="addProd.id === product.id">
-                <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 36px;">
-                    <div style="width: 100%; text-align: right; height: 36px;">
-                        <mat-icon style="font-size: 36px; color: #9c9c9cde; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle_outline</mat-icon>
+        <ng-template #countIf>
+            <div *ngFor="let addProd of addProduct">
+                <mat-card-actions *ngIf="addProd.id === product.id">
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 36px;">
+                        <div style="width: 100%; text-align: right; height: 36px;">
+                            <mat-icon style="font-size: 36px; color: #9c9c9cde; width: 36px; cursor: pointer;" (click)="removeCart()">remove_circle_outline</mat-icon>
+                        </div>
+                        <div style="width: 100%; justify-content: center;">
+                            <strong style="color: #ff4081;">{{ addProd.cant }}</strong>
+                        </div>
+                        <div style="width: 100%; text-align: left; height: 36px;">
+                            <mat-icon style="font-size: 36px; color: #9c9c9cde;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle_outline</mat-icon>
+                        </div>
                     </div>
-                    <div style="width: 100%; justify-content: center;">
-                        <strong style="color: #ff4081;">{{ addProd.cant }}</strong>
-                    </div>
-                    <div style="width: 100%; text-align: left; height: 36px;">
-                        <mat-icon style="font-size: 36px; color: #9c9c9cde;  width: 36px; cursor: pointer;" (click)="addCart()">add_circle_outline</mat-icon>
-                    </div>
-                </div>
-            </mat-card-actions>
-        </div>
+                </mat-card-actions>
+            </div>
+        </ng-template>
     </div>
 </mat-card>

@@ -22,6 +22,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -48,6 +49,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDialogModule,
     MatChipsModule,
     MatProgressBarModule,
+    MatTabsModule,
   ],
   exports: [
     MatButtonModule,
@@ -71,6 +73,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDialogModule,
     MatChipsModule,
     MatProgressBarModule,
+    MatTabsModule,
   ]
 })
 export class MaterialModule { }

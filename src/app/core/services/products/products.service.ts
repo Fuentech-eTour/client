@@ -43,6 +43,14 @@ export class ProductsService {
     );
   }
 
+  getProductByName(name: string) {
+    return this.http.get<any>(`${environment.url_api}/products/obtenerproductbyname/${name}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   createProduct(product: Product) {
     return this.http.post(`${environment.url_api}/products`, product)
     .pipe(

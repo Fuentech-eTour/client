@@ -35,11 +35,12 @@ export class SearchStoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.state$.subscribe((state: any) => {
-      console.log(state);
       if (state.status === '402') {
         this.message = true;
+        this.stores = [];
         this.windowService.loadingFalse();
       } else {
+        this.message = false;
         if (state.length !== 0 || this.isLoading$) {
           this.stores = state;
           this.windowService.loadingFalse();

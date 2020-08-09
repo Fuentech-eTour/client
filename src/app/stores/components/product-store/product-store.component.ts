@@ -43,7 +43,7 @@ export class ProductStoreComponent implements OnInit {
     stateAddProduct() {
       this.addProduct$.subscribe((products: any) => {
         for (const product of products) {
-          if (product.id === this.product.id && products.length !== 0) {
+          if (product.id === this.product.id) {
             this.addState = false;
             break;
           } else {
@@ -63,7 +63,7 @@ export class ProductStoreComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
+        this.stateAddProduct();
       });
     }
 

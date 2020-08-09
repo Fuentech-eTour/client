@@ -35,6 +35,17 @@ import { TagsStoresComponent } from './components/tags-stores/tags-stores.compon
     ProductModule,
     MaterialModule,
     SharedModule,
+  ],
+  exports: [
+    StoresComponent,
+    StoreComponent,
+    BannerStoresComponent,
+    ProductStoreComponent,
+    SidebarStoreComponent,
+    ProductStoreMovilComponent,
+    TagsProductsComponent,
+    SearchStoresComponent,
+    TagsStoresComponent,
   ]
 })
 export class StoresModule { }

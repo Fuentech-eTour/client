@@ -9,7 +9,7 @@
     <div class="text-cont">
         <mat-card-subtitle>
             <div class="logo-title-cont">
-                <div class="logo-cont" style="background-image: url({{product.imagent}});">
+                <div [routerLink]="['/stores', product.idststore]" class="logo-cont" style="background-image: url({{product.imagent}});">
                     <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined" src="./../../../../assets/images/icon-store.png">
                 </div>
                 <strong (click)="openDialogDetailProduct()" class="title">{{ product.nombrearticulo | titlecase | slice:0:40 | moreContent:39 }}</strong>

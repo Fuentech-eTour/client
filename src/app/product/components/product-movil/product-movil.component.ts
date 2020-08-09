@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
+import { BtnAddCountComponent } from '../../../shared/components/btn-add-count/btn-add-count.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { Product } from '@core/models/product.model';
 
@@ -12,6 +13,7 @@ import { Product } from '@core/models/product.model';
 export class ProductMovilComponent implements OnInit {
 
   @Input() product: Product;
+  @ViewChild(BtnAddCountComponent) btnAdd: BtnAddCountComponent;
 
   constructor(
     private dialog: MatDialog,
@@ -26,7 +28,11 @@ export class ProductMovilComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.runState();
     });
+  }
+
+  runState() {
+    this.btnAdd.stateAddProduct();
   }
 }

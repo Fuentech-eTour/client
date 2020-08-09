@@ -1,8 +1,8 @@
-<div ClassName="container" class="cont-name-store">
-    <!-- <mat-card-title>
-        {{ nameStore }}
-    </mat-card-title> -->
-</div>
+<!-- <div ClassName="container" class="cont-name-store">
+    <p>
+        <mat-icon (click)="backHistory()">arrow_back</mat-icon>
+    </p>
+</div> -->
 <div class="cont-store-grid">
     <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
     <div *ngIf="(store$ | async)  as store" class="store-products-grid container">

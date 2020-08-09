@@ -1,5 +1,23 @@
 .cont-name-store {
-    margin: 20px 0px;
+    margin: 0px;
+    padding-top: 10px;
+    p {
+        display: flex;
+        padding: 0px 20px;
+        align-items: center;
+        color: grey;
+        margin: 0px;
+        mat-icon {
+            cursor: pointer;
+            
+            //non-selectable
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+    
 }
 
 .cont-store-grid {
@@ -11,6 +29,10 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px 10px;
+    }
+    app-sidebar-store {
+        display: flex;
+        justify-content: center;
     }
 }
 

@@ -66,14 +66,14 @@
                     </mat-grid-list> -->
                     <mat-grid-list cols="4" rowHeight="90px" *ngFor="let list of orderLists.products" class="container-list-product">
                         <mat-grid-tile colspan="1" rowspan="1" style.background="white" style="justify-content: left; display: flex;">
-                            <div class="crop-image" [routerLink]="['/products', list.id]" (click)="toggleSideBar()">
+                            <div class="crop-image" (click)="openDialogDetailProduct(list.id)">
                                 <img *ngIf="list.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="list.imagen">
                                 <img *ngIf="list.imagen ===''" src="./../../../../assets/images/not-image.png">
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="2" rowspan="1" style.background="white" style="display: flex; justify-content: left; margin: 0px;">
                             <div style="justify-content: left; width: 100%; margin-left: 10px;">
-                                <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>{{ list.nombrearticulo | titlecase | slice:0:25 | moreContent:24 }}</strong></mat-card-subtitle>
+                                <mat-card-subtitle style="margin: 0px; font-size: 12px; cursor: pointer;" (click)="openDialogDetailProduct(list.id)"><strong>{{ list.nombrearticulo | titlecase | slice:0:25 | moreContent:24 }}</strong></mat-card-subtitle>
                                 <mat-card-subtitle style="margin: 0px; font-size: 12px;">{{list.descripcion | slice:0:20 | moreContent:19}}</mat-card-subtitle>
                                 <mat-card-subtitle style="margin: 0px; font-size: 12px;">precio/und: {{ list.valorventa | currency:'COP$':'symbol':'1.0-0' }}</mat-card-subtitle>
                                 <mat-card-subtitle style="margin: 0px; font-size: 12px;"><strong>subTotal: {{ list.valorventa * list.cant| currency:'$':'symbol':'1.0-0' }}</strong></mat-card-subtitle>

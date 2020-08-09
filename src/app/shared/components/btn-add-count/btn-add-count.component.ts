@@ -25,6 +25,17 @@ export class BtnAddCountComponent implements OnInit {
     this.stateAddProduct();
   }
 
+  addCart() {
+    this.cartService.addCart(this.product);
+    this.cartService.addPrice(this.product.valorventa);
+  }
+
+  removeCart() {
+    this.cartService.removeCart(this.product);
+    this.cartService.removePrice(this.product.valorventa);
+    this.stateAddProduct();
+  }
+
   stateAddProduct() {
     this.addProduct$.subscribe((products: any) => {
       for (const product of products) {
@@ -39,17 +50,6 @@ export class BtnAddCountComponent implements OnInit {
         this.addState = true;
       }
     });
-  }
-
-  addCart() {
-    this.cartService.addCart(this.product);
-    this.cartService.addPrice(this.product.valorventa);
-  }
-
-  removeCart() {
-    this.cartService.removeCart(this.product);
-    this.cartService.removePrice(this.product.valorventa);
-    this.stateAddProduct();
   }
 
 }

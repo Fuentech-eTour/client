@@ -1,5 +1,4 @@
-form {
-    mat-card {
+ mat-card {
         margin: 10px;
         .header-1 {
             justify-content: center;
@@ -7,9 +6,9 @@ form {
         mat-card-content {
             .cont-1 {
                 padding: 20px;
-                @media (min-width: 600px) {
+                /* @media (min-width: 600px) {
                     border-right: solid 1px #e0e0e0;
-                }
+                } */
                 mat-form-field {
                     width: 100%;
                 }
@@ -62,7 +61,6 @@ form {
             }
         }
     }
-}
 
 .show {
     box-shadow: 0px 0px 4px 2px rgba(115, 114, 108, 0.4);
@@ -93,7 +91,7 @@ form {
     }
 }
 
-.btn-add {
+/* .btn-add {
     background-color: #4d90d3;
     color: white;
 }
@@ -101,4 +99,4 @@ form {
 .cont-actions :hover {
     background-color: #396a9b;
     color: white;
-}
+} */
