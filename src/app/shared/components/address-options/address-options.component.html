@@ -1,4 +1,7 @@
 <mat-card class="shipping-card">
+    <!-- <div class="btn-close-cont" style="text-align: right;">
+        <mat-icon (click)="onNoClick()">highlight_off</mat-icon> 
+     </div> -->
     <mat-card-header class="row between-xs middled-xs">
         <h1 style="text-align: center; width: 100%;">
             Dirección de entrega
@@ -9,13 +12,13 @@
             <div class="col">
                 <mat-radio-group formControlName="secondCtrl" required>
                     <mat-card class="address-shadow">
-                        <mat-radio-button value="free">Carrera 6a #15b-18 b/rio Villagranda</mat-radio-button>
+                        <mat-radio-button value="free">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
                     </mat-card>
                     <mat-card class="address-shadow">
-                        <mat-radio-button value="priority">Carrera 6a #15b-18 b/rio Villagranda</mat-radio-button>
+                        <mat-radio-button value="priority">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
                     </mat-card>
                     <mat-card class="address-shadow">
-                        <mat-radio-button value="nextday">Carrera 6a #15b-18 b/rio Villagranda</mat-radio-button>
+                        <mat-radio-button value="nextday">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
                     </mat-card>
                 </mat-radio-group>
                 <mat-accordion>

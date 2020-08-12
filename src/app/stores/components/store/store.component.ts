@@ -31,10 +31,11 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.store$ = this.route.params
     .pipe(
       switchMap((params: Params) => {
-        return this.storesService.getProductsOneStore(params.id);
+        return this.storesService.getProductsByTagsOneStore(params.id);
       })
     );
     this.store$.subscribe(store => {
+      console.log(store);
       this.nameStore = store[0].razonsocial;
       this.imagent = store[0].imagen;
       this.windowService.loadingFalse();

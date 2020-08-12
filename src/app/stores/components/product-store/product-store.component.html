@@ -1,6 +1,5 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
-    <!-- <app-counter-products style="cursor: pointer;" [product]="product">
-    </app-counter-products> -->
+    <!-- <app-counter-products></app-counter-products> -->
     <mat-card-header>
         <mat-card-title style="font-size: 12px; width: 108px;" class="title-style" (click)="openDialogDetailProduct()">
             {{ product.nombrearticulo | uppercase | slice:0:20 | moreContent:19 }}

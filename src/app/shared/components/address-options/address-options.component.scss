@@ -5,6 +5,8 @@
 }
 
 .shipping-card {
+    max-height: 360px;
+    overflow: auto;
     min-width: 120px;
     margin: 10px;
     box-shadow: none;
@@ -39,6 +41,5 @@
     box-shadow: none;
     margin: 0px auto;
 }
-
 
 /* address -- final */

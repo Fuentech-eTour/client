@@ -28,7 +28,23 @@ export class StoresService {
   }
 
   getProductsOneStore(id: number) {
-    return this.http.get<Product[]>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
+    return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getProductsByTagsOneStore(id: number) {
+    return this.http.get<any>(`${environment.url_api}/products/obtenerproductostiendasidtags/${id}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getTagsOneStore(id: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenertagsstoresbyid/${id}`)
     .pipe(
       retry(3),
       catchError(this.handleError),

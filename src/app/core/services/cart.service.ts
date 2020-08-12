@@ -185,6 +185,7 @@ export class CartService {
         break;
       }
     }
+    this.card.next(this.products);
     this.order.next(this.orderLists);
   }
 

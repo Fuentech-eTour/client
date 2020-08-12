@@ -24,8 +24,14 @@
     <h1 class="title" routerLink="/products">Categorias
         <mat-icon class="icon-category">category</mat-icon>
     </h1>
-    <div class="category">
-        <p *ngFor="let catProd of categoriasProductos">{{catProd}}</p>
-        <p><b>Ver mas...</b></p>
-    </div>
+    <ul class="category">
+        <li *ngFor="let catProd of categoriasProductos" >
+            <a  [routerLink] [fragment]="'seccion'+catProd.id" 
+                [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                {{ catProd.descripcion | titlecase}}
+            </a>
+        </li>
+        <!-- <p><b>Ver mas...</b></p> -->
+    </ul>
 </mat-card>

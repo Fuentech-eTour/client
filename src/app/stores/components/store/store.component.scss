@@ -34,6 +34,16 @@
         display: flex;
         justify-content: center;
     }
+    .title-tag {
+        margin: 0px;
+        margin-bottom: 20px; 
+        padding: 20px; 
+        font-weight: 900;
+        border-bottom: solid 1px #e0e0e0;
+        @media (min-width: 700px) {
+            padding: 20px 0px;
+        }
+    }
 }
 
 .store-products-grid {

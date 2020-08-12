@@ -1,5 +1,8 @@
 <div *ngIf="(product$ | async) as product">
     <mat-card style="padding: 20px; margin: 20px 0px;">
+        <div class="btn-close-cont">
+            <mat-icon (click)="onNoClick()">highlight_off</mat-icon> 
+         </div>
         <mat-dialog-content style="margin: 0px;">
             <div class="row border-table middle-xs">
                 <div class="col-xs-12 col-sm-6 col-md-6 img-cont">

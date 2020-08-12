@@ -1,5 +1,5 @@
 <div class="actions-cont" *ngIf="(addProduct$ | async) as addProduct">
-    <mat-card-actions *ngIf="addState">
+    <mat-card-actions *ngIf="addState || addProduct.length === 0">
         <button (click)="addCart()" mat-stroked-button color="accent" class="btn-add">agregar
             <mat-icon style="color: #ff4081;">add</mat-icon>
         </button>

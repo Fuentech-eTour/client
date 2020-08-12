@@ -5,9 +5,21 @@
 </div> -->
 <div class="cont-store-grid">
     <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
-    <div *ngIf="(store$ | async)  as store" class="store-products-grid container">
-        <app-product-store *ngFor="let product of store[0].products" [product]="product" [razonsocial]="nameStore" [imagen]="imagent">
-        </app-product-store>
-        <app-product-store-movil *ngFor="let product of store[0].products" [product]="product" [razonsocial]="nameStore" [imagen]="imagent"></app-product-store-movil>
+    <div *ngIf="(store$ | async)  as store">
+        <div *ngFor="let tag of store[0].tags">
+            <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
+            <div class="store-products-grid container">
+              <app-product-store    *ngFor="let product of tag.products" 
+                                    [product]="product" 
+                                    [razonsocial]="nameStore" 
+                                    [imagen]="imagent">
+                </app-product-store>
+                <app-product-store-movil    *ngFor="let product of tag.products" 
+                                            [product]="product" 
+                                            [razonsocial]="nameStore" 
+                                            [imagen]="imagent">
+                </app-product-store-movil> 
+            </div>
+        </div>
     </div>
 </div>

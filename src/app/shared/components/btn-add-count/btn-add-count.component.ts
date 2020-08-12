@@ -11,11 +11,12 @@ import { Product } from '@core/models/product.model';
 export class BtnAddCountComponent implements OnInit {
 
   @Input() product: Product;
-    addProduct$: Observable<any>;
-    addState: boolean;
+  addProduct$: Observable<any>;
+  addProductState$: Observable<[any]>;
+  addState: boolean;
 
-    constructor(
-      private cartService: CartService,
+  constructor(
+    private cartService: CartService,
   ) {
     this.addState = true;
     this.addProduct$ = this.cartService.cart$;
@@ -33,13 +34,12 @@ export class BtnAddCountComponent implements OnInit {
   removeCart() {
     this.cartService.removeCart(this.product);
     this.cartService.removePrice(this.product.valorventa);
-    this.stateAddProduct();
   }
 
   stateAddProduct() {
     this.addProduct$.subscribe((products: any) => {
       for (const product of products) {
-        if (product.id === this.product.id && products.length !== 0) {
+        if (product.id === this.product.id) {
           this.addState = false;
           break;
         } else {

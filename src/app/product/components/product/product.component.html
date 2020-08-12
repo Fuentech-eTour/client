@@ -1,4 +1,5 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
+    <!-- <app-counter-products></app-counter-products> -->
     <mat-card-header>
         <div [routerLink]="['/stores', product.idststore]" mat-card-avatar style="background-image: url({{product.imagent}});
             background-size: cover; cursor: pointer;">

@@ -1,6 +1,18 @@
 div {
   mat-card {
     box-shadow: none !important;
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+    .btn-close-cont {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      align-items: center;
+      mat-icon {
+        padding: 10px 0px;
+        cursor: pointer;
+      }
+    }
     .img-cont {
       text-align: center;
       img {

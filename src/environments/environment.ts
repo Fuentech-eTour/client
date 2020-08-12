@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // url_api: 'http://localhost:3000/api',
-  url_api: 'https://salty-savannah-34168.herokuapp.com/api',
+  url_api: 'http://localhost:3000/api',
+  // url_api: 'https://salty-savannah-34168.herokuapp.com/api',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',
     authDomain: 'platzi-store-749d0.firebaseapp.com',
