@@ -30,7 +30,7 @@
     {
       "name": "api",
       "urls": [
-        "https//platzi-store.herokuapp.com/**"
+        "https://salty-savannah-34168.herokuapp.com/api/**"
         ],
           "cacheConfig": {
           "maxSize": 3,

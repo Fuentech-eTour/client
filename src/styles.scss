@@ -3,10 +3,11 @@
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px 20px;
     margin-top: 20px;
-    padding-bottom: 20px;
+    //padding-bottom: 20px;
     @media (min-width: 700px) {
         margin-right: 20px;
         margin-left: 20px;
+        padding-bottom: 20px;
     }
 }
 
@@ -81,7 +82,8 @@ mat-card-subtitle,
 h1,
 button,
 p,
-span {
+span,
+li {
     &:focus {
         outline: none;
     }
@@ -161,40 +163,76 @@ body::-webkit-scrollbar-track:active {
 
 /* scroll cart --init-- */
 
-.mat-drawer-inner-container::-webkit-scrollbar {
+.ng-tns-c66-1::-webkit-scrollbar {
     width: 8px;     /* Tamaño del scroll en vertical */
     height: 8px;    /* Tamaño del scroll en horizontal */
     // display: none;  /* Ocultar scroll */
 }
 
 /* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-.mat-drawer-inner-container::-webkit-scrollbar-thumb {
+.ng-tns-c66-1::-webkit-scrollbar-thumb {
     background: #dfdfdf;
     border-radius: 4px;
 }
 /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-.mat-drawer-inner-container::-webkit-scrollbar-thumb:hover {
+.ng-tns-c66-1::-webkit-scrollbar-thumb:hover {
     background: #b3b3b3;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 /* Cambiamos el fondo cuando esté en active */
-.mat-drawer-inner-container::-webkit-scrollbar-thumb:active {
+.ng-tns-c66-1::-webkit-scrollbar-thumb:active {
     background-color: #999999;
 }
 
 /* Ponemos un color de fondo y redondeamos las esquinas del track */
-.mat-drawer-inner-container::-webkit-scrollbar-track {
+.ng-tns-c66-1::-webkit-scrollbar-track {
+    background: #ebebeb;
+    border-radius: 4px;
+}
+/* Cambiamos el fondo cuando esté en active o hover */
+.ng-tns-c66-1::-webkit-scrollbar-track:hover,
+.ng-tns-c66-1::-webkit-scrollbar-track:active {
+  background: #e7e7e7;
+}
+
+/* scroll --final-- */
+
+/* scroll sidebar --init-- */
+
+.ng-tns-c66-0::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    // display: none;  /* Ocultar scroll */
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.ng-tns-c66-0::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+    border-radius: 4px;
+}
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.ng-tns-c66-0::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+/* Cambiamos el fondo cuando esté en active */
+.ng-tns-c66-0::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del track */
+.ng-tns-c66-0::-webkit-scrollbar-track {
     background: #ebebeb;
     border-radius: 4px;
     margin-top: 54px;
 }
 /* Cambiamos el fondo cuando esté en active o hover */
-.mat-drawer-inner-container::-webkit-scrollbar-track:hover,
-.mat-drawer-inner-container::-webkit-scrollbar-track:active {
+.ng-tns-c66-0::-webkit-scrollbar-track:hover,
+.ng-tns-c66-0::-webkit-scrollbar-track:active {
   background: #e7e7e7;
 }
 
-/* scroll --final-- */
+/* scroll sidebar --final-- */
 
 /* tabs module search --init-- */
 .mat-tab-body-content {

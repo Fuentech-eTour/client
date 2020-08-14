@@ -6,22 +6,22 @@
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let product"> {{product.id}} </td>
     </ng-container>
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
-        <td mat-cell *matCellDef="let product"> {{product.title}} </td>
+    <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let product"> {{product.nombrearticulo}} </td>
     </ng-container>
-    <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef> image </th>
+    <ng-container matColumnDef="Imagen">
+        <th mat-header-cell *matHeaderCellDef> Imagen </th>
         <td mat-cell *matCellDef="let product">
-            <img [src]="product.image" alt="image product" width="80px">
+            <img [src]="product.imagen" alt="image product" width="50px" style="margin: 5px 0px;">
         </td>
     </ng-container>
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
-        <td mat-cell *matCellDef="let product"> {{product.price | currency:'$':'symbol':'1.0-0'}} </td>
+    <ng-container matColumnDef="Precio">
+        <th mat-header-cell *matHeaderCellDef> Precio </th>
+        <td mat-cell *matCellDef="let product"> {{product.valorventa | currency:'$':'symbol':'1.0-0'}} </td>
     </ng-container>
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let product"> 
             <a mat-button
             [routerLink]="['edit', product.id]">

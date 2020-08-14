@@ -32,6 +32,7 @@ export class AuthService {
   logout(): any {
     localStorage.removeItem('token');
     localStorage.removeItem('user_name');
+    localStorage.removeItem('idstore');
     this.router.navigate(['/stores']);
   }
 
@@ -41,5 +42,9 @@ export class AuthService {
 
   getUserName() {
     return localStorage.getItem('user_name');
+  }
+
+  getIdStore() {
+    return localStorage.getItem('idstore');
   }
 }

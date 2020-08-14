@@ -35,8 +35,10 @@ export class LoginUserStoreComponent implements OnInit {
       const user = this.form.value;
       this.authService.loginUserStore(user)
         .subscribe( (res: any) => {
+          console.log(res);
           localStorage.setItem('token', res.data.accessToken);
           localStorage.setItem('user_name', res.data.user_name);
+          localStorage.setItem('idstore', res.data.idstore);
           this.windowService.addUserName(res.data.user_name.split(' ')[0]);
           this.router.navigate(['./admin']);
           this.windowService.loadingFalse();

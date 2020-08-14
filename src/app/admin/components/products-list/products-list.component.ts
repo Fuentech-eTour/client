@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ProductsService } from './../../../core/services/products/products.service';
+import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-products-list',
@@ -10,21 +11,27 @@ import { ProductsService } from './../../../core/services/products/products.serv
 export class ProductsListComponent implements OnInit {
 
   products = [];
-  displayedColumns: string[] = ['id', 'title', 'image', 'price', 'actions'];
+  id: string;
+  displayedColumns: string[] = ['id', 'Nombre', 'Imagen', 'Precio', 'Acciones'];
 
   constructor(
-    private productsService: ProductsService
-  ) { }
+    private productsService: ProductsService,
+    private authService: AuthService,
+  ) {
+    this.id = authService.getIdStore();
+   }
 
   ngOnInit(): void {
     this.fetchProducts();
   }
 
   fetchProducts() {
-    this.productsService.getProductsUser()
-    .subscribe(products => {
-      if (products.length >= 0) {
-        this.products = products;
+    // tslint:disable-next-line: radix
+    this.productsService.getProductsByStore(parseInt(this.id))
+    .subscribe((store: any) => {
+      console.log(store);
+      if (store.length >= 0) {
+        this.products = store[0].products;
       }
     });
   }

@@ -25,10 +25,12 @@
         <mat-icon class="icon-category">category</mat-icon>
     </h1>
     <ul class="category">
-        <li *ngFor="let catProd of categoriasProductos" >
-            <a  [routerLink] [fragment]="'seccion'+catProd.id" 
-                [routerLinkActive]="'active'"
-                [routerLinkActiveOptions]="{exact: true}">
+        <li *ngFor="let catProd of categoriasProductos"
+            [routerLink] 
+            [fragment]="'seccion'+catProd.id" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+            <a>
                 {{ catProd.descripcion | titlecase}}
             </a>
         </li>

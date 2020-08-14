@@ -27,8 +27,8 @@ export class ProductsService {
     );
   }
 
-  getProductsUser() {
-    return this.http.get<Product[]>(`${environment.url_api}/products/user`)
+  getProductsByStore(id: number) {
+    return this.http.get<Product[]>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
     .pipe(
       retry(3),
       catchError(this.handleError),

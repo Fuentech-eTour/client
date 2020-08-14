@@ -8,7 +8,7 @@
             {{ product.valorventa | currency:'$':'symbol':'1.0-0' }}
         </mat-card-subtitle>
     </mat-card-header>
-    <div class="crop-image">
+    <div class="crop-image" (click)="openDialogDetailProduct()">
         <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product.imagen">
         <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
     </div>
