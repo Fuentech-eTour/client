@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { AddressComponent } from '../address/address.component';
-import { AddProduct } from '../../../core/models/addProduct.model';
-import { CartService } from './../../../core/services/cart.service';
+import { AddProduct } from '@core/models/addProduct.model';
+import { CartService } from '@core/services/cart.service';
+import { AuthService } from '@core/services/auth.service';
+import { OrderService } from '@core/services/order.service';
 import { Observable } from 'rxjs';
 
 export interface DialogData {
@@ -24,17 +26,21 @@ export interface DialogData {
 export class OrderComponent implements OnInit {
 
   products$: Observable<AddProduct[]>;
-  isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  token: string;
+  isLinear = true;
   displayedColumns: string[] = ['imagen', 'nombre', 'cantidad', 'total'];
 
   constructor(
     private cartService: CartService,
+    private authService: AuthService,
+    private orderService: OrderService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
   ) {
     this.products$ = this.cartService.cart$;
+    this.token = this.authService.getToken();
     this.buildForm();
   }
 
@@ -59,6 +65,10 @@ export class OrderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  sendOrder() {
+    this.orderService.getMiners$();
   }
 
 }

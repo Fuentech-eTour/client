@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
+import { OrderService } from '@core/services/order.service';
 
 import Swiper from 'swiper';
 export interface Fruit {
@@ -31,47 +33,52 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   ];
   mySwiper: Swiper;
   slidesPerView: number;
+  token: string;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private orderService: OrderService,
+  ) {
+    this.token = this.authService.getToken();
+    this.orderService.getMiners$().subscribe(st => {
+      console.log(st);
+    });
+   }
 
   ngOnInit(): void {
+  }
+
+  sendOrder() {
+    this.orderService.getMiners$().subscribe(st => {
+      console.log(st);
+    });
   }
 
   ngOnChanges() {
     if (window.matchMedia('(max-width: 375px)').matches) {
       this.slidesPerView = 1;
-      console.log('dos card');
     } else if (window.matchMedia('(max-width: 516px)').matches) {
       this.slidesPerView = 2;
-      console.log('tres card');
     } else if (window.matchMedia('(max-width: 668px)').matches) {
       this.slidesPerView = 2;
-      console.log('cuatro card');
     } else if (window.matchMedia('(max-width: 860px)').matches) {
       this.slidesPerView = 3;
-      console.log('cinco card');
     } else {
       this.slidesPerView = 3;
-      console.log('seis card');
     }
   }
 
   ngAfterViewInit() {
     if (window.matchMedia('(max-width: 375px)').matches) {
       this.slidesPerView = 1;
-      console.log('dos card');
     } else if (window.matchMedia('(max-width: 516px)').matches) {
       this.slidesPerView = 2;
-      console.log('tres card');
     } else if (window.matchMedia('(max-width: 668px)').matches) {
       this.slidesPerView = 2;
-      console.log('cuatro card');
     } else if (window.matchMedia('(max-width: 860px)').matches) {
       this.slidesPerView = 3;
-      console.log('cinco card');
     } else {
       this.slidesPerView = 3;
-      console.log('seis card');
     }
 
     this.mySwiper = new Swiper('.swiper-container', {
