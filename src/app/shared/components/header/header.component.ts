@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
   stateIconMenu = false;
   nameUser$: Observable<any>;
   isLoading$: Observable<boolean>;
+  rol: string;
 
   constructor(
     private cartService: CartService,
@@ -60,14 +61,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  toggleSideBar() {
-    this.cartService.sideBarToggler();
-  }
-
-  toggleSideBarIzq() {
-    this.cartService.sideBarTogglerIzq();
+    this.addRol();
   }
 
   showIconMenu() {
@@ -111,6 +105,25 @@ export class HeaderComponent implements OnInit {
     } else {
       this.windowService.loadingTrue();
       this.router.navigate(['/stores']);
+    }
+  }
+
+  addRol() {
+    const idStore = this.authService.getIdStore();
+    if (idStore === undefined || idStore === null) {
+      this.rol = 'isClient';
+    } else {
+      this.rol = 'isStore';
+    }
+  }
+
+  toPerfil() {
+    const idStore = this.authService.getIdStore();
+    console.log(idStore);
+    if (idStore === undefined || idStore === null) {
+      this.router.navigate(['/user']);
+    } else {
+      this.router.navigate(['/admin']);
     }
   }
 

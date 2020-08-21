@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { AngularFireMessaging } from 'angularfire2/messaging';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { WindowService } from '@core/services/window.service';
 
 interface Token {
   token: string;
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   constructor(
     private swUpdate: SwUpdate,
     private messaging: AngularFireMessaging,
-    private database: AngularFirestore
+    private database: AngularFirestore,
+    private windowService: WindowService,
   ) {
     this.tokensCollections = this.database.collection<Token>('tokens');
   }
@@ -49,4 +51,9 @@ export class AppComponent implements OnInit {
     .subscribe(message => {
     });
   }
+
+  /* @HostListener('window:resize', ['$event'])
+  handleKeyDown(event: any) {
+    this.windowService.onResize(document.body.clientWidth);
+  } */
 }

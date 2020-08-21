@@ -2,10 +2,15 @@
 $primary: mat-palette($mat-indigo);
 footer {
     padding: 50px 0px 0px 0px;
-    margin-top: 20px;
+    margin-top: 0px;
+    margin-bottom: 56px;
     border-top: solid 1px #dbdcdd;
     /* background-color: mat-color($primary); */
     background-color: white;
+    @media (min-width: 700px) {
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
     div {
         div {
             .col-cont-1 {

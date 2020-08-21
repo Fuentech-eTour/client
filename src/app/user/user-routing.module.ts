@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
+import { AddressComponent } from './components/address/address.component';
+import { SettingComponent } from './components/setting/setting.component';
+import { SavedListsComponent } from './components/saved-lists/saved-lists.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 
 const routes: Routes = [{
@@ -8,8 +13,24 @@ const routes: Routes = [{
   component: NavComponent,
   children: [
     {
-      path: 'home',
-      component: NavComponent
+      path: 'savedlists',
+      component: SavedListsComponent
+    },
+    {
+      path: 'address',
+      component: AddressComponent
+    },
+    {
+      path: 'orders',
+      component: OrdersComponent
+    },
+    {
+      path: 'subscriptions',
+      component: SubscriptionsComponent
+    },
+    {
+      path: 'setting',
+      component: SettingComponent
     },
   ]
 }];

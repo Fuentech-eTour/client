@@ -23,7 +23,7 @@ export class AdminStoreGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.authService.loggedIn()) {
+      if (this.authService.loggedInStore()) {
         return true;
       }
       const dialogRef = this.dialog.open(LoginUserStoreComponent, {

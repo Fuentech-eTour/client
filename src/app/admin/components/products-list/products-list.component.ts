@@ -18,7 +18,7 @@ export class ProductsListComponent implements OnInit {
     private productsService: ProductsService,
     private authService: AuthService,
   ) {
-    this.id = authService.getIdStore();
+    this.id = this.authService.getIdStore();
    }
 
   ngOnInit(): void {
@@ -36,9 +36,10 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
-  deleteProduct(id: number) {
-    this.productsService.deleteProduct(id)
+  deleteProduct(codigoP: string, estadoP: number) {
+    this.productsService.deleteProduct({codigo: codigoP, estado: 0})
     .subscribe(rta => {
+      console.log(rta);
       this.fetchProducts();
     });
   }

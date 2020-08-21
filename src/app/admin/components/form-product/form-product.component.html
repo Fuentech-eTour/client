@@ -10,14 +10,21 @@
                             <div class="row">
                                 <div class="col-xs">
                                     <mat-form-field>
-                                        <input placeholder="Titulo" formControlName="title" [(ngModel)]="title" matInput type="text">
+                                        <input placeholder="Código" formControlName="codigo" matInput type="text">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs">
                                     <mat-form-field>
-                                        <input placeholder="Precio" formControlName="price" [(ngModel)]="price" matInput type="number">
+                                        <input placeholder="Nombre" formControlName="nombrearticulo" [(ngModel)]="title" matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field>
+                                        <input placeholder="Precio" formControlName="valorventa" [(ngModel)]="price" matInput type="number">
                                     </mat-form-field>
                                     <div *ngIf="priceField.errors && priceField.dirty">
                                         <p *ngIf="priceField.hasError('price_invalid')">El valor no puede ser mayor a $10.000</p>
@@ -28,14 +35,37 @@
                             <div class="row">
                                 <div class="col-xs">
                                     <mat-form-field>
-                                        <textarea placeholder="Descripción" formControlName="description" [(ngModel)]="description" matInput type="text"></textarea>
+                                        <textarea placeholder="Descripción" formControlName="descripcion" [(ngModel)]="description" matInput type="text"></textarea>
                                     </mat-form-field>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="row">
                                 <div class="col-xs">
-                                    <img *ngIf="(image$ | async) as image" [src]="image" alt="">
-                                    <input type="file" (change)="uploadFile($event)">
+                                    <mat-form-field>
+                                        <mat-label>Categoría</mat-label>
+                                        <mat-select formControlName="tags">
+                                          <mat-option *ngFor="let tag of tags" [value]=tag.id>{{tag.descripcion}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div *ngIf="image !== undefined" class="row">
+                                <div class="col-xs col-cont">
+                                    <div style="width: 100%;">
+                                        <img [src]="image" alt="" height="150px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs col-cont">
+                                    <!-- <div *ngIf="image !== undefined" style="width: 100%;">
+                                        <img [src]="image" alt="" height="150px">
+                                    </div> -->
+                                    <label for="file-upload" class="upload">
+                                        <mat-icon>cloud_upload</mat-icon> 
+                                        Subir imagen
+                                    </label>
+                                    <input type="file" (change)="uploadFile($event)" class="inputImg" id="file-upload" accept="image/*">
                                 </div>
                             </div> 
                             <mat-card-actions class="row">
@@ -50,12 +80,12 @@
                                 {{ title | uppercase | slice:0:20 }}
                             </mat-card-title>
                             <mat-card-subtitle>
-                                {{ price }}
+                                {{ price | currency:'$':'symbol':'1.0-0' }}
                             </mat-card-subtitle>
                         </mat-card-header>
                         <div class="crop-image">
-                            <img onerror="this.src = './../../../../assets/images/not-image.png'" [src]="">
-                            <img src="./../../../../assets/images/not-image.png">
+                            <img *ngIf="image !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="image">
+                            <img *ngIf="image === ''" src="./../../../../assets/images/not-image.png">
                         </div>
                         <mat-card-content style="font-size: 12px; width: 100%; text-align: center;">
                             <p>{{ description | lowercase | slice:0:30 }}</p>

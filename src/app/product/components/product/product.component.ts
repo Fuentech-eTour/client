@@ -12,7 +12,7 @@ import { CartService } from '@core/services/cart.service';
     styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-    @Input() product: Product;
+    @Input() product: any;
     @ViewChild(BtnAddCountComponent) btnAdd: BtnAddCountComponent;
     estadoHover = false;
     idp: number;

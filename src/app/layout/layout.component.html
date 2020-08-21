@@ -4,9 +4,9 @@
         <div class="container">
             <router-outlet></router-outlet>
         </div>
-        <div style="width: 100%; height: 56px;"></div>
+        <div class="space" style="width: 100%; height: 56px;"></div>
         <app-nav-movil [mostrar]="show" [mostrar2]="show2"></app-nav-movil>
-        <app-footer *ngIf="displayFooter$ | async"></app-footer>
+        <app-footer *ngIf="displayFooter"></app-footer>
     </mat-sidenav-content>
     <mat-sidenav #show position="end" class="sidenav" mode="over">
         <app-cart [mostrar]="show" #show></app-cart>

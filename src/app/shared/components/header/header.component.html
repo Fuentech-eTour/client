@@ -47,7 +47,7 @@
                     <button mat-stroked-button (click)="openDialogLogin()" color="accent" class="name-user" *ngIf="(nameUser$ | async) === null || (nameUser$ | async) === undefined">Iniciar sesión</button>
                     <button mat-stroked-button (click)="openDialogRegister()" color="accent" class="name-user" *ngIf="(nameUser$ | async) === null || (nameUser$ | async) === undefined">Obtener cuenta</button>
                     <a (click)="mostrar.toggle()" routerLinkActive="active" mat-button>
-                        Total: {{ totalCompra$ | async | currency:'$':'symbol':'1.0-0' }}
+                        <span >Total: {{ totalCompra$ | async | currency:'$':'symbol':'1.0-0' }}</span>
                         <mat-icon [matBadge]="total$ | async" matBadgeColor="warn"
                             [matBadgeHidden]="matBageShow$ | async" style="color: #73726c;">
                             shopping_cart
@@ -73,25 +73,37 @@
         </div>
         <div class="content-user">
             <span class="name-user">Hola, {{ nameUser$ | async | titlecase }}</span><br>
-            <span class="btn-perfil" routerLink="/user" style="font-size: 12px; cursor: pointer;">ver Perfil</span>
+            <span class="btn-perfil" (click)="toPerfil()" style="font-size: 12px; cursor: pointer;">ver Perfil</span>
         </div>
     </div>
-    <button mat-menu-item>
-      <mat-icon>list_alt</mat-icon>
-      <span>Listas guardadas</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>location_on</mat-icon>
-      <span>Direcciones</span>
-    </button>
-    <button mat-menu-item>
-        <mat-icon>loyalty</mat-icon>
-        <span>Pedidos</span>
-      </button>
-    <button (click)="logout()" mat-menu-item style="border-top: solid 1px rgba(0,0,0,.25);">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Cerrar sesión</span>
-      </button>
+    <div *ngIf="rol === 'isClient'">
+        <button mat-menu-item>
+            <mat-icon>list_alt</mat-icon>
+            <span>Listas guardadas</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>location_on</mat-icon>
+            <span>Direcciones</span>
+          </button>
+          <button mat-menu-item>
+              <mat-icon>loyalty</mat-icon>
+              <span>Pedidos</span>
+            </button>
+          <button (click)="logout()" mat-menu-item style="border-top: solid 1px rgba(0,0,0,.25);">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Cerrar sesión</span>
+          </button>
+    </div>
+    <div *ngIf="rol === 'isStore'">
+        <button mat-menu-item>
+            <mat-icon>list_alt</mat-icon>
+            <span>Productos</span>
+        </button>
+        <button (click)="logout()" mat-menu-item style="border-top: solid 1px rgba(0,0,0,.25);">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar sesión</span>
+        </button>
+    </div>
 </mat-menu>
 
 <!-- menu user --final-- -->

@@ -19,6 +19,7 @@ export class NavComponent {
       shareReplay()
     );
   userName: string;
+  idStore: string;
   isLoading$: Observable<boolean>;
 
   constructor(
@@ -28,9 +29,11 @@ export class NavComponent {
     ) {
       this.userName = this.authService.getUserName();
       this.isLoading$ = this.windowService.isloading$;
+      this.idStore = this.authService.getIdStore();
     }
 
     logout() {
+      this.windowService.addUserName(null);
       this.authService.logout();
     }
 

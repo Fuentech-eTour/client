@@ -1,43 +1,94 @@
-<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+<div class="container">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title>Producto</mat-card-title>
+        <mat-card-header class="header-1">
+            <mat-card-title>Editar Producto</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="row">
-                <div class="col-xs">
-                    <mat-form-field>
-                        <input placeholder="Titulo" formControlName="title" matInput type="text">
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs">
-                    <mat-form-field>
-                        <input placeholder="Precio" formControlName="price" matInput type="number">
-                    </mat-form-field>
-                    <div *ngIf="priceField.errors && priceField.dirty">
-                        <p *ngIf="priceField.hasError('price_invalid')">El valor no puede ser mayor a $10.000</p>
-                        <p *ngIf="priceField.hasError('required')">Este campo es requerido</p>
+                    <div class="col-xs cont-1">
+                        <form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field>
+                                        <input placeholder="Código" formControlName="codigo" matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field>
+                                        <input placeholder="Nombre" formControlName="nombrearticulo" matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field>
+                                        <input placeholder="Precio" formControlName="valorventa" matInput type="number">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field>
+                                        <textarea placeholder="Descripción" formControlName="descripcion" matInput type="text"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field>
+                                        <mat-label>Categoría</mat-label>
+                                        <mat-select formControlName="tags">
+                                          <mat-option *ngFor="let tag of tags" [value]=tag.id>{{tag.descripcion}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col-xs col-cont">
+                                    <div *ngIf="!!(image$ | async) as image" style="width: 100%;">
+                                        <img *ngIf="(image$ | async) as image" [src]="image" alt="" height="150px">
+                                        <img *ngIf="!!(image$ | async) as image" [src]="image" alt="" height="150px">
+                                    </div>
+                                    <label for="file-upload" class="upload">
+                                        <mat-icon>cloud_upload</mat-icon> 
+                                        Subir imagen
+                                    </label>
+                                    <input type="file" (change)="uploadFile($event)" class="inputImg" id="file-upload">
+                                </div>
+                            </div> 
+                            <mat-card-actions class="row">
+                                <button class="btn-save" [disabled]="form.invalid" mat-raised-button type="submit" [ngClass]="{btnActive: !form.invalid}">Editar</button>
+                            </mat-card-actions>
+                        </form>
                     </div>
+                <div class="col-xs cont-2">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title style="font-size: 12px; width: 108px;" class="title-style">
+                                {{ title | uppercase | slice:0:20 }}
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                {{ price | currency:'$':'symbol':'1.0-0' }}
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="crop-image">
+                            <img *ngIf="image !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="image">
+                            <img *ngIf="image ===''" src="./../../../../assets/images/not-image.png">
+                        </div>
+                        <mat-card-content style="font-size: 12px; width: 100%; text-align: center;">
+                            <p>{{ description | lowercase | slice:0:30 }}</p>
+                        </mat-card-content>
+                        <mat-card-actions class="cont-actions">
+                            <button mat-stroked-button color="accent" class="btn-add">Agregar
+                                <mat-icon style="color: #ff4081;">add</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs">
-                    <mat-form-field>
-                        <textarea placeholder="Descripción" formControlName="description" matInput type="text"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs">
-                    <img *ngIf="(image$ | async) as image" [src]="image" alt="">
-                    <input type="file" (change)="uploadFile($event)">
-                </div>
-            </div>           
         </mat-card-content>
-        <mat-card-actions>
-            <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
-        </mat-card-actions>
     </mat-card>
-</form>
+</div>
+

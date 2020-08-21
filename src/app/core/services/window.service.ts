@@ -6,8 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class WindowService {
 
-  isLoadingNow = false;
-  stateDisplayFooterNow = true;
+  isLoadingNow: boolean;
+  stateDisplayFooterNow: boolean;
 
   private windowWidth = new BehaviorSubject<any>(document.body.clientWidth);
   private userName = new BehaviorSubject<any>(localStorage.getItem('user_name')?.split(' ')[0]);
@@ -44,9 +44,9 @@ export class WindowService {
     this.stateDisplayFooter.next(this.stateDisplayFooterNow);
   }
 
-  onresize(e: any): void {
-    const width = e.target.outerWidth;
-    const height = e.target.outerHeight;
+  onResize(width: any): any {
+    console.log(width);
+    this.windowWidth.next(width);
  }
 
   addUserName(value) {

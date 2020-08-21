@@ -1,5 +1,8 @@
 .navbar-cont {
-    height: 64px;
+    height: 56px;
+    @media (min-width: 600px) {
+        height: 64px;
+    }
     mat-toolbar {
         position: fixed;
         width: 100%;

@@ -21,15 +21,18 @@
 }
 
 .cont-store-grid {
-    margin-top: 20px;
+    //margin-top: 20px;
     //margin-right: 20px;
     //margin-left: 20px;
     //padding-bottom: 20px;
+    background-color: white;
     @media (min-width: 700px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px 10px;
         padding-bottom: 20px;
+        margin-top: 20px;
+        background-color: #fafafa;
     }
     app-sidebar-store {
         display: flex;

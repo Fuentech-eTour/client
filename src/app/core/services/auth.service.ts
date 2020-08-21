@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { WindowService } from './window.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private windowService: WindowService,
   ) { }
 
   createUser(user: JSON) {
@@ -29,10 +31,15 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
+  loggedInStore() {
+    return !!localStorage.getItem('idstore');
+  }
+
   logout(): any {
     localStorage.removeItem('token');
     localStorage.removeItem('user_name');
     localStorage.removeItem('idstore');
+    this.windowService.addUserName(null);
     this.router.navigate(['/stores']);
   }
 

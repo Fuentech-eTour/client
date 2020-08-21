@@ -3,25 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { NavComponent } from './components/nav/nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { AddressComponent } from './components/address/address.component';
+
+import { MaterialModule } from '../material/material.module';
+import { SettingComponent } from './components/setting/setting.component';
+import { SavedListsComponent } from './components/saved-lists/saved-lists.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 
 @NgModule({
-  declarations: [NavComponent],
+  declarations: [NavComponent, AddressComponent, SettingComponent, SavedListsComponent, SubscriptionsComponent, OrdersComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
+    MaterialModule,
   ]
 })
 export class UserModule { }

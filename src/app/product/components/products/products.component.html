@@ -1,18 +1,14 @@
-<!--Content component -- init -->
-<mat-sidenav-content>
-    <!-- <div *ngIf="windowWidth >= 475">
-        <div class="aline-product" *ngIf="(sideBarOpen$ | async) as sideBarOpen">
-            <div 
-            class="container-shown" 
-            *ngIf="sideBarOpen === true" 
-            (click)="toggleSideBar()">
-            </div>
+<div *ngFor="let tag of tags">
+    <div *ngIf="tag.products?.length !== 0 && tag.products !== undefined" class="products-cont">
+        <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
+        <div class="product-grid" ClassName="container">
+            <app-product    *ngFor="let product of tag.products" 
+                            [product]="product">
+            </app-product>
+            <app-product-movil  *ngFor="let product of tag.products" 
+                                [product]="product">
+            </app-product-movil>
         </div>
-    </div> -->
-    <div class="product-grid" ClassName="container">
-        <app-product *ngFor="let product of products" [product]="product">
-        </app-product>
-        <app-product-movil *ngFor="let product of products" [product]="product"></app-product-movil>
     </div>
-</mat-sidenav-content>
-<!--Content component -- final -->
+    
+</div>

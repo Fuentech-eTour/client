@@ -45,19 +45,18 @@
 .position-bar-top2 {
     width: 100%; // 90% o 100%
     position: fixed;
+    align-items: center;
     /* top: 55px; */
     margin-left: 0px;
     margin-top: 56px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px;
     background-color: rgb(177, 177, 177);
     z-index: 750;
 }
 
 .position-message-center {
     padding-top: 20px;
+    margin: 20px;
     align-items: center;
     text-align: center;
     color: #4d90d3;

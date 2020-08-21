@@ -6,6 +6,7 @@
             <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
             <a mat-list-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a>
             <a mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
+            <a mat-list-item [routerLink]="['/stores', idStore]" routerLinkActive="active">Mi tienda</a>
             <a mat-list-item (click)="logout()">Cerrar sesión</a>
         </mat-nav-list>
     </mat-sidenav>

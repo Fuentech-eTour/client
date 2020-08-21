@@ -14,19 +14,21 @@ export class LayoutComponent implements OnInit {
   sideBarOpen$: Observable<boolean>;
   sideBarOpenIzq$: Observable<boolean>;
   windowWidth: number = window.screen.width;
-  displayFooter$: Observable<boolean>;
+  displayFooter = true;
 
   constructor(
     private cartService: CartService,
-    private productsService: ProductsService,
     private windowService: WindowService,
   ) {
     this.sideBarOpen$ = this.cartService.openSideBar$;
     this.sideBarOpenIzq$ = this.cartService.openSideBarIzq$;
-    this.displayFooter$ = this.windowService.stateDisplayFooter$;
+    this.windowService.stateFooterTrue();
   }
 
   ngOnInit(): void {
+    this.windowService.stateDisplayFooter$.subscribe(state => {
+      this.displayFooter = state;
+    });
   }
 
   toggleSideBar() {

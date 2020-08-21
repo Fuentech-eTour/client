@@ -15,11 +15,9 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   @Input() store: Store;
   estadoHover = false;
-  mySwiper: Swiper;
   showFiller = false;
-  slidesPerView: number;
-  windowWidth: number = window.screen.width;
   subscribeBtn = false;
+  mySwiper: Swiper;
 
   constructor(
     private cartService: CartService,
@@ -30,20 +28,8 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (window.matchMedia('(max-width: 375px)').matches) {
-      this.slidesPerView = 2;
-    } else if (window.matchMedia('(max-width: 516px)').matches) {
-      this.slidesPerView = 3;
-    } else if (window.matchMedia('(max-width: 668px)').matches) {
-      this.slidesPerView = 4;
-    } else if (window.matchMedia('(max-width: 860px)').matches) {
-      this.slidesPerView = 5;
-    } else {
-      this.slidesPerView = 6;
-    }
-
     this.mySwiper = new Swiper('.swiper-container', {
-      slidesPerView: this.slidesPerView,
+      slidesPerView: 1,
       spaceBetween: 1,
       slidesPerGroup: 1,
       loop: false,
@@ -53,72 +39,24 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      breakpoints: {
+        360: {
+          slidesPerView: 2,
+        },
+        550: {
+          slidesPerView: 3,
+        },
+        720: {
+          slidesPerView: 4,
+        },
+        900: {
+          slidesPerView: 5,
+        },
+        1100: {
+          slidesPerView: 6,
+        }
+      }
     });
-
-    /* this.mySwiper = new Swiper('.swiper-container-1', {
-      slidesPerView: 2,
-      spaceBetween: 1,
-      slidesPerGroup: 1,
-      loop: false,
-      loopFillGroupWithBlank: false,
-      freeMode: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-
-    this.mySwiper = new Swiper('.swiper-container-2', {
-      slidesPerView: 3,
-      spaceBetween: 1,
-      slidesPerGroup: 1,
-      loop: false,
-      loopFillGroupWithBlank: false,
-      freeMode: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-
-    this.mySwiper = new Swiper('.swiper-container-3', {
-      slidesPerView: 4,
-      spaceBetween: 1,
-      slidesPerGroup: 1,
-      loop: false,
-      loopFillGroupWithBlank: false,
-      freeMode: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-
-    this.mySwiper = new Swiper('.swiper-container-4', {
-      slidesPerView: 5,
-      spaceBetween: 1,
-      slidesPerGroup: 1,
-      loop: false,
-      loopFillGroupWithBlank: false,
-      freeMode: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-
-    this.mySwiper = new Swiper('.swiper-container-5', {
-      slidesPerView: 6,
-      spaceBetween: 1,
-      slidesPerGroup: 1,
-      loop: false,
-      loopFillGroupWithBlank: false,
-      freeMode: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    }); */
   }
 
   mouseEnter() {

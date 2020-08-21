@@ -1,24 +1,24 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
     <!-- <app-counter-products></app-counter-products> -->
     <mat-card-header>
-        <div [routerLink]="['/stores', product.idststore]" mat-card-avatar style="background-image: url({{product.imagent}});
+        <div [routerLink]="['/stores', product?.idststore]" mat-card-avatar style="background-image: url({{product?.imagent}});
             background-size: cover; cursor: pointer;">
-            <img *ngIf="product.imagent ==='' || product.imagent ===null || product.imagent === undefined"
+            <img *ngIf="product?.imagent ==='' || product?.imagent ===null || product?.imagent === undefined"
                 src="./../../../../assets/images/icon-store.png">
         </div>
         <mat-card-title style="font-size: 15px;" class="title-style" (click)="openDialogDetailProduct()">
-            {{ product.nombrearticulo | uppercase | slice:0:30 | moreContent:29 }}
+            {{ product?.nombrearticulo | uppercase | slice:0:30 | moreContent:29 }}
         </mat-card-title>
-        <mat-card-subtitle [routerLink]="['/products', product.id]">
-            {{ product.valorventa | currency:'$':'symbol':'1.0-0' }}
+        <mat-card-subtitle [routerLink]="['/products', product?.id]">
+            {{ product?.valorventa | currency:'$':'symbol':'1.0-0' }}
         </mat-card-subtitle>
     </mat-card-header>
     <div (click)="openDialogDetailProduct()" class="crop-image">
-        <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product.imagen">
-        <img *ngIf="product.imagen ===''" src="./../../../../assets/images/not-image.png">
+        <img *ngIf="product?.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product?.imagen">
+        <img *ngIf="product?.imagen ===''" src="./../../../../assets/images/not-image.png">
     </div>
     <mat-card-content>
-        <p>{{ product.descripcion | lowercase | slice:0:40 | moreContent:39 }}</p>
+        <p>{{ product?.descripcion | lowercase | slice:0:40 | moreContent:39 }}</p>
     </mat-card-content>
     <app-btn-add-count [product]="product"></app-btn-add-count>
 </mat-card>

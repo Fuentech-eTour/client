@@ -15,7 +15,17 @@
     width: 100%;
     padding-right: 0px;
     padding-left: 0px;
-    background-color: #f9fafc;
+    background-color: #ffffff00;
+}
+
+.container-home {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    background-color: #fafafa;
+    @media (min-width: 700px) {
+        background-color: #ffffff00;
+    }
 }
 
 @media (min-width: 375px) {
@@ -65,7 +75,10 @@
 html,
 body {
     height: 100%;
-    background-color: #f9fafc;
+    background-color: #dadde1;
+    @media (min-width: 700px) {
+        background-color: #f9fafc;
+    }
 }
 
 body {

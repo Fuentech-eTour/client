@@ -27,6 +27,14 @@ export class ProductsService {
     );
   }
 
+  getAllProductsByTags() {
+    return this.http.get<Product[]>(`${environment.url_api}/products/obtenerProductoalltagsid`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   getProductsByStore(id: number) {
     return this.http.get<Product[]>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
     .pipe(
@@ -52,7 +60,7 @@ export class ProductsService {
   }
 
   createProduct(product: Product) {
-    return this.http.post(`${environment.url_api}/products`, product)
+    return this.http.post(`${environment.url_api}/products/crearproduct`, product)
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -60,18 +68,27 @@ export class ProductsService {
   }
 
   updateProduct(id: number, changes: Partial<Product>) {
-    return this.http.put(`${environment.url_api}/products/${id}`, changes)
+    return this.http.put(`${environment.url_api}/products/actualizaproduct`, changes)
     .pipe(
       retry(3),
       catchError(this.handleError),
     );
   }
 
-  deleteProduct(id: number) {
-    return this.http.delete(`${environment.url_api}/products/${id}`)
+  deleteProduct(code: object) {
+    console.log(code);
+    return this.http.put(`${environment.url_api}/products/inactivaproduct`, code)
     .pipe(
       retry(3), // hace la petición al servicio tres veces
       catchError(this.handleError), // si la petición no se consigue manda el error a handleError()
+    );
+  }
+
+  addTagProduct(idp: number, idt: object) {
+    return this.http.post(`${environment.url_api}/products/asignartagproducto/${idp}`, idt)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
     );
   }
 
