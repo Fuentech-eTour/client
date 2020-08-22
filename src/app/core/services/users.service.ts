@@ -32,6 +32,22 @@ export class UsersService {
     );
   }
 
+  getAllAddress() {
+    return this.http.get<any>(`${environment.url_api}/users/obtenerdirecciones/${1}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  createAddress(newAddress: any) {
+    return this.http.post(`${environment.url_api}/users/creardireccionuser/${1}`, newAddress)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
     console.log(error);

@@ -51,6 +51,9 @@
             .cont-2 {
                 display: flex;
                 justify-content: center;
+                mat-card-subtitle {
+                    text-align: center;
+                }
                 mat-card {
                     padding-top: 24px;
                     padding: 24px 16px 16px;

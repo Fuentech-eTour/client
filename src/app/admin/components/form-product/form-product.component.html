@@ -74,28 +74,31 @@
                         </form>
                     </div>
                 <div class="col-xs cont-2">
-                    <mat-card>
-                        <mat-card-header>
-                            <mat-card-title style="font-size: 12px; width: 108px;" class="title-style">
-                                {{ title | uppercase | slice:0:20 }}
-                            </mat-card-title>
-                            <mat-card-subtitle>
-                                {{ price | currency:'$':'symbol':'1.0-0' }}
-                            </mat-card-subtitle>
-                        </mat-card-header>
-                        <div class="crop-image">
-                            <img *ngIf="image !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="image">
-                            <img *ngIf="image === ''" src="./../../../../assets/images/not-image.png">
-                        </div>
-                        <mat-card-content style="font-size: 12px; width: 100%; text-align: center;">
-                            <p>{{ description | lowercase | slice:0:30 }}</p>
-                        </mat-card-content>
-                        <mat-card-actions class="cont-actions">
-                            <button mat-stroked-button color="accent" class="btn-add">agregar
-                                <mat-icon style="color: #ff4081;">add</mat-icon>
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
+                    <div>
+                        <mat-card-subtitle>Vista previa</mat-card-subtitle>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title style="font-size: 12px; width: 108px;" class="title-style">
+                                    {{ title | uppercase | slice:0:20 }}
+                                </mat-card-title>
+                                <mat-card-subtitle>
+                                    {{ price | currency:'$':'symbol':'1.0-0' }}
+                                </mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="crop-image">
+                                <img *ngIf="image !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="image">
+                                <img *ngIf="image === ''" src="./../../../../assets/images/not-image.png">
+                            </div>
+                            <mat-card-content style="font-size: 12px; width: 100%; text-align: center;">
+                                <p>{{ description | lowercase | slice:0:30 }}</p>
+                            </mat-card-content>
+                            <mat-card-actions class="cont-actions">
+                                <button mat-stroked-button color="accent" class="btn-add">agregar
+                                    <mat-icon style="color: #ff4081;">add</mat-icon>
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </mat-card-content>

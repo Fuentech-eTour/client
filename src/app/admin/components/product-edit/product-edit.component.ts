@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductsService } from '@core/services/products/products.service';
 import { AuthService } from '@core/services/auth.service';
 import { TagsService } from '@core/services/tags.service';
+import { WindowService } from '@core/services/window.service';
 import { MyValidator } from './../../../utils/validators';
 
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -27,13 +28,16 @@ export class ProductEditComponent implements OnInit {
   title: string;
   price: number;
   description: string;
-  image: string;
+  image: any;
+  newImage: any;
+  file: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private productsService: ProductsService,
     private authService: AuthService,
     private tagsService: TagsService,
+    private windowService: WindowService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private angularFireStorage: AngularFireStorage
@@ -52,6 +56,7 @@ export class ProductEditComponent implements OnInit {
         this.price = product[0].valorventa;
         this.description = product[0].descripcion;
         this.image = product[0].imagen;
+        this.form.get('tags').setValue(product[0].idtag);
       });
     });
     this.tagsService.getAllTagsProducts().subscribe(tags => {
@@ -61,21 +66,42 @@ export class ProductEditComponent implements OnInit {
 
   saveProduct(event: Event) {
     event.preventDefault();
-    const updateProduct = this.form.value;
-    const codigo = this.codigo;
-    const product = {...updateProduct, codigo};
-    this.productsService.updateProduct(this.id, product)
-    .subscribe((res: any) => {
-      console.log(res);
-      if (res.statu === 'OK') {
-        const idt = this.form.get('tags').value;
-        const idp = res.idproducto;
-        this.productsService.addTagProduct(idp, idt).subscribe(st => {
-          console.log(st);
-          this.router.navigate(['./admin/products']);
+    this.windowService.loadingTrue();
+    const nameStore = this.authService.getUserName().toString().split(' ').join('');
+    const file = this.file;
+    const name = `product-${nameStore}-${this.date}.png`;
+    const fileRef = this.angularFireStorage.ref(name);
+    const task = this.angularFireStorage.upload(name, file);
+
+    task.snapshotChanges()
+    .pipe(
+      finalize(() => {
+        this.windowService.loadingFalse();
+        this.image$ = fileRef.getDownloadURL();
+        this.image$.subscribe(url => {
+          this.windowService.loadingTrue();
+          this.form.get('imagen').setValue(url);
+          const product = this.form.value;
+          this.productsService.createProduct(product)
+            .subscribe((res: any) => {
+              console.log(res);
+              this.windowService.loadingFalse();
+              if (res.status === 'Ok') {
+                this.windowService.loadingTrue();
+                const idTag = this.form.get('tags').value;
+                const idp = res.idproducto;
+                console.log(idTag, idp);
+                this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
+                  console.log(resul);
+                  this.windowService.loadingFalse();
+                  this.router.navigate(['./admin/products']);
+                });
+              }
+            });
         });
-      }
-    });
+      })
+    )
+    .subscribe();
   }
 
   private buildForm() {
@@ -93,28 +119,17 @@ export class ProductEditComponent implements OnInit {
   }
 
   uploadFile(event) {
-    const nameStore = this.authService.getUserName().toString().split(' ').join('');
-    const idStore = this.authService.getIdStore().toString().split(' ').join('');
-    const file = event.target.files[0];
-    const name = `${idStore}-product-${nameStore}-${this.date}.png`;
-    const fileRef = this.angularFireStorage.ref(name);
-    const task = this.angularFireStorage.upload(name, file);
+    this.file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(this.file);
 
-    task.snapshotChanges()
-    .pipe(
-      finalize(() => {
-        this.image$ = fileRef.getDownloadURL();
-        this.image$.subscribe(url => {
-          console.log(url);
-          this.form.get('imagen').setValue(url);
-        });
-      })
-    )
-    .subscribe();
+    reader.onload = () => {
+      this.newImage = reader.result;
+      this.form.get('imagen').setValue('url');
+    };
   }
 
   get priceField() {
     return this.form.get('valorventa');
   }
-
 }

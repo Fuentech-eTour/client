@@ -1,5 +1,12 @@
 mat-card {
-    margin: 16px;
+    margin: 0px;
+    box-shadow: none !important;
+    @media (min-width: 700px) {
+        margin: 16px;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 
+                    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+                    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
     .action-buttons {
         padding-bottom: 20px;
         button {
@@ -27,9 +34,7 @@ mat-card {
     }
     table {
         width: 100%;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 
-                    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
-                    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: none !important;
                     th {
                         text-align: left;
                         padding-left: 5px;
@@ -44,5 +49,29 @@ mat-card {
                             padding-left: 24px;
                         }
                     }
+                    .aling-action {
+                        text-align: right;
+                    }
     }
+}
+
+.btn-save {
+    margin-top: 20px;
+    width: 100%;
+}
+.btnActive {
+    background-color: #4d90d3;
+    color: white;
+    &:hover {
+        background-color: #396a9b;
+    }
+}
+
+.example-viewport {
+    height: 100%;
+    width: 100%;
+}
+  
+.example-item {
+    height: 50px;
 }
