@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 
 import * as Sentry from '@sentry/browser';
@@ -11,6 +11,9 @@ import * as Sentry from '@sentry/browser';
   providedIn: 'root'
 })
 export class UsersService {
+
+  private selectAddress = new BehaviorSubject<any>('');
+  selectAddress$ = this.selectAddress.asObservable();
 
   constructor(
     private http: HttpClient
@@ -46,6 +49,27 @@ export class UsersService {
       retry(3),
       catchError(this.handleError),
     );
+  }
+
+  editAddress(iddir: number, address: any) {
+    return this.http.put(`${environment.url_api}/users/actualizadireccion/${iddir}`, address)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  deleteAddress(iddir: number, state) {
+    console.log(iddir, state);
+    return this.http.put(`${environment.url_api}/users/cambiaestadodireccion/${iddir}`, state)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  addSelectAddress(address) {
+    this.selectAddress.next(address);
   }
 
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//

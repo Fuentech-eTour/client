@@ -7,6 +7,7 @@ import { LoginComponent } from '../../../auth/components/login/login.component';
 import { RegisterComponent } from '../../../auth/components/register/register.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { WindowService } from '../../../core/services/window.service';
+import { UsersService } from '@core/services/users.service';
 
 import { map } from 'rxjs/operators';
 
@@ -28,12 +29,13 @@ export class HeaderComponent implements OnInit {
   contByProduct$: Observable<number[]>;
   totalCompra$: Observable<number>;
   products$: Observable<AddProduct[]>;
-  showFiller = false;
   matBageShow$: Observable<boolean>;
-  installEvent;
-  stateIconMenu = false;
   nameUser$: Observable<any>;
   isLoading$: Observable<boolean>;
+  selectAddress$: Observable<any>;
+  installEvent;
+  showFiller = false;
+  stateIconMenu = false;
   rol: string;
 
   constructor(
@@ -41,6 +43,7 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService,
     private windowService: WindowService,
+    private usersService: UsersService,
     private router: Router,
   ) {
     this.total$ = this.cartService.numProductsCart$
@@ -58,10 +61,12 @@ export class HeaderComponent implements OnInit {
     this.totalCompra$ = this.cartService.precioTotal$;
     this.nameUser$ = this.windowService.userName$;
     this.isLoading$ = this.windowService.isloading$;
+    this.selectAddress$ = this.usersService.selectAddress$;
   }
 
   ngOnInit() {
     this.addRol();
+    this.usersService.selectAddress$.subscribe(console.log);
   }
 
   showIconMenu() {

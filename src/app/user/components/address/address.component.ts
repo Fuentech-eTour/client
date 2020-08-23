@@ -4,23 +4,19 @@ import { MatAccordion } from '@angular/material/expansion';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilityService } from '@core/services/utility.service';
 import { UsersService } from '@core/services/users.service';
-
-import {FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY} from '@angular/cdk/scrolling';
+import { FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
+import { BehaviorSubject } from 'rxjs';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
     super(50, 250, 500);
   }
 }
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-/**
- * @title Dialog Overview
- */
 
 @Component({
   selector: 'app-address',
@@ -35,36 +31,56 @@ export class AddressComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   displayedColumns: string[] = ['Direccion', /* 'Municipio',  */'Acciones'];
   form: FormGroup;
-  address: any;
   municipalities: any;
-  animal: string;
-  name: string;
+  private address = new BehaviorSubject<any>([]);
+  address$ = this.address.asObservable();
+  private isloading = new BehaviorSubject<boolean>(true);
+  isloading$ = this.isloading.asObservable();
 
   constructor(
     private formBuilder: FormBuilder,
     private utilityService: UtilityService,
     private usersService: UsersService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {
     this.buildForm();
    }
 
   ngOnInit(): void {
+    this.fetchAllMunicipality();
+    this.fetchAllAddress();
+  }
+
+  fetchAllMunicipality() {
     this.utilityService.getAllMunicipality().subscribe(data => {
       this.municipalities = data;
       this.items = data;
     });
+  }
+
+  fetchAllAddress() {
+    this.isloading.next(true);
     this.usersService.getAllAddress().subscribe(data => {
-      this.address = data;
+      this.isloading.next(false);
+      this.address.next(data);
     });
   }
 
-  saveProduct(event: Event) {
+  saveAddress(event: Event) {
     const newAddress = this.form.value;
     this.usersService.createAddress(newAddress).subscribe((res: any) => {
+      this.openSnackBar(res.message);
       if (res.status === 'OK') {
         this.form.reset();
+        this.fetchAllAddress();
       }
+    });
+  }
+
+  deleteAddress(iddir: number) {
+    this.usersService.deleteAddress(iddir, {estado: 0}).subscribe(res => {
+      this.fetchAllAddress();
     });
   }
 
@@ -75,15 +91,22 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
+  openDialog(address: any): void {
     const dialogRef = this.dialog.open(EditAddressComponent, {
       width: '300px',
-      data: {name: this.name, animal: this.animal}
+      data: {data: address, municipalities: this.municipalities}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      this.fetchAllAddress();
+    });
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
     });
   }
 
@@ -98,13 +121,15 @@ export class EditAddressComponent implements OnInit {
   form: FormGroup;
   address: any;
   municipalities: any;
+  stateSpinner: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<EditAddressComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private utilityService: UtilityService,
     private usersService: UsersService,
+    private snackBar: MatSnackBar,
     ) {
       this.buildForm();
     }
@@ -114,19 +139,28 @@ export class EditAddressComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.utilityService.getAllMunicipality().subscribe(data => {
-      this.municipalities = data;
-    });
-    this.usersService.getAllAddress().subscribe(data => {
-      this.address = data;
-    });
+    const { municipalities } = this.data;
+    this.municipalities = municipalities;
+    // implementacion de spinner en input y select
+    /* this.stateSpinner = true;
+    this.utilityService.getAllMunicipality().subscribe(municipalities => {
+      this.municipalities = municipalities;
+      this.stateSpinner = false;
+      const { data } = this.data;
+      this.form.patchValue(data);
+    }); */
+    const { data } = this.data;
+    this.form.patchValue(data);
   }
 
-  saveProduct(event: Event) {
-    const newAddress = this.form.value;
-    this.usersService.createAddress(newAddress).subscribe((res: any) => {
+  editAddress(event: Event) {
+    const { data } = this.data;
+    const iddir = data.id;
+    const editAddress = this.form.value;
+    this.usersService.editAddress(iddir, editAddress).subscribe((res: any) => {
+      this.openSnackBar(res.message);
       if (res.status === 'OK') {
-        this.form.reset();
+        this.onNoClick();
       }
     });
   }
@@ -134,7 +168,15 @@ export class EditAddressComponent implements OnInit {
   private buildForm() {
     this.form = this.formBuilder.group({
       direccion: ['', Validators.required],
-      idmunicipio: ['', Validators.required],
+      idutmunicipality: ['', Validators.required],
+    });
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
     });
   }
 

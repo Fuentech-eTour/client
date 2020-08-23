@@ -12,6 +12,12 @@
     box-shadow: none;
 }
 
+.loading-cont {
+    justify-content: center;
+    display: flex;
+    padding: 20px;
+}
+
 .mat-radio-button {
     display: block;
     margin: 5px 0;
@@ -43,3 +49,20 @@
 }
 
 /* address -- final */
+
+mat-form-field {
+    margin: 0px !important;
+    width: 100%;
+}
+
+.btn-save {
+    margin-top: 20px;
+    width: 100%;
+}
+.btnActive {
+    background-color: #4d90d3;
+    color: white;
+    &:hover {
+        background-color: #396a9b;
+    }
+}

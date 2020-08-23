@@ -10,25 +10,44 @@
     <mat-card-content>
         <div class="row">
             <div class="col">
-                <mat-radio-group formControlName="secondCtrl" required>
-                    <mat-card class="address-shadow">
-                        <mat-radio-button value="free">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
-                    </mat-card>
-                    <mat-card class="address-shadow">
-                        <mat-radio-button value="priority">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
-                    </mat-card>
+                <div *ngIf="isloading$ | async" class="loading-cont">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <mat-radio-group required>
+                    <mat-radio-group>
+                        <mat-card *ngFor="let address of addresses$ | async" class="address-shadow">
+                            <mat-radio-button (click)="selectAddress(address)" [value]="address">
+                                {{ address.direccion | lowercase }}
+                            </mat-radio-button>
+                        </mat-card>
+                    </mat-radio-group>
                 </mat-radio-group>
                 <mat-accordion>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title style="color: #ff4081;">
-                                Agrega una dirección
+                                Agregar dirección
                             </mat-panel-title>
-                            <!-- <mat-panel-description>
-                                {{panelOpenState ? 'open' : 'closed'}}
-                            </mat-panel-description> -->
                         </mat-expansion-panel-header>
-                        <p>Aquí va el formulario</p>
+                        <form [formGroup]="form" (ngSubmit)="saveAddress($event)">
+                            <mat-form-field>
+                              <mat-label>Dirección</mat-label>
+                              <input matInput formControlName="direccion" type="text" autocomplete="off">
+                            </mat-form-field>
+                  
+                            <div class="row">
+                              <div class="col-xs">
+                                  <mat-form-field>
+                                      <mat-label>Municipio</mat-label>
+                                      <mat-select formControlName="idmunicipio">
+                                        <mat-option *ngFor="let municipality of municipalities" [value]=municipality.id>{{municipality.descripcion}}</mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                              </div>
+                            </div>
+                  
+                            <button class="btn-save" [disabled]="form.invalid" mat-raised-button type="submit" [ngClass]="{btnActive: !form.invalid}">Guardar</button>
+                        </form>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>

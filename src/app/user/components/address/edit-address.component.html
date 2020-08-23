@@ -1,19 +1,21 @@
 <div style="padding: 20px 20px 40px; display: grid; overflow: hidden;">
-  <form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+  <form [formGroup]="form" (ngSubmit)="editAddress($event)">
     <mat-card-title style="text-align: center;" mat-dialog-title>Editar dirección</mat-card-title>
     <div mat-dialog-content>
         <mat-form-field style="width: 100%;">
           <mat-label>Dirección</mat-label>
           <input matInput formControlName="direccion" type="text">
+          <span matSuffix><mat-spinner *ngIf="stateSpinner" diameter=20></mat-spinner></span>
         </mat-form-field>
 
         <div class="row">
           <div class="col-xs">
               <mat-form-field style="width: 100%;">
                   <mat-label>Municipio</mat-label>
-                  <mat-select formControlName="idmunicipio">
+                  <mat-select formControlName="idutmunicipality">
                     <mat-option style="width: auto;" *ngFor="let municipality of municipalities" [value]=municipality.id>{{municipality.descripcion}}</mat-option>
                   </mat-select>
+                  <span matSuffix><mat-spinner *ngIf="stateSpinner" diameter=20></mat-spinner></span>
               </mat-form-field>
           </div>
         </div>

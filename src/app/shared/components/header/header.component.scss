@@ -29,6 +29,7 @@
                     div {
                         padding-left: 10px;
                         height: 40px;
+                        cursor: pointer;
                         @media (max-width: 1080px) {
                             display: none;
                         }

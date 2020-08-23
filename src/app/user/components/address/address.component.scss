@@ -48,6 +48,10 @@ mat-card {
                         @media (min-width: 700px) {
                             padding-left: 24px;
                         }
+                        a {
+                            min-width: 0px !important;
+                            padding: 0px 5px !important;
+                        }
                     }
                     .aling-action {
                         text-align: right;

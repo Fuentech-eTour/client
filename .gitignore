@@ -47,3 +47,6 @@ Thumbs.db
 
 # static
 \src\assets\images
+
+# otros
+src/app/auth/components/login/login.component.ts

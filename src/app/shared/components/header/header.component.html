@@ -20,7 +20,8 @@
                         <mat-icon class="col">place</mat-icon>
                         <div class="col" (click)="openDialog()">
                             <p class="label-title">enviar a:</p>
-                            <p class="title">Agregar dirección</p>
+                            <p *ngIf="(selectAddress$ | async) === ''" class="title">Agregar dirección</p>
+                            <p *ngIf="(selectAddress$ | async) !== {}" class="title">{{ (selectAddress$ | async).direccion | lowercase }}</p>
                         </div>
                         <mat-icon class="col icon-2" style="color: #4d90d3; font-size: 25px; margin-top: 10px;">arrow_drop_down</mat-icon>
                     </div>
