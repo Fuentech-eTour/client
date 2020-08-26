@@ -16,9 +16,9 @@
                     </a>
                     <!-- <a mat-button routerLink="/home" routerLinkActive="active" style="font-family: cursive; font-style: italic; font-size: 30px; color: #d0006f;">ema</a> -->
                     <!-- <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a> -->
-                    <div class="row" mat-icon-button>
+                    <div class="row" mat-icon-button (click)="openDialog()">
                         <mat-icon class="col">place</mat-icon>
-                        <div class="col" (click)="openDialog()">
+                        <div class="col">
                             <p class="label-title">enviar a:</p>
                             <p *ngIf="(selectAddress$ | async) === ''" class="title">Agregar dirección</p>
                             <p *ngIf="(selectAddress$ | async) !== {}" class="title">{{ (selectAddress$ | async).direccion | lowercase }}</p>

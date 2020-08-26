@@ -1,7 +1,7 @@
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Sus productos</ng-template>
+      <ng-template matStepLabel><mat-icon>shopping_cart</mat-icon></ng-template>
       <div class="position-button">
         <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
           Continuar
@@ -13,74 +13,41 @@
       <mat-form-field style="display: none;">
         <input matInput formControlName="firstCtrl">
       </mat-form-field>
-      <!-- List of products -- init -->
-      <!-- <div class="aline-product" *ngIf="(products$ | async) as products">
-        <p *ngIf="products.length === 0">no hay productos</p>
-        <div class="row border-table middle-xs" *ngFor="let product of products">
-          <div class="col-xs-12 col-sm-2 col-md-2 init-border">
-            <div class="box">
-              <img style="width: 100%;" class="image" [src]="product.imagen" alt="">
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-3 col-md-3">
-            <div class="box">
-              <mat-card-subtitle>{{ product.nombrearitulo }}</mat-card-subtitle>
-            </div>
-            <div class="box">
-              <mat-card-subtitle>{{ product.descripcion }}</mat-card-subtitle>
-            </div>
-            <div class="box">
-              <mat-card-subtitle>Precio/und: {{ product.valorventa }}</mat-card-subtitle>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-2 col-md-2">
-            <div class="box">
-              <mat-card-subtitle>Cant: {{ product.cant }}</mat-card-subtitle>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-2 col-md-2">
-            <div class="box">
-              <mat-card-title>{{ product.valorventa * product.cant | currency}}</mat-card-title>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
-<mat-table [dataSource]="products$" class="mat-elevation-z8" style="border-radius: 20px; background: #ffffff00;">
-  <!-- Position Column -->
-  <ng-container class="img-cont" matColumnDef="imagen">
-    <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
-    <mat-cell *matCellDef="let products"><img style="margin: 10px;" width="40px" [src]="products.imagen"></mat-cell>
-  </ng-container>
+        <mat-table [dataSource]="products$" class="mat-elevation-z8" style="border-radius: 20px; background: #ffffff00;">
+          <!-- Image -->
+          <ng-container class="img-cont" matColumnDef="imagen">
+            <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
+            <mat-cell *matCellDef="let products"><img style="margin: 10px 0px;" width="40px" [src]="products.imagen"></mat-cell>
+          </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="nombre">
-    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-    <mat-cell *matCellDef="let products"> {{ products.nombrearticulo | lowercase }} </mat-cell>
-  </ng-container>
+          <!-- Name -->
+          <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let products"> {{ products.nombrearticulo | lowercase }} </mat-cell>
+          </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="cantidad">
-    <mat-header-cell *matHeaderCellDef style="justify-content: center;"> Cantidad </mat-header-cell>
-    <mat-cell *matCellDef="let products" style="justify-content: center;"> {{ products.cant }} </mat-cell>
-  </ng-container>
+          <!-- Quantity -->
+          <ng-container matColumnDef="cantidad">
+            <mat-header-cell *matHeaderCellDef style="justify-content: center;"> Cantidad </mat-header-cell>
+            <mat-cell *matCellDef="let products" style="justify-content: center;"> {{ products.cant }} </mat-cell>
+          </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="total">
-    <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-    <mat-cell *matCellDef="let products"> {{ products.valorventa * products.cant | currency }} </mat-cell>
-  </ng-container>
+          <!-- Total -->
+          <ng-container matColumnDef="total">
+            <mat-header-cell style="justify-content: flex-end;" *matHeaderCellDef> Total </mat-header-cell>
+            <mat-cell style="justify-content: flex-end;" *matCellDef="let products"> {{ products.valorventa * products.cant | currency }} </mat-cell>
+          </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
 
-      <!-- List of products -- final -->
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Datos de entrega</ng-template>
+      <ng-template matStepLabel><mat-icon>person_pin</mat-icon></ng-template>
       <div class="position-button">
         <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
           Continuar
@@ -89,10 +56,6 @@
           </mat-icon>
         </button>
       </div>
-      <!-- <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-      </mat-form-field> -->
       <mat-card class="cont-address">
         <mat-card class="shipping-card">
           <mat-card-header class="row between-xs middled-xs" style="align-items: center;">
@@ -117,14 +80,10 @@
             <div class="row">
               <div class="col">
                 <mat-radio-group formControlName="secondCtrl" required>
-                  <mat-card class="address-shadow">
-                    <mat-radio-button value="free">{{'diagonal 8b #25-106'}} <br/> {{'Palmar'}}</mat-radio-button>
-                  </mat-card>
-                  <mat-card class="address-shadow">
-                    <mat-radio-button value="priority">{{'Carrera 6a #15b-18'}} <br/> {{'El camello'}}</mat-radio-button>
-                  </mat-card>
-                  <mat-card class="address-shadow">
-                    <mat-radio-button value="nextday">{{'Calle 16 #00-00'}} <br/> {{'Clemente arrieta'}}</mat-radio-button>
+                  <mat-card *ngFor="let address of addresses$ | async" class="address-shadow">
+                    <mat-radio-button (click)="selectAddress(address)" [value]="address">
+                        {{ address.direccion | lowercase }}
+                    </mat-radio-button>
                   </mat-card>
                 </mat-radio-group>
               </div>
@@ -135,7 +94,7 @@
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Metodo de pago</ng-template>
+    <ng-template matStepLabel><mat-icon>assistant_photo</mat-icon></ng-template>
     <div class="position-button">
       <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
         Finalizar
@@ -144,6 +103,60 @@
         </mat-icon>
       </button>
     </div>
-    <p>You are now done.</p>
+    
+    <div class="summary-cont">
+
+      <mat-card class="contact-cont">
+        <mat-card-header>
+          <mat-card-title>Información de contacto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="border">
+            <p>Cel: 3136187616</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="address-cont">
+        <mat-card-header>
+          <mat-card-title>Dirección de entrega</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="border">
+            <p>Cra 12 #12-13 <br>Caucasia</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="order-cont">
+        <mat-card-header>
+          <mat-card-title>Resumen compra</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="border">
+            <p>tienda 1 <br> cantidad de productos añadidos: 3</p>
+            <p class="aling-right">subTotal: $900</p>
+          </div>
+          <div class="border">
+            <p>tienda 2 <br> cantidad de productos añadidos: 6</p>
+            <p class="aling-right">subTotal: $700</p>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-card-subtitle class="aling-right p-right-16">Total: $1.600</mat-card-subtitle>
+        </mat-card-footer>
+      </mat-card>
+
+    </div>
+
+    <div class="position-button">
+      <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
+        Finalizar
+        <mat-icon>
+          turned_in_not
+        </mat-icon>
+      </button>
+    </div>
+
   </mat-step>
 </mat-horizontal-stepper>

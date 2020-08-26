@@ -15,6 +15,11 @@
 
 <div class="product-movil-cont">
     <div class="img-cont">
+        <div class="favorite-cont">
+            <mat-spinner class="position-favorite non-selectable" *ngIf="stateSpinner" diameter=22></mat-spinner>
+            <mat-icon *ngIf="!subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="notFavorite position-favorite non-selectable">favorite_border</mat-icon>
+            <mat-icon *ngIf="subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="favorite position-favorite non-selectable">favorite_border</mat-icon>
+        </div>
         <div class="crop-image" (click)="openDialogDetailProduct()">
             <img *ngIf="product.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'"
                 [src]="product.imagen">

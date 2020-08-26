@@ -3,8 +3,11 @@ import { Store } from '../../../core/models/store.model';
 
 import { CartService } from './../../../core/services/cart.service';
 import { StoresService } from './../../../core/services/stores.service';
+import { AuthService } from '@core/services/auth.service';
 
 import Swiper from 'swiper';
+import { Observable } from 'rxjs';
+import { isArray } from 'util';
 
 @Component({
   selector: 'app-banner-stores',
@@ -14,17 +17,32 @@ import Swiper from 'swiper';
 export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   @Input() store: Store;
+  favoriteStores$: Observable<any>;
   estadoHover = false;
   showFiller = false;
   subscribeBtn = false;
+  stateSpinner = false;
   mySwiper: Swiper;
 
   constructor(
     private cartService: CartService,
-    private storesService: StoresService
-  ) { }
+    private storesService: StoresService,
+    private authService: AuthService,
+  ) {
+    this.favoriteStores$ = this.storesService.favoriteStores$;
+   }
 
   ngOnInit(): void {
+    this.favoriteStores$.subscribe((stores: any) => {
+      if (Array.isArray(stores)) {
+        const validation = stores.filter(store => store.id === this.store.id);
+        if (validation.length > 0) {
+          this.subscribeBtn = true;
+        } else {
+          this.subscribeBtn = false;
+        }
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -77,9 +95,16 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     }
   }
 
-  subscribe(store: Store) {
-    if (this.subscribeBtn === false) {
-      this.storesService.createSubscription(store);
+  subscribe(idstore: number) {
+    if (this.authService.loggedIn()) {
+      this.stateSpinner = true;
+      this.storesService.subscriptionStore({idtienda: idstore}).subscribe((res: any) => {
+        console.log(res);
+        this.stateSpinner = false;
+        if (res.status === 'OK' || res.status === 'Ok') {
+            this.subscribeBtn = !this.subscribeBtn;
+        }
+      });
     }
   }
 

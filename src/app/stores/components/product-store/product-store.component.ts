@@ -8,6 +8,8 @@ import { AddProduct } from '../../../core/models/addProduct.model';
 
 import { CartService } from '@core/services/cart.service';
 import { WindowService } from '@core/services/window.service';
+import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-product-store',
@@ -19,13 +21,18 @@ export class ProductStoreComponent implements OnInit {
   @Input() product: Product;
   @Input() razonsocial: string;
   @Input() imagen: string;
-  estadoHover = false;
   addProduct$: Observable<AddProduct[]>;
+  favoriteProducts$: Observable<any>;
+  estadoHover = false;
   addState: boolean;
+  subscribeBtn = false;
+  stateSpinner = false;
 
     constructor(
         private cartService: CartService,
         private windowService: WindowService,
+        private productsService: ProductsService,
+        private authService: AuthService,
         private dialog: MatDialog,
     ) {
       this.addState = true;
@@ -34,10 +41,21 @@ export class ProductStoreComponent implements OnInit {
       this.addProduct$.subscribe(() => {
         this.windowService.loadingFalse();
       });
+      this.favoriteProducts$ = this.productsService.favoriteProducts$;
     }
 
     ngOnInit() {
       this.stateAddProduct();
+      this.favoriteProducts$.subscribe((products: any) => {
+        if (Array.isArray(products)) {
+          const validation = products.filter(product => product.id === this.product.id);
+          if (validation.length > 0) {
+            this.subscribeBtn = true;
+          } else {
+            this.subscribeBtn = false;
+          }
+        }
+      });
     }
 
     stateAddProduct() {
@@ -86,6 +104,19 @@ export class ProductStoreComponent implements OnInit {
         this.cartService.removeCart(this.product);
         this.cartService.removePrice(this.product.valorventa);
         this.stateAddProduct();
+    }
+
+    subscribe(idproduct: number) {
+      if (this.authService.loggedIn()) {
+        this.stateSpinner = true;
+        this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
+          console.log(res);
+          this.stateSpinner = false;
+          if (res.status === 'OK' || res.status === 'Ok') {
+              this.subscribeBtn = !this.subscribeBtn;
+          }
+        });
+      }
     }
 
 }

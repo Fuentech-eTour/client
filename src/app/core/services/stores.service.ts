@@ -5,7 +5,7 @@ import { Store } from '../models/store.model';
 import { Product } from '../models/product.model';
 import { environment } from '../../../environments/environment';
 
-import { throwError } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import * as Sentry from '@sentry/browser';
@@ -14,6 +14,9 @@ import * as Sentry from '@sentry/browser';
   providedIn: 'root'
 })
 export class StoresService {
+  storesFavorite: any[];
+  private favoriteStores = new BehaviorSubject<any[]>([]);
+  favoriteStores$ = this.favoriteStores.asObservable();
 
   constructor(
     private http: HttpClient
@@ -51,15 +54,6 @@ export class StoresService {
     );
   }
 
-  createSubscription(store: Store) {
-    console.log(store);
-    return this.http.post(`${environment.url_api}/stores/subscription`, store)
-    .pipe(
-      retry(3),
-      catchError(this.handleError),
-    );
-  }
-
   getStoreByName(name: string) {
     return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystorename/${name}`)
     .pipe(
@@ -74,6 +68,28 @@ export class StoresService {
       retry(3),
       catchError(this.handleError),
     );
+  }
+
+  subscriptionStore(idtienda: object) {
+    console.log(idtienda);
+    return this.http.post(`${environment.url_api}/favs/agregatiendafavs`, idtienda)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getStoreFavorite() {
+    return this.http.get<any>(`${environment.url_api}/favs/obtenertiendasfavoritas`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  stateFavoriteStore(stores: any) {
+    console.log(stores);
+    this.favoriteStores.next(stores);
   }
 
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//

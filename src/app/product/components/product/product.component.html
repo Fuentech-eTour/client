@@ -1,4 +1,9 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
+    <div class="favorite-cont">
+        <mat-spinner class="position-favorite non-selectable" *ngIf="stateSpinner" diameter=22></mat-spinner>
+        <mat-icon *ngIf="!subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="notFavorite position-favorite non-selectable">favorite_border</mat-icon>
+        <mat-icon *ngIf="subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="favorite position-favorite non-selectable">favorite_border</mat-icon>
+    </div>
     <!-- <app-counter-products></app-counter-products> -->
     <mat-card-header>
         <div [routerLink]="['/stores', product?.idststore]" mat-card-avatar style="background-image: url({{product?.imagent}});

@@ -5,7 +5,7 @@ import { Product } from '../../models/product.model';
 
 import { environment } from '../../../../environments/environment';
 
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 
 import * as Sentry from '@sentry/browser';
@@ -14,6 +14,9 @@ import * as Sentry from '@sentry/browser';
   providedIn: 'root'
 })
 export class ProductsService {
+  productsFavorite: any[];
+  private favoriteProducts = new BehaviorSubject<any[]>([]);
+  favoriteProducts$ = this.favoriteProducts.asObservable();
 
   constructor(
     private http: HttpClient
@@ -90,6 +93,28 @@ export class ProductsService {
       retry(3),
       catchError(this.handleError),
     );
+  }
+
+  createFavoritiesProducts(idproducto: object) {
+    console.log(idproducto);
+    return this.http.post(`${environment.url_api}/favs/agregaproductofavs`, idproducto)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getFavoritePorducts() {
+    return this.http.get<any>(`${environment.url_api}/favs/obtenerproductosfavoritos`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  stateFavoriteProducts(products: any) {
+    console.log(products);
+    this.favoriteProducts.next(products);
   }
 
   getFile() {

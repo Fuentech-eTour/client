@@ -5,6 +5,8 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
+import { StoresService } from '@core/services/stores.service';
+import { ProductsService } from '@core/services/products/products.service';
 import { RegisterComponent } from '../register/register.component';
 
 
@@ -22,6 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private windowService: WindowService,
+    private storesService: StoresService,
+    private productsService: ProductsService,
     public dialogRef: MatDialogRef<LoginComponent>,
     private dialog: MatDialog,
   ) {
@@ -53,11 +57,19 @@ export class LoginComponent implements OnInit {
       this.authService.login(user)
         .subscribe( (res: any) => {
           console.log(res);
-          localStorage.setItem('token', res.data.accessToken);
-          localStorage.setItem('user_name', res.data.user_name);
-          this.windowService.addUserName(res.data.user_name.split(' ')[0]);
-          this.router.navigate(['./stores']);
-          this.windowService.loadingFalse();
+          if (res.status === 'OK') {
+            localStorage.setItem('token', res.data.accessToken);
+            localStorage.setItem('user_name', res.data.user_name);
+            this.windowService.addUserName(res.data.user_name.split(' ')[0]);
+            this.storesService.getStoreFavorite().subscribe(data => {
+              this.storesService.stateFavoriteStore(data);
+            });
+            this.productsService.getFavoritePorducts().subscribe(data => {
+              this.productsService.stateFavoriteProducts(data);
+            });
+            this.router.navigate(['./stores']);
+            this.windowService.loadingFalse();
+          }
         });
     }
   }

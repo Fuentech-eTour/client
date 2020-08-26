@@ -14,4 +14,12 @@ app-product-movil {
 
 .mat-tab-group {
     margin-bottom: 48px;
+    background-color: white;
+    @media (min-width: 700px) {
+      background-color: #fafafa;
+    }
+    .message {
+      text-align: center;
+      padding: 16px;
+    }
   }

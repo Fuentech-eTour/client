@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { WindowService } from './window.service';
+import { StoresService } from './stores.service';
+import { ProductsService } from './products/products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private windowService: WindowService,
+    private storesService: StoresService,
+    private productsService: ProductsService,
   ) { }
 
   createUser(user: JSON) {
@@ -40,6 +44,8 @@ export class AuthService {
     localStorage.removeItem('user_name');
     localStorage.removeItem('idstore');
     this.windowService.addUserName(null);
+    this.storesService.stateFavoriteStore([]);
+    this.productsService.stateFavoriteProducts([]);
     this.router.navigate(['/stores']);
   }
 

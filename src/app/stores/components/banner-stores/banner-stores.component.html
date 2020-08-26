@@ -34,35 +34,40 @@
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-
-        <!-- footer display: none; ha espera de implementacion-->
-        <div class="row between-xs middled-xs footer-cont">
-            <div class="row btn-cont">
-                <div class="row">
-                    <a mat-button routerLinkActive="active" class="btn-style" *ngIf="subscribeBtn===false" (click)="subscribe(store)">
-                    Suscribirse
-                    <mat-icon style="color: #73726c;">notifications_none</mat-icon></a>
-                    <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn===true" (click)="subscribe(store)">
-                    Suscrito
-                    <mat-icon style="color: #f44336;">notifications_active</mat-icon></a>
-                    <a mat-button routerLinkActive="active" class="btn-style">
-                    Comentar
-                    <mat-icon style="color: #73726c;">insert_comment</mat-icon></a>
-                    <a mat-button routerLinkActive="active" class="btn-style">
-                    Compartir
-                    <mat-icon style="color: #73726c;">reply</mat-icon></a>
-                </div>
-            </div>
-            <div class="row title-slide">
-                <div class="row" style="padding: 0px 20px 0px 0px">
-                    <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
-                        <mat-icon style="color: #73726c;">more_horiz</mat-icon>
-                    </a>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- Swiper --final-->
+
+    <!-- footer display: none; ha espera de implementacion-->
+    <div class="row between-xs middled-xs footer-cont">
+        <div class="row btn-cont">
+            <a mat-button routerLinkActive="active" class="btn-style" *ngIf="!subscribeBtn" (click)="subscribe(store.id)">
+                <div class="btn-aling">
+                    <span>Suscribirse</span> 
+                    <span *ngIf="stateSpinner" matSuffix><mat-spinner diameter=20></mat-spinner></span>
+                    <mat-icon *ngIf="!stateSpinner" style="color: #73726c;">notifications_none</mat-icon>
+                </div>
+            </a>
+            <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn" (click)="subscribe(store.id)">
+                <div class="btn-aling">
+                    <span>Suscrito</span> 
+                    <span *ngIf="stateSpinner" matSuffix><mat-spinner diameter=20></mat-spinner></span>
+                    <mat-icon *ngIf="!stateSpinner" style="color: #ff4b88;">notifications_active</mat-icon>
+                </div>
+                
+            </a>
+            <a mat-button routerLinkActive="active" class="btn-style">
+                Comentar<mat-icon style="color: #73726c;">insert_comment</mat-icon>
+            </a>
+            <!-- <a mat-button routerLinkActive="active" class="btn-style">
+                Compartir<mat-icon style="color: #73726c;">reply</mat-icon>
+            </a> -->
+        </div>
+        <div class="row btn-cont">
+            <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
+                <mat-icon  style="color: #73726c;">more_horiz</mat-icon>
+            </a>
+        </div>
+    </div>
 </div>
 
 <!-- menu qualification -->

@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="saveAddress($event)">
     <mat-card class="shipping-card">
         <mat-card-header style="justify-content: center;">
             <mat-card-title>Nueva dirección</mat-card-title>
@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="col">
                     <mat-form-field class="full-width">
-                        <textarea matInput placeholder="Dirección" formControlName="address"></textarea>
-                        <mat-error *ngIf="form.controls['address'].hasError('required')">
+                        <textarea matInput placeholder="Dirección" formControlName="direccion"></textarea>
+                        <mat-error *ngIf="form.controls['direccion'].hasError('required')">
                             Dirección es <strong>requerida</strong>
                         </mat-error>
                     </mat-form-field>
@@ -17,20 +17,10 @@
             <div class="row">
                 <div class="col">
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Municipio" formControlName="city">
-                        <mat-error *ngIf="form.controls['city'].hasError('required')">
-                            Municipio es <strong>requerido</strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field class="full-width">
-                        <mat-select placeholder="Departamento" formControlName="state">
-                            <mat-option *ngFor="let state of states" [value]="state.abbreviation">
-                                {{ state.name }}
-                            </mat-option>
+                        <mat-select placeholder="Municipio" formControlName="idmunicipio">
+                            <mat-option *ngFor="let municipality of municipalities" [value]=municipality.id>{{municipality.descripcion}}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="form.controls['state'].hasError('required')">
+                        <mat-error *ngIf="form.controls['idmunicipio'].hasError('required')">
                             Departamento es <strong>requerido</strong>
                         </mat-error>
                     </mat-form-field>

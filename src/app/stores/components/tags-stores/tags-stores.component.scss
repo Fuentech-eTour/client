@@ -1,0 +1,8 @@
+.title-cont {
+    color: #363636; 
+    padding: 10px; 
+    background-color: white;
+    @media (min-width: 700px) {
+        background-color: #ffffff00;
+    }
+}

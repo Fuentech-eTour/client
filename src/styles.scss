@@ -107,6 +107,27 @@ li {
     border-radius: 20px !important;
 }
 
+/* step order --init-- */
+
+.mat-step-label {
+    align-items: center !important;
+    display: contents !important;
+}
+
+.mat-step-icon {
+    background: white !important;
+    border: solid 1px #0000001f;
+}
+
+.mat-step-icon-content {
+    color: #ff4081;
+}
+
+.mat-step-label-active {
+    color: #ff4081 !important;
+}
+
+/* step order --final-- */
 
 /* botones next y prev de los componente banner --init-- */
 

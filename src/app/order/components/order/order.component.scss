@@ -68,6 +68,7 @@
     box-shadow: none;
     margin: 0px auto;
   }
+
 /* address -- final */  
 
 @media(min-width: 576px) {
@@ -105,14 +106,66 @@
 mat-table {
   width: 100%;
   margin-top: 20px;
+  box-shadow: none;
 }
 
 mat-row, mat-header-row {
-  margin: 0px 20px;
+  margin: 0px;
 }
 
 mat-cell, mat-header-cell {
   font-size: 12px;
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+
+.summary-cont {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+
+  mat-card {
+    margin: 0px;
+    max-width: 450px;
+    box-shadow: none;
+    padding: 16px 0px;
+    align-self: center;
+    @media (min-width: 700px) {
+      margin: 10px auto;
+      width: 450px;
+    }
+    .border {
+      border: solid 1px rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+      margin: 5px 0px;
+      padding: 10px;
+      .aling-right {
+        text-align: right;
+      }
+    }
+  }
+
+  .contact-cont {
+    mat-card-header {
+      justify-content: center;
+    }
+  }
+
+  .address-cont {
+    mat-card-header {
+      justify-content: center;
+    }
+  }
+
+  .order-cont {
+    mat-card-header {
+      justify-content: center;
+    }
+    .aling-right {
+      text-align: right;
+    }
+    .p-right-16 {
+      padding-right: 26px;
+    }
+    
+  }
 }

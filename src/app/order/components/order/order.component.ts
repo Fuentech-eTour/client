@@ -5,16 +5,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { AddressComponent } from '../address/address.component';
 import { AddProduct } from '../../../core/models/addProduct.model';
 import { CartService } from './../../../core/services/cart.service';
-import { Observable } from 'rxjs';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-/**
- * @title Dialog Overview
- */
+import { UsersService } from '@core/services/users.service';
+import { UtilityService } from '@core/services/utility.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -27,18 +20,36 @@ export class OrderComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+
+  private isloading = new BehaviorSubject<boolean>(true);
+  isloading$ = this.isloading.asObservable();
+  private addresses = new BehaviorSubject<any>([]);
+  addresses$ = this.addresses.asObservable();
   displayedColumns: string[] = ['imagen', 'nombre', 'cantidad', 'total'];
 
   constructor(
     private cartService: CartService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private usersService: UsersService,
+    private dialog: MatDialog,
   ) {
     this.products$ = this.cartService.cart$;
     this.buildForm();
   }
 
   ngOnInit() {
+    this.fetchAllAddress();
+  }
+
+  fetchAllAddress() {
+    this.usersService.getAllAddress().subscribe(data => {
+      this.isloading.next(false);
+      this.addresses.next(data);
+    });
+  }
+
+  selectAddress(address) {
+    this.usersService.addSelectAddress(address);
   }
 
   buildForm() {
@@ -53,27 +64,11 @@ export class OrderComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddressComponent, {
       width: '300px',
-      data: {name: this.isLinear, animal: this.isLinear}
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.fetchAllAddress();
     });
   }
-
 }
-
-/* @Component({
-  selector: 'app-order-address',
-  templateUrl: './order-address.component.html'
-})
-export class OrderAddressComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<OrderAddressComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-} */

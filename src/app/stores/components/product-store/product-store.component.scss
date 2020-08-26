@@ -17,7 +17,29 @@ mat-card {
             
         }
     }
-    
+    .favorite-cont {
+        mat-icon {
+            font-size: 22px;
+        }
+        .notFavorite {
+            color: rgba(0, 0, 0, 0.12);
+        }
+        .favorite {
+            color: #ff4081;
+        }
+        .position-favorite {
+            position: absolute;
+            z-index: 1;
+            left: 15px;
+            top: 5px;
+        }
+        .non-selectable {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
     .actions-cont {
         // non-selectable
         -moz-user-select: none;

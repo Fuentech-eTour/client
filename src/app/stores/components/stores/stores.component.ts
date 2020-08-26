@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StoresService } from '@core/services/stores.service';
 import { WindowService } from '@core/services/window.service';
+import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
 import { Store } from '@core/models/store.model';
 
 
@@ -16,10 +18,20 @@ export class StoresComponent implements OnInit {
   constructor(
     private storesService: StoresService,
     private windowService: WindowService,
+    private productsService: ProductsService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     this.fetchStores();
+    if (this.authService.loggedIn()) {
+      this.storesService.getStoreFavorite().subscribe(data => {
+        this.storesService.stateFavoriteStore(data);
+      });
+      this.productsService.getFavoritePorducts().subscribe(data => {
+        this.productsService.stateFavoriteProducts(data);
+      });
+    }
   }
 
   fetchStores() {
