@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@core/models/product.model';
 import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
 import { AddProduct } from '@core/models/addProduct.model';
 import { Store } from '@core/models/store.model';
 import { CartService } from '@core/services/cart.service';
 import { WindowService } from '@core/services/window.service';
 import { Observable } from 'rxjs';
+
 
 import Swiper from 'swiper';
 
@@ -30,6 +32,7 @@ export class ProductsComponent implements OnInit {
     private cartService: CartService,
     private productsService: ProductsService,
     private windowService: WindowService,
+    private authService: AuthService,
   ) {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
@@ -39,6 +42,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts();
+    if (this.authService.loggedIn()) {
+      this.productsService.getFavoriteProducts().subscribe(data => {
+        this.productsService.stateFavoriteProducts(data);
+      });
+    }
   }
 
   fetchProducts() {

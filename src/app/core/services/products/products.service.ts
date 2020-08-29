@@ -104,7 +104,7 @@ export class ProductsService {
     );
   }
 
-  getFavoritePorducts() {
+  getFavoriteProducts() {
     return this.http.get<any>(`${environment.url_api}/favs/obtenerproductosfavoritos`)
     .pipe(
       retry(3),

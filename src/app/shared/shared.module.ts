@@ -17,12 +17,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MoreContentPipe } from './pipes/more-content/more-content.pipe';
-import { FirstWordPipe } from './pipes/first-word/first-word.pipe';
 import { CountProductsComponent } from './components/count-products/count-products.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AddressOptionsComponent } from './components/address-options/address-options.component';
 import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
 import { BtnAddCountComponent } from './components/btn-add-count/btn-add-count.component';
+import { HeaderSearchComponent } from './components/header-search/header-search.component';
+import { SanitizerUrlPipe } from './pipes/sanitizer-url/sanitizer-url.pipe';
 
 @NgModule({
   declarations: [
@@ -31,13 +32,14 @@ import { BtnAddCountComponent } from './components/btn-add-count/btn-add-count.c
     HeaderComponent,
     FooterComponent,
     MoreContentPipe,
-    FirstWordPipe,
     CartComponent,
     CountProductsComponent,
     SidenavComponent,
     AddressOptionsComponent,
     NavMovilComponent,
     BtnAddCountComponent,
+    HeaderSearchComponent,
+    SanitizerUrlPipe,
   ],
   exports: [
     ExponentialPipe,
@@ -45,11 +47,12 @@ import { BtnAddCountComponent } from './components/btn-add-count/btn-add-count.c
     HeaderComponent,
     FooterComponent,
     MoreContentPipe,
-    FirstWordPipe,
     CartComponent,
     SidenavComponent,
     NavMovilComponent,
     BtnAddCountComponent,
+    HeaderSearchComponent,
+    SanitizerUrlPipe,
   ],
   imports: [
     CommonModule,

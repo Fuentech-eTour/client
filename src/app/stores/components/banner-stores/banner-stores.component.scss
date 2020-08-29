@@ -4,6 +4,12 @@
     // padding-bottom: 10px;
     margin: 10px 0px;
     @media (min-width: 700px) {
+        // border: solid 1px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 
+                    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+                    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    @media (min-width: 1120px) {
         border-radius: 20px;
     }
     .header-cont {
@@ -44,10 +50,6 @@
     .swiper-container {
         width: 100%;
         height: 100%;
-        //background: white;
-        @media (min-width: 425px) {
-            border-radius: 20px;
-        }
     }
     .general {
         width: 100%;
@@ -81,9 +83,60 @@
     .footer-cont {
         padding: 5px 20px;
         margin-top: 5px;
-        border: solid 1px rgba(0, 0, 0, 0.12);
+        border-top: solid 1px rgba(0, 0, 0, 0.12);
+        // border-bottom: solid 1px rgba(0, 0, 0, 0.12);
         @media (min-width: 700px) {
-            border: none;
+            margin: 5px 20px;
+        }
+        .comments-cont {
+            max-height: 300px;
+            overflow: auto;
+            .comment {
+                display: flex;
+                position: relative;
+                overflow: hidden;
+                height: fit-content;
+                margin: 10px 0px;
+                border-radius: 10px;
+                background-color: rgba(0, 0, 0, 0.034);
+                width: 100%;
+                p {
+                    width: auto;
+                    margin: 0px;
+                    font-size: 14px;
+                    text-align: left;
+                    padding: 5px;
+                    span {
+                        text-align: left;
+                    }
+                    .name-actions {
+                        font-size: 12px !important;
+                        width: 28px !important;
+                        height: 16px !important;
+                        border-radius: 5px;
+                        background: #a09f97;
+                        color: white;
+                        text-align: center;
+                        padding: 0px 3px;
+                        margin-left: 3px;
+                        cursor: pointer;
+                    }
+                }
+                div {
+                    padding: 7px 0px 0px 10px;
+                    .avatar {
+                        display: flex;
+                        width: 24px;
+                        height: 24px;
+                        padding: 0px;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        color: white;
+                        background-color: #a09f97;
+                    }
+                }
+            }
         }
         .btn-cont {
             .btn-style {
@@ -98,6 +151,67 @@
                     display: flex;
                     mat-spinner {
                         margin: 0px 3px;
+                    }
+                }
+            }
+            .btn-style-desktop {
+                display: none;
+                @media (min-width: 700px) {
+                    display: inline-flex;
+                }
+            }
+            .btn-style-movil {
+                @media (min-width: 700px) {
+                    display: none;
+                }
+            }
+        }
+        .input-msn-cont {
+            width: 100%;
+            form {
+                display: flex;
+                input {
+                    text-decoration: none;
+                    height: 30px;
+                    width: 100%;
+                    font-size: 15px;
+                    outline: none;
+                    outline-width: 0;
+                    box-shadow: none;
+                    -moz-box-shadow: none;
+                    -webkit-box-shadow: none;
+                    border: none;
+                    margin: 2px 2px 2px 20px;
+                    background-color: #f0f2f5;
+                    border-radius: 20px;
+                    padding: 2px 2px 2px 20px;
+                    margin: 5px 0px;
+                    &:focus {
+                        box-shadow: 0px 0px 4px 2px rgba(0, 123, 255, 0.3);
+                    }
+                }
+                .actions-cont {
+                    width: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .btn-send-cont {
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        //border: solid 1px rgba(0, 0, 0, 0.12);
+                        background-color: #f0f2f5;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0px 5px;
+                        cursor: pointer;
+                        mat-icon {
+                            color: #0000001f;
+                            &:hover {
+                                color: #00000048;
+                            }
+                        }
                     }
                 }
             }

@@ -39,6 +39,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store$.subscribe(console.log);
   }
 
   openDialogDetailProduct(idp: number): void {

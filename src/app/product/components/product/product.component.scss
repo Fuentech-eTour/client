@@ -32,6 +32,7 @@ mat-card-actions>button {
 }
 
 .crop-image {
+    display: flex;
     height: 125px;
     width: 100%;
     overflow: hidden;
@@ -57,6 +58,9 @@ mat-card-actions>button {
 }
 
 .favorite-cont {
+    width: 50px;
+    display: flex;
+    justify-content: center;
     mat-icon {
         font-size: 22px;
     }
@@ -67,10 +71,8 @@ mat-card-actions>button {
         color: #ff4081;
     }
     .position-favorite {
-        position: absolute;
         z-index: 1;
-        left: 15px;
-        top: 5px;
+        text-align: center;
     }
     .non-selectable {
         -moz-user-select: none;

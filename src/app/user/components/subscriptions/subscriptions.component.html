@@ -1,4 +1,4 @@
-<div>
+<mat-card>
     <div class="action-buttons">
       <button mat-stroked-button color="accent" (click)="accordion.openAll()">Abrir todo</button>
       <button mat-stroked-button color="accent" (click)="accordion.closeAll()">Cerrar todo</button>
@@ -7,36 +7,57 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Suscripciones
+            Suscripciones tiendas
           </mat-panel-title>
+          <mat-spinner *ngIf="isloading$ | async" diameter=24></mat-spinner>
           <mat-icon style="color: #0000008a; padding-right: 10px;">notifications_active</mat-icon>
         </mat-expansion-panel-header>
     
-        <table mat-table [dataSource]="" class="mat-elevation-z8 product-table">
+        <table mat-table [dataSource]="stores$ | async" class="mat-elevation-z8 product-table">
           <ng-container matColumnDef="Tienda">
               <th mat-header-cell *matHeaderCellDef> Tienda </th>
-              <td mat-cell *matCellDef="let product"> {{ product.codigo }} </td>
-          </ng-container>
-          <ng-container matColumnDef="Categorias">
-              <th mat-header-cell *matHeaderCellDef> Categorias </th>
-              <td mat-cell *matCellDef="let product"> {{ product.nombrearticulo | lowercase}} </td>
+              <td mat-cell *matCellDef="let store"> 
+                <div class="title-cont">
+                  <div mat-card-avatar style="background-image: url({{store.imagen}});
+                                              background-size: cover;">
+                      <img *ngIf=" store.imagen ===''          || 
+                                   store.imagen === null       || 
+                                   store.imagen === undefined" 
+                            src="./../../../../assets/images/icon-store.png">
+                  </div>
+                  <mat-card-title [routerLink]="['/stores', store.id]">
+                      {{store.razonsocial | titlecase}}
+                  </mat-card-title>
+              </div>
+              </td>
           </ng-container>
           <ng-container matColumnDef="Acciones">
-              <th mat-header-cell *matHeaderCellDef> Acciones </th>
-              <td mat-cell *matCellDef="let product"> 
-                  <a mat-button
-                  [routerLink]="['edit', product.id]">
-                      <mat-icon color="primary">edit</mat-icon>
-                  </a>
+              <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
+              <td class="aling-action" mat-cell *matCellDef="let store">
                   <a mat-button>
-                      <mat-icon color="warn">delete_outline</mat-icon>
+                      <mat-icon color="warn" (click)="unsubscribe(store.id)">delete_outline</mat-icon>
                   </a>
               </td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsOne"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsOne;"></tr>
+        </table>
+    
+      </mat-expansion-panel>
+      
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Productos favoritos
+          </mat-panel-title>
+          <mat-spinner *ngIf="isloadingTwo$ | async" diameter=24></mat-spinner>
+          <mat-icon style="color: #0000008a; padding-right: 10px;">favorite_border</mat-icon>
+        </mat-expansion-panel-header>
+          <div class="product-movil-cont product-grid-user">
+            <app-product-movil *ngFor="let product of products$ | async" [product]="product">
+            </app-product-movil>
+          </div>
       </mat-expansion-panel>
     </mat-accordion>
-</div>
+  </mat-card>
 

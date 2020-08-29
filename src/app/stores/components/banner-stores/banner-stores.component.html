@@ -55,7 +55,10 @@
                 </div>
                 
             </a>
-            <a mat-button routerLinkActive="active" class="btn-style">
+            <a mat-button routerLinkActive="active" class="btn-style btn-style-desktop" (click)="changeShowComment()">
+                Comentar<mat-icon style="color: #73726c;">insert_comment</mat-icon>
+            </a>
+            <a mat-button routerLinkActive="active" class="btn-style btn-style-movil" (click)="openBottomSheet()">
                 Comentar<mat-icon style="color: #73726c;">insert_comment</mat-icon>
             </a>
             <!-- <a mat-button routerLinkActive="active" class="btn-style">
@@ -66,6 +69,43 @@
             <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
                 <mat-icon  style="color: #73726c;">more_horiz</mat-icon>
             </a>
+        </div>
+    </div>
+    <div *ngIf="showComment" class="between-xs middled-xs footer-cont">
+        <div style="display: flex; justify-content: center;" *ngIf="stateLoading">
+            <mat-spinner diameter=20></mat-spinner>
+        </div>
+        <div class="comments-cont" *ngIf="!stateComment">
+            <p>Aun no hay comentarios, sé el primero en comentar</p>
+        </div>
+        <div class="comments-cont">
+            <div class="comment" *ngFor="let comment of comments$ | async">
+                <div>
+                    <div class="avatar">
+                        {{ comment.name | slice:0:1 }}
+                    </div>
+                </div>
+                <p>
+                    <span><strong>{{ comment.name | titlecase | slice:0:30 | moreContent:29 }}</strong></span>
+                    <span class="name-actions">editar</span>
+                    <span class="name-actions">eliminar</span><br>
+                    {{ comment.comentario | lowercase | slice:0:120 | moreContent:119 }}
+                </p>
+            </div>
+        </div>
+        <div class="input-msn-cont">
+            <form [formGroup]="form">
+                <input  #comment 
+                        matInput 
+                        formControlName="comentario" 
+                        placeholder="Escribenos tus comentarios..." 
+                        autocomplete="off">
+                <div class="actions-cont">
+                    <div class="btn-send-cont">
+                        <mat-icon matSuffix (click)="sendComment(comment.value)">send</mat-icon>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { BtnAddCountComponent } from '../../../shared/components/btn-add-count/btn-add-count.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { Product } from '@core/models/product.model';
+import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-movil',
@@ -14,12 +17,30 @@ export class ProductMovilComponent implements OnInit {
 
   @Input() product: Product;
   @ViewChild(BtnAddCountComponent) btnAdd: BtnAddCountComponent;
+  favoriteProducts$: Observable<any>;
+  subscribeBtn = false;
+  stateSpinner = false;
 
   constructor(
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private productsService: ProductsService,
+    private authService: AuthService,
+  ) {
+    this.favoriteProducts$ = this.productsService.favoriteProducts$;
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.favoriteProducts$.subscribe((products: any) => {
+      if (Array.isArray(products)) {
+        const validation = products.filter(product => product.id === this.product.id);
+        if (validation.length > 0) {
+          this.subscribeBtn = true;
+        } else {
+          this.subscribeBtn = false;
+        }
+      }
+    });
+  }
 
   openDialogDetailProduct(): void {
     const dialogRef = this.dialog.open(ProductDetailComponent, {
@@ -34,5 +55,18 @@ export class ProductMovilComponent implements OnInit {
 
   runState() {
     this.btnAdd.stateAddProduct();
+  }
+
+  subscribe(idproduct: number) {
+    if (this.authService.loggedIn()) {
+      this.stateSpinner = true;
+      this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
+        console.log(res);
+        this.stateSpinner = false;
+        if (res.status === 'OK' || res.status === 'Ok') {
+            this.subscribeBtn = !this.subscribeBtn;
+        }
+      });
+    }
   }
 }

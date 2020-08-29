@@ -6,7 +6,7 @@ import { AddressOptionsComponent } from '../address-options/address-options.comp
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { RegisterComponent } from '../../../auth/components/register/register.component';
 import { AuthService } from '../../../core/services/auth.service';
-import { WindowService } from '../../../core/services/window.service';
+import { WindowService } from '@core/services/window.service';
 import { UsersService } from '@core/services/users.service';
 
 import { map } from 'rxjs/operators';

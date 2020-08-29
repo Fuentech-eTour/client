@@ -7,15 +7,18 @@ import { BehaviorSubject } from 'rxjs';
 export class WindowService {
 
   isLoadingNow: boolean;
-  stateDisplayFooterNow: boolean;
+  stateDisplayFooterNow = false;
+  stateDisplayHeaderNow = false;
 
   private windowWidth = new BehaviorSubject<any>(document.body.clientWidth);
   private userName = new BehaviorSubject<any>(localStorage.getItem('user_name')?.split(' ')[0]);
   private isloading = new BehaviorSubject<boolean>(false);
-  private stateDisplayFooter = new BehaviorSubject<boolean>(true);
+  private stateDisplayFooter = new BehaviorSubject<boolean>(false);
+  private stateDisplayHeader = new BehaviorSubject<boolean>(false);
 
   isloading$ = this.isloading.asObservable();
   stateDisplayFooter$ = this.stateDisplayFooter.asObservable();
+  stateDisplayHeader$ = this.stateDisplayHeader.asObservable();
   userName$ = this.userName.asObservable();
   windowWidth$ = this.windowWidth.asObservable();
 
@@ -42,6 +45,14 @@ export class WindowService {
   stateFooterFalse() {
     this.stateDisplayFooterNow = false;
     this.stateDisplayFooter.next(this.stateDisplayFooterNow);
+  }
+
+  stateHeaderTrue() {
+    this.stateDisplayHeader.next(true);
+  }
+
+  stateHeaderFalse() {
+    this.stateDisplayHeader.next(false);
   }
 
   onResize(width: any): any {

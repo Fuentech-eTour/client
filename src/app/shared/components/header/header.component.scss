@@ -103,6 +103,11 @@
                 }
             }
         }
+        mat-progress-bar {
+            display: flex;
+            bottom: 0px; 
+            position: absolute;
+        }
     }
 }
 

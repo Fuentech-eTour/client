@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { StoresRoutingModule } from './stores-routing.module';
 import { StoresComponent } from './components/stores/stores.component';
@@ -15,6 +16,7 @@ import { ProductStoreMovilComponent } from './components/product-store-movil/pro
 import { TagsProductsComponent } from './components/tags-products/tags-products.component';
 import { SearchStoresComponent } from './components/search-stores/search-stores.component';
 import { TagsStoresComponent } from './components/tags-stores/tags-stores.component';
+import { CommentsStoreComponent } from './components/comments-store/comments-store.component';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { TagsStoresComponent } from './components/tags-stores/tags-stores.compon
     TagsProductsComponent,
     SearchStoresComponent,
     TagsStoresComponent,
+    CommentsStoreComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { TagsStoresComponent } from './components/tags-stores/tags-stores.compon
     ProductModule,
     MaterialModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
   exports: [
     StoresComponent,

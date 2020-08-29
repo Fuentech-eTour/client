@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '@core/services/products/products.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from '@core/services/cart.service';
 import { WindowService } from '@core/services/window.service';
 import { Observable } from 'rxjs';
@@ -9,26 +9,29 @@ import { Observable } from 'rxjs';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
-  sideBarOpen$: Observable<boolean>;
-  sideBarOpenIzq$: Observable<boolean>;
+  displayFooter$: Observable<any>;
+  displayHeader$: Observable<any>;
   windowWidth: number = window.screen.width;
-  displayFooter = true;
 
   constructor(
+    private router: Router,
     private cartService: CartService,
     private windowService: WindowService,
   ) {
-    this.sideBarOpen$ = this.cartService.openSideBar$;
-    this.sideBarOpenIzq$ = this.cartService.openSideBarIzq$;
-    this.windowService.stateFooterTrue();
+    this.displayFooter$ = this.windowService.stateDisplayFooter$;
+    this.displayHeader$ = this.windowService.stateDisplayHeader$;
   }
 
   ngOnInit(): void {
-    this.windowService.stateDisplayFooter$.subscribe(state => {
-      this.displayFooter = state;
-    });
+    if (this.router.url === '/home') {
+      this.windowService.stateFooterTrue();
+    }
+  }
+
+  ngOnDestroy() {
+    this.windowService.stateFooterFalse();
   }
 
   toggleSideBar() {

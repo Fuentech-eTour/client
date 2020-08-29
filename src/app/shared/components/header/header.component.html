@@ -61,7 +61,7 @@
                 </div>
             </div>
         </mat-toolbar-row>
-        <mat-progress-bar mode="indeterminate" [ngStyle]="{'display': (isLoading$ | async) ? 'flex' : 'none' }" style="bottom: 0px; position: absolute;"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" *ngIf="(isLoading$ | async)"></mat-progress-bar>
     </mat-toolbar>
 </div>
 

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { StoresService } from '@core/services/stores.service';
 import { WindowService } from '@core/services/window.service';
+import { ProductsService } from '@core/services/products/products.service';
+import { AuthService } from '@core/services/auth.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -21,6 +23,8 @@ export class StoreComponent implements OnInit, OnDestroy {
     private storesService: StoresService,
     private route: ActivatedRoute,
     private windowService: WindowService,
+    private productsService: ProductsService,
+    private authService: AuthService,
     private router: Router,
   ) {
     this.windowService.stateFooterFalse();
@@ -40,6 +44,14 @@ export class StoreComponent implements OnInit, OnDestroy {
       this.imagent = store[0].imagen;
       this.windowService.loadingFalse();
     });
+    if (this.authService.loggedIn()) {
+      this.storesService.getStoreFavorite().subscribe(data => {
+        this.storesService.stateFavoriteStore(data);
+      });
+      this.productsService.getFavoriteProducts().subscribe(data => {
+        this.productsService.stateFavoriteProducts(data);
+      });
+    }
   }
 
   backHistory() {

@@ -1,9 +1,4 @@
 <mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
-    <div class="favorite-cont">
-        <mat-spinner class="position-favorite non-selectable" *ngIf="stateSpinner" diameter=22></mat-spinner>
-        <mat-icon *ngIf="!subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="notFavorite position-favorite non-selectable">favorite_border</mat-icon>
-        <mat-icon *ngIf="subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="favorite position-favorite non-selectable">favorite_border</mat-icon>
-    </div>
     <!-- <app-counter-products></app-counter-products> -->
     <mat-card-header>
         <div [routerLink]="['/stores', product?.idststore]" mat-card-avatar style="background-image: url({{product?.imagent}});
@@ -18,8 +13,13 @@
             {{ product?.valorventa | currency:'$':'symbol':'1.0-0' }}
         </mat-card-subtitle>
     </mat-card-header>
+    <div class="favorite-cont">
+        <mat-spinner class="position-favorite non-selectable" *ngIf="stateSpinner" diameter=22></mat-spinner>
+        <mat-icon *ngIf="!subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="notFavorite position-favorite non-selectable">favorite_border</mat-icon>
+        <mat-icon *ngIf="subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="favorite position-favorite non-selectable">favorite_border</mat-icon>
+    </div>
     <div (click)="openDialogDetailProduct()" class="crop-image">
-        <img *ngIf="product?.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product?.imagen">
+        <img *ngIf="product?.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product?.imagen | sanitizerUrl">
         <img *ngIf="product?.imagen ===''" src="./../../../../assets/images/not-image.png">
     </div>
     <mat-card-content>

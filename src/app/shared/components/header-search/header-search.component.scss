@@ -1,0 +1,54 @@
+.navbar-cont {
+    height: 56px;
+    @media (min-width: 600px) {
+        height: 64px;
+    }
+    mat-toolbar {
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        background-color: white;
+        box-shadow: 0px 0px 10px 0px #c7c7c7;
+        mat-toolbar-row {
+            .input-msn-cont {
+                width: 100%;
+                form {
+                    display: flex;
+                    mat-form-field {
+                        width: 100%;
+                        mat-label {
+                            border-radius: 20px;
+                        }
+                    }
+                    .actions-cont {
+                        width: 50px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .btn-send-cont {
+                            width: 38px;
+                            height: 38px;
+                            border-radius: 5px;
+                            background-color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0px 5px;
+                            mat-icon {
+                                color: #73726c;
+                            }
+                        }
+                        .border-off {
+                            margin: 0px;
+                            border: none;
+                        }
+                        .border-on {
+                            margin: 0px 5px;
+                            border: solid 1px rgba(0, 0, 0, 0.12);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

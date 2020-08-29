@@ -2,7 +2,7 @@
     <div class="img-cont">
         <div class="crop-image" (click)="openDialogDetailProduct()">
             <img *ngIf="product?.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'"
-                [src]="product?.imagen">
+                [src]="product?.imagen | sanitizerUrl">
             <img *ngIf="product?.imagen ===''" src="./../../../../assets/images/not-image.png">
         </div>
     </div>
@@ -19,5 +19,10 @@
             <h2 class="inf-cont-2">{{ product?.valorventa | currency:'COP$':'symbol':'1.0-0' }}</h2>
             <app-btn-add-count [product]="product"></app-btn-add-count>
         </mat-card-subtitle>
+    </div>
+    <div class="favorite-cont">
+        <mat-spinner class="position-favorite non-selectable" *ngIf="stateSpinner" diameter=22></mat-spinner>
+        <mat-icon *ngIf="!subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="notFavorite position-favorite non-selectable">favorite_border</mat-icon>
+        <mat-icon *ngIf="subscribeBtn && !stateSpinner" (click)="subscribe(product.id)" class="favorite position-favorite non-selectable">favorite_border</mat-icon>
     </div>
 </div>

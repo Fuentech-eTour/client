@@ -107,6 +107,31 @@ li {
     border-radius: 20px !important;
 }
 
+/* Bottom Sheet comments --init-- */
+
+.mat-bottom-sheet-container {
+    border-radius: 20px 20px 0px 0px;
+}
+
+.mat-form-field-wrapper {
+    padding: 0px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 14px 0px 10px !important;
+}
+
+.mat-form-field-infix {
+    border-top: none !important;
+}
+
+/* .mat-bottom-sheet-container {
+    height: 90vh !important;
+    max-height: 90vh !important;
+} */
+
+/* Bottom Sheet comments --final-- */
+
 /* step order --init-- */
 
 .mat-step-label {

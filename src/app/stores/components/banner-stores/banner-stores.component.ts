@@ -1,13 +1,15 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '../../../core/models/store.model';
 
 import { CartService } from './../../../core/services/cart.service';
 import { StoresService } from './../../../core/services/stores.service';
 import { AuthService } from '@core/services/auth.service';
+import { CommentsStoreComponent } from '../comments-store/comments-store.component';
 
 import Swiper from 'swiper';
-import { Observable } from 'rxjs';
-import { isArray } from 'util';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-banner-stores',
@@ -17,19 +19,30 @@ import { isArray } from 'util';
 export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   @Input() store: Store;
+
+  private comments = new BehaviorSubject<[]>([]);
+  comments$ = this.comments.asObservable();
+
+  form: FormGroup;
   favoriteStores$: Observable<any>;
   estadoHover = false;
   showFiller = false;
   subscribeBtn = false;
   stateSpinner = false;
   mySwiper: Swiper;
+  showComment = false;
+  stateComment = true;
+  stateLoading = true;
 
   constructor(
     private cartService: CartService,
     private storesService: StoresService,
     private authService: AuthService,
+    private bottomSheet: MatBottomSheet,
+    private formBuilder: FormBuilder,
   ) {
     this.favoriteStores$ = this.storesService.favoriteStores$;
+    this.buildForm();
    }
 
   ngOnInit(): void {
@@ -77,6 +90,20 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     });
   }
 
+  fetchCommentStore() {
+    this.storesService.getCommentStore(this.store.id).subscribe((res: any) => {
+      console.log(res);
+      if (res.status === 'Empty') {
+        this.stateLoading = false;
+        this.stateComment = false;
+      } else {
+        this.stateLoading = false;
+        this.stateComment = true;
+        this.comments.next(res);
+      }
+    });
+  }
+
   mouseEnter() {
     this.estadoHover = true;
   }
@@ -106,6 +133,34 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(CommentsStoreComponent, {
+      data: { idstore: this.store.id },
+    });
+  }
+
+  sendComment(comment: any) {
+    if (comment !== '') {
+      this.storesService.createCommentStore(this.store.id, {comentario: comment}).subscribe((res: any) => {
+        if (res.status === 'OK') {
+          this.fetchCommentStore();
+          this.form.reset();
+        }
+      });
+    }
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      comentario: [''],
+    });
+  }
+
+  changeShowComment() {
+    this.showComment = !this.showComment;
+    this.fetchCommentStore();
   }
 
 }

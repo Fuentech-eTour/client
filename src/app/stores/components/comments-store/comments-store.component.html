@@ -1,0 +1,40 @@
+<mat-nav-list>
+    <div style="display: flex; justify-content: center;" *ngIf="stateLoading">
+        <mat-spinner diameter=20></mat-spinner>
+    </div>
+    <div class="comments-cont" *ngIf="!stateComment">
+        <p>Aun no hay comentarios, sé el primero en comentar</p>
+    </div>
+    <div class="comments-cont">
+        <div class="comment" *ngFor="let comment of comments$ | async">
+            <div>
+                <div class="avatar">
+                    {{ comment.name | slice:0:1 }}
+                </div>
+            </div>
+            <p>
+                <span><strong>{{ comment.name | titlecase | slice:0:30 | moreContent:29 }}</strong></span>
+                <span class="name-actions">editar</span>
+                <span class="name-actions">eliminar</span><br>
+                {{ comment.comentario | lowercase | slice:0:120 | moreContent:119 }}
+            </p>
+        </div>
+    </div>
+    <div class="input-msn-cont">
+        <form [formGroup]="form">
+            <mat-form-field appearance="outline">
+                <!-- <mat-label>Comentario</mat-label> -->
+                <input  #comment 
+                        matInput 
+                        formControlName="comentario" 
+                        placeholder="Comentario..." 
+                        autocomplete="off">
+            </mat-form-field>
+            <div class="actions-cont">
+                <div class="btn-send-cont">
+                    <mat-icon matSuffix (click)="sendComment(comment.value)">send</mat-icon>
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-nav-list>

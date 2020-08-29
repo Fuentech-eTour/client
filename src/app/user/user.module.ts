@@ -11,6 +11,7 @@ import { SavedListsComponent } from './components/saved-lists/saved-lists.compon
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ProductModule } from '../product/product.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MaterialModule,
     ReactiveFormsModule,
     ScrollingModule,
+    ProductModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

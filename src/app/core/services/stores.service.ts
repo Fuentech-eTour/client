@@ -92,6 +92,23 @@ export class StoresService {
     this.favoriteStores.next(stores);
   }
 
+  createCommentStore(idstore: number, comment: object) {
+    console.log(idstore, comment);
+    return this.http.post(`${environment.url_api}/stores/crearcomentario/${idstore}`, comment)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getCommentStore(idstore: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenercomentariosstore/${idstore}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
     console.log(error);

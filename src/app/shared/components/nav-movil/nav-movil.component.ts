@@ -102,6 +102,10 @@ export class NavMovilComponent implements OnInit {
     this.authService.logout();
   }
 
+  openSearch() {
+    this.windowService.stateHeaderTrue();
+  }
+
   @HostListener('window: beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(event: Event) {
     event.preventDefault();

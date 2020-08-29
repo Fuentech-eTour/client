@@ -1,0 +1,29 @@
+<div class="navbar-cont">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <div class="input-msn-cont">
+                <form [formGroup]="form">
+                    <div class="actions-cont">
+                        <div class="btn-send-cont border-off">
+                            <mat-icon matSuffix (click)="closedSearch()">arrow_back</mat-icon>
+                        </div>
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <input  #termino 
+                                matInput 
+                                formControlName="search" 
+                                placeholder="Buscar..." 
+                                autocomplete="off"
+                                autofocus="true">
+                    </mat-form-field>
+                    <div class="actions-cont">
+                        <div class="btn-send-cont border-on">
+                            <mat-icon matSuffix (click)="searchStore(termino.value)">search</mat-icon>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-toolbar-row>
+        <mat-progress-bar mode="indeterminate" [ngStyle]="{'display': (isLoading$ | async) ? 'flex' : 'none' }" style="bottom: 0px; position: absolute;"></mat-progress-bar>
+    </mat-toolbar>
+</div>

@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.storesService.getStoreFavorite().subscribe(data => {
               this.storesService.stateFavoriteStore(data);
             });
-            this.productsService.getFavoritePorducts().subscribe(data => {
+            this.productsService.getFavoriteProducts().subscribe(data => {
               this.productsService.stateFavoriteProducts(data);
             });
             this.router.navigate(['./stores']);
