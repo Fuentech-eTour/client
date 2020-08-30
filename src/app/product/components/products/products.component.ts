@@ -41,15 +41,21 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchProducts();
-    if (this.authService.loggedIn()) {
-      this.productsService.getFavoriteProducts().subscribe(data => {
-        this.productsService.stateFavoriteProducts(data);
-      });
-    }
+    this.fetchProductsByTags();
+    this.fetchFavoriteProducts();
   }
 
-  fetchProducts() {
+  fetchFavoriteProducts() {
+    this.windowService.session$.subscribe(rol => {
+      if (rol === 'isClient') {
+        this.productsService.getFavoriteProducts().subscribe(data => {
+          this.productsService.stateFavoriteProducts(data);
+        });
+      }
+    });
+  }
+
+  fetchProductsByTags() {
     this.windowService.loadingTrue();
     this.productsService.getAllProductsByTags()
     .subscribe(tags => {

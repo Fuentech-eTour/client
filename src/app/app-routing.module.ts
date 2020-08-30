@@ -60,7 +60,7 @@ const routes: Routes = [
   },
   {
     path: 'super-admin',
-    // canActivate: [ AdminGuard ],
+    canActivate: [ AdminGuard ],
     loadChildren: () => import('./super-admin/super-admin.module').then(m => m.SuperAdminModule)
   },
   {

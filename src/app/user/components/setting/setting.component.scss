@@ -35,7 +35,18 @@ mat-card {
     }
 
     mat-form-field {
-        margin: 0px !important;
+        margin: 10px 0px !important;
         width: 100%;
+    }
+
+    .btn-send {
+        width: 100%;
+    }
+    .btnActive {
+        background-color: #4d90d3;
+        color: white;
+        &:hover {
+            background-color: #396a9b;
+        }
     }
 }

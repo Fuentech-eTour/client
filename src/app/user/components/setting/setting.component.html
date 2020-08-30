@@ -11,33 +11,60 @@
             </mat-panel-title>
             <mat-icon style="color: #0000008a; padding-right: 10px;">security</mat-icon>
           </mat-expansion-panel-header>
-          <div class="form-cont">
-            <mat-form-field>
-              <mat-label>Contraseña actual</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+          <form [formGroup]="form" (ngSubmit)="savePassword($event)">
+            <div class="form-cont">
+              <!-- <mat-form-field>
+                <mat-label>Contraseña actual</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="claveActual">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls['claveActual'].hasError('required')">
+                  Campo <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field> -->
+    
+              <mat-form-field>
+                <mat-label>Nueva contraseña (min 6 caracteres)</mat-label>
+                <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="clave">
+                <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide2 password'" [attr.aria-pressed]="hide2">
+                  <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls['clave'].hasError('required')">
+                  Campo <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls['clave'].hasError('minLength')">
+                  La contraseña debe tener <strong>6</strong> o más caracteres
+                </mat-error>
+              </mat-form-field>
+    
+              <mat-form-field>
+                <mat-label>Repita contraseña</mat-label>
+                <input matInput [type]="hide3 ? 'password' : 'text'" formControlName="repiteClave">
+                <button type="button" mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide3 password'" [attr.aria-pressed]="hide3">
+                <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="form.controls['repiteClave'].hasError('required')">
+                  Campo <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+              <div *ngIf="form.errors" style="color: #f44336; margin-bottom: 10px;">
+                <small *ngIf="form.errors['password-mismatch']">
+                    Las contraseñas no coinciden.
+                </small>
+              </div>
+    
+              <button class="btn-send" 
+                      mat-raised-button
+                      [disabled]="form.invalid" 
+                      type="submit"
+                      [ngClass]="{btnActive: !form.invalid}">
+                      Guardar
               </button>
-            </mat-form-field>
-  
-            <mat-form-field>
-              <mat-label>Nueva contraseña</mat-label>
-              <input matInput [type]="hide2 ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide2 password'" [attr.aria-pressed]="hide2">
-              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-  
-            <mat-form-field>
-              <mat-label>Repita contraseña</mat-label>
-              <input matInput [type]="hide3 ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide3 password'" [attr.aria-pressed]="hide3">
-              <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-  
-            <button mat-stroked-button color="accent">Guardar</button>
-          </div>
+            </div>
+          </form>
+
         </mat-expansion-panel>
       </mat-accordion>
 </mat-card>

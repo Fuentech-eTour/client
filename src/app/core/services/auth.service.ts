@@ -43,6 +43,8 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user_name');
     localStorage.removeItem('idstore');
+    localStorage.setItem('session', '');
+    this.windowService.stateSession('');
     this.windowService.addUserName(null);
     this.storesService.stateFavoriteStore([]);
     this.productsService.stateFavoriteProducts([]);

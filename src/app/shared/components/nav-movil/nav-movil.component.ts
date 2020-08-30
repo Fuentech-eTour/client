@@ -33,6 +33,7 @@ export class NavMovilComponent implements OnInit {
   installEvent;
   stateIconMenu = false;
   nameUser$: Observable<any>;
+  rol$: Observable<any>;
 
   constructor(
     private cartService: CartService,
@@ -54,17 +55,10 @@ export class NavMovilComponent implements OnInit {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
     this.nameUser$ = this.windowService.userName$;
+    this.rol$ = this.windowService.session$;
   }
 
   ngOnInit() {
-  }
-
-  toggleSideBar() {
-    this.cartService.sideBarToggler();
-  }
-
-  toggleSideBarIzq() {
-    this.cartService.sideBarTogglerIzq();
   }
 
   showIconMenu() {
@@ -98,7 +92,6 @@ export class NavMovilComponent implements OnInit {
   }
 
   logout() {
-    this.windowService.addUserName(null);
     this.authService.logout();
   }
 

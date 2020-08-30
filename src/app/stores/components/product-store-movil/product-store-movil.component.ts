@@ -99,15 +99,17 @@ export class ProductStoreMovilComponent implements OnInit {
     }
 
     subscribe(idproduct: number) {
-      if (this.authService.loggedIn()) {
-        this.stateSpinner = true;
-        this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
-          console.log(res);
-          this.stateSpinner = false;
-          if (res.status === 'OK' || res.status === 'Ok') {
-              this.subscribeBtn = !this.subscribeBtn;
-          }
-        });
-      }
+      this.windowService.session$.subscribe(rol => {
+        if (rol === 'isClient') {
+          this.stateSpinner = true;
+          this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
+            console.log(res);
+            this.stateSpinner = false;
+            if (res.status === 'OK' || res.status === 'Ok') {
+                this.subscribeBtn = !this.subscribeBtn;
+            }
+          });
+        }
+      });
     }
 }

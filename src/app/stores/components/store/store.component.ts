@@ -44,14 +44,20 @@ export class StoreComponent implements OnInit, OnDestroy {
       this.imagent = store[0].imagen;
       this.windowService.loadingFalse();
     });
-    if (this.authService.loggedIn()) {
-      this.storesService.getStoreFavorite().subscribe(data => {
-        this.storesService.stateFavoriteStore(data);
-      });
-      this.productsService.getFavoriteProducts().subscribe(data => {
-        this.productsService.stateFavoriteProducts(data);
-      });
-    }
+    this.infoSession();
+  }
+
+  infoSession() {
+    this.windowService.session$.subscribe(state => {
+      if (state === 'isClient') {
+        this.storesService.getStoreFavorite().subscribe(data => {
+          this.storesService.stateFavoriteStore(data);
+        });
+        this.productsService.getFavoriteProducts().subscribe(data => {
+          this.productsService.stateFavoriteProducts(data);
+        });
+      }
+    });
   }
 
   backHistory() {

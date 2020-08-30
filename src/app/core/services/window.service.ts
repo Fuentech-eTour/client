@@ -15,12 +15,14 @@ export class WindowService {
   private isloading = new BehaviorSubject<boolean>(false);
   private stateDisplayFooter = new BehaviorSubject<boolean>(false);
   private stateDisplayHeader = new BehaviorSubject<boolean>(false);
+  private session = new BehaviorSubject<string>(localStorage.getItem('session'));
 
   isloading$ = this.isloading.asObservable();
   stateDisplayFooter$ = this.stateDisplayFooter.asObservable();
   stateDisplayHeader$ = this.stateDisplayHeader.asObservable();
   userName$ = this.userName.asObservable();
   windowWidth$ = this.windowWidth.asObservable();
+  session$ = this.session.asObservable();
 
   constructor(
   ) {
@@ -62,6 +64,10 @@ export class WindowService {
 
   addUserName(value) {
     this.userName.next(value);
+ }
+
+ stateSession(state: string) {
+   this.session.next(state);
  }
 
 }

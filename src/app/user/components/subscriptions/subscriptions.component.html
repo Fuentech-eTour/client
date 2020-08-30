@@ -26,16 +26,17 @@
                             src="./../../../../assets/images/icon-store.png">
                   </div>
                   <mat-card-title [routerLink]="['/stores', store.id]">
-                      {{store.razonsocial | titlecase}}
+                      {{store.razonsocial | titlecase}} <br>
+                      <span>{{'30min'}}</span><span>{{'4.5'}}</span>
                   </mat-card-title>
-              </div>
+                </div>
               </td>
           </ng-container>
           <ng-container matColumnDef="Acciones">
               <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
               <td class="aling-action" mat-cell *matCellDef="let store">
                   <a mat-button>
-                      <mat-icon color="warn" (click)="unsubscribe(store.id)">delete_outline</mat-icon>
+                      <mat-icon (click)="unsubscribe(store.id)">delete_outline</mat-icon>
                   </a>
               </td>
           </ng-container>

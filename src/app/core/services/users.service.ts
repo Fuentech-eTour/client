@@ -72,6 +72,14 @@ export class UsersService {
     this.selectAddress.next(address);
   }
 
+  editPassword(newPassword: object) {
+    return this.http.put(`${environment.url_api}/users/cambiaclave`, newPassword)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
     console.log(error);

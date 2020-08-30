@@ -7,6 +7,7 @@ import { Product } from '@core/models/product.model';
 import { CartService } from '@core/services/cart.service';
 import { ProductsService } from '@core/services/products/products.service';
 import { AuthService } from '@core/services/auth.service';
+import { WindowService } from '@core/services/window.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,6 +28,7 @@ export class ProductComponent implements OnInit {
         private cartService: CartService,
         private productsService: ProductsService,
         private authService: AuthService,
+        private windowService: WindowService,
         private dialog: MatDialog,
     ) {
       this.favoriteProducts$ = this.productsService.favoriteProducts$;
@@ -74,15 +76,17 @@ export class ProductComponent implements OnInit {
     }
 
     subscribe(idproduct: number) {
-      if (this.authService.loggedIn()) {
-        this.stateSpinner = true;
-        this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
-          console.log(res);
-          this.stateSpinner = false;
-          if (res.status === 'OK' || res.status === 'Ok') {
-              this.subscribeBtn = !this.subscribeBtn;
-          }
-        });
-      }
+      this.windowService.session$.subscribe(rol => {
+        if (rol === 'isClient') {
+          this.stateSpinner = true;
+          this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
+            console.log(res);
+            this.stateSpinner = false;
+            if (res.status === 'OK' || res.status === 'Ok') {
+                this.subscribeBtn = !this.subscribeBtn;
+            }
+          });
+        }
+      });
     }
 }

@@ -39,6 +39,8 @@ export class LoginUserStoreComponent implements OnInit {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user_name', res.data.user_name);
           localStorage.setItem('idstore', res.data.idstore);
+          localStorage.setItem('session', 'isStore');
+          this.windowService.stateSession('isStore');
           this.windowService.addUserName(res.data.user_name.split(' ')[0]);
           this.router.navigate(['./admin']);
           this.windowService.loadingFalse();

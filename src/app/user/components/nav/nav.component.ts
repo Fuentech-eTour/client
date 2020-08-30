@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { WindowService } from '@core/services/window.service';
 import { AuthService } from '@core/services/auth.service';

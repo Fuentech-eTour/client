@@ -30,6 +30,9 @@ export class AppComponent implements OnInit {
     this.updatePWA();
     this.requestPermission();
     this.listenNotifications();
+    if (!localStorage.getItem('session')) {
+      localStorage.setItem('session', '');
+    }
   }
 
   updatePWA() {

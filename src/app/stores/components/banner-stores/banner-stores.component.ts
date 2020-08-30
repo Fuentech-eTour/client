@@ -6,6 +6,7 @@ import { Store } from '../../../core/models/store.model';
 import { CartService } from './../../../core/services/cart.service';
 import { StoresService } from './../../../core/services/stores.service';
 import { AuthService } from '@core/services/auth.service';
+import { WindowService } from '@core/services/window.service';
 import { CommentsStoreComponent } from '../comments-store/comments-store.component';
 
 import Swiper from 'swiper';
@@ -38,6 +39,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     private cartService: CartService,
     private storesService: StoresService,
     private authService: AuthService,
+    private windowService: WindowService,
     private bottomSheet: MatBottomSheet,
     private formBuilder: FormBuilder,
   ) {
@@ -123,16 +125,18 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   }
 
   subscribe(idstore: number) {
-    if (this.authService.loggedIn()) {
-      this.stateSpinner = true;
-      this.storesService.subscriptionStore({idtienda: idstore}).subscribe((res: any) => {
-        console.log(res);
-        this.stateSpinner = false;
-        if (res.status === 'OK' || res.status === 'Ok') {
-            this.subscribeBtn = !this.subscribeBtn;
-        }
-      });
-    }
+    this.windowService.session$.subscribe(rol => {
+      if (rol === 'isClient') {
+        this.stateSpinner = true;
+        this.storesService.subscriptionStore({idtienda: idstore}).subscribe((res: any) => {
+          console.log(res);
+          this.stateSpinner = false;
+          if (res.status === 'OK' || res.status === 'Ok') {
+              this.subscribeBtn = !this.subscribeBtn;
+          }
+        });
+      }
+    });
   }
 
   openBottomSheet(): void {

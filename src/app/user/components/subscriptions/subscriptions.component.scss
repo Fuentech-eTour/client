@@ -52,6 +52,9 @@ mat-card {
                         a {
                             min-width: 0px !important;
                             padding: 0px 5px !important;
+                            mat-icon {
+                                color: #f44336;
+                            }
                         }
                         .title-cont {
                             display: flex;
@@ -60,7 +63,17 @@ mat-card {
                                 color: gray;
                                 padding: 8px;
                                 margin: 0px;
+                                font-size: 14px;
                                 cursor: pointer;
+                                span {
+                                    font-size: 10px;
+                                    background-color: lightslategray;
+                                    border-radius: 5px;
+                                    text-align: center;
+                                    padding: 0px 5px;
+                                    color: white;
+                                    margin-right: 5px;
+                                }
                             }
                         }
                     }

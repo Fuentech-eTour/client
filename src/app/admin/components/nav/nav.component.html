@@ -2,7 +2,14 @@
     <mat-sidenav #drawerAdmin class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar>Menu</mat-toolbar>
-        <mat-nav-list>
+        <mat-nav-list class="nav-list-movil">
+            <!-- <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
+            <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a> -->
+            <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
+            <a (click)="drawerAdmin.toggle()" mat-list-item [routerLink]="['/stores', idStore]" routerLinkActive="active">Mi tienda</a>
+            <a (click)="drawerAdmin.toggle()" mat-list-item (click)="logout()">Cerrar sesión</a>
+        </mat-nav-list>
+        <mat-nav-list class="nav-list">
             <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
             <a mat-list-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a>
             <a mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>

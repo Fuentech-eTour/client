@@ -60,6 +60,8 @@ export class LoginComponent implements OnInit {
           if (res.status === 'OK') {
             localStorage.setItem('token', res.data.accessToken);
             localStorage.setItem('user_name', res.data.user_name);
+            localStorage.setItem('session', 'isClient');
+            this.windowService.stateSession('isClient');
             this.windowService.addUserName(res.data.user_name.split(' ')[0]);
             this.storesService.getStoreFavorite().subscribe(data => {
               this.storesService.stateFavoriteStore(data);
@@ -80,8 +82,8 @@ export class LoginComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      email: ['dainerudea@gmail.com', [Validators.required]],
-      password: ['123456', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 

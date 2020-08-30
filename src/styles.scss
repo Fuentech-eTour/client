@@ -115,6 +115,7 @@ li {
 
 .mat-form-field-wrapper {
     padding: 0px;
+    margin: 0px !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-infix {
@@ -123,6 +124,10 @@ li {
 
 .mat-form-field-infix {
     border-top: none !important;
+}
+
+.mat-form-field-appearance-outline {
+    margin: 0px !important;
 }
 
 /* .mat-bottom-sheet-container {

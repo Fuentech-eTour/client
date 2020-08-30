@@ -52,6 +52,11 @@
                             }
                         }
                     }
+                    .install-app {
+                        @media (min-width: 800px) {
+                            display: none;
+                        }
+                    }
                 }
                 .cont-btn-search {
                     // border: solid 1px #b1b1b1;
@@ -78,6 +83,43 @@
                         border: none;
                         margin: 2px 2px 2px 20px;
                         background-color: #f9fafc;
+                    }
+                    mat-label {
+                        margin-left: 0px;
+                        margin-top: 6px;
+                        position: absolute;
+                        width: 35px;
+                        height: 35px;
+                        cursor: pointer;
+                    }
+                }
+                .search-cont {
+                    @media (max-width: 1000px) {
+                        display: none;
+                    }
+                    input {
+                        border-radius: 20px;
+                        height: 35px;
+                        width: 300px;
+                        display: inline-block;
+                        text-align: left;
+                        background-color: #f9fafc;
+                        text-decoration: none;
+                        padding: 0px 20px;
+                        // height: 30px;
+                        // width: 230px;
+                        font-size: 15px;
+                        outline: none;
+                        outline-width: 0;
+                        box-shadow: none;
+                        -moz-box-shadow: none;
+                        -webkit-box-shadow: none;
+                        border: none;
+                        margin: 2px 2px 2px 20px;
+                        background-color: #f9fafc;
+                        &:focus {
+                            box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 0.12);
+                        }
                     }
                     mat-label {
                         margin-left: 0px;

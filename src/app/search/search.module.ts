@@ -8,10 +8,11 @@ import { ProductModule } from '../product/product.module';
 
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './components/search/search.component';
+import { HomeSearchComponent } from './components/home-search/home-search.component';
 
 
 @NgModule({
-  declarations: [SearchComponent],
+  declarations: [SearchComponent, HomeSearchComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,

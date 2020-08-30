@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   installEvent;
   showFiller = false;
   stateIconMenu = false;
-  rol: string;
+  rol$: Observable<any>;
 
   constructor(
     private cartService: CartService,
@@ -62,10 +62,10 @@ export class HeaderComponent implements OnInit {
     this.nameUser$ = this.windowService.userName$;
     this.isLoading$ = this.windowService.isloading$;
     this.selectAddress$ = this.usersService.selectAddress$;
+    this.rol$ = this.windowService.session$;
   }
 
   ngOnInit() {
-    this.addRol();
     this.usersService.selectAddress$.subscribe(console.log);
   }
 
@@ -108,17 +108,7 @@ export class HeaderComponent implements OnInit {
     if (value !== '') {
       this.router.navigate(['/search', value]);
     } else {
-      this.windowService.loadingTrue();
       this.router.navigate(['/stores']);
-    }
-  }
-
-  addRol() {
-    const idStore = this.authService.getIdStore();
-    if (idStore === undefined || idStore === null) {
-      this.rol = 'isClient';
-    } else {
-      this.rol = 'isStore';
     }
   }
 

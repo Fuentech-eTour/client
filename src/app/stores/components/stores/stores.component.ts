@@ -24,14 +24,16 @@ export class StoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchStores();
-    if (this.authService.loggedIn()) {
-      this.storesService.getStoreFavorite().subscribe(data => {
-        this.storesService.stateFavoriteStore(data);
-      });
-      this.productsService.getFavoriteProducts().subscribe(data => {
-        this.productsService.stateFavoriteProducts(data);
-      });
-    }
+    this.windowService.session$.subscribe(state => {
+      if (state === 'isClient') {
+        this.storesService.getStoreFavorite().subscribe(data => {
+          this.storesService.stateFavoriteStore(data);
+        });
+        this.productsService.getFavoriteProducts().subscribe(data => {
+          this.productsService.stateFavoriteProducts(data);
+        });
+      }
+    });
   }
 
   fetchStores() {

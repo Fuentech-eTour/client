@@ -16,7 +16,7 @@
                     </a>
                     <!-- <a mat-button routerLink="/home" routerLinkActive="active" style="font-family: cursive; font-style: italic; font-size: 30px; color: #d0006f;">ema</a> -->
                     <!-- <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a> -->
-                    <div class="row" mat-icon-button (click)="openDialog()">
+                    <div class="row" mat-icon-button *ngIf="(rol$ | async) === 'isClient'" (click)="openDialog()">
                         <mat-icon class="col">place</mat-icon>
                         <div class="col">
                             <p class="label-title">enviar a:</p>
@@ -25,13 +25,23 @@
                         </div>
                         <mat-icon class="col icon-2" style="color: #4d90d3; font-size: 25px; margin-top: 10px;">arrow_drop_down</mat-icon>
                     </div>
-                    <a mat-button (click)="installByUser()" *ngIf="installEvent">Install App</a>
+                    <a class="install-app" mat-button (click)="installByUser()" *ngIf="installEvent">Instalar App</a>
                 </nav>
-                <div class="cont-btn-search">
+                <!-- <div class="cont-btn-search">
                     <input matInput #termino type="text" (keyup)="searchStore(termino.value)" autocomplete="off" placeholder="Buscar...">
                     <mat-label>
                         <mat-icon style="color: #73726c; font-size: 25px;">search</mat-icon>
                     </mat-label>
+                </div> -->
+                <div class="search-cont">
+                    <input  matInput 
+                            #termino 
+                            type="text" 
+                            (keyup)="searchStore(termino.value)" 
+                            autocomplete="off" 
+                            placeholder="Buscar..."
+                            autofocus="true">
+                    
                 </div>
                 <div class="row between-xs middled-xs card-content">
                     <!-- <a mat-button routerLink="/stores" routerLinkActive="active" mat-button>
@@ -40,13 +50,13 @@
                     <a mat-button routerLink="/products" routerLinkActive="active" mat-button>
                         Productos
                         <mat-icon style="color: #73726c;">widgets</mat-icon></a> -->
-                    <a class="name-user" mat-button *ngIf="(nameUser$ | async) !== undefined && (nameUser$ | async) !== null" [matMenuTriggerFor]="menu">
+                    <a class="name-user" mat-button *ngIf="(rol$ | async) !== ''" [matMenuTriggerFor]="menu">
                         <mat-icon style="color: #73726c;">account_circle</mat-icon>
                         Hola, {{ nameUser$ | async | titlecase }}
                         <mat-icon style="color: #4d90d3;">arrow_drop_down</mat-icon>
                     </a>
-                    <button mat-stroked-button (click)="openDialogLogin()" color="accent" class="name-user" *ngIf="(nameUser$ | async) === null || (nameUser$ | async) === undefined">Iniciar sesión</button>
-                    <button mat-stroked-button (click)="openDialogRegister()" color="accent" class="name-user" *ngIf="(nameUser$ | async) === null || (nameUser$ | async) === undefined">Obtener cuenta</button>
+                    <button mat-stroked-button (click)="openDialogLogin()" color="accent" class="name-user" *ngIf="(rol$ | async) === ''">Iniciar sesión</button>
+                    <button mat-stroked-button (click)="openDialogRegister()" color="accent" class="name-user" *ngIf="(rol$ | async) === ''">Obtener cuenta</button>
                     <a (click)="mostrar.toggle()" routerLinkActive="active" mat-button>
                         <span >Total: {{ totalCompra$ | async | currency:'$':'symbol':'1.0-0' }}</span>
                         <mat-icon [matBadge]="total$ | async" matBadgeColor="warn"
@@ -77,25 +87,29 @@
             <span class="btn-perfil" (click)="toPerfil()" style="font-size: 12px; cursor: pointer;">ver Perfil</span>
         </div>
     </div>
-    <div *ngIf="rol === 'isClient'">
-        <button mat-menu-item>
+    <div *ngIf="(rol$ | async) === 'isClient'">
+        <!-- <button mat-menu-item>
             <mat-icon>list_alt</mat-icon>
             <span>Listas guardadas</span>
-          </button>
-          <button mat-menu-item>
+        </button> -->
+        <button mat-menu-item routerLink="/user/address">
             <mat-icon>location_on</mat-icon>
             <span>Direcciones</span>
-          </button>
-          <button mat-menu-item>
-              <mat-icon>loyalty</mat-icon>
-              <span>Pedidos</span>
-            </button>
-          <button (click)="logout()" mat-menu-item style="border-top: solid 1px rgba(0,0,0,.25);">
-              <mat-icon>exit_to_app</mat-icon>
-              <span>Cerrar sesión</span>
-          </button>
+        </button>
+        <button mat-menu-item routerLink="/user/orders">
+            <mat-icon>loyalty</mat-icon>
+            <span>Pedidos</span>
+        </button>
+        <button mat-menu-item routerLink="/user/subscriptions">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Suscripciones</span>
+        </button>
+        <button mat-menu-item (click)="logout()" style="border-top: solid 1px rgba(0,0,0,.25);">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar sesión</span>
+        </button>
     </div>
-    <div *ngIf="rol === 'isStore'">
+    <div *ngIf="(rol$ | async) === 'isStore'">
         <button mat-menu-item>
             <mat-icon>list_alt</mat-icon>
             <span>Productos</span>
