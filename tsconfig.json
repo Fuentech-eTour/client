@@ -17,6 +17,7 @@
     ],
     "paths": {
       "@core/*": ["src/app/core/*"],
+      "@utils/*": ["src/app/utils/*"],
       "@material/*": ["src/app/material/*"],
       "@shered/*": ["src/app/shered/*"]
     }

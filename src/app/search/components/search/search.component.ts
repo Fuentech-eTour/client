@@ -74,7 +74,12 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.windowService.stateHeaderTrue();
+    
+    this.windowService.windowWidth$.subscribe(width => {
+      if (width < 600) {
+        this.windowService.stateHeaderTrue();
+      }
+    });
   }
 
   ngOnDestroy() {

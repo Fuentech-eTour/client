@@ -44,8 +44,10 @@ export class AuthService {
     localStorage.removeItem('user_name');
     localStorage.removeItem('idstore');
     localStorage.setItem('session', '');
+    localStorage.setItem('idClient', '');
     this.windowService.stateSession('');
     this.windowService.addUserName(null);
+    this.windowService.addIdClient(-1);
     this.storesService.stateFavoriteStore([]);
     this.productsService.stateFavoriteProducts([]);
     this.router.navigate(['/stores']);

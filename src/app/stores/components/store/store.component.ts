@@ -39,7 +39,6 @@ export class StoreComponent implements OnInit, OnDestroy {
       })
     );
     this.store$.subscribe(store => {
-      console.log(store);
       this.nameStore = store[0].razonsocial;
       this.imagent = store[0].imagen;
       this.windowService.loadingFalse();

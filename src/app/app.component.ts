@@ -51,12 +51,11 @@ export class AppComponent implements OnInit {
 
   listenNotifications() {
     this.messaging.messages
-    .subscribe(message => {
-    });
+    .subscribe(message => {});
   }
 
-  /* @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', ['$event'])
   handleKeyDown(event: any) {
     this.windowService.onResize(document.body.clientWidth);
-  } */
+  }
 }

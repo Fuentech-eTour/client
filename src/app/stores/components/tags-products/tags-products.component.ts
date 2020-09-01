@@ -36,7 +36,6 @@ export class TagsProductsComponent implements OnInit, AfterContentInit {
     this.tags$.subscribe(tags => {
       if (tags.length !== 0) {
         this.windowService.loadingFalse();
-        console.log(tags);
       }
     });
   }

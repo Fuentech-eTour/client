@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 import { StoresService } from '@core/services/stores.service';
-import { MyValidator } from './../../../utils/validators';
+import { WindowService } from '@core/services/window.service';
 
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-store',
@@ -20,12 +21,16 @@ export class CreateStoreComponent implements OnInit {
   image$: Observable<any>;
   date = new Date().getTime();
   passwordVerify: boolean;
+  image: any;
+  file: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private storesService: StoresService,
+    private windowService: WindowService,
     private router: Router,
     private angularFireStorage: AngularFireStorage,
+    private snackBar: MatSnackBar,
   ) {
     this.buildForm();
   }
@@ -35,29 +40,55 @@ export class CreateStoreComponent implements OnInit {
 
   saveStore(event: Event) {
     event.preventDefault();
-    const store = this.form.value;
-    this.storesService.createStore(store)
-      .subscribe(() => {
-        this.router.navigate(['/super-admin/create-store']);
-    });
+    if (this.form.valid) {
+      this.windowService.loadingTrue();
+      const nameStore = this.form.get('razonsocial').value.toString().split(' ').join('');
+      const file = this.file;
+      const name = `store-${nameStore}-${this.date}.png`;
+      const fileRef = this.angularFireStorage.ref(name);
+      const task = this.angularFireStorage.upload(name, file);
+
+      task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.image$ = fileRef.getDownloadURL();
+          this.image$.subscribe(url => {
+            this.form.get('imagen').setValue(url);
+            const store = this.form.value;
+            this.storesService.createStore(store)
+              .subscribe((res: any) => {
+                console.log(res);
+                this.openSnackBar(res.message);
+                this.windowService.loadingFalse();
+                if (res.status === 'OK') {
+                  this.form.reset();
+                  this.router.navigate(['/super-admin/create-store']);
+                }
+            });
+          });
+        })
+      )
+      .subscribe();
+    }
   }
 
   uploadFile(event) {
-    const file = event.target.files[0];
-    const name = `store-${this.date}.png`;
-    const fileRef = this.angularFireStorage.ref(name);
-    const task = this.angularFireStorage.upload(name, file);
+    this.file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(this.file);
 
-    task.snapshotChanges()
-    .pipe(
-      finalize(() => {
-        this.image$ = fileRef.getDownloadURL();
-        this.image$.subscribe(url => {
-          this.form.get('image').setValue(url);
-        });
-      })
-    )
-    .subscribe();
+    reader.onload = () => {
+      this.image = reader.result;
+      this.form.get('imagen').setValue('url');
+    };
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
   private buildForm() {
@@ -74,6 +105,7 @@ export class CreateStoreComponent implements OnInit {
       telefono: ['', [Validators.required]],
       zona: ['', [Validators.required]],
       digitoclave: ['', [Validators.required]],
+      imagen: ['', Validators.required],
     });
   }
 

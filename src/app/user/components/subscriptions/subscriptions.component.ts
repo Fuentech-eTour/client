@@ -43,19 +43,24 @@ export class SubscriptionsComponent implements OnInit {
 
   fetchStoresFavorite() {
     this.isloading.next(true);
-    this.storesService.getStoreFavorite().subscribe(data => {
+    this.storesService.getStoreFavorite().subscribe((data: any) => {
       this.isloading.next(false);
+      if (data.status === 402) {
+        return;
+      }
       this.stores.next(data);
     });
   }
 
   fetchProductsFavotite() {
     this.isloadingTwo.next(true);
-    this.productsService.getFavoriteProducts().subscribe(data => {
+    this.productsService.getFavoriteProducts().subscribe((data: any) => {
       this.isloadingTwo.next(false);
+      if (data.status === 402) {
+        return;
+      }
       this.products.next(data);
     });
-    this.products$.subscribe(console.log);
   }
 
   unsubscribe(idstore: number) {

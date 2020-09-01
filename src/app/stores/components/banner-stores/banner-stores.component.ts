@@ -5,12 +5,12 @@ import { Store } from '../../../core/models/store.model';
 
 import { CartService } from './../../../core/services/cart.service';
 import { StoresService } from './../../../core/services/stores.service';
-import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
 import { CommentsStoreComponent } from '../comments-store/comments-store.component';
 
 import Swiper from 'swiper';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-banner-stores',
@@ -32,19 +32,24 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   stateSpinner = false;
   mySwiper: Swiper;
   showComment = false;
-  stateComment = true;
-  stateLoading = true;
+  private stateLoading = new BehaviorSubject<boolean>(true);
+  stateLoading$ = this.stateLoading.asObservable();
+  private stateComment = new BehaviorSubject<boolean>(true);
+  stateComment$ = this.stateComment.asObservable();
+  idClient: Observable<any>;
+  idCommentEdit = -1;
 
   constructor(
     private cartService: CartService,
     private storesService: StoresService,
-    private authService: AuthService,
     private windowService: WindowService,
     private bottomSheet: MatBottomSheet,
     private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
   ) {
     this.favoriteStores$ = this.storesService.favoriteStores$;
     this.buildForm();
+    this.idClient = this.windowService.idClient$;
    }
 
   ngOnInit(): void {
@@ -94,15 +99,14 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   fetchCommentStore() {
     this.storesService.getCommentStore(this.store.id).subscribe((res: any) => {
-      console.log(res);
       if (res.status === 'Empty') {
-        this.stateLoading = false;
-        this.stateComment = false;
-      } else {
-        this.stateLoading = false;
-        this.stateComment = true;
+        this.stateComment.next(false);
+      }
+      if (res.length > 0) {
+        this.stateComment.next(true);
         this.comments.next(res);
       }
+      this.stateLoading.next(false);
     });
   }
 
@@ -129,7 +133,6 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
       if (rol === 'isClient') {
         this.stateSpinner = true;
         this.storesService.subscriptionStore({idtienda: idstore}).subscribe((res: any) => {
-          console.log(res);
           this.stateSpinner = false;
           if (res.status === 'OK' || res.status === 'Ok') {
               this.subscribeBtn = !this.subscribeBtn;
@@ -147,13 +150,52 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   sendComment(comment: any) {
     if (comment !== '') {
-      this.storesService.createCommentStore(this.store.id, {comentario: comment}).subscribe((res: any) => {
-        if (res.status === 'OK') {
-          this.fetchCommentStore();
-          this.form.reset();
+      this.windowService.session$.subscribe(session => {
+        if (session === 'isClient') {
+          this.storesService.createCommentStore(this.store.id, {comentario: comment})
+            .subscribe((res: any) => {
+              if (res.status === 'OK') {
+                this.fetchCommentStore();
+                this.form.reset();
+              }
+            });
         }
       });
     }
+  }
+
+  editComment(currentComment: string, comment: string, idComment) {
+    console.log(currentComment, comment, idComment);
+    if (currentComment !== comment) {
+      this.storesService.editOrInactivateComment(idComment, {comentario: comment, estado: 1})
+        .subscribe((res: any) => {
+          this.openSnackBar(res.message);
+          if (res.status === 'Ok') {
+            this.fetchCommentStore();
+            this.idCommentEdit = -1;
+          }
+        });
+    }
+  }
+
+  inactivateComment(currentComment: string, idComment) {
+    this.storesService.editOrInactivateComment(idComment, {comentario: currentComment, estado: 0})
+      .subscribe((res: any) => {
+        this.openSnackBar(res.message);
+        if (res.status === 'Ok') {
+          this.fetchCommentStore();
+          this.idCommentEdit = -1;
+          this.openSnackBar('Mensaje eliminado');
+        }
+      });
+  }
+
+  assignIdEditComment(idCommentEdit: number) {
+    if (idCommentEdit === this.idCommentEdit) {
+      this.idCommentEdit = -1;
+      return;
+    }
+    this.idCommentEdit = idCommentEdit;
   }
 
   private buildForm() {
@@ -165,6 +207,14 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   changeShowComment() {
     this.showComment = !this.showComment;
     this.fetchCommentStore();
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
 }

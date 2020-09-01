@@ -80,7 +80,6 @@ export class ProductComponent implements OnInit {
         if (rol === 'isClient') {
           this.stateSpinner = true;
           this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
-            console.log(res);
             this.stateSpinner = false;
             if (res.status === 'OK' || res.status === 'Ok') {
                 this.subscribeBtn = !this.subscribeBtn;

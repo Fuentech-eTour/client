@@ -25,9 +25,6 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.product$ = this.productsService.getProduct(this.data.id);
-    this.product$.subscribe(pd => {
-      console.log(pd);
-    });
   }
 
   onNoClick(): void {

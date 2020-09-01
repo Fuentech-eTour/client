@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { StoresService } from '@core/services/stores.service';
 
 @Component({
@@ -12,7 +12,9 @@ export class SidebarStoreComponent implements OnInit {
 
   @Input() store: Observable<any>;
   store$: Observable<any>;
-  categoriasProductos: [];
+
+  private categoriasProductos = new BehaviorSubject<[]>([]);
+  categoriasProductos$ = this.categoriasProductos.asObservable();
 
   constructor(
     private storesService: StoresService,
@@ -22,7 +24,7 @@ export class SidebarStoreComponent implements OnInit {
   ngOnInit(): void {
     this.store$ = this.storesService.getTagsOneStore(this.store[0].id);
     this.store$.subscribe((store: any) => {
-      this.categoriasProductos = store[0].tags;
+      this.categoriasProductos.next(store[0].tags);
     });
   }
 

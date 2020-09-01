@@ -25,7 +25,7 @@
         <mat-icon class="icon-category">category</mat-icon>
     </h1>
     <ul class="category">
-        <li *ngFor="let catProd of categoriasProductos"
+        <li *ngFor="let catProd of categoriasProductos$ | async"
             [routerLink] 
             [fragment]="'seccion'+catProd.id" 
             routerLinkActive="active"

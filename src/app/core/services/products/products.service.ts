@@ -79,7 +79,6 @@ export class ProductsService {
   }
 
   deleteProduct(code: object) {
-    console.log(code);
     return this.http.put(`${environment.url_api}/products/inactivaproduct`, code)
     .pipe(
       retry(3), // hace la petición al servicio tres veces
@@ -96,7 +95,6 @@ export class ProductsService {
   }
 
   createFavoritiesProducts(idproducto: object) {
-    console.log(idproducto);
     return this.http.post(`${environment.url_api}/favs/agregaproductofavs`, idproducto)
     .pipe(
       retry(3),
@@ -113,7 +111,6 @@ export class ProductsService {
   }
 
   stateFavoriteProducts(products: any) {
-    console.log(products);
     this.favoriteProducts.next(products);
   }
 
@@ -123,7 +120,6 @@ export class ProductsService {
 
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
     Sentry.captureException(error);
     return throwError('ups algo salio mal');
   }

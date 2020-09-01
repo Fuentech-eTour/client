@@ -69,7 +69,6 @@ export class FormProductComponent implements OnInit {
           const product = this.form.value;
           this.productsService.createProduct(product)
             .subscribe((res: any) => {
-              console.log(res);
               this.windowService.loadingFalse();
               if (res.status === 'Ok') {
                 this.windowService.loadingTrue();
@@ -77,7 +76,6 @@ export class FormProductComponent implements OnInit {
                 const idp = res.idproducto;
                 console.log(idTag, idp);
                 this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
-                  console.log(resul);
                   this.windowService.loadingFalse();
                   this.router.navigate(['./admin/products']);
                 });

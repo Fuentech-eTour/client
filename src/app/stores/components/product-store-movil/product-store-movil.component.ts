@@ -80,9 +80,7 @@ export class ProductStoreMovilComponent implements OnInit {
         data: {id: this.product.id}
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
+      dialogRef.afterClosed().subscribe(result => {});
     }
 
     addCart() {
@@ -103,7 +101,6 @@ export class ProductStoreMovilComponent implements OnInit {
         if (rol === 'isClient') {
           this.stateSpinner = true;
           this.productsService.createFavoritiesProducts({idproducto: idproduct}).subscribe((res: any) => {
-            console.log(res);
             this.stateSpinner = false;
             if (res.status === 'OK' || res.status === 'Ok') {
                 this.subscribeBtn = !this.subscribeBtn;

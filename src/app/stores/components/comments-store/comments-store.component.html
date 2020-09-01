@@ -1,23 +1,46 @@
 <mat-nav-list>
-    <div style="display: flex; justify-content: center;" *ngIf="stateLoading">
+    <div style="display: flex; justify-content: center;" *ngIf="stateLoading$ | async">
         <mat-spinner diameter=20></mat-spinner>
     </div>
-    <div class="comments-cont" *ngIf="!stateComment">
+    <div style="display: flex; justify-content: center;" *ngIf="!(stateComment$ | async)">
         <p>Aun no hay comentarios, sé el primero en comentar</p>
     </div>
     <div class="comments-cont">
-        <div class="comment" *ngFor="let comment of comments$ | async">
-            <div>
-                <div class="avatar">
-                    {{ comment.name | slice:0:1 }}
+        <div *ngFor="let comment of comments$ | async">
+            <div class="comment">
+                <div>
+                    <div class="avatar">
+                        {{ comment.name | slice:0:1 }}
+                    </div>
                 </div>
+                <p>
+                    <span><strong>{{ comment.name | titlecase | slice:0:30 | moreContent:29 }}</strong></span>
+                    <span   *ngIf="comment.idbyaccessuser === ( idClient | async )" 
+                            (click)="assignIdEditComment(comment.id)" 
+                            class="name-actions">
+                            editar
+                    </span>
+                    <span   *ngIf="comment.idbyaccessuser === ( idClient | async )"
+                            (click)="inactivateComment(comment.comentario, comment.id)" 
+                            class="name-actions">
+                            eliminar
+                    </span><br>
+                    {{ comment.comentario | lowercase | slice:0:120 | moreContent:119 }}
+                </p>
             </div>
-            <p>
-                <span><strong>{{ comment.name | titlecase | slice:0:30 | moreContent:29 }}</strong></span>
-                <span class="name-actions">editar</span>
-                <span class="name-actions">eliminar</span><br>
-                {{ comment.comentario | lowercase | slice:0:120 | moreContent:119 }}
-            </p>
+            <div *ngIf="comment.id === idCommentEdit" class="input-edit-cont">
+                <form [formGroup]="form">
+                    <input  #commentEdit 
+                            matInput
+                            [value]="comment.comentario" 
+                            autocomplete="off">
+                    <div class="actions-cont">
+                        <div class="btn-send-cont">
+                            <mat-icon matSuffix (click)="editComment(comment.comentario, commentEdit.value, comment.id)">edit</mat-icon>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="input-msn-cont">

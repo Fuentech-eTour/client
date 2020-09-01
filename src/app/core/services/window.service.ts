@@ -16,6 +16,7 @@ export class WindowService {
   private stateDisplayFooter = new BehaviorSubject<boolean>(false);
   private stateDisplayHeader = new BehaviorSubject<boolean>(false);
   private session = new BehaviorSubject<string>(localStorage.getItem('session'));
+  private idClient = new BehaviorSubject<number>(parseInt(localStorage.getItem('idClient'), 10));
 
   isloading$ = this.isloading.asObservable();
   stateDisplayFooter$ = this.stateDisplayFooter.asObservable();
@@ -23,6 +24,7 @@ export class WindowService {
   userName$ = this.userName.asObservable();
   windowWidth$ = this.windowWidth.asObservable();
   session$ = this.session.asObservable();
+  idClient$ = this.idClient.asObservable();
 
   constructor(
   ) {
@@ -58,7 +60,6 @@ export class WindowService {
   }
 
   onResize(width: any): any {
-    console.log(width);
     this.windowWidth.next(width);
  }
 
@@ -68,6 +69,10 @@ export class WindowService {
 
  stateSession(state: string) {
    this.session.next(state);
+ }
+
+ addIdClient(id: number) {
+    this.idClient.next(id);
  }
 
 }

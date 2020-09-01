@@ -71,7 +71,6 @@ export class StoresService {
   }
 
   subscriptionStore(idtienda: object) {
-    console.log(idtienda);
     return this.http.post(`${environment.url_api}/favs/agregatiendafavs`, idtienda)
     .pipe(
       retry(3),
@@ -88,12 +87,10 @@ export class StoresService {
   }
 
   stateFavoriteStore(stores: any) {
-    console.log(stores);
     this.favoriteStores.next(stores);
   }
 
   createCommentStore(idstore: number, comment: object) {
-    console.log(idstore, comment);
     return this.http.post(`${environment.url_api}/stores/crearcomentario/${idstore}`, comment)
     .pipe(
       retry(3),
@@ -109,9 +106,16 @@ export class StoresService {
     );
   }
 
+  editOrInactivateComment(idComment: number, data: object) {
+    return this.http.put(`${environment.url_api}/stores/actualizacomentario/${idComment}`, data)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
     Sentry.captureException(error);
     return throwError('ups algo salio mal');
   }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '@core/services/users.service';
 import { WindowService } from '@core/services/window.service';
 import { MyValidator } from './../../../utils/validators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-user-store',
@@ -21,6 +22,7 @@ export class CreateUserStoreComponent implements OnInit {
     private usersService: UsersService,
     private windowService: WindowService,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) {
     this.buildForm();
   }
@@ -30,13 +32,12 @@ export class CreateUserStoreComponent implements OnInit {
 
   saveUserStore(event: Event) {
     event.preventDefault();
-    console.log(this.form.get('urol').value);
     if (this.form.valid) {
       this.windowService.loadingTrue();
       this.form.value.userlog = this.form.get('usuario').value;
       this.usersService.createUserStore(this.form.value)
         .subscribe((res: any) => {
-          console.log(res);
+          this.openSnackBar(res.message);
           this.windowService.loadingFalse();
           if (res.status === 'OK') {
             this.windowService.loadingTrue();
@@ -45,15 +46,27 @@ export class CreateUserStoreComponent implements OnInit {
               id: res.userid,
             };
             this.usersService.createPermisionUserStore(createPermission)
-              .subscribe(resPermission => {
-                console.log(resPermission);
+              .subscribe((resPermission: any) => {
                 this.windowService.loadingFalse();
-                this.form.reset();
-                this.router.navigate(['/super-admin/create-user-store']);
+                if (resPermission.status === 'OK') {
+                  this.form.reset();
+                  this.router.navigate(['/super-admin/create-user-store']);
+                }
+                if (resPermission.status !== 'OK') {
+                  this.openSnackBar(resPermission.message);
+                }
               });
           }
       });
     }
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
   private buildForm() {
@@ -66,7 +79,7 @@ export class CreateUserStoreComponent implements OnInit {
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
       identificacion: ['', [Validators.required]],
-      cargo: ['', [Validators.required, MyValidator.isPreciValid]],
+      cargo: ['', [Validators.required]],
       urol: ['', [Validators.required]],
     });
   }

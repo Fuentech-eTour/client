@@ -2,7 +2,11 @@ form {
     mat-card {
         margin: 10px;
         mat-card-header {
-            justify-content: center;;
+            justify-content: center;
+            mat-card-title {
+                padding: 10px 0px;
+                margin: 0px 0px 20px;
+            }
         }
         mat-card-content {
             text-align: center;
@@ -16,9 +20,20 @@ form {
         }
         mat-card-actions {
             text-align: center;
+            display: flex;
+            justify-content: center;
             button {
                 padding: 0px 20px;
-            } 
+                width: 100%;
+                margin: 0px 16px;
+            }
+            .btnActive {
+                background-color: #4d90d3;
+                color: white;
+                &:hover {
+                    background-color: #396a9b;
+                }
+            }  
         }
     }
 }
