@@ -58,15 +58,47 @@
       </div>
       <mat-card class="cont-address">
         <mat-card class="shipping-card">
-          <mat-card-header class="row between-xs middled-xs" style="align-items: center;">
-            <div class="col">
+          <mat-card-header style="align-items: center; display: block;">
+            <div *ngIf="( addresses$ | async ).length > 0">
               <mat-card-title style="text-align: center;">
-                  Dirección
+                  Numero de contacto
               </mat-card-title>
             </div>
-            <div class="col">
+            <div>
+              <mat-card-title style="text-align: right;">
+                <a mat-button style="padding: 0px 5px;" 
+                (click)="openDialog()">
+                  Agregar N° celular 
+                  <mat-icon style="color:#80ad55;">
+                    add_circle
+                  </mat-icon>
+                </a>
+              </mat-card-title>
+            </div>
+          </mat-card-header>
+          <mat-card-content *ngIf="( addresses$ | async ).length === 0">
+            Aun no tienes numero de contacto asociado a tu orden. Agrega uno.
+          </mat-card-content>
+          <mat-card-content *ngIf="( addresses$ | async ).length > 0">
+            <div *ngFor="let address of addresses$ | async" class="row">
+              <ul>
+                <li>Cel: {{'3136187616'}}</li>
+              </ul>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-card>
+      <mat-card class="cont-address">
+        <mat-card class="shipping-card">
+          <mat-card-header style="align-items: center; display: block;">
+            <div *ngIf="( addresses$ | async ).length > 0">
               <mat-card-title style="text-align: center;">
-                <a mat-button style="padding: 0px;" 
+                  Selecciona una dirección
+              </mat-card-title>
+            </div>
+            <div>
+              <mat-card-title style="text-align: right;">
+                <a mat-button style="padding: 0px 5px;" 
                 (click)="openDialog()">
                   Agregar dirección 
                   <mat-icon style="color:#80ad55;">
@@ -76,7 +108,10 @@
               </mat-card-title>
             </div>
           </mat-card-header>
-          <mat-card-content>
+          <mat-card-content *ngIf="( addresses$ | async ).length === 0">
+            Aun no tienes direccion para la entrega de tu orden. Agrega una.
+          </mat-card-content>
+          <mat-card-content *ngIf="( addresses$ | async ).length > 0">
             <div class="row">
               <div class="col">
                 <mat-radio-group formControlName="secondCtrl" required>

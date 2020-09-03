@@ -61,6 +61,7 @@
         .swiper-wrapper {
             // padding-left: 5px;
             .swiper-slide {
+                width: auto; // si se aplica la Logica para numero de card product response se debe quitar este estilo
                 text-align: center;
                 font-size: 18px;
                 // background: white;

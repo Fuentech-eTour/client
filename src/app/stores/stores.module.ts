@@ -17,6 +17,8 @@ import { TagsProductsComponent } from './components/tags-products/tags-products.
 import { SearchStoresComponent } from './components/search-stores/search-stores.component';
 import { TagsStoresComponent } from './components/tags-stores/tags-stores.component';
 import { CommentsStoreComponent } from './components/comments-store/comments-store.component';
+import { InfoStoreMovilComponent } from './components/info-store-movil/info-store-movil.component';
+import { SliderCategoryMovilComponent } from './components/slider-category-movil/slider-category-movil.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { CommentsStoreComponent } from './components/comments-store/comments-sto
     SearchStoresComponent,
     TagsStoresComponent,
     CommentsStoreComponent,
+    InfoStoreMovilComponent,
+    SliderCategoryMovilComponent,
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { WindowService } from './window.service';
 import { StoresService } from './stores.service';
 import { ProductsService } from './products/products.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,14 @@ export class AuthService {
     return this.http.post(`${environment.url_api}/users/login`, user);
   }
 
+  refreshToken() {
+    return this.http.post(`${environment.url_api}/users/tkenclient`, {refreshToken: this.getRefreshToken()})
+    .pipe(tap((res: any) => {
+      console.log(res);
+      this.setToken(res.data.accessToken);
+    }));
+  }
+
   loginUserStore(user: JSON) {
     return this.http.post(`${environment.url_api}/users/loginstore`, user);
   }
@@ -41,6 +50,7 @@ export class AuthService {
 
   logout(): any {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     localStorage.removeItem('user_name');
     localStorage.removeItem('idstore');
     localStorage.setItem('session', '');
@@ -51,10 +61,19 @@ export class AuthService {
     this.storesService.stateFavoriteStore([]);
     this.productsService.stateFavoriteProducts([]);
     this.router.navigate(['/stores']);
+    return this.http.post(`${environment.url_api}/users/logout`, {refreshToken: this.getRefreshToken()});
+  }
+
+  private setToken(jwt: string) {
+    localStorage.setItem('token', jwt);
   }
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken');
   }
 
   getUserName() {

@@ -68,6 +68,7 @@ export class OrderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('holaaaaaaaaaaaaaaa');
       this.fetchAllAddress();
     });
   }

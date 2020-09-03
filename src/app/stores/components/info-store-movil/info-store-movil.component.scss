@@ -1,0 +1,15 @@
+div {
+    .title-cont {
+        display: flex;
+        align-items: center;
+        border-bottom: solid 1px #e0e0e0;
+        padding: 20px;
+        mat-card-title {
+            color: gray;
+            padding: 8px;
+            margin: 0px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    }
+}

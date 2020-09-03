@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
           if (res.status === 'OK') {
             this.openSnackBar('Inicio de sesión exitoso');
             localStorage.setItem('token', res.data.accessToken);
+            localStorage.setItem('refreshToken', res.data.refreshToken);
             localStorage.setItem('user_name', res.data.user_name);
             localStorage.setItem('session', 'isClient');
             localStorage.setItem('idClient', res.data.dato);
@@ -88,8 +89,8 @@ export class LoginComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      email: ['dainerudea@gmail.com', [Validators.required]],
-      password: ['123456', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 

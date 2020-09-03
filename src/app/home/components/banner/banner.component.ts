@@ -46,6 +46,7 @@ export class BannerComponent implements OnInit, AfterViewInit {
       },
       autoplay: {
         delay: 5000,
+        disableOnInteraction: false,
       },
     });
   }

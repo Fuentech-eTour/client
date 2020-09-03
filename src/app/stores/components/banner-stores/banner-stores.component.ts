@@ -67,7 +67,15 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.mySwiper = new Swiper('.swiper-container', {
-      slidesPerView: 1,
+      slidesPerView: 'auto',
+      centeredSlides: false,
+      spaceBetween: 1,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+      /* Logica para numero de card product response */
+      /* slidesPerView: 1,
       spaceBetween: 1,
       slidesPerGroup: 1,
       loop: false,
@@ -93,7 +101,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         1100: {
           slidesPerView: 6,
         }
-      }
+      } */
     });
   }
 

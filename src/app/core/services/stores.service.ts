@@ -19,8 +19,8 @@ export class StoresService {
   favoriteStores$ = this.favoriteStores.asObservable();
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+  ) {}
 
   getAllStores() {
     return this.http.get<Store[]>(`${environment.url_api}/products/obtenerproducts`)

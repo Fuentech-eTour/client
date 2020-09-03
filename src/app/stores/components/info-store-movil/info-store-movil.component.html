@@ -1,0 +1,12 @@
+<div>
+    <div class="title-cont">
+        <div mat-card-avatar style="background-image: url({{store[0].imagen}});
+        background-size: cover;">
+            <img *ngIf="store[0].imagen ==='' || store[0].imagen === null || store[0].imagen === undefined" src="./../../../../assets/images/icon-store.png">
+        </div>
+        <mat-card-title [routerLink]="['/stores', store[0].id]">
+            {{store[0].razonsocial | titlecase}}
+        </mat-card-title>
+    </div>
+</div>
+

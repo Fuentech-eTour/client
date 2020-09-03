@@ -4,6 +4,8 @@
     </p>
 </div> -->
 <div class="cont-store-grid">
+    <app-info-store-movil *ngIf="(store$ | async)  as store" [store]="store"></app-info-store-movil>
+    <app-slider-category-movil *ngIf="(store$ | async)  as store" [store]="store"></app-slider-category-movil>
     <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
     <div *ngIf="(store$ | async)  as store">
         <div *ngFor="let tag of store[0].tags">
