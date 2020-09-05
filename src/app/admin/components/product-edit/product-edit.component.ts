@@ -31,6 +31,8 @@ export class ProductEditComponent implements OnInit {
   image: any;
   newImage: any;
   file: any;
+  fileRef: any;
+  task: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,39 +71,67 @@ export class ProductEditComponent implements OnInit {
     this.windowService.loadingTrue();
     const nameStore = this.authService.getUserName().toString().split(' ').join('');
     const file = this.file;
-    const name = `product-${nameStore}-${this.date}.png`;
-    const fileRef = this.angularFireStorage.ref(name);
-    const task = this.angularFireStorage.upload(name, file);
+    if (file) {
+      const name = `product-${nameStore}-${this.date}.png`;
+      const fileRef = this.angularFireStorage.ref(name);
+      const task = this.angularFireStorage.upload(name, file);
 
-    task.snapshotChanges()
-    .pipe(
-      finalize(() => {
+      task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.windowService.loadingFalse();
+          this.image$ = fileRef.getDownloadURL();
+          this.image$.subscribe(url => {
+            this.windowService.loadingTrue();
+            this.form.get('imagen').setValue(url);
+            const product = this.form.value;
+            const codigo = 'codigo';
+            product[codigo] = this.codigo;
+            this.productsService.updateProduct(product)
+              .subscribe((res: any) => {
+                console.log(res);
+                this.windowService.loadingFalse();
+                // se debe crear un metodo para modificar el tag asignado a un producto
+                /* if (res.status === 'Ok') {
+                  this.windowService.loadingTrue();
+                  const idTag = this.form.get('tags').value;
+                  const idp = res.idproducto;
+                  console.log(idTag, idp);
+                  this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
+                    console.log(resul);
+                    this.windowService.loadingFalse();
+                    this.router.navigate(['./admin/products']);
+                  });
+                } */
+              });
+          });
+        })
+      )
+      .subscribe();
+    } else {
+      this.windowService.loadingTrue();
+      const product = this.form.value;
+      const codigo = 'codigo';
+      product[codigo] = this.codigo;
+      console.log(product);
+      this.productsService.updateProduct(product)
+      .subscribe((res: any) => {
+        console.log(res);
         this.windowService.loadingFalse();
-        this.image$ = fileRef.getDownloadURL();
-        this.image$.subscribe(url => {
+        // se debe crear un metodo para modificar el tag asignado a un producto
+        /* if (res.status === 'Ok') {
           this.windowService.loadingTrue();
-          this.form.get('imagen').setValue(url);
-          const product = this.form.value;
-          this.productsService.createProduct(product)
-            .subscribe((res: any) => {
-              console.log(res);
-              this.windowService.loadingFalse();
-              if (res.status === 'Ok') {
-                this.windowService.loadingTrue();
-                const idTag = this.form.get('tags').value;
-                const idp = res.idproducto;
-                console.log(idTag, idp);
-                this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
-                  console.log(resul);
-                  this.windowService.loadingFalse();
-                  this.router.navigate(['./admin/products']);
-                });
-              }
-            });
-        });
-      })
-    )
-    .subscribe();
+          const idTag = this.form.get('tags').value;
+          const idp = res.idproducto;
+          console.log(idTag, idp);
+          this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
+            console.log(resul);
+            this.windowService.loadingFalse();
+            this.router.navigate(['./admin/products']);
+          });
+        } */
+      });
+    }
   }
 
   private buildForm() {

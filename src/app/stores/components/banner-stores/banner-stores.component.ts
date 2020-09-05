@@ -70,6 +70,10 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
       slidesPerView: 'auto',
       centeredSlides: false,
       spaceBetween: 1,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: false,
+      freeMode: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',

@@ -49,19 +49,23 @@ export class AuthService {
   }
 
   logout(): any {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user_name');
-    localStorage.removeItem('idstore');
-    localStorage.setItem('session', '');
-    localStorage.setItem('idClient', '');
-    this.windowService.stateSession('');
-    this.windowService.addUserName(null);
-    this.windowService.addIdClient(-1);
-    this.storesService.stateFavoriteStore([]);
-    this.productsService.stateFavoriteProducts([]);
-    this.router.navigate(['/stores']);
-    return this.http.post(`${environment.url_api}/users/logout`, {refreshToken: this.getRefreshToken()});
+    return this.http.post(`${environment.url_api}/users/logout`, {refreshToken: this.getRefreshToken()})
+      .subscribe((res: any) => {
+        if (res.status === '402') {
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('user_name');
+          localStorage.removeItem('idstore');
+          localStorage.setItem('session', '');
+          localStorage.setItem('idClient', '');
+          this.windowService.stateSession('');
+          this.windowService.addUserName(null);
+          this.windowService.addIdClient(-1);
+          this.storesService.stateFavoriteStore([]);
+          this.productsService.stateFavoriteProducts([]);
+          this.router.navigate(['/stores']);
+        }
+      });
   }
 
   private setToken(jwt: string) {

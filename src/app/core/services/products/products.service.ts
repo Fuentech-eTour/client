@@ -70,7 +70,7 @@ export class ProductsService {
     );
   }
 
-  updateProduct(id: number, changes: Partial<Product>) {
+  updateProduct(changes: any) {
     return this.http.put(`${environment.url_api}/products/actualizaproduct`, changes)
     .pipe(
       retry(3),

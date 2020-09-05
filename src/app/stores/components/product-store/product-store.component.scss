@@ -10,8 +10,10 @@ mat-card {
     //border: solid 1px rgba(0, 0, 0, 0.12);
     box-shadow: none;
     @media (min-width: 425px) {
-        min-width: 140px;
-        max-width: 160px;
+        /* min-width: 140px;
+        max-width: 160px; */
+        min-width: 148px;
+        max-width: 148px;
     }
     @media (min-width: 700px) {
         &:hover {

@@ -2,30 +2,30 @@
     <mat-toolbar>
         <mat-toolbar-row>
             <div class="row between-xs middled-xs header-row">
-                <button mat-icon-button (click)="mostrar2.toggle()" (click)="showIconMenu()">
+                <a mat-icon-button (click)="mostrar2.toggle()" (click)="showIconMenu()">
                     <mat-icon style="color: #73726c;">menu</mat-icon>
                     <span>Menu</span> 
-                </button>
-                <button mat-icon-button routerLink="/stores" routerLinkActive="active">
+                </a>
+                <a mat-icon-button routerLink="/stores" routerLinkActive="active">
                     <mat-icon style="color: #73726c;">storefront</mat-icon>
                     <span>Tiendas</span> 
-                </button>
-                <button mat-icon-button (click)="openSearch()" routerLink="/search" routerLinkActive="active">
+                </a>
+                <a mat-icon-button (click)="openSearch()" routerLink="/search" routerLinkActive="active">
                     <mat-icon style="color: #73726c;">search</mat-icon>
                     <span>Buscar</span> 
-                </button>
-                <button mat-icon-button routerLink="/products" routerLinkActive="active">
+                </a>
+                <a mat-icon-button routerLink="/products" routerLinkActive="active">
                     <mat-icon style="color: #73726c;">widgets</mat-icon>
                     <span>Productos</span> 
-                </button>
-                <button mat-icon-button *ngIf="(rol$ | async) !== ''" [matMenuTriggerFor]="menu">
+                </a>
+                <a mat-icon-button *ngIf="(rol$ | async) !== ''" [matMenuTriggerFor]="menu">
                     <mat-icon style="color: #73726c;">account_circle</mat-icon>
                     <span>Usuario</span> 
-                </button>
-                <button mat-icon-button *ngIf="(rol$ | async) === ''" [matMenuTriggerFor]="menu2">
+                </a>
+                <a mat-icon-button *ngIf="(rol$ | async) === ''" [matMenuTriggerFor]="menu2">
                     <mat-icon style="color: #73726c;">account_circle</mat-icon>
                     <span>Usuario</span> 
-                </button>
+                </a>
             </div>
         </mat-toolbar-row>
     </mat-toolbar>
