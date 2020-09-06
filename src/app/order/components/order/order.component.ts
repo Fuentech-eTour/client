@@ -45,6 +45,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sendOrder();
   }
 
   buildForm() {
@@ -68,7 +69,7 @@ export class OrderComponent implements OnInit {
   }
 
   sendOrder() {
-    this.orderService.getMiners$();
+    this.orderService.getMiners$().subscribe();
   }
 
 }

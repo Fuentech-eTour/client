@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
-
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,9 @@ export class OrderService {
 
   socket: any;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+  ) {
     this.socket = io(environment.serverSocket, {
       // path: '/',
       secure: true,
@@ -44,12 +46,17 @@ export class OrderService {
           observer.next( data );
         });
 
+        this.socket.on('order', ( data ) => {
+          console.log('order', data);
+          observer.next( data );
+        });
+
+        // this.socket.emit('join', {token: this.authService.getToken()});
+
         this.socket.on('sala', ( data ) => {
           console.log('WS: Message', data);
           observer.next( data );
         });
-
-        this.socket.emit('sala', 'esta es la orden');
 
         this.socket.on('disconnect', () => {
           console.warn('WS: Disconnected!');
@@ -75,5 +82,13 @@ export class OrderService {
         observer.error(error);
       }
     });
+  }
+
+  public joinUser() {
+    this.socket.emit('join', {token: this.authService.getToken()});
+  }
+
+  public emitOrder() {
+    this.socket.emit('order', 23);
   }
 }
