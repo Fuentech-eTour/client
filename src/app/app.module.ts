@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from './../environments/environment';
 import { AdminGuard } from './admin.guard';
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
+import { OrderService } from '@core/services/order.service';
 
 // usar solo en produccion --init-- //
 import * as Sentry from '@sentry/browser';
@@ -60,7 +61,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    OrderService,
   ],
   bootstrap: [AppComponent]
 })

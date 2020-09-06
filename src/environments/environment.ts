@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   url_api: 'http://localhost:3000/api',
+  serverSocket: 'http://localhost:4000',
   // url_api: 'https://salty-savannah-34168.herokuapp.com/api',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',

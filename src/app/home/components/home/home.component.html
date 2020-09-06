@@ -16,3 +16,11 @@
         </div>
     </div>
 </div>
+<button mat-button (click)="sendOrder()">enviar</button>
+<div style="text-align: center; padding: 20px;">
+    <h1>Planes de suscripción</h1>
+    <div class="subscription-product-grid">
+        <app-subscription-plans *ngFor="let subscription of subscriptions" [subs]="subscription">
+        </app-subscription-plans>
+    </div>
+</div>
