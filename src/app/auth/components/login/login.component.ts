@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
 import { StoresService } from '@core/services/stores.service';
+import { OrderService } from '@core/services/order.service';
 import { ProductsService } from '@core/services/products/products.service';
 import { RegisterComponent } from '../register/register.component';
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     private windowService: WindowService,
     private storesService: StoresService,
     private productsService: ProductsService,
+    private orderService: OrderService,
     public dialogRef: MatDialogRef<LoginComponent>,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -68,6 +70,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('user_name', res.data.user_name);
             localStorage.setItem('session', 'isClient');
             localStorage.setItem('idClient', res.data.dato);
+            this.orderService.joinUser();
             this.windowService.stateSession('isClient');
             this.windowService.addIdClient(res.data.dato);
             this.windowService.addUserName(res.data.user_name.split(' ')[0]);

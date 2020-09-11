@@ -1,15 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AddressComponent } from '../address/address.component';
-import { AddProduct } from '../../../core/models/addProduct.model';
 import { UsersService } from '@core/services/users.service';
-import { UtilityService } from '@core/services/utility.service';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AddProduct } from '@core/models/addProduct.model';
 import { CartService } from '@core/services/cart.service';
 import { AuthService } from '@core/services/auth.service';
 import { OrderService } from '@core/services/order.service';
+import { UtilityService } from '@core/services/utility.service';
 
 export interface DialogData {
   animal: string;
@@ -28,9 +28,15 @@ export interface DialogData {
 export class OrderComponent implements OnInit {
 
   products$: Observable<AddProduct[]>;
+  order$: Observable<any>;
+  totalPrice$: Observable<any>;
+  address$: Observable<any>;
+  order: any;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
+  private municipality = new BehaviorSubject<any>({});
+  municipality$ = this.municipality.asObservable();
   private isloading = new BehaviorSubject<boolean>(true);
   isloading$ = this.isloading.asObservable();
   private addresses = new BehaviorSubject<any>([]);
@@ -46,14 +52,31 @@ export class OrderComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usersService: UsersService,
     private dialog: MatDialog,
+    private utilityService: UtilityService,
   ) {
     this.products$ = this.cartService.cart$;
+    this.order$ = this.cartService.order$;
+    this.totalPrice$ = this.cartService.precioTotal$;
+    this.address$ = this.usersService.selectAddress$;
     this.token = this.authService.getToken();
     this.buildForm();
   }
 
   ngOnInit() {
     this.fetchAllAddress();
+    this.order$.subscribe(data => {
+      console.log(data);
+      this.order = data;
+    });
+    this.address$.subscribe(address => {
+      console.log(address);
+      this.utilityService.getAllMunicipality().subscribe(data => {
+        console.log(data);
+        const municipalitySelect = data.filter(municipality => municipality.id === address.idutmunicipality);
+        console.log(municipalitySelect);
+        this.municipality.next(municipalitySelect[0]);
+      });
+    });
   }
 
   fetchAllAddress() {
@@ -65,7 +88,6 @@ export class OrderComponent implements OnInit {
 
   selectAddress(address) {
     this.usersService.addSelectAddress(address);
-    this.sendOrder();
   }
 
   buildForm() {
@@ -84,13 +106,25 @@ export class OrderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('holaaaaaaaaaaaaaaa');
       this.fetchAllAddress();
     });
   }
 
   sendOrder() {
-    this.orderService.getMiners$().subscribe();
+    this.usersService.selectAddress$
+      .subscribe((address: any) => {
+        this.orderService.createSells(this.order, address.id)
+          .subscribe(({ status, data }: any) => {
+            if (status === 'OK') {
+              // tslint:disable-next-line: prefer-for-of
+              for (let i = 0; i < data.length; i++) {
+                data[i].nameUser = this.authService.getUserName();
+                console.log(data);
+              }
+              this.orderService.emitNewOrder(data);
+            }
+        });
+      });
   }
 
 }

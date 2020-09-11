@@ -3,6 +3,8 @@ import { SwUpdate } from '@angular/service-worker';
 import { AngularFireMessaging } from 'angularfire2/messaging';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { WindowService } from '@core/services/window.service';
+import { AuthService } from '@core/services/auth.service';
+import { OrderService } from '@core/services/order.service';
 
 interface Token {
   token: string;
@@ -22,6 +24,8 @@ export class AppComponent implements OnInit {
     private messaging: AngularFireMessaging,
     private database: AngularFirestore,
     private windowService: WindowService,
+    private authService: AuthService,
+    private orderService: OrderService,
   ) {
     this.tokensCollections = this.database.collection<Token>('tokens');
   }
@@ -32,6 +36,15 @@ export class AppComponent implements OnInit {
     this.listenNotifications();
     if (!localStorage.getItem('session')) {
       localStorage.setItem('session', '');
+    }
+    if (localStorage.getItem('session')) {
+      if (localStorage.getItem('session') === 'isClient') {
+        this.authService.refreshToken().subscribe((res: any) => {
+          if (res.status === 'UPDATED') {
+            this.orderService.joinUser();
+          }
+        });
+      }
     }
   }
 

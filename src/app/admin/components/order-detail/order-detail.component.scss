@@ -1,0 +1,43 @@
+mat-card {
+    margin: 0px;
+    box-shadow: none !important;
+    @media (min-width: 700px) {
+        margin: 16px;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 
+                    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+                    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    mat-card-header {
+        justify-content: center;
+    }
+    mat-card-content {
+        table {
+            width: 100%;
+            box-shadow: none !important;
+                        th {
+                            text-align: left;
+                            padding-left: 5px;
+                            @media (min-width: 700px) {
+                                text-align: left;
+                                padding-left: 24px;
+                            }
+                        }
+                        td {
+                            padding: 0px 5px;
+                            @media (min-width: 700px) {
+                                padding-left: 24px;
+                            }
+                            a {
+                                min-width: 0px !important;
+                                padding: 0px 5px !important;
+                            }
+                        }
+                        .aling-action {
+                            text-align: right;
+                        }
+        }
+    }
+    footer {
+        text-align: right;
+    }
+}

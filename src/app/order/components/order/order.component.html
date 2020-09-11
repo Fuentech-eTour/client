@@ -56,7 +56,7 @@
           </mat-icon>
         </button>
       </div>
-      <mat-card class="cont-address">
+      <!-- <mat-card class="cont-address">
         <mat-card class="shipping-card">
           <mat-card-header style="align-items: center; display: block;">
             <div *ngIf="( addresses$ | async ).length > 0">
@@ -87,7 +87,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-      </mat-card>
+      </mat-card> -->
       <mat-card class="cont-address">
         <mat-card class="shipping-card">
           <mat-card-header style="align-items: center; display: block;">
@@ -131,18 +131,20 @@
   <mat-step>
     <ng-template matStepLabel><mat-icon>assistant_photo</mat-icon></ng-template>
     <div class="position-button">
-      <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
+      <button class="margin-button" 
+              mat-stroked-button color="accent" 
+              matStepperNext
+              (click)="sendOrder()">
         Finalizar
         <mat-icon>
           turned_in_not
         </mat-icon>
       </button>
     </div>
-<<<<<<< HEAD
     
     <div class="summary-cont">
 
-      <mat-card class="contact-cont">
+      <!-- <mat-card class="contact-cont">
         <mat-card-header>
           <mat-card-title>Información de contacto</mat-card-title>
         </mat-card-header>
@@ -151,7 +153,7 @@
             <p>Cel: 3136187616</p>
           </div>
         </mat-card-content>
-      </mat-card>
+      </mat-card> -->
   
       <mat-card class="address-cont">
         <mat-card-header>
@@ -159,7 +161,7 @@
         </mat-card-header>
         <mat-card-content>
           <div class="border">
-            <p>Cra 12 #12-13 <br>Caucasia</p>
+            <p>{{ (address$ | async).direccion | lowercase }}<br>{{ (municipality$ | async)?.descripcion }}</p>
           </div>
         </mat-card-content>
       </mat-card>
@@ -169,24 +171,23 @@
           <mat-card-title>Resumen compra</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="border">
-            <p>tienda 1 <br> cantidad de productos añadidos: 3</p>
-            <p class="aling-right">subTotal: $900</p>
-          </div>
-          <div class="border">
-            <p>tienda 2 <br> cantidad de productos añadidos: 6</p>
-            <p class="aling-right">subTotal: $700</p>
+          <div class="border" *ngFor="let store of ( order$ | async )">
+            <p>{{ store.razonsocial }} <br> cantidad de productos añadidos: {{ store.products.length }}</p>
+            <p class="aling-right">subTotal: {{ store.total | currency:'$':'symbol':'1.0-0' }}</p>
           </div>
         </mat-card-content>
         <mat-card-footer>
-          <mat-card-subtitle class="aling-right p-right-16">Total: $1.600</mat-card-subtitle>
+          <mat-card-subtitle class="aling-right p-right-16 font-style">Total: {{ totalPrice$ | async | currency:'$':'symbol':'1.0-0' }}</mat-card-subtitle>
         </mat-card-footer>
       </mat-card>
 
     </div>
 
     <div class="position-button">
-      <button class="margin-button" mat-stroked-button color="accent" matStepperNext>
+      <button class="margin-button" 
+              mat-stroked-button color="accent" 
+              matStepperNext
+              (click)="sendOrder()">
         Finalizar
         <mat-icon>
           turned_in_not
@@ -194,9 +195,5 @@
       </button>
     </div>
 
-=======
-    <p>You are now done.</p>
-    <a mat-button (click)="sendOrder()">Enviar pedido</a>
->>>>>>> experimentos
   </mat-step>
 </mat-horizontal-stepper>

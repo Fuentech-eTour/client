@@ -46,6 +46,13 @@ nav > a.active {
   padding-bottom: 64px;
 }
 
+.align-center {
+  align-items: center;
+  mat-icon {
+    cursor: pointer;
+  }
+}
+
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;

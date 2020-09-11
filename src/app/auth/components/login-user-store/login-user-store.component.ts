@@ -36,6 +36,7 @@ export class LoginUserStoreComponent implements OnInit {
       this.authService.loginUserStore(user)
         .subscribe( (res: any) => {
           localStorage.setItem('token', res.data.token);
+          localStorage.setItem('refreshToken', res.data.refreshToken);
           localStorage.setItem('user_name', res.data.user_name);
           localStorage.setItem('idstore', res.data.idstore);
           localStorage.setItem('session', 'isStore');

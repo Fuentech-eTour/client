@@ -303,3 +303,15 @@ body::-webkit-scrollbar-track:active {
     overflow: hidden !important;
 }
 /* tabs module search --final-- */
+
+/*sidenav izquierdo y derecho --init--*/
+// para que la pantalla negra ocupe todo el espacio
+.mat-drawer-container {
+    position: inherit !important;
+}
+
+.mat-drawer-backdrop {
+    position: fixed !important;
+}
+
+/*sidenav izquierdo y derecho --final--*/

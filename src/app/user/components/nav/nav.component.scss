@@ -51,6 +51,14 @@ nav > a.active {
   background-size: cover;
 }
 
+.actions-cont {
+  align-items: center;
+  button {
+    min-width: 0px;
+    padding: 0px 0px 0px 16px;
+  }
+}
+
 .active {
   background-color: #f0f0f07a;
   color: #f3006d;
