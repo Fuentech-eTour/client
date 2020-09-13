@@ -6,11 +6,11 @@ import { OrderService } from '@core/services/order.service';
 import { WindowService } from '@core/services/window.service';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss']
+  selector: 'app-purchase-detail',
+  templateUrl: './purchase-detail.component.html',
+  styleUrls: ['./purchase-detail.component.scss']
 })
-export class OrderDetailComponent implements OnInit {
+export class PurchaseDetailComponent implements OnInit {
 
   orderDetail$: Observable<any>;
   displayedColumns: string[] = ['Codigo', 'Nombre', 'Cantidad', 'Subtotal'];
@@ -28,15 +28,18 @@ export class OrderDetailComponent implements OnInit {
     this.orderDetail$ = this.route.params
     .pipe(
       switchMap((params: Params) => {
-        if (localStorage.getItem('newOrders')) {
+        /* if (localStorage.getItem('newOrders')) {
           const newOrderUnreviewed = JSON.parse(localStorage.getItem('newOrders'));
           const newData = newOrderUnreviewed.filter((data: any) => data.order !== parseInt(params.id, 10));
           localStorage.setItem('newOrders', JSON.stringify(newData));
-        }
-        return this.orderService.getOneSellById(params.id).pipe();
+        } */
+        return this.orderService.getOnePurchasesByIdClient(params.id);
       })
     );
-    this.orderDetail$.subscribe(() => this.windowService.loadingFalse());
+    this.orderDetail$.subscribe((res: any) => {
+      console.log(res);
+      this.windowService.loadingFalse();
+    });
   }
 
 }

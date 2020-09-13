@@ -10,17 +10,6 @@ import { UsersService } from '@core/services/users.service';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent implements OnInit {
-  addressForm = this.fb.group({
-    address: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required]
-  });
-
-  states = [
-    {name: 'Alabama', abbreviation: 'AL'},
-    {name: 'Alaska', abbreviation: 'AK'},
-    {name: 'American Samoa', abbreviation: 'AS'}
-  ];
 
   form: FormGroup;
   municipalities: any;

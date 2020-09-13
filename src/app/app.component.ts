@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.updatePWA();
-    this.requestPermission();
-    this.listenNotifications();
+    // this.requestPermission();
+    // this.listenNotifications();
     if (!localStorage.getItem('session')) {
       localStorage.setItem('session', '');
     }

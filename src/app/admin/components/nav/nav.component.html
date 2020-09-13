@@ -72,23 +72,31 @@
     <h1 style="padding: 0px 16px;">Notificaciones</h1>
     <p style="padding: 0px 16px 5px; border-bottom: solid 1px #e0e0e0;">Sin revisar</p>
     <div style="padding: 0px 16px;">
-        <button *ngFor="let order of order$ | async"
+        <div *ngFor="let order of order$ | async"
                 [routerLink]="['/admin/orders/detail', order.order]" 
-                mat-menu-item style="border-bottom: solid 1px #e0e0e0; padding: 0px 5px;">
+                mat-menu-item 
+                style=" display: flex; 
+                        align-items: center;
+                        margin: 5px 0px; 
+                        border-bottom: solid 1px #e0e0e0;
+                        cursor: pointer;">
             <mat-icon style="color: crimson;">fiber_manual_record</mat-icon>
             <span>{{ order.userName | titlecase | slice:0:9 }} | </span>
             <span>orden N°: {{ order.order }}</span>
-        </button>
+        </div>
     </div>
     <p style="  padding: 16px 16px 5px; 
-                border-bottom: solid 1px #e0e0e0;">Pedidos pendientes</p>
+                border-bottom: solid 1px #e0e0e0;">
+                Pedidos pendientes
+    </p>
     <div style="padding: 0px 16px;">
         <div    *ngFor="let order of pendingOrder$ | async"
                 [routerLink]="['/admin/orders/detail', order.id]" 
                 style=" display: flex; 
                         align-items: center;
                         margin: 5px 0px; 
-                        border-bottom: solid 1px #e0e0e0;">
+                        border-bottom: solid 1px #e0e0e0;
+                        cursor: pointer;">
             <mat-icon style="color: #80ad55;">shopping_basket</mat-icon>
             <p style="margin: 0px; padding: 0px 5px;"> 
                 <span>Orden N°: {{ order.id }} - </span><span>&nbsp;</span>
@@ -97,5 +105,9 @@
                 <!-- <span>Total: {{ order.valortotal | currency:'$':'symbol':'1.0-0' }}</span> -->
             </p>
         </div>
+    </div>
+    <div    *ngIf="isloadingTwo$ | async"
+            style="justify-content: center; display: flex; width: 100%;">
+        <mat-spinner diameter=24></mat-spinner>
     </div>
 </mat-menu>

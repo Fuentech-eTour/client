@@ -23,6 +23,18 @@
                 padding: 8px;
                 margin: 0px;
                 cursor: pointer;
+                span {
+                    font-size: 18px;
+                }
+                .tag {
+                    font-size: 10px;
+                    background-color: lightslategray;
+                    border-radius: 5px;
+                    text-align: center;
+                    padding: 0px 5px;
+                    color: white;
+                    margin-right: 5px;
+                }
             }
         }
         .nav-cont {
@@ -209,6 +221,10 @@
                         margin: 0px 3px;
                     }
                 }
+            }
+            .btn-style-right {
+                margin: 0px;
+                min-width: 0px;
             }
             .btn-style-desktop {
                 display: none;

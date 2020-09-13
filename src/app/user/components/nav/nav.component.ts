@@ -18,6 +18,8 @@ export class NavComponent implements OnInit {
       map(result => result.matches),
       shareReplay()
     );
+  private isloading = new BehaviorSubject<boolean>(false);
+  isloading$ = this.isloading.asObservable();
   matBageShow$: Observable<boolean>;
   nameUser$: Observable<string>;
   stateOrders = [];
@@ -37,6 +39,9 @@ export class NavComponent implements OnInit {
       if (localStorage.getItem('stateNotifications')) {
         this.numNewOrders.next(parseInt(localStorage.getItem('stateNotifications'), 10));
       }
+      if (localStorage.getItem('stateOrders')) {
+        this.stateOrder.next(JSON.parse(localStorage.getItem('stateOrders')));
+      }
     }
 
     ngOnInit() {
@@ -47,6 +52,7 @@ export class NavComponent implements OnInit {
           localStorage.setItem('stateNotifications', this.stateNumOrder.toString());
           this.numNewOrders.next(this.stateNumOrder);
           this.stateOrders.push(data);
+          localStorage.setItem('stateOrders', JSON.stringify(this.stateOrders));
           this.stateOrder.next(this.stateOrders);
         });
       this.matBageShow$ = this.numNewOrders$

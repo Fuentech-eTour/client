@@ -8,17 +8,20 @@
                     cursor: pointer;">
                 <img *ngIf="store.imagen ==='' || store.imagen === null || store.imagen === undefined" src="./../../../../assets/images/icon-store.png">
             </div>
-            <mat-card-title [routerLink]="['/stores', store.id]">
-                {{store.razonsocial | titlecase}}
+            <mat-card-title>
+                <span [routerLink]="['/stores', store.id]">{{store.razonsocial | titlecase}}</span><br>
+                <!-- <span *ngIf="(qualificationStore$ | async) === -1">Sin puntuación</span> -->
+                <span   class="tag" 
+                        [matMenuTriggerFor]="aboveMenu" 
+                        *ngIf="(qualificationStore$ | async) !== -1">
+                        Punt: {{ qualificationStore$ | async | currency:'':'':'1.2-2' }}
+                </span>
+                <span class="tag">{{'14:00 - 22:00'}}</span>
             </mat-card-title>
         </div>
 
         <div class="row show-hover nav-cont">
             <div class="row">
-                <!-- menu qualification display: none; a espera de implementacion -->
-                <a mat-button [matMenuTriggerFor]="aboveMenu" class="btn-style" style="display: none;">
-                    <mat-icon style="color: #73726c;">star_border</mat-icon>
-                </a>
                 <mat-card-subtitle [routerLink]="['/stores', store.id]">
                     ver mas
                 </mat-card-subtitle>
@@ -68,7 +71,10 @@
             </a> -->
         </div>
         <div class="row btn-cont">
-            <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style">
+            <a mat-button [matMenuTriggerFor]="aboveMenu" class="btn-style btn-style-right">
+                <mat-icon style="color: #73726c;">star_border</mat-icon>
+            </a>
+            <a mat-button routerLink="/stores" routerLinkActive="active" mat-button class="btn-style btn-style-right">
                 <mat-icon  style="color: #73726c;">more_horiz</mat-icon>
             </a>
         </div>
@@ -139,10 +145,48 @@
 <!-- menu qualification -->
 <mat-menu #aboveMenu="matMenu" yPosition="above">
     <a mat-button class="btn-style">
-        <mat-icon style="color: #73726c;">star_border</mat-icon>
-        <mat-icon style="color: #73726c;">star_border</mat-icon>
-        <mat-icon style="color: #73726c;">star_border</mat-icon>
-        <mat-icon style="color: #73726c;">star_border</mat-icon>
-        <mat-icon style="color: #73726c;">star_border</mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover1 === '1' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal1()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(1)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover2 === '2' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal2()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(2)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover3 === '3' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal3()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(3)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover4 === '4' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal4()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(4)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover5 === '5' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal5()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(5)">
+                    star_border
+        </mat-icon>
     </a>
+    <!-- <mat-slider
+        class="example-margin"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [thumbLabel]="thumbLabel"
+        [tickInterval]="getSliderTickInterval()">
+    </mat-slider> -->
 </mat-menu>

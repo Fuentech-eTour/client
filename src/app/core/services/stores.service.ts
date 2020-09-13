@@ -114,6 +114,22 @@ export class StoresService {
     );
   }
 
+  addQualificationStore(idstore: number, quantity: number) {
+    return this.http.post(`${environment.url_api}/stores/agregarpuntuacion`, { idtienda: idstore, puntuacion: quantity })
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getQualificationStore(idstore: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenerpuntuaciontienda/${idstore}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
     Sentry.captureException(error);

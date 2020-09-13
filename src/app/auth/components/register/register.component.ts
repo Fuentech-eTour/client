@@ -7,6 +7,8 @@ import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
 import { StoresService } from '@core/services/stores.service';
 import { ProductsService } from '@core/services/products/products.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { OrderService } from '@core/services/order.service';
 
 @Component({
   selector: 'app-register',
@@ -23,9 +25,11 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private windowService: WindowService,
+    private orderService: OrderService,
     private storesService: StoresService,
     private productsService: ProductsService,
-    public dialogRef: MatDialogRef<RegisterComponent>
+    public dialogRef: MatDialogRef<RegisterComponent>,
+    private snackBar: MatSnackBar,
   ) {
     this.buildForm();
   }
@@ -44,19 +48,26 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       this.windowService.loadingTrue();
       this.authService.createUser(this.form.value)
-      .subscribe( (res: any) => {
+      .subscribe( (resData: any) => {
         this.windowService.loadingFalse();
-        if (res.status === 'OK') {
+        if (resData.status === 'OK') {
           this.windowService.loadingTrue();
           this.dialogRef.close();
           this.authService.login(this.form.value)
-            .subscribe((resLogin: any) => {
-              if (resLogin.status === 'OK') {
-                localStorage.setItem('token', resLogin.data.accessToken);
-                localStorage.setItem('user_name', resLogin.data.user_name);
+            .subscribe((res: any) => {
+              this.openSnackBar(res.message);
+              this.windowService.loadingFalse();
+              if (res.status === 'OK') {
+                this.openSnackBar('Inicio de sesión exitoso');
+                localStorage.setItem('token', res.data.accessToken);
+                localStorage.setItem('refreshToken', res.data.refreshToken);
+                localStorage.setItem('user_name', res.data.user_name);
                 localStorage.setItem('session', 'isClient');
+                localStorage.setItem('idClient', res.data.dato);
+                this.orderService.joinUser();
                 this.windowService.stateSession('isClient');
-                this.windowService.addUserName(resLogin.data.user_name.split(' ')[0]);
+                this.windowService.addIdClient(res.data.dato);
+                this.windowService.addUserName(res.data.user_name.split(' ')[0]);
                 this.storesService.getStoreFavorite().subscribe(data => {
                   this.storesService.stateFavoriteStore(data);
                 });
@@ -64,7 +75,6 @@ export class RegisterComponent implements OnInit {
                   this.productsService.stateFavoriteProducts(data);
                 });
                 this.router.navigate(['./stores']);
-                this.windowService.loadingFalse();
               }
             });
         }
@@ -97,6 +107,14 @@ export class RegisterComponent implements OnInit {
     } else {
       this.passwordVerify = false;
     }
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
 }

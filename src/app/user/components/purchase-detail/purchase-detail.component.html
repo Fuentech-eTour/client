@@ -11,6 +11,10 @@
         <span><strong>E-mail:</strong> {{ order.email | lowercase }}</span><br>
         <span><strong>Fecha:</strong> {{  order.fechaventa | date:'shortDate' }} </span><span><strong>Hora:</strong> {{ order.horaventa }}</span><br>
 
+        <div>
+            <met-mat-card-subtitle>{{ order.razonsocial }}</met-mat-card-subtitle>
+        </div>
+
         <table mat-table [dataSource]="order.products" class="mat-elevation-z8 product-table">
             <ng-container matColumnDef="Codigo">
                 <th mat-header-cell *matHeaderCellDef> Código </th>
@@ -44,3 +48,4 @@
         <mat-card-subtitle>Total: {{ order.valortotal | currency:'$':'symbol':'1.0-0' }}</mat-card-subtitle>
     </footer>
 </mat-card>
+

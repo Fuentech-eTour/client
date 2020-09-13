@@ -56,6 +56,9 @@ export class AuthService {
           localStorage.removeItem('refreshToken');
           localStorage.removeItem('user_name');
           localStorage.removeItem('idstore');
+          localStorage.removeItem('stateNotifications');
+          localStorage.removeItem('stateOrders');
+          localStorage.removeItem('newOrders');
           localStorage.setItem('session', '');
           localStorage.setItem('idClient', '');
           this.windowService.stateSession('');

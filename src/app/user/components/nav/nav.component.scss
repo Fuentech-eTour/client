@@ -53,9 +53,9 @@ nav > a.active {
 
 .actions-cont {
   align-items: center;
-  button {
+  button, span {
     min-width: 0px;
-    padding: 0px 0px 0px 16px;
+    padding: 0px 8px;
   }
 }
 

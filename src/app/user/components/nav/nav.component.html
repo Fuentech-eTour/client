@@ -33,13 +33,6 @@
               <div class="row between-xs middled-xs actions-cont">
                   <span routerLink="/user">{{ nameUser$ | async | titlecase | slice:0:12 }}</span>
                   <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                  <button mat-button 
-                          routerLink="/stores" 
-                          routerLinkActive="active">
-                          <mat-icon style="color: #73726c;">
-                            storefront
-                          </mat-icon>
-                        </button>
                   <button mat-button>
                           <mat-icon   [matBadge]="numNewOrders$ | async"
                                       [matBadgeHidden]="matBageShow$ | async" 
@@ -51,6 +44,13 @@
                                       notifications
                           </mat-icon>
                   </button>
+                  <button mat-button 
+                          routerLink="/stores" 
+                          routerLinkActive="active">
+                          <mat-icon style="color: #73726c;">
+                            storefront
+                          </mat-icon>
+                        </button>
               </div>
           </div>
       </mat-toolbar-row>
@@ -71,11 +71,13 @@
                       border-bottom: solid 1px #e0e0e0;">
                       <mat-card-subtitle>Aún no realizas una compra.</mat-card-subtitle>
       </div>
-      <div    *ngFor="let stateOrder of stateOrder$ | async" 
+      <div    *ngFor="let stateOrder of stateOrder$ | async"
+              [routerLink]="['/user/orders/detail', stateOrder.idSell]" 
               style=" display: flex; 
                       align-items: center;
                       margin: 5px 0px; 
-                      border-bottom: solid 1px #e0e0e0;">
+                      border-bottom: solid 1px #e0e0e0;
+                      cursor: pointer;">
           <mat-icon style="color: #80ad55;">fiber_manual_record</mat-icon>
           <p style="margin: 0px; padding: 0px 5px;"> 
             <span>Orden N°: {{ stateOrder.idSell }}</span>
@@ -100,4 +102,8 @@
           </p>
       </div>
   </div> -->
+  <div    *ngIf="isloading$ | async"
+            style="justify-content: center; display: flex; width: 100%;">
+        <mat-spinner diameter=24></mat-spinner>
+    </div>
 </mat-menu>

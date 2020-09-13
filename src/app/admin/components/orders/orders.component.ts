@@ -18,6 +18,8 @@ export class OrdersComponent implements OnInit {
   order$ = this.order.asObservable();
   private isloading = new BehaviorSubject<boolean>(false);
   isloading$ = this.isloading.asObservable();
+  private isloadingTwo = new BehaviorSubject<boolean>(false);
+  isloadingTwo$ = this.isloadingTwo.asObservable();
   private pendingOrder = new BehaviorSubject<any[]>([]);
   pendingOrder$ = this.pendingOrder.asObservable();
   private historyOrder = new BehaviorSubject<any[]>([]);
@@ -44,9 +46,11 @@ export class OrdersComponent implements OnInit {
   }
 
   fetchPendingOrder() {
+    this.isloading.next(true);
     this.orderService.getShoppingByOneStore()
       .subscribe((data: any) => {
         console.log(data);
+        this.isloading.next(false);
         if (data.status === 402) {
           return;
         }
@@ -56,8 +60,10 @@ export class OrdersComponent implements OnInit {
   }
 
   fetchHistoryOrder() {
+    this.isloadingTwo.next(true);
     this.orderService.getSellsByOneStore()
     .subscribe((data: any) => {
+      this.isloadingTwo.next(false);
       if (data.status === 402) {
         return;
       }

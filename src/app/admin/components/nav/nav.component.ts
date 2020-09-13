@@ -31,6 +31,8 @@ export class NavComponent implements OnInit {
   numNewOrders$ = this.numNewOrders.asObservable();
   private pendingOrder = new BehaviorSubject<any[]>([]);
   pendingOrder$ = this.pendingOrder.asObservable();
+  private isloadingTwo = new BehaviorSubject<boolean>(false);
+  isloadingTwo$ = this.isloadingTwo.asObservable();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -74,6 +76,7 @@ export class NavComponent implements OnInit {
     }
 
     fetchPendingOrder() {
+      this.isloadingTwo.next(true);
       // Reinicia las notificaciones
       this.numNewOrders.next(0);
       localStorage.setItem('stateNotifications', '0');
@@ -85,6 +88,7 @@ export class NavComponent implements OnInit {
 
       this.orderService.getShoppingByOneStore()
         .subscribe((data: any) => {
+          this.isloadingTwo.next(false);
           if (data.status === 402) {
             return;
           }

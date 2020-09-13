@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 
 import { AddProduct } from '../../../core/models/addProduct.model';
 import { CartService } from './../../../core/services/cart.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -31,7 +31,8 @@ export class HeaderComponent implements OnInit {
   products$: Observable<AddProduct[]>;
   matBageShow$: Observable<boolean>;
   nameUser$: Observable<any>;
-  isLoading$: Observable<boolean>;
+  private isLoading = new BehaviorSubject<boolean>(false);
+  isLoading$ = this.isLoading.asObservable();
   selectAddress$: Observable<any>;
   installEvent;
   showFiller = false;
@@ -60,12 +61,14 @@ export class HeaderComponent implements OnInit {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
     this.nameUser$ = this.windowService.userName$;
-    this.isLoading$ = this.windowService.isloading$;
     this.selectAddress$ = this.usersService.selectAddress$;
     this.rol$ = this.windowService.session$;
   }
 
   ngOnInit() {
+    this.windowService.isloading$.subscribe(data => {
+      this.isLoading.next(data);
+    });
     this.usersService.selectAddress$.subscribe(console.log);
   }
 

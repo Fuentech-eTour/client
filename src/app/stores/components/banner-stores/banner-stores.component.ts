@@ -38,6 +38,22 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   stateComment$ = this.stateComment.asObservable();
   idClient: Observable<any>;
   idCommentEdit = -1;
+  private qualificationStore = new BehaviorSubject<number>(0);
+  qualificationStore$ = this.qualificationStore.asObservable();
+  colorHover1 = '0';
+  colorHover2 = '0';
+  colorHover3 = '0';
+  colorHover4 = '0';
+  colorHover5 = '0';
+  // Calificacion con slider
+  autoTicks = false;
+  max = 5;
+  min = 0;
+  showTicks = true;
+  step = 0.1;
+  thumbLabel = true;
+  value = 0;
+  tickInterval = 1;
 
   constructor(
     private cartService: CartService,
@@ -63,6 +79,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         }
       }
     });
+    this.fetchQualificationStore();
   }
 
   ngAfterViewInit() {
@@ -229,4 +246,68 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     });
   }
 
+  selectCal1() {
+    this.colorHover1 = '1';
+  }
+  selectCal2() {
+    this.colorHover1 = '1';
+    this.colorHover2 = '2';
+  }
+  selectCal3() {
+    this.colorHover1 = '1';
+    this.colorHover2 = '2';
+    this.colorHover3 = '3';
+  }
+  selectCal4() {
+    this.colorHover1 = '1';
+    this.colorHover2 = '2';
+    this.colorHover3 = '3';
+    this.colorHover4 = '4';
+  }
+  selectCal5() {
+    this.colorHover1 = '1';
+    this.colorHover2 = '2';
+    this.colorHover3 = '3';
+    this.colorHover4 = '4';
+    this.colorHover5 = '5';
+  }
+
+  offSelectCal() {
+    this.colorHover1 = '0';
+    this.colorHover2 = '0';
+    this.colorHover3 = '0';
+    this.colorHover4 = '0';
+    this.colorHover5 = '0';
+  }
+
+  sendQualification(quantity: number) {
+    this.colorHover1 = '0';
+    this.colorHover2 = '0';
+    this.colorHover3 = '0';
+    this.colorHover4 = '0';
+    this.colorHover5 = '0';
+    this.storesService.addQualificationStore(this.store.id, quantity)
+    .subscribe(({ message }: any) => {
+      this.openSnackBar(message);
+    });
+  }
+
+  fetchQualificationStore() {
+    this.storesService.getQualificationStore(this.store.id).subscribe(({ puntuacion }: any) => {
+      console.log(puntuacion);
+      if (puntuacion !== 'Aun no tiene puntuacion') {
+        this.qualificationStore.next(puntuacion);
+      } else {
+        this.qualificationStore.next(-1);
+      }
+    });
+  }
+
+  getSliderTickInterval(): number | 'auto' {
+    if (this.showTicks) {
+      return this.autoTicks ? 'auto' : this.tickInterval;
+    }
+
+    return 0;
+  }
 }

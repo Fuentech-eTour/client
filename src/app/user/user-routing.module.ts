@@ -6,6 +6,7 @@ import { SettingComponent } from './components/setting/setting.component';
 import { SavedListsComponent } from './components/saved-lists/saved-lists.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
 
 
 const routes: Routes = [{
@@ -23,6 +24,10 @@ const routes: Routes = [{
     {
       path: 'orders',
       component: OrdersComponent
+    },
+    {
+      path: 'orders/detail/:id',
+      component: PurchaseDetailComponent
     },
     {
       path: 'subscriptions',

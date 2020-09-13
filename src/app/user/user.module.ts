@@ -12,6 +12,7 @@ import { SubscriptionsComponent } from './components/subscriptions/subscriptions
 import { OrdersComponent } from './components/orders/orders.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ProductModule } from '../product/product.module';
+import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ProductModule } from '../product/product.module';
     SavedListsComponent,
     SubscriptionsComponent,
     OrdersComponent,
+    PurchaseDetailComponent,
   ],
   imports: [
     CommonModule,

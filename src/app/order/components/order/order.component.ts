@@ -39,7 +39,7 @@ export class OrderComponent implements OnInit {
   municipality$ = this.municipality.asObservable();
   private isloading = new BehaviorSubject<boolean>(true);
   isloading$ = this.isloading.asObservable();
-  private addresses = new BehaviorSubject<any>([]);
+  private addresses = new BehaviorSubject<any[]>([]);
   addresses$ = this.addresses.asObservable();
   token: string;
   isLinear = true;
@@ -79,13 +79,6 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  fetchAllAddress() {
-    this.usersService.getAllAddress().subscribe(data => {
-      this.isloading.next(false);
-      this.addresses.next(data);
-    });
-  }
-
   selectAddress(address) {
     this.usersService.addSelectAddress(address);
   }
@@ -106,7 +99,16 @@ export class OrderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       this.fetchAllAddress();
+    });
+  }
+
+  fetchAllAddress() {
+    this.usersService.getAllAddress().subscribe(data => {
+      console.log(data);
+      this.isloading.next(false);
+      this.addresses.next(data);
     });
   }
 
