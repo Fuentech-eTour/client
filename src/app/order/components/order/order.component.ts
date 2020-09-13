@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
 import { AddressComponent } from '../address/address.component';
 import { UsersService } from '@core/services/users.service';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -10,6 +10,7 @@ import { CartService } from '@core/services/cart.service';
 import { AuthService } from '@core/services/auth.service';
 import { OrderService } from '@core/services/order.service';
 import { UtilityService } from '@core/services/utility.service';
+
 
 export interface DialogData {
   animal: string;
@@ -53,6 +54,7 @@ export class OrderComponent implements OnInit {
     private usersService: UsersService,
     private dialog: MatDialog,
     private utilityService: UtilityService,
+    private router: Router,
   ) {
     this.products$ = this.cartService.cart$;
     this.order$ = this.cartService.order$;
@@ -124,6 +126,7 @@ export class OrderComponent implements OnInit {
                 console.log(data);
               }
               this.orderService.emitNewOrder(data);
+              this.router.navigate(['/user/orders']);
             }
         });
       });
