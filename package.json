@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "analyzer": "npx webpack-bundle-analyzer dist/platzi-store/stats-es2015.json"
+    "analyzer": "npx webpack-bundle-analyzer dist/ema/stats-es2015.json"
   },
   "private": true,
   "dependencies": {
