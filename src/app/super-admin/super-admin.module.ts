@@ -14,13 +14,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { CreateUserStoreComponent } from './components/create-user-store/create-user-store.component';
 import { CreateStoreComponent } from './components/create-store/create-store.component';
+import { TagsComponent, EditTagComponent } from './components/tags/tags.component';
 
 
 @NgModule({
   declarations: [
     NavComponent,
     CreateUserStoreComponent,
-    CreateStoreComponent
+    CreateStoreComponent,
+    TagsComponent,
+    EditTagComponent
   ],
   imports: [
     CommonModule,

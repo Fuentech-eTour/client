@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
 import { CreateUserStoreComponent } from './components/create-user-store/create-user-store.component';
 import { CreateStoreComponent } from './components/create-store/create-store.component';
+import { TagsComponent } from './components/tags/tags.component';
 
 
 const routes: Routes = [{
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'create-store',
       component: CreateStoreComponent
+    },
+    {
+      path: 'tags',
+      component: TagsComponent
     },
   ]
 }];

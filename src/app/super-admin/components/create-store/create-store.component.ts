@@ -9,6 +9,7 @@ import { WindowService } from '@core/services/window.service';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UtilityService } from '../../../core/services/utility.service';
 
 @Component({
   selector: 'app-create-store',
@@ -23,11 +24,13 @@ export class CreateStoreComponent implements OnInit {
   passwordVerify: boolean;
   image: any;
   file: any;
+  municipalities: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private storesService: StoresService,
     private windowService: WindowService,
+    private utilityService: UtilityService,
     private router: Router,
     private angularFireStorage: AngularFireStorage,
     private snackBar: MatSnackBar,
@@ -36,6 +39,13 @@ export class CreateStoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchAllMunicipality();
+  }
+
+  fetchAllMunicipality() {
+    this.utilityService.getAllMunicipality().subscribe(data => {
+      this.municipalities = data;
+    });
   }
 
   saveStore(event: Event) {

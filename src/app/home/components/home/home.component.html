@@ -1,5 +1,6 @@
 <div class="container-home">
-    <app-banner ></app-banner>
+    <!-- <app-banner ></app-banner> -->
+    <app-banner-gifs></app-banner-gifs>
     <form class="form-btn-search">
         <div class="cont-btn-search">
             <input class="btn-search" type="text" autocomplete="off" matInput placeholder="Buscar...">
@@ -14,12 +15,5 @@
             <app-subscription-plans *ngFor="let subscription of subscriptions" [subs]="subscription">
             </app-subscription-plans>
         </div>
-    </div>
-</div>
-<div style="text-align: center; padding: 20px;">
-    <h1>Planes de suscripción</h1>
-    <div class="subscription-product-grid">
-        <app-subscription-plans *ngFor="let subscription of subscriptions" [subs]="subscription">
-        </app-subscription-plans>
     </div>
 </div>

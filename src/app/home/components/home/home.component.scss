@@ -71,3 +71,13 @@
 
 
 /* sistemas de grillas para las tarjetas de las suscripciones -- final -- */
+
+app-footer {
+    display: block;
+    footer {
+        margin-bottom: 0px;
+    }
+    @media (min-width: 1120px) {
+        display: none;
+    }
+}

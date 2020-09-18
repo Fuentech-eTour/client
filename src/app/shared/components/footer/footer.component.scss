@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 $primary: mat-palette($mat-indigo);
 footer {
-    padding: 50px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
     margin-top: 0px;
     margin-bottom: 56px;
     border-top: solid 1px #dbdcdd;
@@ -70,5 +70,5 @@ footer {
     width: 100%;
     text-align: center;
     align-items: center;
-    padding: 20px 0px;
+    padding: 20px 20px;
 }

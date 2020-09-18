@@ -18,7 +18,7 @@ export class NavComponent {
       map(result => result.matches),
       shareReplay()
     );
-  userName: string;
+  nameUser$: Observable<any>;
   isLoading$: Observable<boolean>;
 
   constructor(
@@ -26,7 +26,7 @@ export class NavComponent {
     private authService: AuthService,
     private windowService: WindowService,
     ) {
-      this.userName = this.authService.getUserName();
+      this.nameUser$ = this.windowService.userName$;
       this.isLoading$ = this.windowService.isloading$;
     }
 

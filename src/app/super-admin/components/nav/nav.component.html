@@ -7,7 +7,8 @@
     <mat-nav-list>
       <a mat-list-item routerLink="create-store" routerLinkActive="active">Crear Tienda</a>
       <a mat-list-item routerLink="create-user-store" routerLinkActive="active">Crear Usuario Tienda</a>
-      <a mat-list-item routerLink="/super-admin" routerLinkActive="active">Cerrar Sesión</a>
+      <a mat-list-item routerLink="tags" routerLinkActive="active">Categorias</a>
+      <a mat-list-item routerLink="/stores" routerLinkActive="active">Volver</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,8 +23,8 @@
                   <span style="color: #f3006d;">ema</span>
               </nav>
               <div class="row between-xs middled-xs">
-                  <a mat-button routerLink="/super-admin" routerLinkActive="active">{{userName}}</a>
-                  <div mat-card-avatar class="example-header-image"></div>
+                  <a mat-button routerLink="/super-admin" routerLinkActive="active">{{ nameUser$ | async | titlecase }}</a>
+                  <!-- <div mat-card-avatar class="example-header-image"></div> -->
               </div>
           </div>
       </mat-toolbar-row>

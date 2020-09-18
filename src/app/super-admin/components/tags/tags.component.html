@@ -1,0 +1,105 @@
+<mat-card>
+    <div class="action-buttons">
+        <button mat-stroked-button color="accent" (click)="accordion.openAll()">Abrir todo</button>
+        <button mat-stroked-button color="accent" (click)="accordion.closeAll()">Cerrar todo</button>
+      </div>
+      <mat-accordion class="headers-align" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Categorías tiendas
+            </mat-panel-title>
+            <mat-spinner *ngIf="isloading$ | async" diameter=24></mat-spinner>
+            <mat-icon style="color: #0000008a; padding-right: 10px;">location_on</mat-icon>
+          </mat-expansion-panel-header>
+      
+            <table mat-table [dataSource]="tagsStores$ | async" class="mat-elevation-z8 product-table">
+              <ng-container matColumnDef="Categoria">
+                  <th mat-header-cell *matHeaderCellDef> Categoría </th>
+                  <td mat-cell *matCellDef="let tag"> {{ tag.descripcion }} </td>
+              </ng-container>
+              <ng-container matColumnDef="Acciones">
+                  <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td class="aling-action" mat-cell *matCellDef="let tag"> 
+                      <a mat-button (click)="openDialog(tag)">
+                          <mat-icon color="primary">edit</mat-icon>
+                      </a>
+                      <a mat-button (click)="deleteAddress(tag.id)">
+                          <mat-icon color="warn">delete_outline</mat-icon>
+                      </a>
+                  </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+      
+        </mat-expansion-panel>
+      
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Agregar categoría tienda
+            </mat-panel-title>
+            <mat-icon style="color: #0000008a; padding-right: 10px;">add_location</mat-icon>
+          </mat-expansion-panel-header>
+          <form [formGroup]="form" (ngSubmit)="saveTag($event)">
+
+            <mat-form-field>
+              <mat-label>Categoría</mat-label>
+              <input matInput formControlName="tag" type="text" autocomplete="off">
+            </mat-form-field>
+  
+            <button class="btn-save" [disabled]="form.invalid" mat-raised-button type="submit" [ngClass]="{btnActive: !form.invalid}">Guardar</button>
+          </form>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Categorías productos
+              </mat-panel-title>
+              <mat-spinner *ngIf="isloading$ | async" diameter=24></mat-spinner>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">location_on</mat-icon>
+            </mat-expansion-panel-header>
+        
+              <table mat-table [dataSource]="tagsStores$ | async" class="mat-elevation-z8 product-table">
+                <ng-container matColumnDef="Categoria">
+                    <th mat-header-cell *matHeaderCellDef> Categoría </th>
+                    <td mat-cell *matCellDef="let tag"> {{ tag.descripcion }} </td>
+                </ng-container>
+                <ng-container matColumnDef="Acciones">
+                    <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td class="aling-action" mat-cell *matCellDef="let tag"> 
+                        <a mat-button (click)="openDialog(tag)">
+                            <mat-icon color="primary">edit</mat-icon>
+                        </a>
+                        <a mat-button (click)="deleteAddress(tag.id)">
+                            <mat-icon color="warn">delete_outline</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        
+          </mat-expansion-panel>
+        
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Agregar categoría producto
+              </mat-panel-title>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">add_location</mat-icon>
+            </mat-expansion-panel-header>
+            <form [formGroup]="form" (ngSubmit)="saveTag($event)">
+  
+              <mat-form-field>
+                <mat-label>Categoría</mat-label>
+                <input matInput formControlName="tag" type="text" autocomplete="off">
+              </mat-form-field>
+    
+              <button class="btn-save" [disabled]="form.invalid" mat-raised-button type="submit" [ngClass]="{btnActive: !form.invalid}">Guardar</button>
+            </form>
+          </mat-expansion-panel>
+      </mat-accordion>
+</mat-card>

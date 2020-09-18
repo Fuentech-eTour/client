@@ -48,6 +48,30 @@ export class TagsService {
       );
   }
 
+  createTagStore(tag: JSON) {
+    return this.http.post<any>(`${environment.url_api}/tags/creartagsstores`, tag)
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
+  updateTagStore(id: number, newTag: string) {
+    return this.http.put<any>(`${environment.url_api}/tags/actualizatagstore/${id}`, { tag: newTag })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
+  updateStateTag(id: number, newState: number) {
+    return this.http.put<any>(`${environment.url_api}/tags/estadotagstore/${id}`, { estado: newState })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
     console.log(error);
