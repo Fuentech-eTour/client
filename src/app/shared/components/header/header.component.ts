@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
   selectAddress$: Observable<any>;
+  session$: Observable<any>;
   installEvent;
   showFiller = false;
   stateIconMenu = false;
@@ -63,6 +64,7 @@ export class HeaderComponent implements OnInit {
     this.nameUser$ = this.windowService.userName$;
     this.selectAddress$ = this.usersService.selectAddress$;
     this.rol$ = this.windowService.session$;
+    this.session$ = this.windowService.session$;
   }
 
   ngOnInit() {
@@ -123,6 +125,10 @@ export class HeaderComponent implements OnInit {
     } else {
       this.router.navigate(['/admin']);
     }
+  }
+
+  openSearch() {
+    this.windowService.stateHeaderTrue();
   }
 
   @HostListener('window: beforeinstallprompt', ['$event'])

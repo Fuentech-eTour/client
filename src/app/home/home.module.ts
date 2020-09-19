@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
 import { SubscriptionPlansComponent } from './components/subscription-plans/subscription-plans.component';
 import { BannerGifsComponent } from './components/banner-gifs/banner-gifs.component';
+import { CardCategoryComponent } from './components/card-category/card-category.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { BannerGifsComponent } from './components/banner-gifs/banner-gifs.compon
         BannerComponent,
         SubscriptionPlansComponent,
         BannerGifsComponent,
+        CardCategoryComponent,
     ],
     imports: [
         HomeRoutingModule,

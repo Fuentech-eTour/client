@@ -19,8 +19,12 @@ export class TagsComponent implements OnInit {
   municipalities: any;
   private tagsStores = new BehaviorSubject<any>([]);
   tagsStores$ = this.tagsStores.asObservable();
+  private tagsProducts = new BehaviorSubject<any>([]);
+  tagsProducts$ = this.tagsProducts.asObservable();
   private isloading = new BehaviorSubject<boolean>(true);
   isloading$ = this.isloading.asObservable();
+  private isloadingTwo = new BehaviorSubject<boolean>(true);
+  isloadingTwo$ = this.isloadingTwo.asObservable();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,9 +37,10 @@ export class TagsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllTagsStore();
+    this.fetchAllTagsProduct();
   }
 
-  // tags products
+  // tags stores
 
   fetchAllTagsStore() {
     this.isloading.next(true);
@@ -46,7 +51,7 @@ export class TagsComponent implements OnInit {
     });
   }
 
-  saveTag(event: Event) {
+  saveTagStore(event: Event) {
     const newTag = this.form.value;
     this.tagsService.createTagStore(newTag).subscribe((res: any) => {
       console.log(res);
@@ -58,22 +63,42 @@ export class TagsComponent implements OnInit {
     });
   }
 
-  deleteAddress(idTag: number) {
-    this.tagsService.updateStateTag(idTag, 0).subscribe((res: any) => {
+  deleteTagStore(idTag: number) {
+    this.tagsService.updateStateTagStore(idTag, 0).subscribe((res: any) => {
       console.log(res);
       this.openSnackBar(res.message);
       this.fetchAllTagsStore();
     });
   }
 
-  // tags stores
+  // tags products
 
   fetchAllTagsProduct() {
-    this.isloading.next(true);
-    this.tagsService.getAllTagsStores().subscribe(data => {
+    this.isloadingTwo.next(true);
+    this.tagsService.getAllTagsProducts().subscribe(data => {
       console.log(data);
-      this.isloading.next(false);
-      this.tagsStores.next(data);
+      this.isloadingTwo.next(false);
+      this.tagsProducts.next(data);
+    });
+  }
+
+  saveTagProduct(event: Event) {
+    const newTag = this.form.value;
+    this.tagsService.createTagProduct(newTag).subscribe((res: any) => {
+      console.log(res);
+      this.openSnackBar(res.message);
+      if (res.status === 'OK' || res.status === 'Ok') {
+        this.form.reset();
+        this.fetchAllTagsProduct();
+      }
+    });
+  }
+
+  deleteTagProduct(idTag: number) {
+    this.tagsService.updateStateTagProduct(idTag, 0).subscribe((res: any) => {
+      console.log(res);
+      this.openSnackBar(res.message);
+      this.fetchAllTagsProduct();
     });
   }
 
@@ -91,14 +116,25 @@ export class TagsComponent implements OnInit {
     });
   }
 
-  openDialog(tag: any): void {
+  openDialogTagStore(tag: any): void {
     const dialogRef = this.dialog.open(EditTagComponent, {
       width: '300px',
-      data: { data: tag }
+      data: { data: tag, type: 'isTagStore' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.fetchAllTagsStore();
+    });
+  }
+
+  openDialogTagProduct(tag: any): void {
+    const dialogRef = this.dialog.open(EditTagComponent, {
+      width: '300px',
+      data: { data: tag, type: 'isTagProduct' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchAllTagsProduct();
     });
   }
 
@@ -132,15 +168,28 @@ export class EditTagComponent implements OnInit {
   }
 
   editTag(event: Event) {
-    const { data } = this.data;
-    const updateTag = this.form.value;
-    console.log(updateTag);
-    this.tagsService.updateTagStore(data.id, updateTag.descripcion).subscribe((res: any) => {
-      this.openSnackBar(res.message);
-      if (res.status === 'OK' || res.status === 'Ok') {
-        this.onNoClick();
-      }
-    });
+    if (this.data.type === 'isTagStore') {
+      const { data } = this.data;
+      const updateTag = this.form.value;
+      console.log(updateTag);
+      this.tagsService.updateTagStore(data.id, updateTag.descripcion).subscribe((res: any) => {
+        this.openSnackBar(res.message);
+        if (res.status === 'OK' || res.status === 'Ok') {
+          this.onNoClick();
+        }
+      });
+    }
+    if (this.data.type === 'isTagProduct') {
+      const { data } = this.data;
+      const updateTag = this.form.value;
+      console.log(updateTag);
+      this.tagsService.updateTagProduct(data.id, updateTag.descripcion).subscribe((res: any) => {
+        this.openSnackBar(res.message);
+        if (res.status === 'OK' || res.status === 'Ok') {
+          this.onNoClick();
+        }
+      });
+    }
   }
 
   private buildForm() {

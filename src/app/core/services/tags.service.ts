@@ -24,6 +24,30 @@ export class TagsService {
       );
   }
 
+  createTagProduct(tag: JSON) {
+    return this.http.post<any>(`${environment.url_api}/tags/creartags`, tag)
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
+  updateTagProduct(id: number, newTag: string) {
+    return this.http.put<any>(`${environment.url_api}/tags/actualizatag/${id}`, { tag: newTag })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
+  updateStateTagProduct(id: number, newState: number) {
+    return this.http.put<any>(`${environment.url_api}/tags/estadotag/${id}`, { estado: newState })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
   getAllTagsStores() {
     return this.http.get<any>(`${environment.url_api}/tags/obtenertagsstores`)
       .pipe(
@@ -64,7 +88,7 @@ export class TagsService {
       );
   }
 
-  updateStateTag(id: number, newState: number) {
+  updateStateTagStore(id: number, newState: number) {
     return this.http.put<any>(`${environment.url_api}/tags/estadotagstore/${id}`, { estado: newState })
       .pipe(
         retry(3),

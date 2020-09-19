@@ -117,8 +117,10 @@ export class OrderComponent implements OnInit {
   sendOrder() {
     this.usersService.selectAddress$
       .subscribe((address: any) => {
+        console.log(address);
         this.orderService.createSells(this.order, address.id)
           .subscribe(({ status, data }: any) => {
+            console.log(status, data);
             if (status === 'OK') {
               // tslint:disable-next-line: prefer-for-of
               for (let i = 0; i < data.length; i++) {

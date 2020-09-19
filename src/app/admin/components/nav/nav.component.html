@@ -72,6 +72,13 @@
     <h1 style="padding: 0px 16px;">Notificaciones</h1>
     <p style="padding: 0px 16px 5px; border-bottom: solid 1px #e0e0e0;">Sin revisar</p>
     <div style="padding: 0px 16px;">
+        <div    *ngIf="(order$ | async).length === 0" 
+                style=" display: flex; 
+                        align-items: center;
+                        margin: 5px 0px; 
+                        border-bottom: solid 1px #e0e0e0;">
+                        <mat-card-subtitle>Todo esta al día.</mat-card-subtitle>
+        </div>
         <div *ngFor="let order of order$ | async"
                 [routerLink]="['/admin/orders/detail', order.order]" 
                 mat-menu-item 
@@ -90,6 +97,13 @@
                 Pedidos pendientes
     </p>
     <div style="padding: 0px 16px;">
+        <div    *ngIf="(pendingOrder$ | async).length === 0" 
+                style=" display: flex; 
+                        align-items: center;
+                        margin: 5px 0px; 
+                        border-bottom: solid 1px #e0e0e0;">
+                        <mat-card-subtitle>No tienes pedidos pendientes.</mat-card-subtitle>
+        </div>
         <div    *ngFor="let order of pendingOrder$ | async"
                 [routerLink]="['/admin/orders/detail', order.id]" 
                 style=" display: flex; 

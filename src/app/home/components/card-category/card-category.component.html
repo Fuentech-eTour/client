@@ -1,0 +1,8 @@
+<mat-card (mouseenter)="mouseEnter('div a') " (mouseleave)="mouseLeave('div A')" [ngClass]="{show: estadoHover}">
+    <mat-card-header style="text-align: center;">
+        
+    </mat-card-header>
+    <mat-card-content style="text-align: center;">
+        <mat-card-subtitle style="font-size: 20px;">{{ tags.descripcion | titlecase }}</mat-card-subtitle>
+    </mat-card-content>
+</mat-card>

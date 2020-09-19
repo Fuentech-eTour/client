@@ -1,3 +1,17 @@
+.container-home {
+    div {
+        .title-cont {
+        display: flex;
+        justify-content: center;
+        mat-card-title {
+            width: auto;
+            cursor: pointer;
+        }
+    }
+    }
+    
+}
+
 /* input search -- init -- */
 
 .form-btn-search {

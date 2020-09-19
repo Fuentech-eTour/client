@@ -55,6 +55,7 @@ export class SubscriptionsComponent implements OnInit {
   fetchProductsFavotite() {
     this.isloadingTwo.next(true);
     this.productsService.getFavoriteProducts().subscribe((data: any) => {
+      console.log(data);
       this.isloadingTwo.next(false);
       if (data.status === 402) {
         return;

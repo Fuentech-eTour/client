@@ -1,19 +1,32 @@
 <div class="container-home">
     <!-- <app-banner ></app-banner> -->
     <app-banner-gifs></app-banner-gifs>
-    <form class="form-btn-search">
+    <!-- <form class="form-btn-search">
         <div class="cont-btn-search">
             <input class="btn-search" type="text" autocomplete="off" matInput placeholder="Buscar...">
             <mat-label class="label-btn-search">
                 <mat-icon style="color: #b1b1b1; font-size: 35px;">search</mat-icon>
             </mat-label>
         </div>
-    </form>
+    </form> -->
     <div style="text-align: center; padding: 20px 0px;">
-        <h1>Planes de suscripción</h1>
+        <div class="title-cont">
+            <mat-card-title [routerLink]="['/stores']">Categorías tiendas</mat-card-title>
+        </div>
         <div class="subscription-product-grid">
-            <app-subscription-plans *ngFor="let subscription of subscriptions" [subs]="subscription">
-            </app-subscription-plans>
+            <!-- <app-subscription-plans *ngFor="let subscription of subscriptions" [subs]="subscription">
+            </app-subscription-plans> -->
+            <app-card-category  *ngFor="let tags of tagsStores" [tags]="tags"
+                                [routerLink]="['/stores/tagsstores', tags.id]">
+            </app-card-category>
+        </div>
+        <div class="title-cont">
+            <mat-card-title [routerLink]="['/products']">Categorías productos</mat-card-title>
+        </div>
+        <div class="subscription-product-grid">
+            <app-card-category  *ngFor="let tags of tagsProducts" [tags]="tags"
+                                [routerLink]="['/stores/tagsproducts', tags.id]">
+            </app-card-category>
         </div>
     </div>
 </div>

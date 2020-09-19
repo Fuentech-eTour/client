@@ -21,10 +21,10 @@
               <ng-container matColumnDef="Acciones">
                   <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td class="aling-action" mat-cell *matCellDef="let tag"> 
-                      <a mat-button (click)="openDialog(tag)">
+                      <a mat-button (click)="openDialogTagStore(tag)">
                           <mat-icon color="primary">edit</mat-icon>
                       </a>
-                      <a mat-button (click)="deleteAddress(tag.id)">
+                      <a mat-button (click)="deleteTagStore(tag.id)">
                           <mat-icon color="warn">delete_outline</mat-icon>
                       </a>
                   </td>
@@ -42,7 +42,7 @@
             </mat-panel-title>
             <mat-icon style="color: #0000008a; padding-right: 10px;">add_location</mat-icon>
           </mat-expansion-panel-header>
-          <form [formGroup]="form" (ngSubmit)="saveTag($event)">
+          <form [formGroup]="form" (ngSubmit)="saveTagStore($event)">
 
             <mat-form-field>
               <mat-label>Categoría</mat-label>
@@ -58,11 +58,11 @@
               <mat-panel-title>
                 Categorías productos
               </mat-panel-title>
-              <mat-spinner *ngIf="isloading$ | async" diameter=24></mat-spinner>
+              <mat-spinner *ngIf="isloadingTwo$ | async" diameter=24></mat-spinner>
               <mat-icon style="color: #0000008a; padding-right: 10px;">location_on</mat-icon>
             </mat-expansion-panel-header>
         
-              <table mat-table [dataSource]="tagsStores$ | async" class="mat-elevation-z8 product-table">
+              <table mat-table [dataSource]="tagsProducts$ | async" class="mat-elevation-z8 product-table">
                 <ng-container matColumnDef="Categoria">
                     <th mat-header-cell *matHeaderCellDef> Categoría </th>
                     <td mat-cell *matCellDef="let tag"> {{ tag.descripcion }} </td>
@@ -70,10 +70,10 @@
                 <ng-container matColumnDef="Acciones">
                     <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
                     <td class="aling-action" mat-cell *matCellDef="let tag"> 
-                        <a mat-button (click)="openDialog(tag)">
+                        <a mat-button (click)="openDialogTagProduct(tag)">
                             <mat-icon color="primary">edit</mat-icon>
                         </a>
-                        <a mat-button (click)="deleteAddress(tag.id)">
+                        <a mat-button (click)="deleteTagProduct(tag.id)">
                             <mat-icon color="warn">delete_outline</mat-icon>
                         </a>
                     </td>
@@ -91,7 +91,7 @@
               </mat-panel-title>
               <mat-icon style="color: #0000008a; padding-right: 10px;">add_location</mat-icon>
             </mat-expansion-panel-header>
-            <form [formGroup]="form" (ngSubmit)="saveTag($event)">
+            <form [formGroup]="form" (ngSubmit)="saveTagProduct($event)">
   
               <mat-form-field>
                 <mat-label>Categoría</mat-label>
