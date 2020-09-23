@@ -68,6 +68,36 @@
                             </mat-form-field>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input  placeholder="Valor mínimo/pedido" 
+                                        formControlName="valormin" 
+                                        matInput 
+                                        type="number">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input  placeholder="Hora inicio" 
+                                        formControlName="horaini" 
+                                        matInput 
+                                        type="time">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input  placeholder="Hora cierre" 
+                                        formControlName="horafin" 
+                                        matInput 
+                                        type="time">
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs col-xs-cont">
                     <div class="row">
@@ -102,13 +132,23 @@
                             </mat-form-field>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <mat-label>Categoría</mat-label>
+                                <mat-select formControlName="idtag">
+                                    <mat-option *ngFor="let tag of tagsStore" [value]=tag.id>{{tag.descripcion}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
                     <!-- <div class="row">
                         <div class="col-xs">
                             <img *ngIf="(image$ | async) as image" [src]="image" alt="">
                             <input type="file" (change)="uploadFile($event)">
                         </div>
                     </div> -->
-                    <div *ngIf="image !== undefined" class="row">
+                    <div *ngIf="image !== undefined || image !== ''" class="row">
                         <div class="col-xs col-cont">
                             <div style="width: 100%;">
                                 <img [src]="image" alt="" height="150px">

@@ -10,7 +10,7 @@
               Categorías tiendas
             </mat-panel-title>
             <mat-spinner *ngIf="isloading$ | async" diameter=24></mat-spinner>
-            <mat-icon style="color: #0000008a; padding-right: 10px;">location_on</mat-icon>
+            <mat-icon style="color: #0000008a; padding-right: 10px;">category</mat-icon>
           </mat-expansion-panel-header>
       
             <table mat-table [dataSource]="tagsStores$ | async" class="mat-elevation-z8 product-table">
@@ -40,7 +40,7 @@
             <mat-panel-title>
               Agregar categoría tienda
             </mat-panel-title>
-            <mat-icon style="color: #0000008a; padding-right: 10px;">add_location</mat-icon>
+            <mat-icon style="color: #0000008a; padding-right: 10px;">post_add</mat-icon>
           </mat-expansion-panel-header>
           <form [formGroup]="form" (ngSubmit)="saveTagStore($event)">
 
@@ -59,7 +59,7 @@
                 Categorías productos
               </mat-panel-title>
               <mat-spinner *ngIf="isloadingTwo$ | async" diameter=24></mat-spinner>
-              <mat-icon style="color: #0000008a; padding-right: 10px;">location_on</mat-icon>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">category</mat-icon>
             </mat-expansion-panel-header>
         
               <table mat-table [dataSource]="tagsProducts$ | async" class="mat-elevation-z8 product-table">
@@ -89,7 +89,7 @@
               <mat-panel-title>
                 Agregar categoría producto
               </mat-panel-title>
-              <mat-icon style="color: #0000008a; padding-right: 10px;">add_location</mat-icon>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">post_add</mat-icon>
             </mat-expansion-panel-header>
             <form [formGroup]="form" (ngSubmit)="saveTagProduct($event)">
   

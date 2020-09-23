@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilityService } from '../../../core/services/utility.service';
+import { TagsService } from '@core/services/tags.service';
 
 @Component({
   selector: 'app-create-store',
@@ -25,12 +26,14 @@ export class CreateStoreComponent implements OnInit {
   image: any;
   file: any;
   municipalities: any;
+  tagsStore: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private storesService: StoresService,
     private windowService: WindowService,
     private utilityService: UtilityService,
+    private tagsService: TagsService,
     private router: Router,
     private angularFireStorage: AngularFireStorage,
     private snackBar: MatSnackBar,
@@ -40,11 +43,18 @@ export class CreateStoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllMunicipality();
+    this.fetchAllTagsStore();
   }
 
   fetchAllMunicipality() {
     this.utilityService.getAllMunicipality().subscribe(data => {
       this.municipalities = data;
+    });
+  }
+
+  fetchAllTagsStore() {
+    this.tagsService.getAllTagsStores().subscribe(data => {
+      this.tagsStore = data;
     });
   }
 
@@ -71,8 +81,32 @@ export class CreateStoreComponent implements OnInit {
                 this.openSnackBar(res.message);
                 this.windowService.loadingFalse();
                 if (res.status === 'OK') {
-                  this.form.reset();
-                  this.router.navigate(['/super-admin/create-store']);
+                  this.windowService.loadingTrue();
+                  this.storesService.assingTagStore(res.idstore, this.form.get('idtag').value)
+                  .subscribe((resTag: any) => {
+                    this.openSnackBar(resTag.message);
+                    this.windowService.loadingFalse();
+                    if (resTag.status === 'Ok') {
+                      this.form.reset();
+                      this.image = '';
+                      this.router.navigate(['/super-admin/create-store']);
+                    }
+                  });
+                  const config = {
+                    valormin: this.form.get('valormin').value,
+                    horaini: this.form.get('horaini').value,
+                    horafin: this.form.get('horafin').value,
+                  };
+                  this.storesService.assingConfigStore(res.idstore, config)
+                  .subscribe((resConfig: any) => {
+                    this.openSnackBar(resConfig.message);
+                    this.windowService.loadingFalse();
+                    if (resConfig.status === 'Ok' || resConfig.status === 'OK') {
+                      this.form.reset();
+                      this.image = '';
+                      this.router.navigate(['/super-admin/create-store']);
+                    }
+                  });
                 }
             });
           });
@@ -116,6 +150,10 @@ export class CreateStoreComponent implements OnInit {
       zona: ['', [Validators.required]],
       digitoclave: ['', [Validators.required]],
       imagen: ['', Validators.required],
+      idtag: ['', Validators.required],
+      valormin: ['', Validators.required],
+      horaini: ['', Validators.required],
+      horafin: ['', Validators.required],
     });
   }
 

@@ -30,6 +30,22 @@ export class StoresService {
     );
   }
 
+  getOneStores(id: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenerstoresid/${id}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  assingConfigStore(idstore: number, config: object) {
+    return this.http.post(`${environment.url_api}/stores/asignarconfiguracion/${idstore}`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   getProductsOneStore(id: number) {
     return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
     .pipe(
@@ -64,6 +80,14 @@ export class StoresService {
 
   createStore(store: any) {
     return this.http.post(`${environment.url_api}/stores/crearstore`, store)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  assingTagStore(idstore: number, idtag: number) {
+    return this.http.post(`${environment.url_api}/stores/asignatagstore`, { idstore, idtag })
     .pipe(
       retry(3),
       catchError(this.handleError),

@@ -38,7 +38,8 @@ export class HeaderComponent implements OnInit {
   installEvent;
   showFiller = false;
   stateIconMenu = false;
-  rol$: Observable<any>;
+  private rol = new BehaviorSubject<any>('');
+  rol$ = this.rol.asObservable();
 
   constructor(
     private cartService: CartService,
@@ -63,11 +64,17 @@ export class HeaderComponent implements OnInit {
     this.totalCompra$ = this.cartService.precioTotal$;
     this.nameUser$ = this.windowService.userName$;
     this.selectAddress$ = this.usersService.selectAddress$;
-    this.rol$ = this.windowService.session$;
     this.session$ = this.windowService.session$;
   }
 
   ngOnInit() {
+    this.windowService.session$.subscribe(data => {
+      if (data === null) {
+        this.rol.next('');
+        return;
+      }
+      this.rol.next(data);
+    });
     this.windowService.isloading$.subscribe(data => {
       this.isLoading.next(data);
     });

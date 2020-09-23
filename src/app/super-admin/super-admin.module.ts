@@ -15,6 +15,9 @@ import { MaterialModule } from '../material/material.module';
 import { CreateUserStoreComponent } from './components/create-user-store/create-user-store.component';
 import { CreateStoreComponent } from './components/create-store/create-store.component';
 import { TagsComponent, EditTagComponent } from './components/tags/tags.component';
+import { AssingCategoryComponent } from './components/assing-category/assing-category.component';
+import { StoresComponent } from './components/stores/stores.component';
+import { EditStoreComponent } from './components/edit-store/edit-store.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import { TagsComponent, EditTagComponent } from './components/tags/tags.componen
     CreateUserStoreComponent,
     CreateStoreComponent,
     TagsComponent,
-    EditTagComponent
+    EditTagComponent,
+    AssingCategoryComponent,
+    StoresComponent,
+    EditStoreComponent
   ],
   imports: [
     CommonModule,
