@@ -1,0 +1,93 @@
+form {
+    mat-card {
+        margin: 10px;
+        mat-card-header {
+            justify-content: center;
+            mat-card-title {
+                padding: 10px 0px;
+                margin: 0px 0px 20px;
+            }
+        }
+        mat-card-content {
+            text-align: center;
+            .col-xs-cont {
+                padding-right: 1.5rem; 
+                padding-left: 1.5rem;
+                .input-g {
+                width: 100%;
+                }
+                .input-c2-1 {
+                    width: 65%;
+                }
+                .input-c2-2 {
+                    width: 34%;
+                    margin-left: 1%;
+                }
+                .input-c3-1 {
+                    width: 15%;
+                }
+                .input-c3-2 {
+                    width: 49%;
+                    margin-left: 1%;
+                }
+                .input-c3-3 {
+                    width: 34%;
+                    margin-left: 1%;
+                }
+                .col-cont {
+                    display: flex;
+                    text-align: center;
+                    .upload{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-top: 10px;
+                        padding: 10px;
+                        background: white;
+                        color: #808080;
+                        border:1px solid #0000001f;
+                        border-radius: 20px;
+                        width: 100%;
+                        font-weight: 900;
+                        cursor: pointer;
+                        mat-icon {
+                            margin-right: 15px;
+                            padding: 0px;
+                            font-size: 22px;
+                        }
+                        &:hover {
+                            color:#ff4081;
+                            background: #ff569113;
+                        }
+                    }
+                    .inputImg {
+                        width: 0.1px;
+                        height: 0.1px;
+                        opacity: 0;
+                        overflow: hidden;
+                        position: absolute;
+                        z-index: -1;
+                    }
+                }
+            }
+            
+        }
+        mat-card-actions {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            button {
+                padding: 0px 20px;
+                width: 100%;
+                margin: 0px 16px;
+            }
+            .btnActive {
+                background-color: #4d90d3;
+                color: white;
+                &:hover {
+                    background-color: #396a9b;
+                }
+            } 
+        }
+    }
+}
