@@ -23,8 +23,12 @@
         text-align: center;
         display: flex;
         padding: 0% 25%;
-        background-color: #c6c6c6;
+        background-color:#ff4081;
         cursor: pointer;
+        &:hover {
+            background-color:#ff1e69;
+            font-weight: 500;
+        }
         .icon-category {
             color: white;
             display: flex;
@@ -38,11 +42,14 @@
             padding: 0px;
             font-size: 16px;
             border-bottom: solid 1px #e0e0e0;
-            color: #555555;
+            //color: #555555;
+            color: #ff4081;
+            font-weight: 500;
             cursor: pointer;
             &:hover {
-                color: black;
+                color:#ff0055;
                 background-color: #f5f5f5;
+                font-weight: bold;
             }
         }
     }

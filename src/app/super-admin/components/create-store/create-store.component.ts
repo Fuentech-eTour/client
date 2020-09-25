@@ -27,6 +27,7 @@ export class CreateStoreComponent implements OnInit {
   file: any;
   municipalities: any;
   tagsStore: any;
+  verificationDigit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   constructor(
     private formBuilder: FormBuilder,

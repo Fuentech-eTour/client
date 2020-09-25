@@ -38,7 +38,7 @@ export class StoresComponent implements OnInit {
 
   fetchStores() {
     this.windowService.loadingTrue();
-    this.storesService.getAllStores()
+    this.storesService.getAllStoresWithProduct()
     .subscribe(stores => {
       this.stores = stores;
       this.windowService.loadingFalse();

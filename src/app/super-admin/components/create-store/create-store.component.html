@@ -20,7 +20,10 @@
                             </mat-form-field>
                             <mat-form-field class="input-c3-3">
                                 <span matPrefix>-</span>
-                                <input placeholder="Digito verificación" formControlName="digito" matInput type="text">
+                                <mat-label>Digito verificación</mat-label>
+                                <mat-select formControlName="digito">
+                                    <mat-option *ngFor="let digit of verificationDigit" [value]=digit>{{ digit }}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>

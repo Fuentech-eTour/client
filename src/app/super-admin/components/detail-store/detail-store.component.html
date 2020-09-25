@@ -1,0 +1,52 @@
+<mat-card *ngFor="let store of detailStore">
+    <mat-card-header>
+        <mat-card-title>Detalles {{ store.razonsocial }}</mat-card-title>
+    </mat-card-header>
+    <div class="row detail-cont">
+        <mat-card-content class="col-2">
+            <span><strong>Digito clave:</strong> {{  store.digitoclave }} </span><br>
+            <span><strong>{{store.tipodoc}}:</strong> {{ store.identificacion }} - {{ store.digito}}</span><br>
+            <span><strong>Celular:</strong> {{ store.telefono }}</span><br>
+            <span><strong>Dirección:</strong> {{ store.direccion | lowercase }}</span><br>
+            <span><strong>E-mail:</strong> {{ store.email | lowercase }}</span><br>
+            <span><strong>Tipo de sociedad:</strong> {{  store.tipo }} </span><br>
+            <span><strong>Regimen:</strong> {{ store.regimen | titlecase }}</span><br>
+            <span><strong>Zona:</strong> {{ store.zona | titlecase }}</span><br>
+            <span><strong>Valor mínimo:</strong> {{ store.valormin }}</span><br>
+            <span><strong>Hora inicio:</strong> {{  store.horaini }} </span><span><strong>Hora cierre:</strong> {{  store.horafin }} </span><br>
+    
+            <!-- <table mat-table [dataSource]="store.products" class="mat-elevation-z8 product-table">
+                <ng-container matColumnDef="Codigo">
+                    <th mat-header-cell *matHeaderCellDef> Código </th>
+                    <td mat-cell *matCellDef="let product">
+                        {{ product.codigo }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let product">
+                        {{ product.nombrearticulo | lowercase }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Cantidad">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center; padding: 0px;"> Cantidad </th>
+                    <td mat-cell *matCellDef="let product" style="text-align: center; padding: 0px;">
+                        {{ product.cantidad }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Subtotal">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: right; padding: 0px 5px;"> Subtotal </th>
+                    <td mat-cell *matCellDef="let product" style="text-align: right;">
+                        {{ product.subtotal | currency:'$':'symbol':'1.0-0' }}
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table> -->
+        </mat-card-content>
+        <div class="col-2 img-cont">
+            <img [src]="store.imagen" alt="logo">
+        </div>
+    </div>
+</mat-card>
+

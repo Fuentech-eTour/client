@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Store } from '../models/store.model';
-import { Product } from '../models/product.model';
 import { environment } from '../../../environments/environment';
 
 import { throwError, BehaviorSubject } from 'rxjs';
@@ -17,12 +16,22 @@ export class StoresService {
   storesFavorite: any[];
   private favoriteStores = new BehaviorSubject<any[]>([]);
   favoriteStores$ = this.favoriteStores.asObservable();
+  private userStore = new BehaviorSubject<any[]>([]);
+  userStore$ = this.userStore.asObservable();
 
   constructor(
     private http: HttpClient,
   ) {}
 
   getAllStores() {
+    return this.http.get<Store[]>(`${environment.url_api}/stores/obtenerstores`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getAllStoresWithProduct() {
     return this.http.get<Store[]>(`${environment.url_api}/products/obtenerproducts`)
     .pipe(
       retry(3),
@@ -38,8 +47,32 @@ export class StoresService {
     );
   }
 
+  updateOneStores(idstore: number, data: object) {
+    return this.http.put(`${environment.url_api}/stores/actualizarstore/${idstore}`, data)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  inactivateStore(idstore: number) {
+    return this.http.put(`${environment.url_api}/stores/inactivarstore/${idstore}`, { estado: 0 })
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   assingConfigStore(idstore: number, config: object) {
     return this.http.post(`${environment.url_api}/stores/asignarconfiguracion/${idstore}`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  updateConfigStore(idconfig: number, config: object) {
+    return this.http.put(`${environment.url_api}/stores/actualizaconfiguracion/${idconfig}`, config)
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -152,6 +185,26 @@ export class StoresService {
       retry(3),
       catchError(this.handleError),
     );
+  }
+
+  getUsersStore(idstore: number) {
+    return this.http.get<any>(`${environment.url_api}/users/obtenerusuariosportienda/${idstore}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  editUserStoreBySuperAdmin(id: number, data: object) {
+    return this.http.put(`${environment.url_api}/users/updateuserStoreBySuperAdmin/${id}`, data)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  dataUserStore(userStore: any) {
+    this.userStore.next(userStore);
   }
 
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//

@@ -18,6 +18,10 @@ import { TagsComponent, EditTagComponent } from './components/tags/tags.componen
 import { AssingCategoryComponent } from './components/assing-category/assing-category.component';
 import { StoresComponent } from './components/stores/stores.component';
 import { EditStoreComponent } from './components/edit-store/edit-store.component';
+import { MessageModalComponent } from './components/message-modal/message-modal.component';
+import { UsersStoreComponent } from './components/users-store/users-store.component';
+import { DetailStoreComponent } from './components/detail-store/detail-store.component';
+import { EditUserStoreComponent } from './components/edit-user-store/edit-user-store.component';
 
 
 @NgModule({
@@ -29,7 +33,11 @@ import { EditStoreComponent } from './components/edit-store/edit-store.component
     EditTagComponent,
     AssingCategoryComponent,
     StoresComponent,
-    EditStoreComponent
+    EditStoreComponent,
+    MessageModalComponent,
+    UsersStoreComponent,
+    DetailStoreComponent,
+    EditUserStoreComponent
   ],
   imports: [
     CommonModule,

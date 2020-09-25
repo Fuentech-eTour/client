@@ -34,7 +34,7 @@ export class AssingCategoryComponent implements OnInit {
 
   fetchStoresSlopeTag() {
     this.isloading.next(true);
-    this.storesService.getAllStores().subscribe(data => {
+    this.storesService.getAllStoresWithProduct().subscribe(data => {
       console.log(data);
       this.isloading.next(false);
       this.stores.next(data);

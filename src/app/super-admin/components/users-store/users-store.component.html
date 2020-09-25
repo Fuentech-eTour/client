@@ -3,39 +3,41 @@
         <button mat-stroked-button color="accent" (click)="accordion.openAll()">Abrir todo</button>
         <button mat-stroked-button color="accent" (click)="accordion.closeAll()">Cerrar todo</button>
     </div>
+    <div class="title-session">
+        <mat-card-title>
+            {{ nameStore }}
+        </mat-card-title>
+    </div>
     <mat-accordion class="headers-align" multi>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Tiendas
+                    Usuarios
                 </mat-panel-title>
                 <mat-spinner *ngIf="isloading$ | async" diameter=24></mat-spinner>
-                <mat-icon style="color: #0000008a; padding-right: 10px;">storefront</mat-icon>
+                <mat-icon style="color: #0000008a; padding-right: 10px;">assignment_ind</mat-icon>
             </mat-expansion-panel-header>
         
-            <table mat-table [dataSource]="stores$ | async" class="mat-elevation-z8 product-table">
-                <ng-container matColumnDef="Nit">
-                    <th mat-header-cell *matHeaderCellDef> Nit </th>
-                    <td mat-cell *matCellDef="let store"> {{ store.identificacion }} </td>
+            <table mat-table [dataSource]="users$ | async" class="mat-elevation-z8 product-table">
+                <ng-container matColumnDef="DI">
+                    <th mat-header-cell *matHeaderCellDef> Identificación </th>
+                    <td mat-cell *matCellDef="let user"> {{ user.identificacion }} </td>
                 </ng-container>
-                <ng-container matColumnDef="Razon-social">
-                <th mat-header-cell *matHeaderCellDef> Razon social </th>
-                <td mat-cell *matCellDef="let store"> {{ store.razonsocial }} </td>
+                <ng-container matColumnDef="Nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let user"> {{ user.nombres }} {{ user.apellidos }} </td>
             </ng-container>
                 <ng-container matColumnDef="Acciones">
                     <th class="aling-action" mat-header-cell *matHeaderCellDef> Acciones </th>
-                    <td class="aling-action" mat-cell *matCellDef="let store">
+                    <td class="aling-action" mat-cell *matCellDef="let user">
                         <a mat-button>
-                            <mat-icon color="primary" [routerLink]="['edit', store.id]">edit</mat-icon>
+                            <mat-icon color="primary" [routerLink]="['edituserstore', user.id]" (click)="addInfoUserStore(user)">edit</mat-icon>
                         </a>
                         <a mat-button>
-                            <mat-icon color="warn" (click)="inactivateStore(store.id)">delete_outline</mat-icon>
+                            <mat-icon color="warn" (click)="inactivateUser(user.id)">delete_outline</mat-icon>
                         </a>
                         <a mat-button>
-                            <mat-icon style="color: #ff4081;" [routerLink]="['users', store.id, store.razonsocial]">assignment_ind</mat-icon>
-                        </a> 
-                        <a mat-button>
-                            <mat-icon style="color: #80ad55;" [routerLink]="['detail', store.id]">add_circle</mat-icon>
+                            <mat-icon style="color: #80ad55;">add_circle</mat-icon>
                         </a>
                     </td>
                 </ng-container>

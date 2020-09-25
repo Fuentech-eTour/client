@@ -1,0 +1,83 @@
+<form [formGroup]="form" (ngSubmit)="saveUserStore($event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Modificar Usuario Tienda</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Usuario" formControlName="usuario" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Nombres" formControlName="nombres" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Apellidos" formControlName="apellidos" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Identificación" formControlName="identificacion" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Cargo" formControlName="cargo" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Contraseña" formControlName="clave" matInput type="password">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input placeholder="Repita Contraseña" (keyup)="validatorPassword()" formControlName="repClave" matInput type="password">
+                            </mat-form-field>
+                            <p *ngIf="passwordVerify">Las contraseñas no coinciden</p>
+                            <div *ngIf="claveField.errors && claveField.dirty">
+                                <p *ngIf="claveField.hasError('required')">Este campo es requerido</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <mat-label>Rol</mat-label>
+                                <mat-select formControlName="urol">
+                                  <mat-option value=3>Administrador</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="form.invalid" [ngClass]="{btnActive: !form.invalid}" mat-raised-button type="submit">Guardar cambios</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+
+

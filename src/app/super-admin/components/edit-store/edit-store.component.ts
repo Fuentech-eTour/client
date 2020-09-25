@@ -27,6 +27,9 @@ export class EditStoreComponent implements OnInit {
   file: any;
   municipalities: any;
   tagsStore: any;
+  idstore: number;
+  idconfig: number;
+  verificationDigit: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,13 +43,17 @@ export class EditStoreComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
     this.buildForm();
+    this.verificationDigit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.storesService.getOneStores(parseInt(params.id, 10)).subscribe(store => {
         console.log(store, parseInt(params.id, 10));
-        this.form.patchValue(store);
+        this.image = store[0].imagen;
+        this.idstore = store[0].id;
+        this.idconfig = store[0].idconfig;
+        this.form.patchValue(store[0]);
       });
     });
     this.fetchAllMunicipality();
@@ -65,46 +72,81 @@ export class EditStoreComponent implements OnInit {
     });
   }
 
-  saveStore(event: Event) {
+  editStore(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
       this.windowService.loadingTrue();
       const nameStore = this.form.get('razonsocial').value.toString().split(' ').join('');
       const file = this.file;
-      const name = `store-${nameStore}-${this.date}.png`;
-      const fileRef = this.angularFireStorage.ref(name);
-      const task = this.angularFireStorage.upload(name, file);
+      if (file) {
+        const name = `store-${nameStore}-${this.date}.png`;
+        const fileRef = this.angularFireStorage.ref(name);
+        const task = this.angularFireStorage.upload(name, file);
 
-      task.snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.image$ = fileRef.getDownloadURL();
-          this.image$.subscribe(url => {
-            this.form.get('imagen').setValue(url);
-            const store = this.form.value;
-            this.storesService.createStore(store)
-              .subscribe((res: any) => {
-                console.log(res);
-                this.openSnackBar(res.message);
-                this.windowService.loadingFalse();
-                if (res.status === 'OK') {
-                  this.windowService.loadingTrue();
-                  this.storesService.assingTagStore(res.idstore, this.form.get('idtag').value)
-                  .subscribe((resTag: any) => {
-                    this.openSnackBar(resTag.message);
-                    this.windowService.loadingFalse();
-                    if (resTag.status === 'Ok') {
-                      this.form.reset();
-                      this.image = '';
-                      this.router.navigate(['/super-admin/create-store']);
-                    }
-                  });
-                }
+        task.snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.image$ = fileRef.getDownloadURL();
+            this.image$.subscribe(url => {
+              this.form.get('imagen').setValue(url);
+              const store = this.form.value;
+              this.storesService.updateOneStores(this.idstore, store)
+                .subscribe((res: any) => {
+                  console.log(res);
+                  this.openSnackBar(res.message);
+                  this.windowService.loadingFalse();
+                  if (res.status === 'OK' || res.status === 'Ok') {
+                    this.windowService.loadingTrue();
+                    const config = {
+                      valormin: this.form.get('valormin').value,
+                      horaini: this.form.get('horaini').value,
+                      horafin: this.form.get('horafin').value,
+                      estado: 1,
+                    };
+                    this.storesService.updateConfigStore(this.idconfig, config)
+                    .subscribe((resConfig: any) => {
+                      this.openSnackBar(resConfig.message);
+                      this.windowService.loadingFalse();
+                      if (resConfig.status === 'Ok' || resConfig.status === 'OK') {
+                        this.form.reset();
+                        this.image = '';
+                        this.router.navigate(['/super-admin/stores']);
+                      }
+                    });
+                  }
+              });
             });
-          });
-        })
-      )
-      .subscribe();
+          })
+        )
+        .subscribe();
+      } else {
+        const store = this.form.value;
+        this.storesService.updateOneStores(this.idstore, store)
+          .subscribe((res: any) => {
+            console.log(res);
+            this.openSnackBar(res.message);
+            this.windowService.loadingFalse();
+            if (res.status === 'OK' || res.status === 'Ok') {
+              this.windowService.loadingTrue();
+              const config = {
+                valormin: this.form.get('valormin').value,
+                horaini: this.form.get('horaini').value,
+                horafin: this.form.get('horafin').value,
+                estado: 1,
+              };
+              this.storesService.updateConfigStore(this.idconfig, config)
+              .subscribe((resConfig: any) => {
+                this.openSnackBar(resConfig.message);
+                this.windowService.loadingFalse();
+                if (resConfig.status === 'Ok' || resConfig.status === 'OK') {
+                  this.form.reset();
+                  this.image = '';
+                  this.router.navigate(['/super-admin/stores']);
+                }
+              });
+            }
+        });
+      }
     }
   }
 
@@ -142,7 +184,9 @@ export class EditStoreComponent implements OnInit {
       zona: ['', [Validators.required]],
       digitoclave: ['', [Validators.required]],
       imagen: ['', Validators.required],
-      idtag: ['', Validators.required],
+      valormin: ['', Validators.required],
+      horaini: ['', Validators.required],
+      horafin: ['', Validators.required],
     });
   }
 

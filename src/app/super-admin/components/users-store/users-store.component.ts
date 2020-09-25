@@ -1,34 +1,33 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StoresService } from '@core/services/stores.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageModalComponent } from '../message-modal/message-modal.component';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-stores',
-  templateUrl: './stores.component.html',
-  styleUrls: ['./stores.component.scss']
+  selector: 'app-users-store',
+  templateUrl: './users-store.component.html',
+  styleUrls: ['./users-store.component.scss']
 })
-export class StoresComponent implements OnInit {
+export class UsersStoreComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  displayedColumns: string[] = ['Nit', 'Razon-social', 'Acciones'];
-  form: FormGroup;
+  displayedColumns: string[] = ['DI', 'Nombre', 'Acciones'];
   private isloading = new BehaviorSubject<boolean>(true);
   isloading$ = this.isloading.asObservable();
-  private stores = new BehaviorSubject<any>([]);
-  stores$ = this.stores.asObservable();
+  private users = new BehaviorSubject<any>([]);
+  users$ = this.users.asObservable();
+  nameStore: any;
 
   constructor(
-    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private storesService: StoresService,
     private dialog: MatDialog,
+    private route: ActivatedRoute,
   ) {
-    this.buildForm();
    }
 
    ngOnInit(): void {
@@ -36,39 +35,34 @@ export class StoresComponent implements OnInit {
   }
 
   fetchStores() {
-    this.isloading.next(true);
-    this.storesService.getAllStores().subscribe(data => {
-      console.log(data);
-      this.isloading.next(false);
-      this.stores.next(data);
+    this.route.params.subscribe((params: Params) => {
+      this.nameStore = params.razonsocial;
+      this.isloading.next(true);
+      this.storesService.getUsersStore(params.id).subscribe(data => {
+        console.log(data);
+        this.isloading.next(false);
+        this.users.next(data);
+      });
     });
   }
 
-  private buildForm() {
-    this.form = this.formBuilder.group({
-      tag: ['', Validators.required],
-    });
-  }
-
-  inactivateStore(idstore: number): void {
+  inactivateUser(iduser: number): void {
     const dialogRef = this.dialog.open(MessageModalComponent, {
       width: '300px',
-      data: { message: '¿desea eliminar esta tienda?' }
+      data: { message: '¿desea eliminar este usuario?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result === 'SI') {
         this.isloading.next(true);
-        this.storesService.inactivateStore(idstore).subscribe((res: any) => {
-          this.isloading.next(false);
-          this.openSnackBar(res.message);
-          if (res.status === 'Ok') {
-            this.fetchStores();
-          }
-        });
+        // logica para inactivar usuario tipo tienda
       }
     });
+  }
+
+  addInfoUserStore(userStore: any) {
+    this.storesService.dataUserStore(userStore);
   }
 
   openSnackBar(message) {
