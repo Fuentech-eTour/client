@@ -31,7 +31,6 @@ export class AuthService {
   refreshToken() {
     return this.http.post(`${environment.url_api}/users/tkenclient`, {refreshToken: this.getRefreshToken()})
     .pipe(tap((res: any) => {
-      console.log(res);
       this.setToken(res.data.accessToken);
     }));
   }

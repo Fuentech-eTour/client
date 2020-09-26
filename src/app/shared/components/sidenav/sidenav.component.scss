@@ -24,9 +24,10 @@
         display: flex;
         padding: 0% 25%;
         background-color:#ff4081;
+        //background-color: #f3006d;
         cursor: pointer;
         &:hover {
-            background-color:#ff1e69;
+            background-color:#f3006d;
             font-weight: 500;
         }
         .icon-category {
@@ -43,7 +44,7 @@
             font-size: 16px;
             border-bottom: solid 1px #e0e0e0;
             //color: #555555;
-            color: #ff4081;
+            color: #ff4081cc;
             font-weight: 500;
             cursor: pointer;
             &:hover {

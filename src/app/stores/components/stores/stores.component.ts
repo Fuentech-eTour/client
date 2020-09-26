@@ -19,7 +19,6 @@ export class StoresComponent implements OnInit {
     private storesService: StoresService,
     private windowService: WindowService,
     private productsService: ProductsService,
-    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {

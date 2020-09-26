@@ -59,7 +59,6 @@ export class CartService {
   }
 
   addCart(product: Product) {
-
     this.contId(product.id);
 
     this.newProduct = {

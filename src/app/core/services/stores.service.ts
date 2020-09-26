@@ -32,7 +32,7 @@ export class StoresService {
   }
 
   getAllStoresWithProduct() {
-    return this.http.get<Store[]>(`${environment.url_api}/products/obtenerproducts`)
+    return this.http.get<any[]>(`${environment.url_api}/products/obtenerproducts`)
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -65,6 +65,14 @@ export class StoresService {
 
   assingConfigStore(idstore: number, config: object) {
     return this.http.post(`${environment.url_api}/stores/asignarconfiguracion/${idstore}`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getConfigStoreById(id: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenerconfigstore/${id}`)
     .pipe(
       retry(3),
       catchError(this.handleError),

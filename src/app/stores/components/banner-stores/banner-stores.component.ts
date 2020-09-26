@@ -40,20 +40,13 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   idCommentEdit = -1;
   private qualificationStore = new BehaviorSubject<number>(0);
   qualificationStore$ = this.qualificationStore.asObservable();
+  private configStore = new BehaviorSubject<any>({});
+  configStore$ = this.configStore.asObservable();
   colorHover1 = '0';
   colorHover2 = '0';
   colorHover3 = '0';
   colorHover4 = '0';
   colorHover5 = '0';
-  // Calificacion con slider
-  autoTicks = false;
-  max = 5;
-  min = 0;
-  showTicks = true;
-  step = 0.1;
-  thumbLabel = true;
-  value = 0;
-  tickInterval = 1;
 
   constructor(
     private cartService: CartService,
@@ -69,16 +62,8 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
    }
 
   ngOnInit(): void {
-    this.favoriteStores$.subscribe((stores: any) => {
-      if (Array.isArray(stores)) {
-        const validation = stores.filter(store => store.id === this.store.id);
-        if (validation.length > 0) {
-          this.subscribeBtn = true;
-        } else {
-          this.subscribeBtn = false;
-        }
-      }
-    });
+    this.fetchConfigStore();
+    this.getFavoriteStores();
     this.fetchQualificationStore();
   }
 
@@ -95,34 +80,32 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       }
-      /* Logica para numero de card product response */
-      /* slidesPerView: 1,
-      spaceBetween: 1,
-      slidesPerGroup: 1,
-      loop: false,
-      loopFillGroupWithBlank: false,
-      freeMode: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        360: {
-          slidesPerView: 2,
-        },
-        550: {
-          slidesPerView: 3,
-        },
-        720: {
-          slidesPerView: 4,
-        },
-        900: {
-          slidesPerView: 5,
-        },
-        1100: {
-          slidesPerView: 6,
+    });
+  }
+
+  fetchConfigStore() {
+    this.storesService.getConfigStoreById(this.store.id).subscribe((data: any) => {
+      const dateInit = new Date('2020-01-01T' + data.horaini);
+      const dateFinal = new Date('2020-01-01T' + data.horafin);
+      const schedule = {
+        timeInit: dateInit,
+        timeFinal: dateFinal,
+        valueMin: data.valormin,
+      };
+      this.configStore.next(schedule);
+    });
+  }
+
+  getFavoriteStores() {
+    this.favoriteStores$.subscribe((stores: any) => {
+      if (Array.isArray(stores)) {
+        const validation = stores.filter(store => store.id === this.store.id);
+        if (validation.length > 0) {
+          this.subscribeBtn = true;
+        } else {
+          this.subscribeBtn = false;
         }
-      } */
+      }
     });
   }
 
@@ -289,25 +272,17 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     this.storesService.addQualificationStore(this.store.id, quantity)
     .subscribe(({ message }: any) => {
       this.openSnackBar(message);
+      this.fetchQualificationStore();
     });
   }
 
   fetchQualificationStore() {
     this.storesService.getQualificationStore(this.store.id).subscribe(({ puntuacion }: any) => {
-      console.log(puntuacion);
       if (puntuacion !== 'Aun no tiene puntuacion') {
         this.qualificationStore.next(puntuacion);
       } else {
         this.qualificationStore.next(-1);
       }
     });
-  }
-
-  getSliderTickInterval(): number | 'auto' {
-    if (this.showTicks) {
-      return this.autoTicks ? 'auto' : this.tickInterval;
-    }
-
-    return 0;
   }
 }

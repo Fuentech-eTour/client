@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
   passwordVerify: boolean;
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,

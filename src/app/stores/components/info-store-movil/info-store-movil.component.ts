@@ -13,7 +13,6 @@ export class InfoStoreMovilComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.store);
   }
 
 }

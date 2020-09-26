@@ -41,7 +41,7 @@
                   formControlName="nombres" 
                   matInput 
                   type="email">
-                <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
+                <mat-icon matSuffix style="color: #4d90d3;">person</mat-icon>
               </mat-form-field>
             </div>
           </div>
@@ -52,7 +52,7 @@
                   formControlName="apellidos" 
                   matInput 
                   type="email">
-                <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
+                <mat-icon matSuffix style="color: #4d90d3;">person</mat-icon>
               </mat-form-field>
             </div>
           </div>
@@ -63,35 +63,37 @@
                   formControlName="email" 
                   matInput 
                   type="email">
-                <mat-icon matSuffix style="color: #e0e0e0;">person</mat-icon>
+                <mat-icon matSuffix style="color: #4d90d3;">email</mat-icon>
               </mat-form-field>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs">
+            <div class="col-xs example-container">
               <mat-form-field>
-                <input placeholder="contraseña" 
-                  formControlName="clave" 
-                  matInput 
-                  type="password">
-                <mat-icon matSuffix style="color: #e0e0e0;">lock</mat-icon>
+                <mat-label>Contraseña</mat-label>
+                <input matInput formControlName="clave" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix 
+                        (click)="hide = !hide" 
+                        [attr.aria-label]="'Hide password'" 
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
               </mat-form-field>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs">
+            <div class="col-xs example-container">
               <mat-form-field>
-                <input placeholder="Repita contraseña"
-                  formControlName="clave2"
-                  (keyup)="validatorPassword()"
-                  matInput 
-                  type="password">
-                <mat-icon matSuffix style="color: #e0e0e0;">lock</mat-icon>
+                <mat-label>Repita contraseña</mat-label>
+                <input matInput formControlName="clave2" (keyup)="validatorPassword()" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix 
+                        (click)="hide = !hide" 
+                        [attr.aria-label]="'Hide password'" 
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
               </mat-form-field>
               <p style="color: red;" *ngIf="passwordVerify">Las contraseñas no coinciden</p>
-              <!-- <div *ngIf="claveField.errors && claveField.dirty">
-                <p *ngIf="claveField.hasError('required')">Este campo es requerido</p>
-              </div> -->
             </div>
           </div>
         </mat-card-content>
