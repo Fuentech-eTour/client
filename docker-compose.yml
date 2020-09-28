@@ -48,9 +48,9 @@ services:
             - build:/usr/share/nginx/html:rw
             - ./nginx-custom.conf:/etc/nginx/conf.d/default.conf
         environment:
-            - VIRTUAL_HOST=ematiendas.com.co,www.ematiendas.com.co
-            - LETSENCRYPT_HOST=ematiendas.com.co,www.ematiendas.com.co
-            - LETSENCRYPT_EMAIL=mail.ematiendas.com.co
+            - VIRTUAL_HOST=emastore.com.co,www.emastore.com.co
+            - LETSENCRYPT_HOST=emastore.com.co,www.emastore.com.co
+            - LETSENCRYPT_EMAIL=mail.emastore.com.co
 volumes:
     html:
     vhostd:
