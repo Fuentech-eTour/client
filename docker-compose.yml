@@ -32,7 +32,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: node
+        image: nodejs
         container_name: nodejs-build
         restart: unless-stopped
         volumes:
