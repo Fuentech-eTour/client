@@ -50,7 +50,7 @@ services:
         environment:
             - VIRTUAL_HOST=emastore.com.co,www.emastore.com.co
             - LETSENCRYPT_HOST=emastore.com.co,www.emastore.com.co
-            - LETSENCRYPT_EMAIL=mail.emastore.com.co
+            - LETSENCRYPT_EMAIL=dainerudea@gmail.com
 volumes:
     html:
     vhostd:
