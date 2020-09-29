@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  url_api: 'https://68.183.129.238:3000/api',
-  serverSocket: 'https://68.183.129.238:4000',
+  url_api: 'http://68.183.129.238:3000/api',
+  serverSocket: 'http://68.183.129.238:4000',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',
     authDomain: 'platzi-store-749d0.firebaseapp.com',
