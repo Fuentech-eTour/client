@@ -32,7 +32,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: nodejs
+        image: node
         container_name: nodejs-build
         restart: unless-stopped
         volumes:
@@ -44,9 +44,9 @@ services:
         restart: always
         expose:
             - "80"
-        volumes:
-            - build:/usr/share/nginx/html:rw
-            - ./nginx-custom.conf:/etc/nginx/conf.d/default.conf
+        #volumes:
+        #    - build:/usr/share/nginx/html:rw
+        #    - ./nginx-custom.conf:/etc/nginx/conf.d/default.conf
         environment:
             - VIRTUAL_HOST=emastore.com.co,www.emastore.com.co
             - LETSENCRYPT_HOST=emastore.com.co,www.emastore.com.co
