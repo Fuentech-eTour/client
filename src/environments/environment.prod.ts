@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url_api: 'http://68.183.129.238:3000/api',
+  url_api: 'https://ematienda.com.co/api',
   serverSocket: 'http://68.183.129.238:4000',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',
