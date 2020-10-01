@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  url_api: 'https://emastore.com.co:8080/api',
-  serverSocket: 'https://emastore.com.co:8080/wss',
+  url_api: 'https://emastore.com.co/api',
+  serverSocket: 'https://emastore.com.co/wss',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',
     authDomain: 'platzi-store-749d0.firebaseapp.com',
