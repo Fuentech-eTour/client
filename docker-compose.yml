@@ -32,14 +32,13 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: nodejs
         container_name: nodejs-build
         restart: unless-stopped
         volumes:
             - build:/app/dist/ema:rw
 
     www:
-        image: nginx
+        image: nginx:1.19
         container_name: ema-client
         restart: always
         expose:
