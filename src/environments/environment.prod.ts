@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   url_api: 'https://ematiendas.com.co/api',
-  serverSocket: 'wss://ematiendas.com.co/wss',
+  serverSocket: 'https://ematiendas.com.co/wss',
   firebase: {
     apiKey: 'AIzaSyCO8YeZ9RGhmfFzscabcJXFMVMJi8IHE8s',
     authDomain: 'platzi-store-749d0.firebaseapp.com',
