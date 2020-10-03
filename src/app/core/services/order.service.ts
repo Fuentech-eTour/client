@@ -28,7 +28,7 @@ export class OrderService {
       rejectUnauthorized: false,
       agent: false,
       upgrade: false,
-      transports: [ 'websocket' ],
+      transports: [ 'websocket', 'polling', 'flashsocket' ],
     });
   }
 
