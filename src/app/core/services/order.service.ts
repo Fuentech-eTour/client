@@ -20,7 +20,7 @@ export class OrderService {
     private authService: AuthService,
   ) {
     this.socket = io(environment.serverSocket, {
-      path: 'wss/socket.io',
+      path: '/socket.io',
       secure: true,
       reconnectionDelay: 1000,
       reconnection: true,
