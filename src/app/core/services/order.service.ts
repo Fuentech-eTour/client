@@ -20,7 +20,8 @@ export class OrderService {
     private authService: AuthService,
   ) {
     this.socket = io(environment.serverSocket, {
-      path: '/wss/socket.io',
+      path: '/wss',
+      forceNew: true,
       secure: true,
       reconnectionDelay: 1000,
       reconnection: true,
@@ -28,7 +29,7 @@ export class OrderService {
       rejectUnauthorized: false,
       agent: false,
       upgrade: false,
-      transports: [ 'websocket' ],
+      transports: [ 'websocket', 'polling', 'flashsocket' ],
     });
   }
 
