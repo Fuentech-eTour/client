@@ -81,6 +81,12 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  fetchInfoUser() {
+    this.usersService.getInfoUser().subscribe(data => {
+      console.log(data);
+    });
+  }
+
   selectAddress(address) {
     this.usersService.addSelectAddress(address);
   }
@@ -122,6 +128,7 @@ export class OrderComponent implements OnInit {
           .subscribe(({ status, data }: any) => {
             console.log(status, data);
             if (status === 'OK') {
+              this.cartService.resetOrder();
               // tslint:disable-next-line: prefer-for-of
               for (let i = 0; i < data.length; i++) {
                 data[i].nameUser = this.authService.getUserName();

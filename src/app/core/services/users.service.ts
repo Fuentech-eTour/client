@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { map, catchError, retry } from 'rxjs/operators';
+import { throwError, BehaviorSubject } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 import * as Sentry from '@sentry/browser';
 
@@ -18,6 +18,22 @@ export class UsersService {
   constructor(
     private http: HttpClient
   ) { }
+
+  getInfoUser() {
+    return this.http.get<any>(`${environment.url_api}/users/obtenerinfocliente`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  editInfoUser(iddir: number, address: any) {
+    return this.http.put(`${environment.url_api}/users/updateClient/${iddir}`, address)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
 
   createUserStore(userStore: any) {
     return this.http.post(`${environment.url_api}/users/createustore`, userStore)

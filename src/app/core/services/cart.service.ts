@@ -15,7 +15,6 @@ export class CartService {
   private storeList: Store;
   private idStore: number[] = [];
   private idStoreState: boolean;
-  private priceTotalStore: number;
   private products: AddProduct[] = [];
   private idProduct: number[] = [];
   private precio = 0;
@@ -28,12 +27,12 @@ export class CartService {
   private openSideBarIzq = new BehaviorSubject<boolean>(false);
   private precioTotal = new BehaviorSubject<number>(0);
   private numProductsCart = new BehaviorSubject<number[]>([]);
-  private card = new BehaviorSubject<AddProduct[]>([]);
+  private cart = new BehaviorSubject<AddProduct[]>([]);
   private order = new BehaviorSubject<Store[]>([]);
 
   openSideBar$ = this.openSideBar.asObservable();
   openSideBarIzq$ = this.openSideBarIzq.asObservable();
-  cart$ = this.card.asObservable();
+  cart$ = this.cart.asObservable();
   order$ = this.order.asObservable();
   precioTotal$ = this.precioTotal.asObservable();
   numProductsCart$ = this.numProductsCart.asObservable();
@@ -75,7 +74,7 @@ export class CartService {
     // adiciona producto a la lista de productos y si existe aumenta la cantidad de ese producto
     if (this.contProduct <= 1) {
       this.products = [...this.products, this.newProduct];
-      this.card.next(this.products);
+      this.cart.next(this.products);
     } else {
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.products.length; i++) {
@@ -184,7 +183,7 @@ export class CartService {
         break;
       }
     }
-    this.card.next(this.products);
+    this.cart.next(this.products);
     this.order.next(this.orderLists);
   }
 
@@ -248,5 +247,19 @@ export class CartService {
       }
     }
     this.numProductsCart.next(this.idProduct);
+  }
+
+  resetOrder() {
+    this.orderLists = [];
+    this.idStore = [];
+    this.products = [];
+    this.idProduct = [];
+    this.precio = 0;
+    this.contProduct = 0;
+
+    this.order.next([]);
+    this.precioTotal.next(0);
+    this.numProductsCart.next([]);
+    this.cart.next([]);
   }
 }
