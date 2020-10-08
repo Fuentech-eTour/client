@@ -27,8 +27,8 @@ export class UsersService {
     );
   }
 
-  editInfoUser(iddir: number, address: any) {
-    return this.http.put(`${environment.url_api}/users/updateClient/${iddir}`, address)
+  editInfoUser(data: any) {
+    return this.http.put(`${environment.url_api}/users/updateClient`, data)
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -90,6 +90,14 @@ export class UsersService {
 
   editPassword(newPassword: object) {
     return this.http.put(`${environment.url_api}/users/cambiaclave`, newPassword)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getRolUser() {
+    return this.http.get<any>(`${environment.url_api}/users/obtenerrolusuario`)
     .pipe(
       retry(3),
       catchError(this.handleError),

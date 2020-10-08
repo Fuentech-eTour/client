@@ -61,28 +61,53 @@
           <mat-card-header style="align-items: center; display: block;">
             <div *ngIf="( addresses$ | async ).length > 0">
               <mat-card-title style="text-align: center;">
-                  Numero de contacto
+                  Información cliente
               </mat-card-title>
             </div>
-            <div>
+            <div *ngIf="( infoUser$ | async )?.identificacion !== ''">
               <mat-card-title style="text-align: right;">
                 <a mat-button style="padding: 0px 5px;" 
                 (click)="openDialog()">
-                  Agregar N° celular 
+                  Editar celular 
                   <mat-icon style="color:#80ad55;">
-                    add_circle
+                    smartphone
                   </mat-icon>
                 </a>
               </mat-card-title>
             </div>
+            <div>
+              <mat-form-field class="full-width" *ngIf="( infoUser$ | async )?.identificacion === ''">
+                <input  matInput
+                        #identificacion
+                        (keyup)="stateInputIdentificacion(identificacion.value)" 
+                        placeholder="Identificación" 
+                        formControlName="identificacion"
+                        autocomplete="off"
+                        cdkFocusInitial
+                        type="text">
+                <mat-error *ngIf="secondFormGroup.controls['identificacion'].hasError('required')">
+                    Identificación es <strong>requerida</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width" *ngIf="( infoUser$ | async )?.telefeno === ''">
+                <input  matInput
+                        #telefeno
+                        (keyup)="stateInputTelefono(telefeno.value)" 
+                        placeholder="N° de Celular" 
+                        formControlName="telefono"
+                        autocomplete="off"
+                        type="text">
+                <mat-error *ngIf="secondFormGroup.controls['telefono'].hasError('required')">
+                    N° de celular es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </mat-card-header>
-          <mat-card-content *ngIf="( addresses$ | async ).length === 0">
-            Aun no tienes numero de contacto asociado a tu orden. Agrega uno.
-          </mat-card-content>
-          <mat-card-content *ngIf="( addresses$ | async ).length > 0">
-            <div *ngFor="let address of addresses$ | async" class="row">
+          <mat-card-content *ngIf="( infoUser$ | async )?.identificacion !== ''">
+            <div class="row">
               <ul>
-                <li>Cel: {{'3136187616'}}</li>
+                <li>Identificación: {{ (infoUser$ | async)?.identificacion }}</li>
+                <li>Celular: {{ (infoUser$ | async)?.telefeno }}</li>
               </ul>
             </div>
           </mat-card-content>
@@ -114,7 +139,7 @@
           <mat-card-content *ngIf="( addresses$ | async ).length > 0">
             <div class="row">
               <div class="col">
-                <mat-radio-group formControlName="secondCtrl" required>
+                <mat-radio-group formControlName="direccion" required>
                   <mat-card *ngFor="let address of addresses$ | async" class="address-shadow">
                     <mat-radio-button (click)="selectAddress(address)" [value]="address">
                         {{ address.direccion | lowercase }}
@@ -128,72 +153,82 @@
       </mat-card>
     </form>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel><mat-icon>assistant_photo</mat-icon></ng-template>
-    <div class="position-button">
-      <button class="margin-button" 
-              mat-stroked-button color="accent" 
-              matStepperNext
-              (click)="sendOrder()">
-        Finalizar
-        <mat-icon>
-          turned_in_not
-        </mat-icon>
-      </button>
-    </div>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel><mat-icon>assistant_photo</mat-icon></ng-template>
+      <div class="position-button">
+        <button class="margin-button" 
+                mat-stroked-button 
+                color="accent" 
+                (click)="sendOrder()">
+          Finalizar
+          <mat-icon>
+            turned_in_not
+          </mat-icon>
+        </button>
+      </div>
+      
+      <div class="summary-cont">
+
+        <mat-card class="contact-cont">
+          <mat-card-header>
+            <mat-card-title>Información de contacto</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="border" *ngIf="( infoUser$ | async )?.identificacion === ''">
+              <p>Nombres: {{ (infoUser$ | async)?.nombres }}</p>
+              <p>Apellidos: {{ (infoUser$ | async)?.apellidos }}</p>
+              <p>Identificación: {{ identificacion }}</p>
+              <p>Celular: {{ telefeno }}</p>
+            </div>
+            <div class="border" *ngIf="( infoUser$ | async )?.identificacion !== ''">
+              <p>Nombres: {{ (infoUser$ | async)?.nombres }}</p>
+              <p>Apellidos: {{ (infoUser$ | async)?.apellidos }}</p>
+              <p>Identificación: {{ (infoUser$ | async)?.identificacion }}</p>
+              <p>Celular: {{ (infoUser$ | async)?.telefeno }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
     
-    <div class="summary-cont">
+        <mat-card class="address-cont">
+          <mat-card-header>
+            <mat-card-title>Dirección de entrega</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="border">
+              <p>{{ (address$ | async).direccion | lowercase }}<br>{{ (municipality$ | async)?.descripcion }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="order-cont">
+          <mat-card-header>
+            <mat-card-title>Resumen compra</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="border" *ngFor="let store of ( order$ | async )">
+              <p>{{ store.razonsocial }} <br> cantidad de productos añadidos: {{ store.products.length }}</p>
+              <p class="aling-right">subTotal: {{ store.total | currency:'$':'symbol':'1.0-0' }}</p>
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <mat-card-subtitle class="aling-right p-right-16 font-style">Total: {{ totalPrice$ | async | currency:'$':'symbol':'1.0-0' }}</mat-card-subtitle>
+          </mat-card-footer>
+        </mat-card>
 
-      <!-- <mat-card class="contact-cont">
-        <mat-card-header>
-          <mat-card-title>Información de contacto</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="border">
-            <p>Cel: 3136187616</p>
-          </div>
-        </mat-card-content>
-      </mat-card> -->
-  
-      <mat-card class="address-cont">
-        <mat-card-header>
-          <mat-card-title>Dirección de entrega</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="border">
-            <p>{{ (address$ | async).direccion | lowercase }}<br>{{ (municipality$ | async)?.descripcion }}</p>
-          </div>
-        </mat-card-content>
-      </mat-card>
-  
-      <mat-card class="order-cont">
-        <mat-card-header>
-          <mat-card-title>Resumen compra</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="border" *ngFor="let store of ( order$ | async )">
-            <p>{{ store.razonsocial }} <br> cantidad de productos añadidos: {{ store.products.length }}</p>
-            <p class="aling-right">subTotal: {{ store.total | currency:'$':'symbol':'1.0-0' }}</p>
-          </div>
-        </mat-card-content>
-        <mat-card-footer>
-          <mat-card-subtitle class="aling-right p-right-16 font-style">Total: {{ totalPrice$ | async | currency:'$':'symbol':'1.0-0' }}</mat-card-subtitle>
-        </mat-card-footer>
-      </mat-card>
+      </div>
 
-    </div>
-
-    <div class="position-button">
-      <button class="margin-button" 
-              mat-stroked-button color="accent" 
-              matStepperNext
-              (click)="sendOrder()">
-        Finalizar
-        <mat-icon>
-          turned_in_not
-        </mat-icon>
-      </button>
-    </div>
-
+      <div class="position-button">
+        <button class="margin-button" 
+                mat-stroked-button 
+                color="accent"
+                (click)="sendOrder()">
+          Finalizar
+          <mat-icon>
+            turned_in_not
+          </mat-icon>
+        </button>
+      </div>
+    </form>
   </mat-step>
 </mat-horizontal-stepper>

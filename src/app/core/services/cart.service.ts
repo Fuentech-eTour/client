@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
 import { BehaviorSubject } from 'rxjs';
-
 import { Product } from '../models/product.model';
 import { AddProduct } from '../models/addProduct.model';
 import { Store } from '../models/store.model';
@@ -20,18 +18,12 @@ export class CartService {
   private precio = 0;
   private contProduct = 0;
   private newProduct: AddProduct;
-  private sideBarOpen = false;
-  private sideBarOpenIzq = false;
 
-  private openSideBar = new BehaviorSubject<boolean>(false);
-  private openSideBarIzq = new BehaviorSubject<boolean>(false);
   private precioTotal = new BehaviorSubject<number>(0);
   private numProductsCart = new BehaviorSubject<number[]>([]);
   private cart = new BehaviorSubject<AddProduct[]>([]);
   private order = new BehaviorSubject<Store[]>([]);
 
-  openSideBar$ = this.openSideBar.asObservable();
-  openSideBarIzq$ = this.openSideBarIzq.asObservable();
   cart$ = this.cart.asObservable();
   order$ = this.order.asObservable();
   precioTotal$ = this.precioTotal.asObservable();
@@ -39,26 +31,10 @@ export class CartService {
 
   constructor() { }
 
-  sideBarToggler() {
-    if (this.sideBarOpenIzq === true) {
-      this.sideBarOpenIzq = false;
-      this.openSideBarIzq.next(this.sideBarOpenIzq);
-    }
-    this.sideBarOpen = !this.sideBarOpen;
-    this.openSideBar.next(this.sideBarOpen);
-  }
-
-  sideBarTogglerIzq() {
-    if (this.sideBarOpen === true) {
-      this.sideBarOpen = false;
-      this.openSideBar.next(this.sideBarOpen);
-    }
-    this.sideBarOpenIzq = !this.sideBarOpenIzq;
-    this.openSideBarIzq.next(this.sideBarOpenIzq);
-  }
-
   addCart(product: Product) {
+
     this.contId(product.id);
+    this.addPrice(product.valorventa);
 
     this.newProduct = {
       id: product.id,
@@ -121,6 +97,7 @@ export class CartService {
   removeCart(product: Product) {
 
     this.contIdRemove(product.id);
+    this.removePrice(product.valorventa);
 
     // asigna la cantidad al objeto producto
     // tslint:disable-next-line: prefer-for-of
@@ -249,6 +226,7 @@ export class CartService {
     this.numProductsCart.next(this.idProduct);
   }
 
+  // metodo para vaciar el carrito
   resetOrder() {
     this.orderLists = [];
     this.idStore = [];

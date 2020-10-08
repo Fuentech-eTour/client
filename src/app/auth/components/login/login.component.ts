@@ -10,6 +10,7 @@ import { StoresService } from '@core/services/stores.service';
 import { OrderService } from '@core/services/order.service';
 import { ProductsService } from '@core/services/products/products.service';
 import { RegisterComponent } from '../register/register.component';
+import { UsersService } from '@core/services/users.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     private storesService: StoresService,
     private productsService: ProductsService,
     private orderService: OrderService,
+    private usersService: UsersService,
     public dialogRef: MatDialogRef<LoginComponent>,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -74,6 +76,9 @@ export class LoginComponent implements OnInit {
             this.windowService.stateSession('isClient');
             this.windowService.addIdClient(res.data.dato);
             this.windowService.addUserName(res.data.user_name.split(' ')[0]);
+            this.usersService.getRolUser().subscribe(({ data }) => {
+              localStorage.setItem('rol', data);
+            });
             this.storesService.getStoreFavorite().subscribe(data => {
               this.storesService.stateFavoriteStore(data);
             });

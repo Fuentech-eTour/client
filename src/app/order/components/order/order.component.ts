@@ -10,16 +10,7 @@ import { CartService } from '@core/services/cart.service';
 import { AuthService } from '@core/services/auth.service';
 import { OrderService } from '@core/services/order.service';
 import { UtilityService } from '@core/services/utility.service';
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-/**
- * @title Dialog Overview
- */
+import { MessageModalComponent } from '../message-modal/message-modal.component';
 
 @Component({
   selector: 'app-order',
@@ -33,8 +24,12 @@ export class OrderComponent implements OnInit {
   totalPrice$: Observable<any>;
   address$: Observable<any>;
   order: any;
+  identificacion: any;
+  telefeno: any;
+  selectAddressOrder: any;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   private municipality = new BehaviorSubject<any>({});
   municipality$ = this.municipality.asObservable();
@@ -42,6 +37,8 @@ export class OrderComponent implements OnInit {
   isloading$ = this.isloading.asObservable();
   private addresses = new BehaviorSubject<any[]>([]);
   addresses$ = this.addresses.asObservable();
+  private infoUser = new BehaviorSubject<any>({});
+  infoUser$ = this.infoUser.asObservable();
   token: string;
   isLinear = true;
   displayedColumns: string[] = ['imagen', 'nombre', 'cantidad', 'total'];
@@ -65,6 +62,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchInfoUser();
     this.fetchAllAddress();
     this.order$.subscribe(data => {
       console.log(data);
@@ -72,6 +70,7 @@ export class OrderComponent implements OnInit {
     });
     this.address$.subscribe(address => {
       console.log(address);
+      this.selectAddressOrder = address;
       this.utilityService.getAllMunicipality().subscribe(data => {
         console.log(data);
         const municipalitySelect = data.filter(municipality => municipality.id === address.idutmunicipality);
@@ -82,8 +81,12 @@ export class OrderComponent implements OnInit {
   }
 
   fetchInfoUser() {
-    this.usersService.getInfoUser().subscribe(data => {
+    this.usersService.getInfoUser().subscribe(([data]) => {
       console.log(data);
+      this.infoUser.next(data);
+      this.secondFormGroup.patchValue(data);
+      this.secondFormGroup.get('telefono').setValue(data.telefeno);
+      console.log(this.secondFormGroup.value);
     });
   }
 
@@ -96,7 +99,14 @@ export class OrderComponent implements OnInit {
       firstCtrl: ['true', Validators.required]
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      nombres: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      identificacion: ['', Validators.required],
+      telefono: ['', Validators.required],
+      direccion: ['', Validators.required],
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      confirmacion: ['', Validators.required],
     });
   }
 
@@ -121,12 +131,20 @@ export class OrderComponent implements OnInit {
   }
 
   sendOrder() {
-    this.usersService.selectAddress$
-      .subscribe((address: any) => {
-        console.log(address);
-        this.orderService.createSells(this.order, address.id)
+    const dialogRef = this.dialog.open(MessageModalComponent, {
+      width: '300px',
+      data: { message: 'Confirme la orden por favor' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result === 'SI') {
+        console.log(this.selectAddressOrder);
+        this.usersService.editInfoUser(this.secondFormGroup.value).subscribe(console.log);
+        this.orderService.createSells(this.order, this.selectAddressOrder.id)
           .subscribe(({ status, data }: any) => {
             console.log(status, data);
+            const idSell = data[0].idSell;
             if (status === 'OK') {
               this.cartService.resetOrder();
               // tslint:disable-next-line: prefer-for-of
@@ -135,10 +153,19 @@ export class OrderComponent implements OnInit {
                 console.log(data);
               }
               this.orderService.emitNewOrder(data);
-              this.router.navigate(['/user/orders']);
+              this.router.navigate([`/user/orders/detail/${idSell}`]);
             }
         });
-      });
+      }
+    });
+  }
+
+  stateInputIdentificacion(state) {
+    this.identificacion = state;
+  }
+
+  stateInputTelefono(state) {
+    this.telefeno = state;
   }
 
 }

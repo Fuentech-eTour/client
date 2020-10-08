@@ -17,15 +17,13 @@ export class CartComponent implements OnInit {
 
   @Input() mostrar: any;
 
-  products: Product[] = [];
   totalCompra$: Observable<number>;
   products$: Observable<AddProduct[]>;
   store$: Observable<Store[]>;
-  sideBarOpen$: Observable<boolean>;
-  sideBarOpenIzq$: Observable<boolean>;
   showFiller = false;
   slidesPerView: number;
   panelOpenState = false;
+  products: [];
 
   constructor(
     private cartService: CartService,
@@ -33,13 +31,13 @@ export class CartComponent implements OnInit {
   ) {
     this.products$ = this.cartService.cart$;
     this.totalCompra$ = this.cartService.precioTotal$;
-    this.sideBarOpen$ = this.cartService.openSideBar$;
-    this.sideBarOpenIzq$ = this.cartService.openSideBarIzq$;
     this.store$ = this.cartService.order$;
   }
 
   ngOnInit(): void {
-    this.store$.subscribe(console.log);
+    this.products$.subscribe((products: any) => {
+      this.products = products;
+    });
   }
 
   openDialogDetailProduct(idp: number): void {
@@ -53,12 +51,22 @@ export class CartComponent implements OnInit {
     });
   }
 
-  toggleSideBar() {
-    this.cartService.sideBarToggler();
+  emptyCartByOneStore(idStore: number) {
+    console.log(this.products, idStore);
+    const newProducts = this.products.filter((product: any) => product.idststore === idStore);
+    console.log(newProducts);
+    for (let i = 0; i <= newProducts.length; i++) {
+      console.log(newProducts);
+      const prod: any = newProducts[i];
+      for (let j = 0; j < prod?.cant; j++) {
+        this.cartService.removeCart(newProducts[i]);
+      }
+      console.log(newProducts[i]);
+    }
   }
 
-  toggleSideBarIzq() {
-    this.cartService.sideBarTogglerIzq();
+  emptyCart() {
+    this.cartService.resetOrder();
   }
 
 }

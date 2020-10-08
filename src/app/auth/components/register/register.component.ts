@@ -9,6 +9,7 @@ import { StoresService } from '@core/services/stores.service';
 import { ProductsService } from '@core/services/products/products.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrderService } from '@core/services/order.service';
+import { UsersService } from '@core/services/users.service';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     private orderService: OrderService,
     private storesService: StoresService,
     private productsService: ProductsService,
+    private usersService: UsersService,
     public dialogRef: MatDialogRef<RegisterComponent>,
     private snackBar: MatSnackBar,
   ) {
@@ -69,6 +71,9 @@ export class RegisterComponent implements OnInit {
                 this.windowService.stateSession('isClient');
                 this.windowService.addIdClient(res.data.dato);
                 this.windowService.addUserName(res.data.user_name.split(' ')[0]);
+                this.usersService.getRolUser().subscribe(({ data }) => {
+                  localStorage.setItem('rol', data);
+                });
                 this.storesService.getStoreFavorite().subscribe(data => {
                   this.storesService.stateFavoriteStore(data);
                 });

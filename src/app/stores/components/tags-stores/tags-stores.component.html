@@ -3,5 +3,7 @@
     <div class="title-cont">
         <mat-card-title>{{tags[0]?.descripcion | titlecase}}</mat-card-title>
     </div>
-    <app-banner-stores *ngFor="let store of tags[0]?.tiendas" [store]="store"></app-banner-stores>
+    <div *ngFor="let store of tags[0]?.tiendas">
+        <app-banner-stores *ngIf="store.products" [store]="store"></app-banner-stores>
+    </div>
 </div>

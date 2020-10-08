@@ -28,12 +28,12 @@ export class CountProductsComponent implements OnInit {
 
   addCart() {
     this.cartService.addCart(this.product);
-    this.cartService.addPrice(this.product.valorventa);
+    // this.cartService.addPrice(this.product.valorventa);
   }
 
   removeCart() {
-      this.cartService.removeCart(this.product);
-      this.cartService.removePrice(this.product.valorventa);
+    this.cartService.removeCart(this.product);
+    // this.cartService.removePrice(this.product.valorventa);
   }
 
 }

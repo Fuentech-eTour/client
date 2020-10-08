@@ -58,6 +58,7 @@ export class AuthService {
           localStorage.removeItem('stateNotifications');
           localStorage.removeItem('stateOrders');
           localStorage.removeItem('newOrders');
+          localStorage.removeItem('rol');
           localStorage.setItem('session', '');
           localStorage.setItem('idClient', '');
           this.windowService.stateSession('');
@@ -88,5 +89,9 @@ export class AuthService {
 
   getIdStore() {
     return localStorage.getItem('idstore');
+  }
+
+  getRol(): any {
+    return localStorage.getItem('rol');
   }
 }

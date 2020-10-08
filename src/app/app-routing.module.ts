@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LayoutComponent } from './layout/layout.component';
 import { AdminGuard } from './admin.guard';
 import { AdminStoreGuard } from './shared/guards/admin-store.guard';
+import { SuperAdminGuard } from './shared/guards/super-admin.guard';
 
 const routes: Routes = [
   {
@@ -60,7 +61,7 @@ const routes: Routes = [
   },
   {
     path: 'super-admin',
-    canActivate: [ AdminGuard ],
+    canActivate: [ SuperAdminGuard ],
     loadChildren: () => import('./super-admin/super-admin.module').then(m => m.SuperAdminModule)
   },
   {

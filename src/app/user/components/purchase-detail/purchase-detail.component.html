@@ -6,7 +6,7 @@
         <span><strong>Orden N°:</strong> {{ order.id }}</span><br>
         <span><strong>Nombre:</strong> {{ order.nombres | titlecase }}</span><span> {{ order.apellidos | titlecase }}</span><br>
         <span><strong>CC</strong> {{ order.identificacion }}</span><br>
-        <span><strong>Celular:</strong> {{ order.telefono }}</span><br>
+        <span><strong>Celular:</strong> {{ order.telefeno }}</span><br>
         <span><strong>Dirección de entrega:</strong> {{ order.direccion | lowercase }}</span><br>
         <span><strong>E-mail:</strong> {{ order.email | lowercase }}</span><br>
         <span><strong>Fecha:</strong> {{  order.fechaventa | date:'shortDate' }} </span><span><strong>Hora:</strong> {{ order.horaventa }}</span><br>

@@ -34,8 +34,4 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.windowService.stateFooterFalse();
   }
-
-  toggleSideBar() {
-    this.cartService.sideBarToggler();
-  }
 }

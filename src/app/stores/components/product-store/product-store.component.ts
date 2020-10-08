@@ -97,12 +97,12 @@ export class ProductStoreComponent implements OnInit {
       this.product.razonsocial = this.razonsocial;
       this.product.imagent = this.imagen;
       this.cartService.addCart(this.product);
-      this.cartService.addPrice(this.product.valorventa);
+      // this.cartService.addPrice(this.product.valorventa);
     }
 
     removeCart() {
         this.cartService.removeCart(this.product);
-        this.cartService.removePrice(this.product.valorventa);
+        // this.cartService.removePrice(this.product.valorventa);
         this.stateAddProduct();
     }
 

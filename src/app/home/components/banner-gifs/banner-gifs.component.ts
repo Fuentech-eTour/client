@@ -9,11 +9,11 @@ import Swiper from 'swiper';
 export class BannerGifsComponent implements OnInit, AfterViewInit {
 
   images: string[] = [
-    '../../../assets/images/banner-1.jpg',
-    '../../../assets/images/banner-2.jpg',
-    '../../../assets/images/banner-3.jpg',
-    '../../../assets/images/banner-1.jpg',
-    '../../../assets/images/banner-2.jpg'
+    '../../../assets/images/banner-1.png',
+    '../../../assets/images/banner-2.png',
+    '../../../assets/images/banner-3.png',
+    '../../../assets/images/banner-1.png',
+    '../../../assets/images/banner-2.png'
   ];
   mySwiper: Swiper;
 
