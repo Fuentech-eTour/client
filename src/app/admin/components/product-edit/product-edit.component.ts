@@ -28,6 +28,7 @@ export class ProductEditComponent implements OnInit {
   title: string;
   price: number;
   description: string;
+  idTag: number;
   image: any;
   newImage: any;
   file: any;
@@ -57,11 +58,12 @@ export class ProductEditComponent implements OnInit {
         this.title = product[0].nombrearticulo;
         this.price = product[0].valorventa;
         this.description = product[0].descripcion;
+        this.idTag = product[0].idtag;
         this.image = product[0].imagen;
         this.form.get('tags').setValue(product[0].idtag);
       });
     });
-    this.tagsService.getAllTagsProducts().subscribe(tags => {
+    this.tagsService.getAllTagsProducts().subscribe((tags: any) => {
       this.tags = tags;
     });
   }
@@ -89,20 +91,17 @@ export class ProductEditComponent implements OnInit {
             product[codigo] = this.codigo;
             this.productsService.updateProduct(product)
               .subscribe((res: any) => {
-                console.log(res);
                 this.windowService.loadingFalse();
                 // se debe crear un metodo para modificar el tag asignado a un producto
-                /* if (res.status === 'Ok') {
+                if (res.status === 'Ok') {
                   this.windowService.loadingTrue();
                   const idTag = this.form.get('tags').value;
                   const idp = res.idproducto;
-                  console.log(idTag, idp);
-                  this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
-                    console.log(resul);
+                  this.productsService.editTagProduct({ idtagproducto: this.idTag, newtag: idTag }).subscribe(resul => {
                     this.windowService.loadingFalse();
                     this.router.navigate(['./admin/products']);
                   });
-                } */
+                }
               });
           });
         })
@@ -113,23 +112,19 @@ export class ProductEditComponent implements OnInit {
       const product = this.form.value;
       const codigo = 'codigo';
       product[codigo] = this.codigo;
-      console.log(product);
       this.productsService.updateProduct(product)
       .subscribe((res: any) => {
-        console.log(res);
         this.windowService.loadingFalse();
         // se debe crear un metodo para modificar el tag asignado a un producto
-        /* if (res.status === 'Ok') {
+        if (res.status === 'Ok') {
           this.windowService.loadingTrue();
           const idTag = this.form.get('tags').value;
           const idp = res.idproducto;
-          console.log(idTag, idp);
-          this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
-            console.log(resul);
+          this.productsService.editTagProduct({ idtagproducto: this.idTag, newtag: idTag }).subscribe(resul => {
             this.windowService.loadingFalse();
             this.router.navigate(['./admin/products']);
           });
-        } */
+        }
       });
     }
   }

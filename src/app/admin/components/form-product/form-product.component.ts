@@ -43,7 +43,7 @@ export class FormProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tagsService.getAllTagsProducts().subscribe(tags => {
+    this.tagsService.getAllTagsProducts().subscribe((tags: any) => {
       this.tags = tags;
     });
     console.log(this.image);

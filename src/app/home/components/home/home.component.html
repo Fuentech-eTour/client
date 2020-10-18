@@ -19,6 +19,14 @@
             <app-card-category  *ngFor="let tags of tagsStores" [tags]="tags"
                                 [routerLink]="['/stores/tagsstores', tags.id]">
             </app-card-category>
+            <mat-card *ngIf="stateSeeMoreStores" (click)="seeMoreTagsStores()" class="card-cont">
+                <mat-card-header style="text-align: center;">
+                    
+                </mat-card-header>
+                <mat-card-content style="text-align: center;">
+                    <mat-card-subtitle style="font-size: 20px;">Ver mas...</mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
         </div>
         <div class="title-cont">
             <mat-card-title [routerLink]="['/products']">Categorías productos</mat-card-title>
@@ -27,6 +35,14 @@
             <app-card-category  *ngFor="let tags of tagsProducts" [tags]="tags"
                                 [routerLink]="['/stores/tagsproducts', tags.id]">
             </app-card-category>
+            <mat-card *ngIf="stateSeeMoreProducts" (click)="seeMoreTagsProducts()" class="card-cont">
+                <mat-card-header style="text-align: center;">
+                    
+                </mat-card-header>
+                <mat-card-content style="text-align: center;">
+                    <mat-card-subtitle style="font-size: 20px;">Ver mas...</mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>

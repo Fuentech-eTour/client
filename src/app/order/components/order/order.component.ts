@@ -11,6 +11,7 @@ import { AuthService } from '@core/services/auth.service';
 import { OrderService } from '@core/services/order.service';
 import { UtilityService } from '@core/services/utility.service';
 import { MessageModalComponent } from '../message-modal/message-modal.component';
+import { InputsModalComponent } from '../inputs-modal/inputs-modal.component';
 
 @Component({
   selector: 'app-order',
@@ -119,6 +120,25 @@ export class OrderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.fetchAllAddress();
+    });
+  }
+
+  openDialogEditPhone(): void {
+    const dialogRef = this.dialog.open(InputsModalComponent, {
+      width: '300px',
+      data: { message: 'Editar celular'}
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(result);
+      if (result?.confirm === 'OK' && result?.telefono !== '') {
+        this.secondFormGroup.get('telefono').setValue(result.telefono);
+        this.usersService.editInfoUser(this.secondFormGroup.value).subscribe((res: any) => {
+          if (res.status === 'OK') {
+            this.fetchInfoUser();
+          }
+        });
+      }
     });
   }
 

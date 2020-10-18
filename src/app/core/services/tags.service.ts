@@ -17,7 +17,15 @@ export class TagsService {
   ) { }
 
   getAllTagsProducts() {
-    return this.http.get<any>(`${environment.url_api}/tags/obtenertags`)
+    return this.http.get(`${environment.url_api}/tags/obtenertags`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
+  getTagsProductsForPage(newPage: number) {
+    return this.http.post(`${environment.url_api}/tags/obtenertagsporpagina`, { cnt: newPage, limite: 8 })
       .pipe(
         retry(3),
         catchError(this.handleError),
@@ -49,7 +57,15 @@ export class TagsService {
   }
 
   getAllTagsStores() {
-    return this.http.get<any>(`${environment.url_api}/tags/obtenertagsstores`)
+    return this.http.get(`${environment.url_api}/tags/obtenertagsstores`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+
+  getTagsStoresForPage(newPage: number) {
+    return this.http.post(`${environment.url_api}/tags/obtenertagsstoresporpagina`, { cnt: newPage, limite: 8 })
       .pipe(
         retry(3),
         catchError(this.handleError),

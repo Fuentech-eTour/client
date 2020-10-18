@@ -31,8 +31,8 @@ export class StoresService {
     );
   }
 
-  getAllStoresWithProduct() {
-    return this.http.get<any[]>(`${environment.url_api}/products/obtenerproducts`)
+  getAllStoresWithProduct(newPage: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerproducts`, { cnt: newPage, limitt: 5, cnp: 0, limitp: 10 })
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -129,6 +129,14 @@ export class StoresService {
 
   assingTagStore(idstore: number, idtag: number) {
     return this.http.post(`${environment.url_api}/stores/asignatagstore`, { idstore, idtag })
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  editTagStore(newTag: object) {
+    return this.http.put(`${environment.url_api}/stores/modificatagStore`, newTag)
     .pipe(
       retry(3),
       catchError(this.handleError),

@@ -10,6 +10,10 @@ export class SidenavComponent implements OnInit {
 
   tagsStores: any;
   tagsProducts: any;
+  stateSeeMoreProducts = true;
+  newPageProducts = 0;
+  stateSeeMoreStores = true;
+  newPageStores = 0;
 
   @Input() mostrar2: any;
 
@@ -23,16 +27,44 @@ export class SidenavComponent implements OnInit {
   }
 
   fetchTagsProducts() {
-    this.tagsService.getAllTagsProducts()
+    this.tagsService.getTagsProductsForPage(this.newPageProducts)
     .subscribe(tags => {
       this.tagsProducts = tags;
     });
   }
 
+  seeMoreTagsProducts() {
+    this.newPageProducts += 8;
+    this.tagsService.getTagsProductsForPage(this.newPageProducts)
+    .subscribe((tags: []) => {
+      if (tags.length === 0) {
+        return;
+      }
+      if (tags.length < 8) {
+        this.stateSeeMoreProducts = false;
+      }
+      this.tagsProducts = this.tagsProducts.concat(tags);
+    });
+  }
+
   fetchTagsStores() {
-    this.tagsService.getAllTagsStores()
+    this.tagsService.getTagsStoresForPage(this.newPageStores)
     .subscribe(tags => {
       this.tagsStores = tags;
+    });
+  }
+
+  seeMoreTagsStores() {
+    this.newPageStores += 8;
+    this.tagsService.getTagsStoresForPage(this.newPageStores)
+    .subscribe((tags: []) => {
+      if (tags.length === 0) {
+        return;
+      }
+      if (tags.length < 8) {
+        this.stateSeeMoreStores = false;
+      }
+      this.tagsStores = this.tagsStores.concat(tags);
     });
   }
 

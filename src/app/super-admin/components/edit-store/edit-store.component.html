@@ -35,9 +35,9 @@
                             <mat-form-field class="input-c2-2">
                                 <mat-label>Tipo de sociedad</mat-label>
                                 <mat-select formControlName="tipo">
-                                  <mat-option value="Natural">NATURAL</mat-option>
+                                  <mat-option value="NATURAL">NATURAL</mat-option>
                                   <mat-option value="SAS">SAS</mat-option>
-                                  <mat-option value="Limitada">LIMITADA</mat-option>
+                                  <mat-option value="LIMITADA">LIMITADA</mat-option>
                                   <mat-option value="UP">UP</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -135,16 +135,16 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-xs">
                             <mat-form-field class="input-g">
                                 <mat-label>Categoría</mat-label>
-                                <mat-select formControlName="idtag">
+                                <mat-select formControlName="iduttagstores">
                                     <mat-option *ngFor="let tag of tagsStore" [value]=tag.id>{{tag.descripcion}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div class="row">
                         <div class="col-xs">
                             <img *ngIf="(image$ | async) as image" [src]="image" alt="">

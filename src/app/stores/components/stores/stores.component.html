@@ -4,3 +4,11 @@
     [store]="store"
     ></app-banner-stores>
 </div>
+<div class="action-btn">
+    <!-- <div (click)="seeMore()">Ver mas</div> -->
+    <div (click)="paginationPrevious()"><mat-icon>keyboard_arrow_left</mat-icon></div>
+    <div (click)="btnOne()" [ngClass]="{'btnPageSelect': stateBtnOne}">{{ btnPageOne }}</div>
+    <div (click)="btnTwo()" [ngClass]="{'btnPageSelect': stateBtnTwo}">{{ btnPageTwo }}</div>
+    <div (click)="btnThree()" [ngClass]="{'btnPageSelect': stateBtnThree}">{{ btnPageThree }}</div>
+    <div (click)="paginationNext()"><mat-icon>keyboard_arrow_right</mat-icon></div>
+</div>

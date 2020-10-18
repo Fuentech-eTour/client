@@ -81,6 +81,14 @@
     @media (min-width: 768px) {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .card-cont {
+        cursor: pointer;
+        &:hover {
+            box-shadow: 0px 0px 2px 1px #edf1fd;
+            background-color: #edf1fd;
+        }
+    }
 }
 
 

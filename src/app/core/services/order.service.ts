@@ -169,6 +169,30 @@ export class OrderService {
     );
   }
 
+  getWithoutDispatching() {
+    return this.http.get<any>(`${environment.url_api}/sells/obtenerconfirmadasbystore/${localStorage.getItem('idstore')}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getDispatchedOrders() {
+    return this.http.get<any>(`${environment.url_api}/sells/obtenerdespachosbystore/${localStorage.getItem('idstore')}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getCanceledOrders() {
+    return this.http.get<any>(`${environment.url_api}/sells/obteneranuladosbystore/${localStorage.getItem('idstore')}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   getOneSellById(id: number) {
     return this.http.get<any>(`${environment.url_api}/sells/obtenerventaunitaria/${id}`)
     .pipe(
@@ -178,7 +202,23 @@ export class OrderService {
   }
 
   confirmSell(id: number) {
-    return this.http.put<any>(`${environment.url_api}/sells/confirmacompra/${id}`, {})
+    return this.http.put<any>(`${environment.url_api}/sells/confirmacompra/${id}`, { mensaje: '' })
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  dispatchingOrder(id: number) {
+    return this.http.post(`${environment.url_api}/sells/despachacompra/${id}`, {})
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  cancelOrder(id: number) {
+    return this.http.post(`${environment.url_api}/sells/anularcompra/${id}`, { razon: '' })
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -186,7 +226,31 @@ export class OrderService {
   }
 
   getPurchasesByIdClient() {
-    return this.http.get<any>(`${environment.url_api}/sells/obtenercomprasbycliente`)
+    return this.http.get<any>(`${environment.url_api}/sells/obtenercomprasnoconfirmadasbycliente`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getPurchasesConfirmedByIdClient() {
+    return this.http.get<any>(`${environment.url_api}/sells/obtenercomprasconfirmadasbycliente`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getPurchasesWithoutDispatchingByIdClient() {
+    return this.http.get<any>(`${environment.url_api}/sells/obtenercomprasendespacho`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getPurchasesCanceledByIdClient() {
+    return this.http.get<any>(`${environment.url_api}/sells/obtenercomprasanuladas`)
     .pipe(
       retry(3),
       catchError(this.handleError),

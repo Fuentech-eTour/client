@@ -94,6 +94,14 @@ export class ProductsService {
     );
   }
 
+  editTagProduct(newTag: object) {
+    return this.http.put(`${environment.url_api}/products/actualizartagproducto`, newTag)
+    .pipe(
+      retry(3), // hace la petición al servicio tres veces
+      catchError(this.handleError), // si la petición no se consigue manda el error a handleError()
+    );
+  }
+
   createFavoritiesProducts(idproducto: object) {
     return this.http.post(`${environment.url_api}/favs/agregaproductofavs`, idproducto)
     .pipe(

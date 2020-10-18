@@ -10,10 +10,11 @@ import { OrderRoutingModule } from './order-routing.module';
 import { OrderComponent } from './components/order/order.component';
 import { AddressComponent } from './components/address/address.component';
 import { MessageModalComponent } from './components/message-modal/message-modal.component';
+import { InputsModalComponent } from './components/inputs-modal/inputs-modal.component';
 
 
 @NgModule({
-  declarations: [OrderComponent, AddressComponent, MessageModalComponent],
+  declarations: [OrderComponent, AddressComponent, MessageModalComponent, InputsModalComponent],
   imports: [
     CommonModule,
     OrderRoutingModule,

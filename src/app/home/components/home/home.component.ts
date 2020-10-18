@@ -35,6 +35,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   slidesPerView: number;
   tagsStores: any;
   tagsProducts: any;
+  stateSeeMoreProducts = true;
+  newPageProducts = 0;
+  stateSeeMoreStores = true;
+  newPageStores = 0;
 
   constructor(
     private tagsService: TagsService,
@@ -43,11 +47,47 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.windowService.stateFooterTrue();
-    this.tagsService.getAllTagsStores().subscribe(data => {
+    this.fetchTagsProducts();
+    this.fetchTagsStores();
+  }
+
+  fetchTagsProducts() {
+    this.tagsService.getTagsProductsForPage(this.newPageProducts).subscribe(data => {
+      this.tagsProducts = data;
+    });
+  }
+
+  seeMoreTagsProducts() {
+    this.newPageProducts += 8;
+    this.tagsService.getTagsProductsForPage(this.newPageProducts)
+    .subscribe((tags: []) => {
+      if (tags.length === 0) {
+        return;
+      }
+      if (tags.length < 8) {
+        this.stateSeeMoreProducts = false;
+      }
+      this.tagsProducts = this.tagsProducts.concat(tags);
+    });
+  }
+
+  fetchTagsStores() {
+    this.tagsService.getTagsStoresForPage(this.newPageStores).subscribe(data => {
       this.tagsStores = data;
     });
-    this.tagsService.getAllTagsProducts().subscribe(data => {
-      this.tagsProducts = data;
+  }
+
+  seeMoreTagsStores() {
+    this.newPageStores += 8;
+    this.tagsService.getTagsStoresForPage(this.newPageStores)
+    .subscribe((tags: []) => {
+      if (tags.length === 0) {
+        return;
+      }
+      if (tags.length < 8) {
+        this.stateSeeMoreStores = false;
+      }
+      this.tagsStores = this.tagsStores.concat(tags);
     });
   }
 

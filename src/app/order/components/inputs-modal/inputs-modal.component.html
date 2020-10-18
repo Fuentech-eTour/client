@@ -1,0 +1,46 @@
+<form [formGroup]="form">
+    <mat-card>
+        <mat-card-header style="justify-content: center; margin: 20px 0px;">
+            <mat-card-title>{{ data.message }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input   matInput 
+                                    placeholder="Nuevo N° de celular" 
+                                    formControlName="telefono"
+                                    cdkFocusInitial>
+                        <mat-error *ngIf="form.controls['telefono'].hasError('required')">
+                            Celular es <strong>requerido</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button [mat-dialog-close]="form.value">Guardar cambios</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+
+<!-- <div style="padding: 20px;">
+    <mat-card style="box-shadow: none;">
+        <div mat-dialog-content style="text-align: center;">
+            <p>{{ data.message }}</p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input  matInput 
+                            placeholder="Celular"
+                            cdkFocusInitial>
+                </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions style="justify-content: center;">
+            <button mat-button mat-dialog-close="NO" cdkFocusInitial>No</button>
+            <button mat-button mat-dialog-close="SI">Si</button>
+        </div>
+    </mat-card>
+</div> -->

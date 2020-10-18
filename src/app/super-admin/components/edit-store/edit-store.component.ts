@@ -26,6 +26,7 @@ export class EditStoreComponent implements OnInit {
   image: any;
   file: any;
   municipalities: any;
+  idTag: number;
   tagsStore: any;
   idstore: number;
   idconfig: number;
@@ -53,6 +54,7 @@ export class EditStoreComponent implements OnInit {
         this.image = store[0].imagen;
         this.idstore = store[0].id;
         this.idconfig = store[0].idconfig;
+        this.idTag = store[0].idtagstore;
         this.form.patchValue(store[0]);
       });
     });
@@ -108,9 +110,15 @@ export class EditStoreComponent implements OnInit {
                       this.openSnackBar(resConfig.message);
                       this.windowService.loadingFalse();
                       if (resConfig.status === 'Ok' || resConfig.status === 'OK') {
-                        this.form.reset();
-                        this.image = '';
-                        this.router.navigate(['/super-admin/stores']);
+                        this.windowService.loadingTrue();
+                        const idTag = this.form.get('iduttagstores').value;
+                        this.storesService.editTagStore({ idtagtienda: this.idTag, nuevotag: idTag })
+                        .subscribe(resul => {
+                          this.windowService.loadingFalse();
+                          this.form.reset();
+                          this.image = '';
+                          this.router.navigate(['/super-admin/stores']);
+                        });
                       }
                     });
                   }
@@ -139,9 +147,15 @@ export class EditStoreComponent implements OnInit {
                 this.openSnackBar(resConfig.message);
                 this.windowService.loadingFalse();
                 if (resConfig.status === 'Ok' || resConfig.status === 'OK') {
-                  this.form.reset();
-                  this.image = '';
-                  this.router.navigate(['/super-admin/stores']);
+                  this.windowService.loadingTrue();
+                  const idTag = this.form.get('iduttagstores').value;
+                  this.storesService.editTagStore({ idtagtienda: this.idTag, nuevotag: idTag })
+                  .subscribe(resul => {
+                    this.windowService.loadingFalse();
+                    this.form.reset();
+                    this.image = '';
+                    this.router.navigate(['/super-admin/stores']);
+                  });
                 }
               });
             }
@@ -187,6 +201,7 @@ export class EditStoreComponent implements OnInit {
       valormin: ['', Validators.required],
       horaini: ['', Validators.required],
       horafin: ['', Validators.required],
+      iduttagstores: ['', Validators.required],
     });
   }
 

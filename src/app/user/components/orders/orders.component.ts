@@ -12,20 +12,35 @@ export class OrdersComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   displayedColumns: string[] = ['Orden', 'Acciones'];
-  private historyOrder = new BehaviorSubject<any[]>([]);
-  historyOrder$ = this.historyOrder.asObservable();
+  private purchases = new BehaviorSubject<any[]>([]);
+  purchases$ = this.purchases.asObservable();
+  private purchasesConfirmed = new BehaviorSubject<any[]>([]);
+  purchasesConfirmed$ = this.purchasesConfirmed.asObservable();
+  private withoutDispatching = new BehaviorSubject<any[]>([]);
+  withoutDispatching$ = this.withoutDispatching.asObservable();
+  private purchasesCanceled = new BehaviorSubject<any[]>([]);
+  purchasesCanceled$ = this.purchasesCanceled.asObservable();
   private isloading = new BehaviorSubject<boolean>(true);
   isloading$ = this.isloading.asObservable();
+  private isloadingTwo = new BehaviorSubject<boolean>(true);
+  isloadingTwo$ = this.isloadingTwo.asObservable();
+  private isloadingThree = new BehaviorSubject<boolean>(true);
+  isloadingThree$ = this.isloadingThree.asObservable();
+  private isloadingFour = new BehaviorSubject<boolean>(true);
+  isloadingFour$ = this.isloadingFour.asObservable();
 
   constructor(
     private orderService: OrderService,
   ) { }
 
   ngOnInit(): void {
-    this.fetchPurcheseClient();
+    this.fetchPurchese();
+    this.fetchPurchasesConfirmed();
+    this.fetchPurchasesWithoutDispatching();
+    this.fetchPurchasesCanceled();
   }
 
-  fetchPurcheseClient() {
+  fetchPurchese() {
     this.isloading.next(true);
     this.orderService.getPurchasesByIdClient()
       .subscribe((data: any) => {
@@ -34,7 +49,46 @@ export class OrdersComponent implements OnInit {
           return;
         }
         console.log(data);
-        this.historyOrder.next(data);
+        this.purchases.next(data);
+      });
+  }
+
+  fetchPurchasesConfirmed() {
+    this.isloadingTwo.next(true);
+    this.orderService.getPurchasesConfirmedByIdClient()
+      .subscribe((data: any) => {
+        this.isloadingTwo.next(false);
+        if (data.status === 402) {
+          return;
+        }
+        console.log(data);
+        this.purchasesConfirmed.next(data);
+      });
+  }
+
+  fetchPurchasesWithoutDispatching() {
+    this.isloadingThree.next(true);
+    this.orderService.getPurchasesWithoutDispatchingByIdClient()
+      .subscribe((data: any) => {
+        this.isloadingThree.next(false);
+        if (data.status === 402) {
+          return;
+        }
+        console.log(data);
+        this.withoutDispatching.next(data);
+      });
+  }
+
+  fetchPurchasesCanceled() {
+    this.isloadingFour.next(true);
+    this.orderService.getPurchasesCanceledByIdClient()
+      .subscribe((data: any) => {
+        this.isloadingFour.next(false);
+        if (data.status === 402) {
+          return;
+        }
+        console.log(data);
+        this.purchasesCanceled.next(data);
       });
   }
 
