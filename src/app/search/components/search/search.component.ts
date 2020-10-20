@@ -20,6 +20,29 @@ export class SearchComponent implements OnInit, OnDestroy {
   stateSearchStores$: Observable<any>;
   stateSearchProducts$: Observable<any>;
   isLoading$: Observable<boolean>;
+  searchParams: any;
+
+  // pagination for the searched products
+  numberProductsFetch = 12;
+  stateSeeMore = 0;
+  stateBtnPage = 1;
+  btnPageOne = 1;
+  btnPageTwo = 2;
+  btnPageThree = 3;
+  stateBtnOne = true;
+  stateBtnTwo = false;
+  stateBtnThree = false;
+
+  // paging for stores searched
+  numberStoresFetch = 5;
+  stateSeeMoreStore = 0;
+  stateBtnPageStore = 1;
+  btnPageOneStore = 1;
+  btnPageTwoStore = 2;
+  btnPageThreeStore = 3;
+  stateBtnOneStore = true;
+  stateBtnTwoStore = false;
+  stateBtnThreeStore = false;
 
   constructor(
     private storesService: StoresService,
@@ -31,13 +54,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.stateSearchStores$ = this.route.params
           .pipe(
             switchMap((params: Params) => {
-              return this.storesService.getStoreByName(params.name);
+              this.searchParams = params.name;
+              return this.storesService.getStoreByName(params.name, this.stateSeeMoreStore);
             })
           );
     this.stateSearchProducts$ = this.route.params
           .pipe(
             switchMap((params: Params) => {
-              return this.productsService.getProductByName(params.name);
+              return this.productsService.getProductByName(params.name, this.stateSeeMore);
             })
           );
     this.stores = [];
@@ -85,5 +109,217 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.windowService.stateHeaderFalse();
   }
+
+  // pagination for the searched products --init--
+
+  paginationNext() {
+    this.btnPageOne += 1;
+    this.btnPageTwo += 1;
+    this.btnPageThree += 1;
+    this.changeStatePage();
+  }
+
+  paginationPrevious() {
+    this.changeStatePage();
+    if (this.btnPageOne === 1) {
+      return;
+    }
+    this.btnPageOne -= 1;
+    this.btnPageTwo -= 1;
+    this.btnPageThree -= 1;
+    this.changeStatePage();
+  }
+
+  btnOne() {
+    if (this.btnPageOne === 1) {
+      this.stateSeeMore = 0;
+    }
+    if (this.btnPageOne !== 1) {
+      this.stateSeeMore = this.numberProductsFetch * (this.btnPageOne - 1);
+    }
+    this.windowService.loadingTrue();
+    this.productsService.getProductByName(this.searchParams, this.stateSeeMore)
+    .subscribe((products: any) => {
+      console.log(products);
+      this.windowService.loadingFalse();
+      if (products.status === '402') {
+        this.products = [];
+        return;
+      }
+      this.products = products;
+    });
+    this.stateBtnPage = this.btnPageOne;
+    this.changeStatePage();
+  }
+
+  btnTwo() {
+    this.stateSeeMore = this.numberProductsFetch * (this.btnPageTwo - 1);
+    this.windowService.loadingTrue();
+    this.productsService.getProductByName(this.searchParams, this.stateSeeMore)
+    .subscribe((products: any) => {
+      console.log(products);
+      this.windowService.loadingFalse();
+      if (products.status === '402') {
+        this.products = [];
+        return;
+      }
+      this.products = products;
+    });
+    this.stateBtnPage = this.btnPageTwo;
+    this.changeStatePage();
+  }
+
+  btnThree() {
+    this.stateSeeMore = this.numberProductsFetch * (this.btnPageThree - 1);
+    this.windowService.loadingTrue();
+    this.productsService.getProductByName(this.searchParams, this.stateSeeMore)
+    .subscribe((products: any) => {
+      console.log(products);
+      this.windowService.loadingFalse();
+      if (products.status === '402') {
+        this.products = [];
+        return;
+      }
+      this.products = products;
+    });
+    this.stateBtnPage = this.btnPageThree;
+    this.changeStatePage();
+  }
+
+  changeStatePage() {
+    if (this.stateBtnPage === this.btnPageOne) {
+      this.stateBtnOne = true;
+      this.stateBtnTwo = false;
+      this.stateBtnThree = false;
+    }
+
+    if (this.stateBtnPage === this.btnPageTwo) {
+      this.stateBtnOne = false;
+      this.stateBtnTwo = true;
+      this.stateBtnThree = false;
+    }
+
+    if (this.stateBtnPage === this.btnPageThree) {
+      this.stateBtnOne = false;
+      this.stateBtnTwo = false;
+      this.stateBtnThree = true;
+    }
+
+    if (this.stateBtnPage !== this.btnPageOne &&
+      this.stateBtnPage !== this.btnPageTwo &&
+      this.stateBtnPage !== this.btnPageThree) {
+        this.stateBtnOne = false;
+        this.stateBtnTwo = false;
+        this.stateBtnThree = false;
+    }
+  }
+
+  // pagination for the searched products --final--
+
+  // paging for stores searched --init--
+
+  paginationNextStores() {
+    this.btnPageOneStore += 1;
+    this.btnPageTwoStore += 1;
+    this.btnPageThreeStore += 1;
+    this.changeStatePageStores();
+  }
+
+  paginationPreviousStores() {
+    this.changeStatePageStores();
+    if (this.btnPageOneStore === 1) {
+      return;
+    }
+    this.btnPageOneStore -= 1;
+    this.btnPageTwoStore -= 1;
+    this.btnPageThreeStore -= 1;
+    this.changeStatePageStores();
+  }
+
+  btnOneStores() {
+    if (this.btnPageOneStore === 1) {
+      this.stateSeeMoreStore = 0;
+    }
+    if (this.btnPageOneStore !== 1) {
+      this.stateSeeMoreStore = this.numberStoresFetch * (this.btnPageOneStore - 1);
+    }
+    this.windowService.loadingTrue();
+    this.storesService.getStoreByName(this.searchParams, this.stateSeeMoreStore)
+    .subscribe((stores: any) => {
+      console.log(stores);
+      this.windowService.loadingFalse();
+      if (stores.status === '402') {
+        this.stores = [];
+        return;
+      }
+      this.stores = stores;
+    });
+    this.stateBtnPage = this.btnPageOneStore;
+    this.changeStatePageStores();
+  }
+
+  btnTwoStores() {
+    this.stateSeeMoreStore = this.numberStoresFetch * (this.btnPageTwoStore - 1);
+    this.windowService.loadingTrue();
+    this.storesService.getStoreByName(this.searchParams, this.stateSeeMoreStore)
+    .subscribe((stores: any) => {
+      console.log(stores);
+      this.windowService.loadingFalse();
+      if (stores.status === '402') {
+        this.stores = [];
+        return;
+      }
+      this.stores = stores;
+    });
+    this.stateBtnPage = this.btnPageTwoStore;
+    this.changeStatePageStores();
+  }
+
+  btnThreeStores() {
+    this.stateSeeMoreStore = this.numberStoresFetch * (this.btnPageThreeStore - 1);
+    this.windowService.loadingTrue();
+    this.storesService.getStoreByName(this.searchParams, this.stateSeeMoreStore)
+    .subscribe((stores: any) => {
+      console.log(stores);
+      this.windowService.loadingFalse();
+      if (stores.status === '402') {
+        this.stores = [];
+        return;
+      }
+      this.stores = stores;
+    });
+    this.stateBtnPage = this.btnPageThreeStore;
+    this.changeStatePageStores();
+  }
+
+  changeStatePageStores() {
+    if (this.stateBtnPage === this.btnPageOneStore) {
+      this.stateBtnOneStore = true;
+      this.stateBtnTwoStore = false;
+      this.stateBtnThreeStore = false;
+    }
+
+    if (this.stateBtnPage === this.btnPageTwoStore) {
+      this.stateBtnOneStore = false;
+      this.stateBtnTwoStore = true;
+      this.stateBtnThreeStore = false;
+    }
+
+    if (this.stateBtnPage === this.btnPageThreeStore) {
+      this.stateBtnOneStore = false;
+      this.stateBtnTwoStore = false;
+      this.stateBtnThreeStore = true;
+    }
+
+    if (this.stateBtnPage !== this.btnPageOneStore &&
+      this.stateBtnPage !== this.btnPageTwoStore &&
+      this.stateBtnPage !== this.btnPageThreeStore) {
+        this.stateBtnOneStore = false;
+        this.stateBtnTwoStore = false;
+        this.stateBtnThreeStore = false;
+    }
+  }
+
+  // paging for stores searched --final--
 
 }

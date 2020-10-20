@@ -72,16 +72,18 @@ export class TagsService {
       );
   }
 
-  getOneTag(id: number) {
-    return this.http.get<any>(`${environment.url_api}/products/obtenerproductotagid/${id}`)
+  getOneTag(id: number, newPage: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerproductotagid/${id}`,
+    { cnt: newPage, limitt: 5, cnp: 0, limitp: 10 })
       .pipe(
         retry(3),
         catchError(this.handleError),
       );
   }
 
-  getOneTagStore(id: number) {
-    return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystoretagidall/${id}`)
+  getOneTagStore(id: number, newPage: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerproductsbystoretagidall/${id}`,
+    { cnt: newPage, limitt: 5, cnp: 0, limitp: 10, cntg: 0, limitg: 5 })
       .pipe(
         retry(3),
         catchError(this.handleError),

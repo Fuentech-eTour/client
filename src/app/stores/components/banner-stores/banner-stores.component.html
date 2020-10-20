@@ -29,6 +29,12 @@
             </div>
         </div>
     </div>
+    <!-- message -->
+    <div class="message-cont" *ngIf="store.products === null || store.products === undefined || store.products === []">
+        <mat-card-subtitle>
+            Esta tienda aun no agrega productos.
+        </mat-card-subtitle>
+    </div>
     <!-- Swiper --init-->
     <div class="swiper-container general">
         <!-- swiper wrapper -->

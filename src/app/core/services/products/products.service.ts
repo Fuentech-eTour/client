@@ -30,8 +30,9 @@ export class ProductsService {
     );
   }
 
-  getAllProductsByTags() {
-    return this.http.get<Product[]>(`${environment.url_api}/products/obtenerProductoalltagsid`)
+  getAllProductsByTags(newPageTag: number, newPageProduct: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerProductoalltagsid`,
+    { limitg: 4, cng: newPageTag, limit: 20, cnt: newPageProduct })
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -54,8 +55,8 @@ export class ProductsService {
     );
   }
 
-  getProductByName(name: string) {
-    return this.http.get<any>(`${environment.url_api}/products/obtenerproductbyname/${name}`)
+  getProductByName(name: string, newPage: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerproductbyname/${name}`, { limit: 12, cnt: newPage })
     .pipe(
       retry(3),
       catchError(this.handleError),

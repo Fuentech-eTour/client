@@ -13,7 +13,7 @@ app-product-movil {
 }
 
 .mat-tab-group {
-    margin-bottom: 48px;
+    //margin-bottom: 48px;
     background-color: white;
     @media (min-width: 700px) {
       background-color: #fafafa;
@@ -22,4 +22,41 @@ app-product-movil {
       text-align: center;
       padding: 16px;
     }
+}
+
+.action-btn {
+  justify-content: center;
+  text-align: center;
+  padding: 20px 0px;
+  background-color: white;
+  display: flex;
+
+  div {
+      display: flex;
+      width: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,.12);
+      padding: 5px;
+      margin: 0px 2.5px;
+      cursor: pointer;
+      color: #ff4b88;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+
+      // non-selectable
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      &:hover {
+          border: 1px solid #ff4b88;
+          background-color: #ff4b8715;
+      }
   }
+
+  .btnPageSelect {
+      border: 1px solid #ff4b88;
+      background-color: #ff4b8715;
+  }
+}

@@ -26,7 +26,7 @@ export class SearchStoresComponent implements OnInit {
     this.state$ = this.route.params
           .pipe(
             switchMap((params: Params) => {
-              return this.storesService.getStoreByName(params.name);
+              return this.storesService.getStoreByName(params.name, 0);
             })
           );
     this.stores = [];

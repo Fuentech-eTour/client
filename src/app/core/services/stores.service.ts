@@ -111,8 +111,9 @@ export class StoresService {
     );
   }
 
-  getStoreByName(name: string) {
-    return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystorename/${name}`)
+  getStoreByName(name: string, newPage: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerproductsbystorename/${name}`,
+    { cnt: newPage, limitt: 5, cnp: 0, limitp: 10 })
     .pipe(
       retry(3),
       catchError(this.handleError),
