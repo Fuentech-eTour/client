@@ -4,7 +4,7 @@
     height: auto;
     max-height: 70vh;
     display: none;
-    margin-top: 5px;
+    // margin-top: 5px;
     border-radius: 20px;
     overflow: auto;
     @media (min-width: 700px) {
@@ -18,22 +18,43 @@
         mat-card-title {
             margin: 10px 0px;
             font-size: 25px;
-            margin: 0px;
+            margin: 0px 0px 5px;
             padding: 0px;
+        }
+        .tag {
+            font-size: 10px;
+            background-color: lightslategray;
+            border-radius: 5px;
+            text-align: center;
+            padding: 0px 5px;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    .info-cont {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 10px;
+        div {
+            display: flex;
+            align-items: center;
+            margin: 5px 0px;
+            mat-icon {
+                margin-right: 5px;
+            }
+            p {
+                margin: 5px 0px;
+            }
         }
     }
     .title {
-        // display: flex;
-        display: none;
-        color: white;
+        display: flex;
         font-size: 16px;
         margin-bottom: 0px;
         align-items: center;
         justify-content: center;
-        background-color: #c6c6c6;
-        cursor: pointer;
+        margin: 10px 0px;
         .icon-category {
-            color: white;
             display: flex;
             padding: 0px 10px;
         }
@@ -42,7 +63,7 @@
         margin: 0px;
         padding: 0px;
         li {
-            margin: 10px 10px 0px 10px;
+            margin: 0px 10px 0px 10px;
             padding: 5px 0px;
             font-size: 16px;
             border-bottom: solid 1px #e0e0e0;

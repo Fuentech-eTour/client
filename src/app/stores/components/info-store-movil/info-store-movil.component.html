@@ -4,9 +4,62 @@
         background-size: cover;">
             <img *ngIf="store[0].imagen ==='' || store[0].imagen === null || store[0].imagen === undefined" src="./../../../../assets/images/icon-store.png">
         </div>
-        <mat-card-title [routerLink]="['/stores', store[0].id]">
-            {{store[0].razonsocial | titlecase}}
-        </mat-card-title>
+        <div class="info-cont">
+            <mat-card-title [routerLink]="['/stores', store[0].id]">
+                {{store[0].razonsocial | titlecase}}
+            </mat-card-title>
+            <div class="tag-cont">
+                <span class="tag" *ngIf="(qualificationStore$ | async) !== -1" [matMenuTriggerFor]="aboveMenu" >
+                    Puntuación: {{ qualificationStore$ | async | currency:'':'':'1.2-2' }} de 5.00
+                </span>
+                <span class="tag" *ngIf="(qualificationStore$ | async) === -1" [matMenuTriggerFor]="aboveMenu" >
+                    Puntuación: sin puntuación
+                </span><br/>
+                <span class="tag">Compra mínima: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}</span>
+                <span class="tag">Atención de {{ (configStore$ | async)?.timeInit | date:'H:mm' }} - {{ (configStore$ | async)?.timeFinal | date:'H:mm' }}</span>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- menu qualification -->
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+    <a mat-button class="btn-style">
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover1 === '1' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal1()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(1)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover2 === '2' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal2()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(2)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover3 === '3' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal3()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(3)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover4 === '4' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal4()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(4)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover5 === '5' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal5()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(5)">
+                    star_border
+        </mat-icon>
+    </a>
+</mat-menu>
 

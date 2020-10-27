@@ -4,12 +4,26 @@ div {
         align-items: center;
         border-bottom: solid 1px #e0e0e0;
         padding: 20px;
-        mat-card-title {
-            color: gray;
-            padding: 8px;
-            margin: 0px;
-            cursor: pointer;
-            font-size: 16px;
+        .info-cont {
+            mat-card-title {
+                color: gray;
+                padding: 0px 8px;
+                margin: 0px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .tag-cont {
+                margin-left: 8px;
+                .tag {
+                    font-size: 10px;
+                    background-color: lightslategray;
+                    border-radius: 5px;
+                    text-align: center;
+                    padding: 0px 8px;
+                    color: white;
+                    margin-right: 5px;
+                }
+            }
         }
     }
 }

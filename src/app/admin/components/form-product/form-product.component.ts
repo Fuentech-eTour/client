@@ -11,6 +11,7 @@ import { MyValidator } from './../../../utils/validators';
 
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class FormProductComponent implements OnInit {
     private tagsService: TagsService,
     private windowService: WindowService,
     private router: Router,
-    private angularFireStorage: AngularFireStorage
+    private angularFireStorage: AngularFireStorage,
+    private snackBar: MatSnackBar,
   ) {
     this.buildForm();
   }
@@ -88,6 +90,13 @@ export class FormProductComponent implements OnInit {
   }
 
   uploadFile(event) {
+    if (event.target.files.length === 0) {
+      return;
+    }
+    if (event.target.files[0].size > 150000) {
+      this.openSnackBar('El tamaño de la imagen supera los 150kb');
+      return;
+    }
     this.file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(this.file);
@@ -114,6 +123,14 @@ export class FormProductComponent implements OnInit {
 
   get priceField() {
     return this.form.get('valorventa');
+  }
+
+  openSnackBar(message) {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
   /* uploadFile(event) {

@@ -1,4 +1,13 @@
 <mat-card class="cont-category">
+    <!-- <mat-card-header>
+        <div mat-card-avatar style="background-image: url({{store[0].imagen}});
+        background-size: cover;">
+            <img *ngIf="store[0].imagen ==='' || store[0].imagen === null || store[0].imagen === undefined" src="./../../../../assets/images/icon-store.png">
+        </div>
+        <mat-card-title>
+            {{ store[0].razonsocial | titlecase }}
+        </mat-card-title>
+    </mat-card-header> -->
     <img *ngIf="store[0].imagen ===''       || 
                 store[0].imagen === null    || 
                 store[0].imagen === undefined; else imgstore" 
@@ -10,18 +19,22 @@
         <mat-card-title>
             {{ store[0].razonsocial | titlecase | slice:0:20 | moreContent:19 }}
         </mat-card-title>
+        <span class="tag" *ngIf="(qualificationStore$ | async) !== -1" [matMenuTriggerFor]="aboveMenu">
+            Puntuación: {{ qualificationStore$ | async | currency:'':'':'1.2-2' }} de 5.00
+        </span>
+        <span class="tag" *ngIf="(qualificationStore$ | async) === -1" [matMenuTriggerFor]="aboveMenu">
+            Puntuación: tienda sin puntuación
+        </span>
     </mat-card-header>
-    <!-- <mat-card-header>
-        <div mat-card-avatar style="background-image: url({{store[0].imagen}});
-        background-size: cover;">
-            <img *ngIf="store[0].imagen ==='' || store[0].imagen === null || store[0].imagen === undefined" src="./../../../../assets/images/icon-store.png">
-        </div>
-        <mat-card-title>
-            {{ store[0].razonsocial | titlecase }}
-        </mat-card-title>
-    </mat-card-header> -->
 
-    <h1 class="title" routerLink="/products">Categorias
+    <div class="info-cont">
+        <div><mat-icon>schedule</mat-icon><p>Horario de atención: <br/> {{ (configStore$ | async)?.timeInit | date:'H:mm' }} - {{ (configStore$ | async)?.timeFinal | date:'H:mm' }}</p></div>
+        <div><mat-icon>local_atm</mat-icon><p>Compra mínima: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}</p></div>
+        <div><mat-icon>phone</mat-icon><p>Celular: {{ store[0]?.telefono }}</p></div>
+        <!-- <div><mat-icon>mail</mat-icon><p>E-mail: {{ store[0]?.email }}</p></div> -->
+    </div>
+
+    <h1 class="title" >Categorias
         <mat-icon class="icon-category">category</mat-icon>
     </h1>
     <ul class="category">
@@ -37,3 +50,44 @@
         <!-- <p><b>Ver mas...</b></p> -->
     </ul>
 </mat-card>
+
+<!-- menu qualification -->
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+    <a mat-button class="btn-style">
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover1 === '1' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal1()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(1)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover2 === '2' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal2()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(2)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover3 === '3' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal3()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(3)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover4 === '4' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal4()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(4)">
+                    star_border
+        </mat-icon>
+        <mat-icon   class="cal-color" 
+                    [ngStyle]="{'color':colorHover5 === '5' ? '#fff159' : 'grey' }" 
+                    (mouseenter)="selectCal5()" 
+                    (mouseleave)="offSelectCal()"
+                    (click)="sendQualification(5)">
+                    star_border
+        </mat-icon>
+    </a>
+</mat-menu>
