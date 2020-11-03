@@ -5,6 +5,10 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { WindowService } from '@core/services/window.service';
 import { AuthService } from '@core/services/auth.service';
 import { OrderService } from '@core/services/order.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+declare var gtag;
 
 interface Token {
   token: string;
@@ -26,7 +30,17 @@ export class AppComponent implements OnInit {
     private windowService: WindowService,
     private authService: AuthService,
     private orderService: OrderService,
+    private router: Router,
   ) {
+    const navEndEvents$ = this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationEnd)
+    );
+    navEndEvents$.subscribe((event: NavigationEnd) => {
+      gtag('config', 'G-3ZMM7R062W', {
+        page_path: event.urlAfterRedirects
+      });
+    });
     this.tokensCollections = this.database.collection<Token>('tokens');
   }
 

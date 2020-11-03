@@ -9,7 +9,6 @@ import { AddProduct } from '../../../core/models/addProduct.model';
 import { CartService } from '@core/services/cart.service';
 import { WindowService } from '@core/services/window.service';
 import { ProductsService } from '@core/services/products/products.service';
-import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-product-store-movil',
@@ -32,7 +31,6 @@ export class ProductStoreMovilComponent implements OnInit {
         private cartService: CartService,
         private windowService: WindowService,
         private productsService: ProductsService,
-        private authService: AuthService,
         private dialog: MatDialog,
     ) {
       this.addState = true;
@@ -87,13 +85,11 @@ export class ProductStoreMovilComponent implements OnInit {
       this.product.razonsocial = this.razonsocial;
       this.product.imagent = this.imagen;
       this.cartService.addCart(this.product);
-      this.cartService.addPrice(this.product.valorventa);
     }
 
     removeCart() {
-        this.cartService.removeCart(this.product);
-        this.cartService.removePrice(this.product.valorventa);
-        this.stateAddProduct();
+      this.cartService.removeCart(this.product);
+      this.stateAddProduct();
     }
 
     subscribe(idproduct: number) {

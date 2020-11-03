@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 // import { map, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
-import { LoginComponent } from './auth/components/login/login.component';
+import { LoginComponent } from '../../auth/components/login/login.component';
 import { AuthService } from '@core/services/auth.service';
 
 @Injectable({

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AssingCategoryComponent } from './assing-category.component';
 
-describe('AssingCategoryComponent', () => {
+xdescribe('AssingCategoryComponent', () => {
   let component: AssingCategoryComponent;
   let fixture: ComponentFixture<AssingCategoryComponent>;
 

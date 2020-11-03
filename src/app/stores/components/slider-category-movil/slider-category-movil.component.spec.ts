@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SliderCategoryMovilComponent } from './slider-category-movil.component';
 
-describe('SliderCategoryMovilComponent', () => {
+xdescribe('SliderCategoryMovilComponent', () => {
   let component: SliderCategoryMovilComponent;
   let fixture: ComponentFixture<SliderCategoryMovilComponent>;
 

@@ -4,7 +4,7 @@ import { Routes, RouterModule, PreloadAllModules, ExtraOptions } from '@angular/
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { LayoutComponent } from './layout/layout.component';
-import { AdminGuard } from './admin.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
 import { AdminStoreGuard } from './shared/guards/admin-store.guard';
 import { SuperAdminGuard } from './shared/guards/super-admin.guard';
 
@@ -43,10 +43,6 @@ const routes: Routes = [
         canActivate: [ AdminGuard ],
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
       },
-      {
-        path: 'demo',
-        loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
-      }
     ]
   },
   {

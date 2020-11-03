@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BtnAddCountComponent } from './btn-add-count.component';
 
-describe('BtnAddCountComponent', () => {
+xdescribe('BtnAddCountComponent', () => {
   let component: BtnAddCountComponent;
   let fixture: ComponentFixture<BtnAddCountComponent>;
 

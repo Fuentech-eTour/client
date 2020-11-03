@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SavedListsComponent } from './saved-lists.component';
 
-describe('SavedListsComponent', () => {
+xdescribe('SavedListsComponent', () => {
   let component: SavedListsComponent;
   let fixture: ComponentFixture<SavedListsComponent>;
 

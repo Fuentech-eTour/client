@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddressOptionsComponent } from './address-options.component';
 
-describe('AddressOptionsComponent', () => {
+xdescribe('AddressOptionsComponent', () => {
   let component: AddressOptionsComponent;
   let fixture: ComponentFixture<AddressOptionsComponent>;
 

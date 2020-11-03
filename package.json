@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
     "@angular/service-worker": "~9.0.6",
+    "@nguniversal/express-engine": "^9.0.2",
     "@sentry/browser": "^5.15.4",
     "angularfire2": "^5.4.2",
     "file-saver": "^2.0.2",

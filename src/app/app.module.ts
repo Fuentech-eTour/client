@@ -20,18 +20,18 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from './../environments/environment';
-import { AdminGuard } from './admin.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
 import { OrderService } from '@core/services/order.service';
-
-// usar solo en produccion --init-- //
-import * as Sentry from '@sentry/browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-/* Sentry.init({
-  dsn: 'https://31fa6721aa294e12b316eb64c1edd21b@o375175.ingest.sentry.io/5194223'
-}); */
-// usar solo en produccion --final-- //
+import * as Sentry from '@sentry/browser';
+
+if (environment.production) {
+  Sentry.init({
+    dsn: 'https://31fa6721aa294e12b316eb64c1edd21b@o375175.ingest.sentry.io/5194223'
+  });
+}
 
 @NgModule({
   declarations: [
