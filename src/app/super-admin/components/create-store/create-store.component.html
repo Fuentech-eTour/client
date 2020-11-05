@@ -73,25 +73,29 @@
                     </div>
                     <div class="row">
                         <div class="col-xs">
-                            <mat-form-field class="input-g">
-                                <input  placeholder="Valor mínimo/pedido" 
-                                        formControlName="valormin" 
-                                        matInput 
-                                        type="number">
-                            </mat-form-field>
+                            <mat-card-title class="title">Horarios de atención</mat-card-title>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row hours-cont" *ngFor="let day of days">
                         <div class="col-xs">
-                            <mat-form-field class="input-g">
-                                <input  placeholder="Hora inicio" 
-                                        formControlName="horaini" 
-                                        matInput
-                                        type="time">
-                            </mat-form-field>
+                            <div style="display: flex;">
+                                <div class="input-h3-1">{{ day.name }}: </div>
+                                <mat-form-field class="input-h3-2">
+                                    <input  placeholder="Hora inicio" 
+                                            [formControlName]="'horaini'+day.id" 
+                                            matInput
+                                            type="time">
+                                </mat-form-field>
+                                <mat-form-field class="input-h3-3">
+                                    <input  placeholder="Hora cierre" 
+                                            [formControlName]="'horafin'+day.id" 
+                                            matInput 
+                                            type="time">
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs">
                             <mat-form-field class="input-g">
                                 <input  placeholder="Hora cierre" 
@@ -100,9 +104,19 @@
                                         type="time">
                             </mat-form-field>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
+                                <input  placeholder="Valor mínimo/pedido" 
+                                        formControlName="valormin" 
+                                        matInput 
+                                        type="number">
+                            </mat-form-field>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs">
                             <mat-form-field class="input-g">
@@ -172,6 +186,7 @@
         </mat-card-content>
         <mat-card-actions>
             <button [disabled]="form.invalid" [ngClass]="{btnActive: !form.invalid}" mat-raised-button type="submit">Guardar</button>
+            <button (click)="prueba()">prueba</button>
         </mat-card-actions>
     </mat-card>
 </form>

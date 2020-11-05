@@ -31,6 +31,7 @@ export class EditStoreComponent implements OnInit {
   idstore: number;
   idconfig: number;
   verificationDigit: any[];
+  days: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,13 +50,27 @@ export class EditStoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.storesService.getOneStores(parseInt(params.id, 10)).subscribe(store => {
+      this.storesService.getOneStores(parseInt(params.id, 10))
+      .subscribe(store => {
         console.log(store, parseInt(params.id, 10));
         this.image = store[0].imagen;
         this.idstore = store[0].id;
         this.idconfig = store[0].idconfig;
         this.idTag = store[0].idtagstore;
         this.form.patchValue(store[0]);
+      });
+    });
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.storesService.getConfigBusinessHours(parseInt(params.id, 10))
+      .subscribe((data: any[]) => {
+        console.log(data);
+        this.days = data;
+        for (const hours of data) {
+          if (hours.horaini !== '00:00:00' && hours.horafin !== '00:00:00') {
+            this.form.get(`horaini${hours.idutdays}`).setValue(hours.horaini);
+            this.form.get(`horafin${hours.idutdays}`).setValue(hours.horafin);
+          }
+        }
       });
     });
     this.fetchAllMunicipality();
@@ -121,6 +136,23 @@ export class EditStoreComponent implements OnInit {
                         });
                       }
                     });
+                    const businessHours: any[] = [];
+                    for (const hours of this.days) {
+                      const objectBusinessHours = {
+                        idConfig: hours.id, idday: hours.idutdays,
+                        horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                        horafin: this.form.get(`horafin${hours.idutdays}`).value
+                      };
+                      businessHours.push(objectBusinessHours);
+                    }
+                    for (const hours of businessHours) {
+                      if (hours.horaini !== ' ' && hours.horafin !== ' ') {
+                        this.storesService.updateConfigBusinessHours(hours.idConfig, hours)
+                        .subscribe((resHours: any) => {
+                          this.openSnackBar(resHours.message);
+                        });
+                      }
+                    }
                   }
               });
             });
@@ -138,8 +170,6 @@ export class EditStoreComponent implements OnInit {
               this.windowService.loadingTrue();
               const config = {
                 valormin: this.form.get('valormin').value,
-                horaini: this.form.get('horaini').value,
-                horafin: this.form.get('horafin').value,
                 estado: 1,
               };
               this.storesService.updateConfigStore(this.idconfig, config)
@@ -158,6 +188,23 @@ export class EditStoreComponent implements OnInit {
                   });
                 }
               });
+              const businessHours: any[] = [];
+              for (const hours of this.days) {
+                const objectBusinessHours = {
+                  idConfig: hours.id, idday: hours.idutdays,
+                  horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                  horafin: this.form.get(`horafin${hours.idutdays}`).value
+                };
+                businessHours.push(objectBusinessHours);
+              }
+              for (const hours of businessHours) {
+                if (hours.horaini !== ' ' && hours.horafin !== ' ') {
+                  this.storesService.updateConfigBusinessHours(hours.idConfig, hours)
+                  .subscribe((resHours: any) => {
+                    this.openSnackBar(resHours.message);
+                  });
+                }
+              }
             }
         });
       }
@@ -198,10 +245,22 @@ export class EditStoreComponent implements OnInit {
       zona: ['', [Validators.required]],
       digitoclave: ['', [Validators.required]],
       imagen: ['', Validators.required],
-      valormin: ['', Validators.required],
-      horaini: ['', Validators.required],
-      horafin: ['', Validators.required],
       iduttagstores: ['', Validators.required],
+      valormin: ['', Validators.required],
+      horaini1: [' ', Validators.required],
+      horafin1: [' ', Validators.required],
+      horaini2: [' ', Validators.required],
+      horafin2: [' ', Validators.required],
+      horaini3: [' ', Validators.required],
+      horafin3: [' ', Validators.required],
+      horaini4: [' ', Validators.required],
+      horafin4: [' ', Validators.required],
+      horaini5: [' ', Validators.required],
+      horafin5: [' ', Validators.required],
+      horaini6: [' ', Validators.required],
+      horafin6: [' ', Validators.required],
+      horaini7: [' ', Validators.required],
+      horafin7: [' ', Validators.required],
     });
   }
 

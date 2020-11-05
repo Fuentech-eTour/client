@@ -87,6 +87,30 @@ export class StoresService {
     );
   }
 
+  getConfigBusinessHours(idstore: number) {
+    return this.http.get(`${environment.url_api}/stores/obtenerconfigdiasbystoreid/${idstore}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  createConfigBusinessHours(config: object) {
+    return this.http.post(`${environment.url_api}/stores/creaconfiguraciondias`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  updateConfigBusinessHours(idConfig: number, config: object) {
+    return this.http.put(`${environment.url_api}/stores/actualizaconfigdias/${idConfig}`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   getProductsOneStore(id: number) {
     return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
     .pipe(
