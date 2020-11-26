@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
@@ -14,6 +14,8 @@ import { retry, catchError } from 'rxjs/operators';
 export class OrderService {
 
   socket: any;
+  private currentSells = new BehaviorSubject<any[]>([]);
+  currentSells$ = this.currentSells.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -31,6 +33,10 @@ export class OrderService {
       upgrade: false,
       transports: [ 'websocket', 'polling', 'flashsocket' ],
     });
+  }
+
+  addCurrentSells(data) {
+    this.currentSells.next(data);
   }
 
   // Metodos protocolo Websocket --init--
@@ -145,8 +151,8 @@ export class OrderService {
 
   // Metodos protocolo HTTP --init--
 
-  createSells(stores: [], idAddress: number) {
-    return this.http.post(`${environment.url_api}/sells/crearventa`, { objventa: stores, iddir:  idAddress})
+  createSells(objventa: [], iddir: number, idpayment: number) {
+    return this.http.post(`${environment.url_api}/sells/crearventa`, { objventa, iddir, idpayment })
     .pipe(
       retry(3),
       catchError(this.handleError),

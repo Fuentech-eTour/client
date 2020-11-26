@@ -1,9 +1,9 @@
-<mat-card *ngFor="let order of orderDetail$ | async">
+<mat-card *ngFor="let order of orderDetail">
     <mat-card-header>
-        <mat-card-title>Detalles de la Orden</mat-card-title>
+        <mat-card-title>Detalles de la Orden N° {{ order.id }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <span><strong>Orden N°:</strong> {{ order.id }}</span><br>
+        <!-- <span><strong>Orden N°:</strong> {{ order.id }}</span><br> -->
         <span><strong>Nombre:</strong> {{ order.nombres | titlecase }}</span><span> {{ order.apellidos | titlecase }}</span><br>
         <span><strong>CC</strong> {{ order.identificacion }}</span><br>
         <span><strong>Celular:</strong> {{ order.telefeno }}</span><br>

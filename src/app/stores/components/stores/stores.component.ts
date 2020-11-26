@@ -47,6 +47,7 @@ export class StoresComponent implements OnInit {
     this.windowService.loadingTrue();
     this.storesService.getAllStoresWithProduct(0)
     .subscribe((stores: any) => {
+      console.log(stores);
       this.stores = stores;
       this.windowService.loadingFalse();
     });

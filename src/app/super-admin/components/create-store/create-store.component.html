@@ -120,6 +120,16 @@
                     <div class="row">
                         <div class="col-xs">
                             <mat-form-field class="input-g">
+                                <input  placeholder="Valor domicilio" 
+                                        formControlName="valordomicilio" 
+                                        matInput 
+                                        type="number">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field class="input-g">
                                 <input placeholder="E-mail" formControlName="email" matInput type="email">
                             </mat-form-field>
                         </div>
@@ -186,7 +196,6 @@
         </mat-card-content>
         <mat-card-actions>
             <button [disabled]="form.invalid" [ngClass]="{btnActive: !form.invalid}" mat-raised-button type="submit">Guardar</button>
-            <button (click)="prueba()">prueba</button>
         </mat-card-actions>
     </mat-card>
 </form>

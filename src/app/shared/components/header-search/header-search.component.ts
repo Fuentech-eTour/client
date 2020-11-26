@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { WindowService } from '@core/services/window.service';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-search',
   templateUrl: './header-search.component.html',
   styleUrls: ['./header-search.component.scss']
 })
-export class HeaderSearchComponent implements OnInit {
+export class HeaderSearchComponent implements OnInit, AfterViewInit {
 
-  isLoading$: Observable<boolean>;
+  private isLoading = new BehaviorSubject<boolean>(true);
+  isLoading$ = this.isLoading.asObservable();
   form: FormGroup;
 
   constructor(
@@ -20,10 +22,17 @@ export class HeaderSearchComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.buildForm();
-    this.isLoading$ = this.windowService.isloading$;
    }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    this.windowService.isloading$
+    .pipe(
+      delay(0),
+      tap(res => this.isLoading.next(res))
+    ).subscribe();
   }
 
   searchStore(value: string) {

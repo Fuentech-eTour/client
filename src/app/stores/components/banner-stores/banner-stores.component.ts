@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Store } from '../../../core/models/store.model';
 
-import { CartService } from './../../../core/services/cart.service';
 import { StoresService } from './../../../core/services/stores.service';
 import { WindowService } from '@core/services/window.service';
 import { CommentsStoreComponent } from '../comments-store/comments-store.component';
@@ -11,6 +10,9 @@ import { CommentsStoreComponent } from '../comments-store/comments-store.compone
 import Swiper from 'swiper';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
+import { BusinessHoursComponent } from '../business-hours/business-hours.component';
 
 @Component({
   selector: 'app-banner-stores',
@@ -32,6 +34,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   stateSpinner = false;
   mySwiper: Swiper;
   showComment = false;
+  availabilityStore: boolean;
   private stateLoading = new BehaviorSubject<boolean>(true);
   stateLoading$ = this.stateLoading.asObservable();
   private stateComment = new BehaviorSubject<boolean>(true);
@@ -42,6 +45,9 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   qualificationStore$ = this.qualificationStore.asObservable();
   private configStore = new BehaviorSubject<any>({});
   configStore$ = this.configStore.asObservable();
+  businessHours: any[] = [];
+  private currentBusinessHours = new BehaviorSubject<any>({});
+  currentBusinessHours$ = this.currentBusinessHours.asObservable();
   colorHover1 = '0';
   colorHover2 = '0';
   colorHover3 = '0';
@@ -49,12 +55,12 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   colorHover5 = '0';
 
   constructor(
-    private cartService: CartService,
     private storesService: StoresService,
     private windowService: WindowService,
     private bottomSheet: MatBottomSheet,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
     this.favoriteStores$ = this.storesService.favoriteStores$;
     this.buildForm();
@@ -63,8 +69,10 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.fetchConfigStore();
+    this.fetchConfigBusinessHours();
     this.getFavoriteStores();
     this.fetchQualificationStore();
+    this.fetchAvailabilityStore();
   }
 
   ngAfterViewInit() {
@@ -83,6 +91,19 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     });
   }
 
+  fetchAvailabilityStore() {
+    this.storesService.getAvailabilityStoreById(this.store.id)
+    .subscribe((res: any) => {
+      console.log(res);
+      if (res.message === 'Cerrado') {
+        this.availabilityStore = false;
+      }
+      if (res.message === 'Abierto') {
+        this.availabilityStore = true;
+      }
+    });
+  }
+
   fetchConfigStore() {
     this.storesService.getConfigStoreById(this.store.id).subscribe((data: any) => {
       const dateInit = new Date('2020-01-01T' + data.horaini);
@@ -93,6 +114,28 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         valueMin: data.valormin,
       };
       this.configStore.next(schedule);
+    });
+  }
+
+  fetchConfigBusinessHours() {
+    this.storesService.getConfigBusinessHours(this.store.id)
+    .subscribe((res: any) => {
+      if (res.status === 402) {
+        return;
+      }
+      for (const hours of res) {
+        hours.horaini = new Date('2020-01-01T' + hours.horaini);
+        hours.horafin = new Date('2020-01-01T' + hours.horafin);
+        // this.currentBusinessHours.next(hours);
+        this.businessHours.push(hours);
+      }
+      const currentDay = new Date().getDay();
+      for (const hours of res) {
+        if (hours.idutdays === currentDay) {
+          this.currentBusinessHours.next(hours);
+          break;
+        }
+      }
     });
   }
 
@@ -128,16 +171,6 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
 
   mouseLeave() {
    this.estadoHover = false;
-  }
-
-  addCart(id: number) {
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.store.products.length; i++) {
-      if (this.store.products[i].id === id) {
-        this.cartService.addCart(this.store.products[i]);
-        this.cartService.addPrice(this.store.products[i].valorventa);
-      }
-    }
   }
 
   subscribe(idstore: number) {
@@ -219,6 +252,17 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   changeShowComment() {
     this.showComment = !this.showComment;
     this.fetchCommentStore();
+  }
+
+  openDialogBusinessHours(): void {
+    const dialogRef = this.dialog.open(BusinessHoursComponent, {
+      width: '300px',
+      data: this.businessHours,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   openSnackBar(message) {

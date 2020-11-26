@@ -37,6 +37,23 @@
             text-align: center;
             color: #4d90d3;
         }
+        .note-cont {
+            padding: 5px;
+            margin: 0px 5px;
+            border: solid 1px #e0e0e0;
+            border-radius: 5px;
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 
+                        0px 2px 2px 0px rgba(0, 0, 0, 0.14), 
+                        0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+            mat-card-subtitle {
+                color: red;
+                margin: 0px;
+                text-align: justify;
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
         .list-store-cont {
             mat-expansion-panel {
                 margin-top: 10px; 
@@ -44,7 +61,8 @@
 
                 mat-expansion-panel-header {
                     margin-bottom: 5px;
-
+                    padding-top: 5px;
+                    height: auto !important;
                     mat-panel-title {
                         display: flex; 
                         align-items: center;
@@ -52,6 +70,7 @@
                     mat-panel-description {
                         flex-direction: row-reverse; 
                         align-items: center;
+                        margin-right: 10px !important;
                     }
 
                 }

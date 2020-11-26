@@ -14,34 +14,37 @@
         <input matInput formControlName="firstCtrl">
       </mat-form-field>
 
-        <mat-table [dataSource]="products$" class="mat-elevation-z8" style="border-radius: 20px; background: #ffffff00;">
+      <div *ngFor="let store of order" style="margin-bottom: 20px;">
+        <mat-card-title style="text-align: center; font-size: 16px;">{{ store.razonsocial }}</mat-card-title>
+        <mat-table [dataSource]="store.products" class="mat-elevation-z8" style="border-radius: 20px; background: #ffffff00;">
           <!-- Image -->
           <ng-container class="img-cont" matColumnDef="imagen">
             <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>
             <mat-cell *matCellDef="let products"><img style="margin: 10px 0px;" width="40px" [src]="products.imagen"></mat-cell>
           </ng-container>
-
+  
           <!-- Name -->
           <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
             <mat-cell *matCellDef="let products"> {{ products.nombrearticulo | lowercase }} </mat-cell>
           </ng-container>
-
+  
           <!-- Quantity -->
           <ng-container matColumnDef="cantidad">
             <mat-header-cell *matHeaderCellDef style="justify-content: center;"> Cantidad </mat-header-cell>
             <mat-cell *matCellDef="let products" style="justify-content: center;"> {{ products.cant }} </mat-cell>
           </ng-container>
-
+  
           <!-- Total -->
           <ng-container matColumnDef="total">
             <mat-header-cell style="justify-content: flex-end;" *matHeaderCellDef> Total </mat-header-cell>
-            <mat-cell style="justify-content: flex-end;" *matCellDef="let products"> {{ products.valorventa * products.cant | currency }} </mat-cell>
+            <mat-cell style="justify-content: flex-end;" *matCellDef="let products"> {{ products.valorventa * products.cant | currency:'$':'symbol':'1.0-0' }} </mat-cell>
           </ng-container>
-
+  
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+      </div>
 
     </form>
   </mat-step>
@@ -151,6 +154,37 @@
           </mat-card-content>
         </mat-card>
       </mat-card>
+      <!-- selección metodo de pago --init-- -->
+      <!-- <mat-card class="cont-address">
+        <mat-card class="shipping-card">
+          <mat-card-header style="align-items: center; display: block;">
+            <div>
+              <mat-card-title style="text-align: center;">
+                  Selecciona método de pago
+              </mat-card-title>
+            </div>
+          </mat-card-header>
+          <mat-card-content *ngIf="( addresses$ | async ).length > 0">
+            <div class="row">
+              <div class="col">
+                <mat-radio-group formControlName="idPayment" required>
+                  <mat-card class="address-shadow">
+                    <mat-radio-button value=1>
+                        Efectivo
+                    </mat-radio-button>
+                  </mat-card>
+                  <mat-card class="address-shadow">
+                    <mat-radio-button value=2>
+                        Comprobante
+                    </mat-radio-button>
+                  </mat-card>
+                </mat-radio-group>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-card> -->
+      <!-- selección metodo de pago --final-- -->
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup">
@@ -206,7 +240,7 @@
             <mat-card-title>Resumen compra</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="border" *ngFor="let store of ( order$ | async )">
+            <div class="border" *ngFor="let store of order">
               <p>{{ store.razonsocial }} <br> cantidad de productos añadidos: {{ store.products.length }}</p>
               <p class="aling-right">subTotal: {{ store.total | currency:'$':'symbol':'1.0-0' }}</p>
             </div>

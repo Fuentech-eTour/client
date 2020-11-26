@@ -1,0 +1,25 @@
+<div class="hours-cont">
+    <mat-card>
+        <div class="title-cont" mat-dialog-content>
+            <p>Horarios de atención</p>
+        </div>
+        <div *ngIf="data.length !== 0">
+            <p *ngFor="let hours of data">
+                <span   *ngIf="hours.horaini.getHours() !== 0 && 
+                        hours.horafin.getHours() !== 0">
+                            {{ hours.dia | titlecase }}: 
+                            {{ hours.horaini | date:'H:mm' }} - 
+                            {{ hours.horafin | date:'H:mm' }}
+                </span>
+                <span   *ngIf="hours.horaini.getHours() === 0 && 
+                        hours.horafin.getHours() === 0">
+                            {{ hours.dia | titlecase }}: 
+                            Cerrado
+                </span>
+            </p>
+        </div>
+        <div *ngIf="data.length === 0">
+            <p>Esta tienda aún no agrega horarios de atención</p>
+        </div>
+    </mat-card>
+</div>

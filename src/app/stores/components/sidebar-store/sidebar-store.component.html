@@ -28,9 +28,40 @@
     </mat-card-header>
 
     <div class="info-cont">
-        <div><mat-icon>schedule</mat-icon><p>Horario de atención: <br/> {{ (configStore$ | async)?.timeInit | date:'H:mm' }} - {{ (configStore$ | async)?.timeFinal | date:'H:mm' }}</p></div>
-        <div><mat-icon>local_atm</mat-icon><p>Compra mínima: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}</p></div>
-        <div><mat-icon>phone</mat-icon><p>Celular: {{ store[0]?.telefono }}</p></div>
+        <div (click)="openDialogBusinessHours()" style="cursor: pointer;">
+            <mat-icon>schedule</mat-icon>
+            <p *ngIf="availabilityStore">
+                Horario de atención: <br/> 
+                {{ (currentBusinessHours$ | async)?.horaini | date:'H:mm' }} - 
+                {{ (currentBusinessHours$ | async)?.horafin | date:'H:mm' }}
+            </p>
+            <p *ngIf="!availabilityStore">
+                Horario de atención: cerrado
+            </p>
+        </div>
+        <div>
+            <mat-icon>local_atm</mat-icon>
+            <p>
+                Compra mínima: 
+                {{ store[0].valormin | currency:'$':'symbol':'1.0-0' }}
+            </p>
+        </div>
+        <div >
+            <mat-icon>moped</mat-icon>
+            <p *ngIf="store[0].valordomicilio > 0">
+                Valor domicilio: 
+                {{ store[0].valordomicilio | currency:'$':'symbol':'1.0-0' }}
+            </p>
+            <p *ngIf="store[0].valordomicilio === 0">
+                Valor domicilio: gratis
+            </p>
+        </div>
+        <div>
+            <mat-icon>phone</mat-icon>
+            <p>
+                Celular: {{ store[0]?.telefono }}
+            </p>
+        </div>
         <!-- <div><mat-icon>mail</mat-icon><p>E-mail: {{ store[0]?.email }}</p></div> -->
     </div>
 

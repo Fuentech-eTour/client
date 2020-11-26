@@ -32,6 +32,7 @@ export class EditStoreComponent implements OnInit {
   idconfig: number;
   verificationDigit: any[];
   days: any[];
+  existingBusinessHours = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,13 +63,26 @@ export class EditStoreComponent implements OnInit {
     });
     this.activatedRoute.params.subscribe((params: Params) => {
       this.storesService.getConfigBusinessHours(parseInt(params.id, 10))
-      .subscribe((data: any[]) => {
+      .subscribe((data: any) => {
         console.log(data);
-        this.days = data;
-        for (const hours of data) {
-          if (hours.horaini !== '00:00:00' && hours.horafin !== '00:00:00') {
-            this.form.get(`horaini${hours.idutdays}`).setValue(hours.horaini);
-            this.form.get(`horafin${hours.idutdays}`).setValue(hours.horafin);
+        if (data.status === 402) {
+          this.existingBusinessHours = false;
+          this.days = [
+            { idutdays: 1, dia: 'Lunes' },
+            { idutdays: 2, dia: 'Martes' },
+            { idutdays: 3, dia: 'Miércoles' },
+            { idutdays: 4, dia: 'Jueves' },
+            { idutdays: 5, dia: 'Viernes' },
+            { idutdays: 6, dia: 'Sábado' },
+            { idutdays: 7, dia: 'Domingo' }
+          ];
+        } else {
+          this.days = data;
+          for (const hours of data) {
+            if (hours.horaini !== '00:00:00' && hours.horafin !== '00:00:00') {
+              this.form.get(`horaini${hours.idutdays}`).setValue(hours.horaini);
+              this.form.get(`horafin${hours.idutdays}`).setValue(hours.horafin);
+            }
           }
         }
       });
@@ -116,6 +130,7 @@ export class EditStoreComponent implements OnInit {
                     this.windowService.loadingTrue();
                     const config = {
                       valormin: this.form.get('valormin').value,
+                      valordomicilio: this.form.get('valordomicilio').value,
                       horaini: this.form.get('horaini').value,
                       horafin: this.form.get('horafin').value,
                       estado: 1,
@@ -136,18 +151,52 @@ export class EditStoreComponent implements OnInit {
                         });
                       }
                     });
-                    const businessHours: any[] = [];
-                    for (const hours of this.days) {
-                      const objectBusinessHours = {
-                        idConfig: hours.id, idday: hours.idutdays,
-                        horaini: this.form.get(`horaini${hours.idutdays}`).value,
-                        horafin: this.form.get(`horafin${hours.idutdays}`).value
-                      };
-                      businessHours.push(objectBusinessHours);
-                    }
-                    for (const hours of businessHours) {
-                      if (hours.horaini !== ' ' && hours.horafin !== ' ') {
-                        this.storesService.updateConfigBusinessHours(hours.idConfig, hours)
+                    if (this.existingBusinessHours === true) {
+                      const businessHours: any[] = [];
+                      for (const hours of this.days) {
+                        const objectBusinessHours = {
+                          idConfig: hours.id, idday: hours.idutdays,
+                          horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                          horafin: this.form.get(`horafin${hours.idutdays}`).value
+                        };
+                        businessHours.push(objectBusinessHours);
+                      }
+                      for (const hours of businessHours) {
+                        if (hours.horaini !== ' ' && hours.horafin !== ' ') {
+                          this.storesService.updateConfigBusinessHours(hours.idConfig, hours)
+                          .subscribe((resHours: any) => {
+                            this.openSnackBar(resHours.message);
+                          });
+                        }
+                      }
+                    } else {
+                      const businessHours: any[] = [];
+                      for (const hours of this.days) {
+                        if (this.form.get(`horaini${hours.idutdays}`).value !== ' ' &&
+                            this.form.get(`horafin${hours.idutdays}`).value !== ' ') {
+                          // tslint:disable-next-line: no-shadowed-variable
+                          const objectBusinessHours = {
+                            idstore: this.idstore, idday: hours.idutdays,
+                            horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                            horafin: this.form.get(`horafin${hours.idutdays}`).value
+                          };
+                          businessHours.push(objectBusinessHours);
+                        } else {
+                          this.form.get(`horaini${hours.idutdays}`).setValue('00:00:00');
+                          this.form.get(`horafin${hours.idutdays}`).setValue('00:00:00');
+                          const horaini = this.form.get(`horaini${hours.idutdays}`).value;
+                          const horafin = this.form.get(`horafin${hours.idutdays}`).value;
+                          // tslint:disable-next-line: no-shadowed-variable
+                          const objectBusinessHours = {
+                            idstore: this.idstore, idday: hours.idutdays,
+                            horaini,
+                            horafin
+                          };
+                          businessHours.push(objectBusinessHours);
+                        }
+                      }
+                      for (const hours of businessHours) {
+                        this.storesService.createConfigBusinessHours(hours)
                         .subscribe((resHours: any) => {
                           this.openSnackBar(resHours.message);
                         });
@@ -170,6 +219,7 @@ export class EditStoreComponent implements OnInit {
               this.windowService.loadingTrue();
               const config = {
                 valormin: this.form.get('valormin').value,
+                valordomicilio: this.form.get('valordomicilio').value,
                 estado: 1,
               };
               this.storesService.updateConfigStore(this.idconfig, config)
@@ -188,18 +238,52 @@ export class EditStoreComponent implements OnInit {
                   });
                 }
               });
-              const businessHours: any[] = [];
-              for (const hours of this.days) {
-                const objectBusinessHours = {
-                  idConfig: hours.id, idday: hours.idutdays,
-                  horaini: this.form.get(`horaini${hours.idutdays}`).value,
-                  horafin: this.form.get(`horafin${hours.idutdays}`).value
-                };
-                businessHours.push(objectBusinessHours);
-              }
-              for (const hours of businessHours) {
-                if (hours.horaini !== ' ' && hours.horafin !== ' ') {
-                  this.storesService.updateConfigBusinessHours(hours.idConfig, hours)
+              if (this.existingBusinessHours === true) {
+                const businessHours: any[] = [];
+                for (const hours of this.days) {
+                  const objectBusinessHours = {
+                    idConfig: hours.id, idday: hours.idutdays,
+                    horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                    horafin: this.form.get(`horafin${hours.idutdays}`).value
+                  };
+                  businessHours.push(objectBusinessHours);
+                }
+                for (const hours of businessHours) {
+                  if (hours.horaini !== ' ' && hours.horafin !== ' ') {
+                    this.storesService.updateConfigBusinessHours(hours.idConfig, hours)
+                    .subscribe((resHours: any) => {
+                      this.openSnackBar(resHours.message);
+                    });
+                  }
+                }
+              } else {
+                const businessHours: any[] = [];
+                for (const hours of this.days) {
+                  if (this.form.get(`horaini${hours.idutdays}`).value !== ' ' &&
+                      this.form.get(`horafin${hours.idutdays}`).value !== ' ') {
+                    // tslint:disable-next-line: no-shadowed-variable
+                    const objectBusinessHours = {
+                      idstore: this.idstore, idday: hours.idutdays,
+                      horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                      horafin: this.form.get(`horafin${hours.idutdays}`).value
+                    };
+                    businessHours.push(objectBusinessHours);
+                  } else {
+                    this.form.get(`horaini${hours.idutdays}`).setValue('00:00:00');
+                    this.form.get(`horafin${hours.idutdays}`).setValue('00:00:00');
+                    const horaini = this.form.get(`horaini${hours.idutdays}`).value;
+                    const horafin = this.form.get(`horafin${hours.idutdays}`).value;
+                    // tslint:disable-next-line: no-shadowed-variable
+                    const objectBusinessHours = {
+                      idstore: this.idstore, idday: hours.idutdays,
+                      horaini,
+                      horafin
+                    };
+                    businessHours.push(objectBusinessHours);
+                  }
+                }
+                for (const hours of businessHours) {
+                  this.storesService.createConfigBusinessHours(hours)
                   .subscribe((resHours: any) => {
                     this.openSnackBar(resHours.message);
                   });
@@ -247,6 +331,7 @@ export class EditStoreComponent implements OnInit {
       imagen: ['', Validators.required],
       iduttagstores: ['', Validators.required],
       valormin: ['', Validators.required],
+      valordomicilio: ['', Validators.required],
       horaini1: [' ', Validators.required],
       horafin1: [' ', Validators.required],
       horaini2: [' ', Validators.required],

@@ -2,11 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ProductDetailComponent } from '../../../product/components/product-detail/product-detail.component';
-import { Product } from '@core/models/product.model';
 import { AddProduct } from '@core/models/addProduct.model';
 import { Store } from '@core/models/store.model';
 import { CartService } from '@core/services/cart.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -24,6 +23,8 @@ export class CartComponent implements OnInit {
   slidesPerView: number;
   panelOpenState = false;
   products: [];
+  private stateNote = new BehaviorSubject<boolean>(false);
+  stateNote$ = this.stateNote.asObservable();
 
   constructor(
     private cartService: CartService,
@@ -37,6 +38,19 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.products$.subscribe((products: any) => {
       this.products = products;
+    });
+    this.store$.subscribe(stores => {
+      if (stores.length === 0) {
+        this.stateNote.next(false);
+      }
+      for (const store of stores) {
+        if (store.valormin > (store.total - store.valordomicilio)) {
+          this.stateNote.next(true);
+          break;
+        } else {
+          this.stateNote.next(false);
+        }
+      }
     });
   }
 

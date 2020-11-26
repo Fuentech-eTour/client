@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
-
 import { StoresService } from '@core/services/stores.service';
 import { WindowService } from '@core/services/window.service';
-
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilityService } from '../../../core/services/utility.service';
 import { TagsService } from '@core/services/tags.service';
@@ -110,6 +108,7 @@ export class CreateStoreComponent implements OnInit {
                   });
                   const config = {
                     valormin: this.form.get('valormin').value,
+                    valordomicilio: this.form.get('valordomicilio').value,
                     /* horaini: this.form.get('horaini').value,
                     horafin: this.form.get('horafin').value, */
                   };
@@ -135,11 +134,15 @@ export class CreateStoreComponent implements OnInit {
                       };
                       businessHours.push(objectBusinessHours);
                     } else {
+                      this.form.get(`horaini${hours.id}`).setValue('00:00:00');
+                      this.form.get(`horafin${hours.id}`).setValue('00:00:00');
+                      const horaini = this.form.get(`horaini${hours.id}`).value;
+                      const horafin = this.form.get(`horafin${hours.id}`).value;
                       // tslint:disable-next-line: no-shadowed-variable
                       const objectBusinessHours = {
                         idstore: res.idstore, idday: hours.id,
-                        horaini: this.form.get(`horaini${hours.id}`).setValue('00:00:00'),
-                        horafin: this.form.get(`horafin${hours.id}`).setValue('00:00:00')
+                        horaini,
+                        horafin
                       };
                       businessHours.push(objectBusinessHours);
                     }
@@ -157,31 +160,6 @@ export class CreateStoreComponent implements OnInit {
       )
       .subscribe();
     }
-  }
-
-  prueba() {
-    const businessHours: any[] = [];
-    for (const hours of this.days) {
-      if (this.form.get(`horaini${hours.id}`).value !== ' ' &&
-          this.form.get(`horafin${hours.id}`).value !== ' ') {
-        // tslint:disable-next-line: no-shadowed-variable
-        const objectBusinessHours = {
-          idstore: 1, idday: hours.id,
-          horaini: this.form.get(`horaini${hours.id}`).value,
-          horafin: this.form.get(`horafin${hours.id}`).value
-        };
-        businessHours.push(objectBusinessHours);
-      } else {
-        // tslint:disable-next-line: no-shadowed-variable
-        const objectBusinessHours = {
-          idstore: 1, idday: hours.id,
-          horaini: this.form.get(`horaini${hours.id}`).setValue('00:00:00'),
-          horafin: this.form.get(`horafin${hours.id}`).setValue('00:00:00')
-        };
-        businessHours.push(objectBusinessHours);
-      }
-    }
-    console.log(businessHours);
   }
 
   uploadFile(event) {
@@ -220,6 +198,7 @@ export class CreateStoreComponent implements OnInit {
       imagen: ['', Validators.required],
       idtag: ['', Validators.required],
       valormin: ['', Validators.required],
+      valordomicilio: ['', Validators.required],
       horaini1: [' ', Validators.required],
       horafin1: [' ', Validators.required],
       horaini2: [' ', Validators.required],

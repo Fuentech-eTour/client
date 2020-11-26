@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowService {
-
-  isLoadingNow: boolean;
-  stateDisplayFooterNow = false;
-  stateDisplayHeaderNow = false;
 
   private windowWidth = new BehaviorSubject<any>(document.body.clientWidth);
   private userName = new BehaviorSubject<any>(localStorage.getItem('user_name')?.split(' ')[0]);
@@ -27,28 +24,27 @@ export class WindowService {
   idClient$ = this.idClient.asObservable();
 
   constructor(
+    private router: Router,
   ) {
     window.addEventListener('resize', onresize);
   }
 
   loadingTrue() {
-    this.isLoadingNow = true;
-    this.isloading.next(this.isLoadingNow);
+    this.isloading.next(true);
   }
 
   loadingFalse() {
-    this.isLoadingNow = false;
-    this.isloading.next(this.isLoadingNow);
+    this.isloading.next(false);
   }
 
   stateFooterTrue() {
-    this.stateDisplayFooterNow = true;
-    this.stateDisplayFooter.next(this.stateDisplayFooterNow);
+    if (this.router.url === '/home') {
+      this.stateDisplayFooter.next(true);
+    }
   }
 
   stateFooterFalse() {
-    this.stateDisplayFooterNow = false;
-    this.stateDisplayFooter.next(this.stateDisplayFooterNow);
+    this.stateDisplayFooter.next(false);
   }
 
   stateHeaderTrue() {

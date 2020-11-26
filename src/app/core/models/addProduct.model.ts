@@ -7,4 +7,6 @@ export interface AddProduct {
     cant: number;
     idststore: number;
     razonsocial: string;
+    valormin?: number;
+    valordomicilio?: number;
 }

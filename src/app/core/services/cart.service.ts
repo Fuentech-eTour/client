@@ -32,9 +32,8 @@ export class CartService {
   constructor() { }
 
   addCart(product: Product) {
-
+    console.log(product);
     this.contId(product.id);
-    this.addPrice(product.valorventa);
 
     this.newProduct = {
       id: product.id,
@@ -44,8 +43,11 @@ export class CartService {
       descripcion: product.descripcion,
       idststore: product.idststore,
       razonsocial: product.razonsocial,
+      valormin: product.valormin,
+      valordomicilio: product.valordomicilio,
       cant: this.contProduct,
     };
+    console.log(this.newProduct);
 
     // adiciona producto a la lista de productos y si existe aumenta la cantidad de ese producto
     if (this.contProduct <= 1) {
@@ -63,15 +65,19 @@ export class CartService {
     this.verifyExistStore(product.idststore);
 
     if (!this.idStoreState) {
+      this.addPrice(product.valorventa + product.valordomicilio);
       this.storeList = {
         id: product.idststore,
         razonsocial: product.razonsocial,
         products: [this.newProduct],
-        total: product.valorventa,
+        total: (product.valorventa + product.valordomicilio),
         imagen: product.imagent,
+        valormin: product.valormin,
+        valordomicilio: product.valordomicilio,
       };
       this.orderLists = [...this.orderLists, this.storeList];
     } else {
+      this.addPrice(product.valorventa);
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.orderLists.length; i++) {
         if (this.orderLists[i].id === product.idststore) {
@@ -95,7 +101,6 @@ export class CartService {
   }
 
   removeCart(product: Product) {
-
     this.contIdRemove(product.id);
     this.removePrice(product.valorventa);
 
@@ -138,6 +143,9 @@ export class CartService {
 
     }
 
+    // Asigna la nueva cantidad a los productos en la orderLists
+    // Resta el valor del producto al total de la tienda
+    // Remueve las tiendas que no tienen productos
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.orderLists.length; i++) {
       if (this.orderLists[i].id === product.idststore) {
@@ -150,6 +158,7 @@ export class CartService {
           }
         }
         if (this.orderLists[i].products.length === 0) {
+          this.removePrice(product.valordomicilio);
           this.orderLists.splice(i, 1);
           for (let y = 0; y < this.idStore.length; y++) {
             if (this.idStore[y] === product.idststore) {

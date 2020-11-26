@@ -22,24 +22,40 @@
                 color: gray;
                 padding: 8px;
                 margin: 0px;
-                cursor: pointer;
                 span {
                     font-size: 18px;
                 }
                 .tag {
                     font-size: 10px;
-                    background-color: lightslategray;
                     border-radius: 5px;
                     text-align: center;
                     padding: 0px 5px;
-                    color: white;
                     margin-right: 5px;
+                }
+                .tag-pointer {
+                    cursor: pointer;
+                }
+                .tag-color-gray {
+                    background-color: lightslategray;
+                    color: white;
+                }
+                .tag-color-green {
+                   background-color:#54a954;
+                   color: white; 
+                }
+                .tag-color-red {
+                    background-color: #ff2b2b;
+                    color: white; 
+                }
+                .tag-color-blue {
+                    background-color: #3434ff;
+                    color: white; 
                 }
             }
         }
         .nav-cont {
             color: gray;
-            padding-left: 16px;
+            // padding-left: 16px;
             div {
                 padding: 0px 20px 0px 0px;
                 mat-card-subtitle {
@@ -47,12 +63,14 @@
                     margin: 0px;
                     color: #ff4b88;
                     border-radius: 10px;
-                    border: solid 1px #ff4b88;
+                    // border: solid 1px #ff4b88;
                     cursor: pointer;
                     @media (min-width: 700px) {
-                        border: solid 1px #0000001f;
+                        // border: solid 1px #0000001f;
+                        color: grey;
                         &:hover {
-                            border: solid 1px #ff4b88;
+                            // border: solid 1px #ff4b88;
+                            color: #ff4b88;
                         }
                     }
                 }

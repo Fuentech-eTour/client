@@ -72,6 +72,7 @@ export class FormProductComponent implements OnInit {
           this.productsService.createProduct(product)
             .subscribe((res: any) => {
               this.windowService.loadingFalse();
+              console.log(res);
               if (res.status === 'Ok') {
                 this.windowService.loadingTrue();
                 const idTag = this.form.get('tags').value;
@@ -117,7 +118,8 @@ export class FormProductComponent implements OnInit {
       valorventa: ['', [Validators.required, /* MyValidator.isPreciValid */]],
       imagen: ['', Validators.required],
       descripcion: ['', Validators.required],
-      tags: ['', Validators.required]
+      tags: ['', Validators.required],
+      stock: null,
     });
   }
 

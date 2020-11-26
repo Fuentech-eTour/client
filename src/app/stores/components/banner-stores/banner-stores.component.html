@@ -6,31 +6,54 @@
                     mat-card-avatar style="background-image: url({{store.imagen}});
                     background-size: cover;
                     cursor: pointer;">
-                <img *ngIf="store.imagen ==='' || store.imagen === null || store.imagen === undefined" src="./../../../../assets/images/icon-store.png">
+                <img *ngIf="store.imagen ==='' || 
+                store.imagen === null || 
+                store.imagen === undefined" 
+                src="./../../../../assets/images/icon-store.png">
             </div>
             <mat-card-title>
-                <span [routerLink]="['/stores', store.id]">{{store.razonsocial | titlecase}}</span><br>
-                <!-- <span *ngIf="(qualificationStore$ | async) === -1">Sin puntuación</span> -->
-                <!-- <span   class="tag" 
-                        [matMenuTriggerFor]="aboveMenu" 
-                        *ngIf="(qualificationStore$ | async) !== -1">
-                        Punt: {{ qualificationStore$ | async | currency:'':'':'1.2-2' }}
-                </span> -->
-                <span class="tag">Min: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}</span>
-                <span class="tag">{{ (configStore$ | async)?.timeInit | date:'H:mm' }} - {{ (configStore$ | async)?.timeFinal | date:'H:mm' }}</span>
+                <span class="tag-pointer" [routerLink]="['/stores', store.id]">
+                    {{store.razonsocial | titlecase}}
+                </span><br>
+                <span class="tag tag-color-gray">
+                    Min: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}
+                </span>
+                <span   (click)="openDialogBusinessHours()" 
+                        class="tag tag-color-green tag-pointer"
+                        *ngIf="availabilityStore">
+                        {{ (currentBusinessHours$ | async)?.horaini | date:'H:mm' }} - 
+                        {{ (currentBusinessHours$ | async)?.horafin | date:'H:mm' }}
+                </span>
+                <span   class="tag tag-color-red tag-pointer"
+                        (click)="openDialogBusinessHours()"
+                        *ngIf="!availabilityStore">
+                        Cerrado
+                </span>
+                <span   class="tag tag-color-blue"
+                        *ngIf="store.valordomicilio > 0">
+                        Domicilio: {{ store.valordomicilio | currency:'$':'symbol':'1.0-0' }}
+                </span>
+                <span   class="tag tag-color-green"
+                        *ngIf="store.valordomicilio === 0">
+                        Domicilio: Gratis
+                </span>
             </mat-card-title>
         </div>
 
         <div class="row show-hover nav-cont">
             <div class="row">
                 <mat-card-subtitle [routerLink]="['/stores', store.id]">
-                    ver mas
+                    <mat-icon>add_circle</mat-icon>
                 </mat-card-subtitle>
             </div>
         </div>
     </div>
+    
     <!-- message -->
-    <div class="message-cont" *ngIf="store.products === null || store.products === undefined || store.products === []">
+    <div class="message-cont" 
+    *ngIf="store.products === null  || 
+    store.products === undefined    || 
+    store.products === []">
         <mat-card-subtitle>
             Esta tienda aun no agrega productos.
         </mat-card-subtitle>
@@ -39,8 +62,11 @@
     <div class="swiper-container general">
         <!-- swiper wrapper -->
         <div class="swiper-wrapper">
-            <div *ngFor="let storeProduct of store.products" class="swiper-slide">
-                <app-product-store [product]="storeProduct" [razonsocial]="store.razonsocial" [imagen]="store.imagen">
+            <div *ngFor="let storeProduct of store.products" 
+            class="swiper-slide">
+                <app-product-store [product]="storeProduct" 
+                [razonsocial]="store.razonsocial" 
+                [imagen]="store.imagen">
                 </app-product-store>
             </div>
         </div>
@@ -52,26 +78,55 @@
     <!-- footer display: none; ha espera de implementacion-->
     <div class="row between-xs middled-xs footer-cont">
         <div class="row btn-cont">
-            <a mat-button routerLinkActive="active" class="btn-style" *ngIf="!subscribeBtn" (click)="subscribe(store.id)">
+            <a mat-button 
+            routerLinkActive="active" 
+            class="btn-style" 
+            *ngIf="!subscribeBtn" 
+            (click)="subscribe(store.id)">
                 <div class="btn-aling">
                     <span>Suscribirse</span> 
-                    <span *ngIf="stateSpinner" matSuffix><mat-spinner diameter=20></mat-spinner></span>
-                    <mat-icon *ngIf="!stateSpinner" style="color: #73726c;">notifications_none</mat-icon>
+                    <span *ngIf="stateSpinner" matSuffix>
+                        <mat-spinner diameter=20></mat-spinner>
+                    </span>
+                    <mat-icon *ngIf="!stateSpinner" 
+                    style="color: #73726c;">
+                        notifications_none
+                    </mat-icon>
                 </div>
             </a>
-            <a mat-button routerLinkActive="active" class="btn-style" style="color: black;" *ngIf="subscribeBtn" (click)="subscribe(store.id)">
+            <a mat-button 
+            routerLinkActive="active" 
+            class="btn-style" style="color: black;" 
+            *ngIf="subscribeBtn" 
+            (click)="subscribe(store.id)">
                 <div class="btn-aling">
                     <span>Suscrito</span> 
-                    <span *ngIf="stateSpinner" matSuffix><mat-spinner diameter=20></mat-spinner></span>
-                    <mat-icon *ngIf="!stateSpinner" style="color: #ff4b88;">notifications_active</mat-icon>
+                    <span *ngIf="stateSpinner" matSuffix>
+                        <mat-spinner diameter=20></mat-spinner>
+                    </span>
+                    <mat-icon *ngIf="!stateSpinner" 
+                    style="color: #ff4b88;">
+                        notifications_active
+                    </mat-icon>
                 </div>
-                
             </a>
-            <a mat-button routerLinkActive="active" class="btn-style btn-style-desktop" (click)="changeShowComment()">
-                Comentar<mat-icon style="color: #73726c;">insert_comment</mat-icon>
+            <a mat-button 
+            routerLinkActive="active" 
+            class="btn-style btn-style-desktop" 
+            (click)="changeShowComment()">
+                Comentar
+                <mat-icon style="color: #73726c;">
+                    insert_comment
+                </mat-icon>
             </a>
-            <a mat-button routerLinkActive="active" class="btn-style btn-style-movil" (click)="openBottomSheet()">
-                Comentar<mat-icon style="color: #73726c;">insert_comment</mat-icon>
+            <a mat-button 
+            routerLinkActive="active" 
+            class="btn-style btn-style-movil" 
+            (click)="openBottomSheet()">
+                Comentar
+                <mat-icon style="color: #73726c;">
+                    insert_comment
+                </mat-icon>
             </a>
             <!-- <a mat-button routerLinkActive="active" class="btn-style">
                 Compartir<mat-icon style="color: #73726c;">reply</mat-icon>
@@ -107,15 +162,17 @@
                         </div>
                     </div>
                     <p>
-                        <span><strong>{{ comment.name | titlecase | slice:0:30 | moreContent:29 }}</strong></span>
+                        <span>
+                            <strong>{{ comment.name | titlecase | slice:0:30 | moreContent:29 }}</strong>
+                        </span>
                         <span   *ngIf="comment.idbyaccessuser === ( idClient | async )"
-                                (click)="assignIdEditComment(comment.id)" 
-                                class="name-actions">
+                        (click)="assignIdEditComment(comment.id)" 
+                        class="name-actions">
                                 editar
                         </span>
                         <span   *ngIf="comment.idbyaccessuser === ( idClient | async )"
-                                (click)="inactivateComment(comment.comentario, comment.id)" 
-                                class="name-actions">
+                        (click)="inactivateComment(comment.comentario, comment.id)" 
+                        class="name-actions">
                                 eliminar
                         </span><br>
                         {{ comment.comentario | lowercase | slice:0:120 | moreContent:119 }}
@@ -130,7 +187,10 @@
                                 autofocus="true">
                         <div class="actions-cont">
                             <div class="btn-send-cont">
-                                <mat-icon matSuffix (click)="editComment(comment.comentario, commentEdit.value, comment.id)">edit</mat-icon>
+                                <mat-icon matSuffix 
+                                (click)="editComment(comment.comentario, commentEdit.value, comment.id)">
+                                    edit
+                                </mat-icon>
                             </div>
                         </div>
                     </form>

@@ -111,6 +111,14 @@ export class StoresService {
     );
   }
 
+  getAvailabilityStoreById(id: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenerdispotienda/${id}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   getProductsOneStore(id: number) {
     return this.http.get<any>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
     .pipe(

@@ -16,12 +16,26 @@ div {
                 margin-left: 8px;
                 .tag {
                     font-size: 10px;
-                    background-color: lightslategray;
                     border-radius: 5px;
                     text-align: center;
-                    padding: 0px 8px;
-                    color: white;
+                    padding: 0px 5px;
                     margin-right: 5px;
+                }
+                .tag-color-gray {
+                    background-color: lightslategray;
+                    color: white;
+                }
+                .tag-color-green {
+                   background-color:#54a954;
+                   color: white; 
+                }
+                .tag-color-red {
+                    background-color: #ff2b2b;
+                    color: white; 
+                }
+                .tag-color-blue {
+                    background-color: #3434ff;
+                    color: white; 
                 }
             }
         }

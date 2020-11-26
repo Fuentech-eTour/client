@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
 import { UsersService } from '@core/services/users.service';
 
-import { map } from 'rxjs/operators';
+import { map, delay, tap } from 'rxjs/operators';
 
 import { AddProduct } from '../../../core/models/addProduct.model';
 import { CartService } from './../../../core/services/cart.service';
@@ -20,7 +20,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   @Input() mostrar: any;
   @Input() mostrar2: any;
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   products$: Observable<AddProduct[]>;
   matBageShow$: Observable<boolean>;
   nameUser$: Observable<any>;
-  private isLoading = new BehaviorSubject<boolean>(false);
+  private isLoading = new BehaviorSubject<boolean>(true);
   isLoading$ = this.isLoading.asObservable();
   selectAddress$: Observable<any>;
   session$: Observable<any>;
@@ -75,11 +75,17 @@ export class HeaderComponent implements OnInit {
       }
       this.rol.next(data);
     });
-    this.windowService.isloading$.subscribe(data => {
-      this.isLoading.next(data);
-    });
     this.usersService.selectAddress$.subscribe(console.log);
   }
+
+  ngAfterViewInit() {
+    this.windowService.isloading$
+    .pipe(
+      delay(0),
+      tap(res => this.isLoading.next(res))
+    ).subscribe();
+  }
+
 
   showIconMenu() {
     this.stateIconMenu = !this.stateIconMenu;

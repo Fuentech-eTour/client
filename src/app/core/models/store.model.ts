@@ -6,4 +6,6 @@ export interface Store {
     products: AddProduct[];
     imagen?: string;
     total: number;
+    valormin?: number;
+    valordomicilio?: number;
 }

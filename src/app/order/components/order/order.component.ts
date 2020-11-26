@@ -31,6 +31,7 @@ export class OrderComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  currentPhone: number;
 
   private municipality = new BehaviorSubject<any>({});
   municipality$ = this.municipality.asObservable();
@@ -65,10 +66,18 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.fetchInfoUser();
     this.fetchAllAddress();
-    this.order$.subscribe(data => {
+    this.addressSubscribe();
+    this.orderSubscribe();
+  }
+
+  orderSubscribe() {
+    this.order$.subscribe((data: any[]) => {
       console.log(data);
-      this.order = data;
+      this.order = data.filter(store => store.valormin < (store.total - store.valordomicilio));
     });
+  }
+
+  addressSubscribe() {
     this.address$.subscribe(address => {
       console.log(address);
       this.selectAddressOrder = address;
@@ -86,7 +95,9 @@ export class OrderComponent implements OnInit {
       console.log(data);
       this.infoUser.next(data);
       this.secondFormGroup.patchValue(data);
+      // adicion por error en la palabra telefono escrita en el backend telefeno
       this.secondFormGroup.get('telefono').setValue(data.telefeno);
+      this.currentPhone = this.secondFormGroup.get('telefono').value;
       console.log(this.secondFormGroup.value);
     });
   }
@@ -105,6 +116,7 @@ export class OrderComponent implements OnInit {
       identificacion: ['', Validators.required],
       telefono: ['', Validators.required],
       direccion: ['', Validators.required],
+      idPayment: [1, Validators.required],
     });
     this.thirdFormGroup = this.formBuilder.group({
       confirmacion: ['', Validators.required],
@@ -118,7 +130,6 @@ export class OrderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.fetchAllAddress();
     });
   }
@@ -130,7 +141,6 @@ export class OrderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(result);
       if (result?.confirm === 'OK' && result?.telefono !== '') {
         this.secondFormGroup.get('telefono').setValue(result.telefono);
         this.usersService.editInfoUser(this.secondFormGroup.value).subscribe((res: any) => {
@@ -159,22 +169,29 @@ export class OrderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result === 'SI') {
-        console.log(this.selectAddressOrder);
-        this.usersService.editInfoUser(this.secondFormGroup.value).subscribe(console.log);
-        this.orderService.createSells(this.order, this.selectAddressOrder.id)
-          .subscribe(({ status, data }: any) => {
-            console.log(status, data);
-            const idSell = data[0].idSell;
-            if (status === 'OK') {
-              this.cartService.resetOrder();
-              // tslint:disable-next-line: prefer-for-of
-              for (let i = 0; i < data.length; i++) {
-                data[i].nameUser = this.authService.getUserName();
-                console.log(data);
-              }
-              this.orderService.emitNewOrder(data);
-              this.router.navigate([`/user/orders/detail/${idSell}`]);
+        if (this.currentPhone !== this.secondFormGroup.get('telefono').value) {
+          this.usersService.editInfoUser(this.secondFormGroup.value)
+          .subscribe(console.log);
+        }
+        this.orderService.createSells(
+          this.order,
+          this.selectAddressOrder.id,
+          parseInt(this.secondFormGroup.get('idPayment').value, 10),
+        )
+        .subscribe(({ status, data }: any) => {
+          console.log(status, data);
+          this.orderService.addCurrentSells(data);
+          const idSell = data[0].idSell;
+          if (status === 'OK') {
+            this.cartService.resetOrder();
+            // tslint:disable-next-line: prefer-for-of
+            for (let i = 0; i < data.length; i++) {
+              data[i].nameUser = this.authService.getUserName();
+              console.log(data);
             }
+            this.orderService.emitNewOrder(data);
+            this.router.navigate([`/user/orders/purchasesdetails`]);
+          }
         });
       }
     });

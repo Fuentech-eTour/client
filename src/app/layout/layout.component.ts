@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
-import { CartService } from '@core/services/cart.service';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { WindowService } from '@core/services/window.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
   // changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,25 +9,33 @@ import { Observable } from 'rxjs';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, OnDestroy {
+export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  displayFooter$: Observable<any>;
-  displayHeader$: Observable<any>;
+  private displayFooter = new BehaviorSubject<boolean>(true);
+  displayFooter$ = this.displayFooter.asObservable();
+  private displayHeader = new BehaviorSubject<boolean>(true);
+  displayHeader$ = this.displayHeader.asObservable();
   windowWidth: number = window.screen.width;
 
   constructor(
-    private router: Router,
-    private cartService: CartService,
     private windowService: WindowService,
   ) {
-    this.displayFooter$ = this.windowService.stateDisplayFooter$;
-    this.displayHeader$ = this.windowService.stateDisplayHeader$;
   }
 
   ngOnInit(): void {
-    if (this.router.url === '/home') {
-      this.windowService.stateFooterTrue();
-    }
+  }
+
+  ngAfterViewInit() {
+    this.windowService.stateDisplayFooter$
+    .pipe(
+      delay(0),
+      tap(res => this.displayFooter.next(res) )
+    ).subscribe();
+    this.windowService.stateDisplayHeader$
+    .pipe(
+      delay(0),
+      tap(res => this.displayHeader.next(res) )
+    ).subscribe();
   }
 
   ngOnDestroy() {

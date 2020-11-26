@@ -141,7 +141,8 @@ export class ProductEditComponent implements OnInit {
       valorventa: ['', Validators.required],
       imagen: ['', Validators.required],
       descripcion: ['', Validators.required],
-      tags: ['', Validators.required]
+      tags: ['', Validators.required],
+      stock: null,
     });
   }
 

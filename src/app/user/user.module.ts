@@ -13,6 +13,8 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ProductModule } from '../product/product.module';
 import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
+import { PurchaseDetailContainer } from './containers/purchase-detail/purchase-detail.container';
+import { PurchasesDetailsContainer } from './containers/purchases-details/purchases-details.container';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { PurchaseDetailComponent } from './components/purchase-detail/purchase-d
     SubscriptionsComponent,
     OrdersComponent,
     PurchaseDetailComponent,
+    PurchaseDetailContainer,
+    PurchasesDetailsContainer,
   ],
   imports: [
     CommonModule,

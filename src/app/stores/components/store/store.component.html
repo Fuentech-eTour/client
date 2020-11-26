@@ -11,7 +11,7 @@
         <div *ngFor="let tag of store[0].tags">
             <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
             <div class="store-products-grid container">
-              <app-product-store    *ngFor="let product of tag.products" 
+                <app-product-store    *ngFor="let product of tag.products" 
                                     [product]="product" 
                                     [razonsocial]="nameStore" 
                                     [imagen]="imagent">

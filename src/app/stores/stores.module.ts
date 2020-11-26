@@ -20,6 +20,7 @@ import { TagsStoresComponent } from './components/tags-stores/tags-stores.compon
 import { CommentsStoreComponent } from './components/comments-store/comments-store.component';
 import { InfoStoreMovilComponent } from './components/info-store-movil/info-store-movil.component';
 import { SliderCategoryMovilComponent } from './components/slider-category-movil/slider-category-movil.component';
+import { BusinessHoursComponent } from './components/business-hours/business-hours.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { SliderCategoryMovilComponent } from './components/slider-category-movil
     CommentsStoreComponent,
     InfoStoreMovilComponent,
     SliderCategoryMovilComponent,
+    BusinessHoursComponent,
   ],
   imports: [
     CommonModule,

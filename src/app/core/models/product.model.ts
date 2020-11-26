@@ -7,4 +7,6 @@ export interface Product {
     descripcion: string;
     idststore: number;
     razonsocial: string;
+    valormin?: number;
+    valordomicilio?: number;
 }

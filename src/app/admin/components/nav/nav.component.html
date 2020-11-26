@@ -8,6 +8,7 @@
             <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/orders" routerLinkActive="active">Pedidos</a>
             <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
             <a (click)="drawerAdmin.toggle()" mat-list-item [routerLink]="['/stores', idStore]" routerLinkActive="active">Mi tienda</a>
+            <!-- <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Configuración</a> -->
             <a (click)="drawerAdmin.toggle()" mat-list-item (click)="logout()">Cerrar sesión</a>
         </mat-nav-list>
         <mat-nav-list class="nav-list">
@@ -16,6 +17,7 @@
             <a mat-list-item routerLink="/admin/orders" routerLinkActive="active">Pedidos</a>
             <a mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
             <a mat-list-item [routerLink]="['/stores', idStore]" routerLinkActive="active">Mi tienda</a>
+            <!-- <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Configuración</a> -->
             <a mat-list-item (click)="logout()">Cerrar sesión</a>
         </mat-nav-list>
     </mat-sidenav>

@@ -1,22 +1,49 @@
 <div>
     <div class="title-cont">
-        <div mat-card-avatar style="background-image: url({{store[0].imagen}});
-        background-size: cover;">
-            <img *ngIf="store[0].imagen ==='' || store[0].imagen === null || store[0].imagen === undefined" src="./../../../../assets/images/icon-store.png">
+        <div mat-card-avatar 
+        style="background-image: url({{store[0].imagen}}); background-size: cover;">
+            <img *ngIf="store[0].imagen ===''   || 
+            store[0].imagen === null            || 
+            store[0].imagen === undefined" 
+            src="./../../../../assets/images/icon-store.png">
         </div>
         <div class="info-cont">
             <mat-card-title [routerLink]="['/stores', store[0].id]">
                 {{store[0].razonsocial | titlecase}}
             </mat-card-title>
             <div class="tag-cont">
-                <span class="tag" *ngIf="(qualificationStore$ | async) !== -1" [matMenuTriggerFor]="aboveMenu" >
+                <span class="tag tag-color-blue" 
+                *ngIf="(qualificationStore$ | async) !== -1" 
+                [matMenuTriggerFor]="aboveMenu" >
                     Puntuación: {{ qualificationStore$ | async | currency:'':'':'1.2-2' }} de 5.00
                 </span>
-                <span class="tag" *ngIf="(qualificationStore$ | async) === -1" [matMenuTriggerFor]="aboveMenu" >
-                    Puntuación: sin puntuación
+                <span class="tag tag-color-green" 
+                *ngIf="(qualificationStore$ | async) === -1" 
+                [matMenuTriggerFor]="aboveMenu" >
+                    sin puntuación
+                </span>
+                <span   class="tag tag-color-blue"
+                        *ngIf="store[0].valordomicilio > 0">
+                        Domicilio: {{ store[0].valordomicilio | currency:'$':'symbol':'1.0-0' }}
+                </span>
+                <span   class="tag tag-color-green"
+                        *ngIf="store[0].valordomicilio === 0">
+                        Domicilio: Gratis
                 </span><br/>
-                <span class="tag">Compra mínima: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}</span>
-                <span class="tag">Atención de {{ (configStore$ | async)?.timeInit | date:'H:mm' }} - {{ (configStore$ | async)?.timeFinal | date:'H:mm' }}</span>
+                <span class="tag tag-color-gray">
+                    Compra mínima: {{ (configStore$ | async)?.valueMin | currency:'$':'symbol':'1.0-0' }}
+                </span>
+                <span   (click)="openDialogBusinessHours()" 
+                        class="tag tag-color-green"
+                        *ngIf="availabilityStore">
+                        {{ (currentBusinessHours$ | async)?.horaini | date:'H:mm' }} - 
+                        {{ (currentBusinessHours$ | async)?.horafin | date:'H:mm' }}
+                </span>
+                <span   class="tag tag-color-red"
+                        (click)="openDialogBusinessHours()"
+                        *ngIf="!availabilityStore">
+                        Cerrado
+                </span>
             </div>
         </div>
     </div>
