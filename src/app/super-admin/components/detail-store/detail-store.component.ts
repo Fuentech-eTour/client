@@ -25,9 +25,7 @@ export class DetailStoreComponent implements OnInit {
     this.windowService.loadingTrue();
     this.route.params
     .subscribe((params: Params) => {
-      console.log(params.id);
       this.storesService.getOneStores(params.id).subscribe(data => {
-        console.log(data);
         this.windowService.loadingFalse();
         this.detailStore = data;
       });

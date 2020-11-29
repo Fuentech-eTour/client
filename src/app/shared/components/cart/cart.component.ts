@@ -61,21 +61,16 @@ export class CartComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
   emptyCartByOneStore(idStore: number) {
-    console.log(this.products, idStore);
     const newProducts = this.products.filter((product: any) => product.idststore === idStore);
-    console.log(newProducts);
     for (let i = 0; i <= newProducts.length; i++) {
-      console.log(newProducts);
       const prod: any = newProducts[i];
       for (let j = 0; j < prod?.cant; j++) {
         this.cartService.removeCart(newProducts[i]);
       }
-      console.log(newProducts[i]);
     }
   }
 

@@ -39,7 +39,6 @@ export class UsersStoreComponent implements OnInit {
       this.nameStore = params.razonsocial;
       this.isloading.next(true);
       this.storesService.getUsersStore(params.id).subscribe(data => {
-        console.log(data);
         this.isloading.next(false);
         this.users.next(data);
       });
@@ -53,7 +52,6 @@ export class UsersStoreComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === 'SI') {
         this.isloading.next(true);
         // logica para inactivar usuario tipo tienda

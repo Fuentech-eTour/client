@@ -29,7 +29,6 @@ export class ProductsListComponent implements OnInit {
     // tslint:disable-next-line: radix
     this.productsService.getProductsByStore(parseInt(this.id))
     .subscribe((store: any) => {
-      console.log(store);
       if (store.length >= 0) {
         this.products = store[0].products;
       }
@@ -39,7 +38,6 @@ export class ProductsListComponent implements OnInit {
   deleteProduct(codigoP: string, estadoP: number) {
     this.productsService.deleteProduct({codigo: codigoP, estado: 0})
     .subscribe(rta => {
-      console.log(rta);
       this.fetchProducts();
     });
   }

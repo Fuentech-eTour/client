@@ -70,7 +70,6 @@ export class CommentsStoreComponent implements OnInit {
   }
 
   editComment(currentComment: string, comment: string, idComment) {
-    console.log(currentComment, comment, idComment);
     if (currentComment !== comment) {
       this.storesService.editOrInactivateComment(idComment, {comentario: comment, estado: 1})
         .subscribe((res: any) => {

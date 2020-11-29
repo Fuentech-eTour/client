@@ -106,7 +106,6 @@ export class ProductsComponent implements OnInit {
     this.windowService.loadingTrue();
     this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
     .subscribe((tags: any) => {
-      console.log(tags);
       this.windowService.loadingFalse();
       if (tags.status === '402') {
         this.tags = [];
@@ -124,7 +123,6 @@ export class ProductsComponent implements OnInit {
     this.windowService.loadingTrue();
     this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
     .subscribe((tags: any) => {
-      console.log(tags);
       this.windowService.loadingFalse();
       if (tags.status === '402') {
         this.tags = [];
@@ -142,7 +140,6 @@ export class ProductsComponent implements OnInit {
     this.windowService.loadingTrue();
     this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
     .subscribe((tags: any) => {
-      console.log(tags);
       this.windowService.loadingFalse();
       if (tags.status === '402') {
         this.tags = [];

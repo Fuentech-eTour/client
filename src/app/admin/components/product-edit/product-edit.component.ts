@@ -54,7 +54,6 @@ export class ProductEditComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = params.id;
       this.productsService.getProduct(this.id).subscribe(product => {
-        console.log(product);
         this.form.patchValue(product[0]);
         this.codigo = product[0].codigo;
         this.title = product[0].nombrearticulo;

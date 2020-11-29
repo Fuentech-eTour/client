@@ -44,14 +44,13 @@ export class TagsProductsComponent implements OnInit, AfterContentInit {
         return this.tagsService.getOneTag(params.id, this.stateSeeMore);
       })
     );
-    this.tags$.subscribe(console.log);
+    this.tags$.subscribe();
   }
 
   ngAfterContentInit(): void {
     this.windowService.loadingTrue();
     this.tags$.subscribe(tags => {
       this.windowService.loadingFalse();
-      console.log(tags);
       if (tags.status === '402') {
         this.openSnackBar(tags.message);
       }

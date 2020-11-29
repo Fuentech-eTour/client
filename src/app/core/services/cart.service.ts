@@ -32,7 +32,6 @@ export class CartService {
   constructor() { }
 
   addCart(product: Product) {
-    console.log(product);
     this.contId(product.id);
 
     this.newProduct = {
@@ -47,7 +46,6 @@ export class CartService {
       valordomicilio: product.valordomicilio,
       cant: this.contProduct,
     };
-    console.log(this.newProduct);
 
     // adiciona producto a la lista de productos y si existe aumenta la cantidad de ese producto
     if (this.contProduct <= 1) {

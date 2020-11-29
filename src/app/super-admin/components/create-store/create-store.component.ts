@@ -91,7 +91,6 @@ export class CreateStoreComponent implements OnInit {
             const store = this.form.value;
             this.storesService.createStore(store)
               .subscribe((res: any) => {
-                console.log(res);
                 this.openSnackBar(res.message);
                 this.windowService.loadingFalse();
                 if (res.status === 'OK') {

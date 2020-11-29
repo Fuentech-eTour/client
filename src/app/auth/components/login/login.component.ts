@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
       const user = this.form.value;
       this.authService.login(user)
         .subscribe( (res: any) => {
-          console.log(res);
           this.openSnackBar(res.message);
           this.windowService.loadingFalse();
           if (res.status === 'OK') {

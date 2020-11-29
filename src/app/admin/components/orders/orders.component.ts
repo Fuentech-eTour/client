@@ -46,7 +46,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.newOrders$()
       .subscribe((order: any) => {
-        console.log(order);
         this.order$.subscribe(data => {
           this.stateOrder = data;
         });
@@ -72,13 +71,11 @@ export class OrdersComponent implements OnInit {
     this.isloading.next(true);
     this.orderService.getShoppingByOneStore()
       .subscribe((data: any) => {
-        console.log(data);
         this.isloading.next(false);
         this.pendingOrder.next([]);
         if (data.status === 402) {
           return;
         }
-        console.log(data);
         this.pendingOrder.next(data);
       });
   }
@@ -87,7 +84,6 @@ export class OrdersComponent implements OnInit {
     this.isloadingThree.next(true);
     this.orderService.getWithoutDispatching()
       .subscribe((res: any) => {
-        console.log(res);
         this.isloadingThree.next(false);
         if (res.status === 402) {
           this.WithoutDispatching.next([]);
@@ -101,7 +97,6 @@ export class OrdersComponent implements OnInit {
     this.isloadingFour.next(true);
     this.orderService.getDispatchedOrders()
       .subscribe((res: any) => {
-        console.log(res);
         this.isloadingFour.next(false);
         if (res.status === 402) {
           this.dispatchedOrders.next([]);
@@ -115,7 +110,6 @@ export class OrdersComponent implements OnInit {
     this.isloadingFive.next(true);
     this.orderService.getCanceledOrders()
       .subscribe((res: any) => {
-        console.log(res);
         this.isloadingFive.next(false);
         if (res.status === 402) {
           this.canceledOrders.next([]);
@@ -134,7 +128,6 @@ export class OrdersComponent implements OnInit {
         this.historyOrder.next([]);
         return;
       }
-      console.log(data);
       this.historyOrder.next(data);
     });
   }

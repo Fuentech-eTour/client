@@ -53,7 +53,7 @@ export class EditStoreComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.storesService.getOneStores(parseInt(params.id, 10))
       .subscribe(store => {
-        console.log(store, parseInt(params.id, 10));
+        (store, parseInt(params.id, 10));
         this.image = store[0].imagen;
         this.idstore = store[0].id;
         this.idconfig = store[0].idconfig;
@@ -64,7 +64,6 @@ export class EditStoreComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.storesService.getConfigBusinessHours(parseInt(params.id, 10))
       .subscribe((data: any) => {
-        console.log(data);
         if (data.status === 402) {
           this.existingBusinessHours = false;
           this.days = [
@@ -123,7 +122,6 @@ export class EditStoreComponent implements OnInit {
               const store = this.form.value;
               this.storesService.updateOneStores(this.idstore, store)
                 .subscribe((res: any) => {
-                  console.log(res);
                   this.openSnackBar(res.message);
                   this.windowService.loadingFalse();
                   if (res.status === 'OK' || res.status === 'Ok') {
@@ -212,7 +210,6 @@ export class EditStoreComponent implements OnInit {
         const store = this.form.value;
         this.storesService.updateOneStores(this.idstore, store)
           .subscribe((res: any) => {
-            console.log(res);
             this.openSnackBar(res.message);
             this.windowService.loadingFalse();
             if (res.status === 'OK' || res.status === 'Ok') {

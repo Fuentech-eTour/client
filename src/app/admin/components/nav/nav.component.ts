@@ -59,7 +59,6 @@ export class NavComponent implements OnInit {
       });
       this.orderService.newOrders$()
         .subscribe((data: any) => {
-          console.log(data);
           this.stateNumOrder += 1;
           localStorage.setItem('stateNotifications', this.stateNumOrder.toString());
           this.numNewOrders.next(this.stateNumOrder);
@@ -92,7 +91,6 @@ export class NavComponent implements OnInit {
           if (data.status === 402) {
             return;
           }
-          console.log(data);
           this.pendingOrder.next(data);
       });
     }

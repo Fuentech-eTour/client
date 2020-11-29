@@ -45,7 +45,6 @@ export class TagsComponent implements OnInit {
   fetchAllTagsStore() {
     this.isloading.next(true);
     this.tagsService.getAllTagsStores().subscribe(data => {
-      console.log(data);
       this.isloading.next(false);
       this.tagsStores.next(data);
     });
@@ -54,7 +53,6 @@ export class TagsComponent implements OnInit {
   saveTagStore(event: Event) {
     const newTag = this.form.value;
     this.tagsService.createTagStore(newTag).subscribe((res: any) => {
-      console.log(res);
       this.openSnackBar(res.message);
       if (res.status === 'OK' || res.status === 'Ok') {
         this.form.reset();
@@ -65,7 +63,6 @@ export class TagsComponent implements OnInit {
 
   deleteTagStore(idTag: number) {
     this.tagsService.updateStateTagStore(idTag, 0).subscribe((res: any) => {
-      console.log(res);
       this.openSnackBar(res.message);
       this.fetchAllTagsStore();
     });
@@ -76,7 +73,6 @@ export class TagsComponent implements OnInit {
   fetchAllTagsProduct() {
     this.isloadingTwo.next(true);
     this.tagsService.getAllTagsProducts().subscribe(data => {
-      console.log(data);
       this.isloadingTwo.next(false);
       this.tagsProducts.next(data);
     });
@@ -85,7 +81,6 @@ export class TagsComponent implements OnInit {
   saveTagProduct(event: Event) {
     const newTag = this.form.value;
     this.tagsService.createTagProduct(newTag).subscribe((res: any) => {
-      console.log(res);
       this.openSnackBar(res.message);
       if (res.status === 'OK' || res.status === 'Ok') {
         this.form.reset();
@@ -96,7 +91,6 @@ export class TagsComponent implements OnInit {
 
   deleteTagProduct(idTag: number) {
     this.tagsService.updateStateTagProduct(idTag, 0).subscribe((res: any) => {
-      console.log(res);
       this.openSnackBar(res.message);
       this.fetchAllTagsProduct();
     });
@@ -171,7 +165,6 @@ export class EditTagComponent implements OnInit {
     if (this.data.type === 'isTagStore') {
       const { data } = this.data;
       const updateTag = this.form.value;
-      console.log(updateTag);
       this.tagsService.updateTagStore(data.id, updateTag.descripcion).subscribe((res: any) => {
         this.openSnackBar(res.message);
         if (res.status === 'OK' || res.status === 'Ok') {
@@ -182,7 +175,6 @@ export class EditTagComponent implements OnInit {
     if (this.data.type === 'isTagProduct') {
       const { data } = this.data;
       const updateTag = this.form.value;
-      console.log(updateTag);
       this.tagsService.updateTagProduct(data.id, updateTag.descripcion).subscribe((res: any) => {
         this.openSnackBar(res.message);
         if (res.status === 'OK' || res.status === 'Ok') {

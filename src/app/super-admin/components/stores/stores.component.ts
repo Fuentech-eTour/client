@@ -38,7 +38,6 @@ export class StoresComponent implements OnInit {
   fetchStores() {
     this.isloading.next(true);
     this.storesService.getAllStores().subscribe(data => {
-      console.log(data);
       this.isloading.next(false);
       this.stores.next(data);
     });
@@ -57,7 +56,6 @@ export class StoresComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === 'SI') {
         this.isloading.next(true);
         this.storesService.inactivateStore(idstore).subscribe((res: any) => {

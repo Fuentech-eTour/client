@@ -48,7 +48,6 @@ export class OrdersComponent implements OnInit {
         if (data.status === 402) {
           return;
         }
-        console.log(data);
         this.purchases.next(data);
       });
   }
@@ -61,7 +60,6 @@ export class OrdersComponent implements OnInit {
         if (data.status === 402) {
           return;
         }
-        console.log(data);
         this.purchasesConfirmed.next(data);
       });
   }
@@ -74,7 +72,6 @@ export class OrdersComponent implements OnInit {
         if (data.status === 402) {
           return;
         }
-        console.log(data);
         this.withoutDispatching.next(data);
       });
   }
@@ -87,7 +84,6 @@ export class OrdersComponent implements OnInit {
         if (data.status === 402) {
           return;
         }
-        console.log(data);
         this.purchasesCanceled.next(data);
       });
   }

@@ -120,6 +120,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   fetchConfigBusinessHours() {
     this.storesService.getConfigBusinessHours(this.store.id)
     .subscribe((res: any) => {
+      console.log(res);
       if (res.status === 402) {
         return;
       }
@@ -129,9 +130,16 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
         // this.currentBusinessHours.next(hours);
         this.businessHours.push(hours);
       }
-      const currentDay = new Date().getDay();
+      let currentDay = new Date().getDay();
+
+      if (currentDay === 0) {
+        currentDay = 7;
+      }
+
       for (const hours of res) {
+        console.log(hours.idutdays, currentDay);
         if (hours.idutdays === currentDay) {
+          console.log(hours);
           this.currentBusinessHours.next(hours);
           break;
         }
@@ -210,7 +218,6 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   }
 
   editComment(currentComment: string, comment: string, idComment) {
-    console.log(currentComment, comment, idComment);
     if (currentComment !== comment) {
       this.storesService.editOrInactivateComment(idComment, {comentario: comment, estado: 1})
         .subscribe((res: any) => {
@@ -261,7 +268,6 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
     });
   }
 

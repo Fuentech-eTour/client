@@ -140,7 +140,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.windowService.loadingTrue();
     this.productsService.getProductByName(this.searchParams, this.stateSeeMore)
     .subscribe((products: any) => {
-      console.log(products);
       this.windowService.loadingFalse();
       if (products.status === '402') {
         this.products = [];
@@ -157,7 +156,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.windowService.loadingTrue();
     this.productsService.getProductByName(this.searchParams, this.stateSeeMore)
     .subscribe((products: any) => {
-      console.log(products);
       this.windowService.loadingFalse();
       if (products.status === '402') {
         this.products = [];
@@ -174,7 +172,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.windowService.loadingTrue();
     this.productsService.getProductByName(this.searchParams, this.stateSeeMore)
     .subscribe((products: any) => {
-      console.log(products);
       this.windowService.loadingFalse();
       if (products.status === '402') {
         this.products = [];
@@ -246,7 +243,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.windowService.loadingTrue();
     this.storesService.getStoreByName(this.searchParams, this.stateSeeMoreStore)
     .subscribe((stores: any) => {
-      console.log(stores);
       this.windowService.loadingFalse();
       if (stores.status === '402') {
         this.stores = [];
@@ -263,7 +259,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.windowService.loadingTrue();
     this.storesService.getStoreByName(this.searchParams, this.stateSeeMoreStore)
     .subscribe((stores: any) => {
-      console.log(stores);
       this.windowService.loadingFalse();
       if (stores.status === '402') {
         this.stores = [];
@@ -280,7 +275,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.windowService.loadingTrue();
     this.storesService.getStoreByName(this.searchParams, this.stateSeeMoreStore)
     .subscribe((stores: any) => {
-      console.log(stores);
       this.windowService.loadingFalse();
       if (stores.status === '402') {
         this.stores = [];

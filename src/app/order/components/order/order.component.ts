@@ -72,19 +72,15 @@ export class OrderComponent implements OnInit {
 
   orderSubscribe() {
     this.order$.subscribe((data: any[]) => {
-      console.log(data);
       this.order = data.filter(store => store.valormin < (store.total - store.valordomicilio));
     });
   }
 
   addressSubscribe() {
     this.address$.subscribe(address => {
-      console.log(address);
       this.selectAddressOrder = address;
       this.utilityService.getAllMunicipality().subscribe(data => {
-        console.log(data);
         const municipalitySelect = data.filter(municipality => municipality.id === address.idutmunicipality);
-        console.log(municipalitySelect);
         this.municipality.next(municipalitySelect[0]);
       });
     });
@@ -92,13 +88,11 @@ export class OrderComponent implements OnInit {
 
   fetchInfoUser() {
     this.usersService.getInfoUser().subscribe(([data]) => {
-      console.log(data);
       this.infoUser.next(data);
       this.secondFormGroup.patchValue(data);
       // adicion por error en la palabra telefono escrita en el backend telefeno
       this.secondFormGroup.get('telefono').setValue(data.telefeno);
       this.currentPhone = this.secondFormGroup.get('telefono').value;
-      console.log(this.secondFormGroup.value);
     });
   }
 
@@ -154,7 +148,6 @@ export class OrderComponent implements OnInit {
 
   fetchAllAddress() {
     this.usersService.getAllAddress().subscribe(data => {
-      console.log(data);
       this.isloading.next(false);
       this.addresses.next(data);
     });
@@ -167,11 +160,10 @@ export class OrderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === 'SI') {
         if (this.currentPhone !== this.secondFormGroup.get('telefono').value) {
           this.usersService.editInfoUser(this.secondFormGroup.value)
-          .subscribe(console.log);
+          .subscribe();
         }
         this.orderService.createSells(
           this.order,
@@ -179,7 +171,6 @@ export class OrderComponent implements OnInit {
           parseInt(this.secondFormGroup.get('idPayment').value, 10),
         )
         .subscribe(({ status, data }: any) => {
-          console.log(status, data);
           this.orderService.addCurrentSells(data);
           const idSell = data[0].idSell;
           if (status === 'OK') {
@@ -187,7 +178,6 @@ export class OrderComponent implements OnInit {
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < data.length; i++) {
               data[i].nameUser = this.authService.getUserName();
-              console.log(data);
             }
             this.orderService.emitNewOrder(data);
             this.router.navigate([`/user/orders/purchasesdetails`]);

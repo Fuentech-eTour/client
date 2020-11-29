@@ -26,7 +26,6 @@ export class UtilityService {
 
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
     Sentry.captureException(error);
     return throwError('ups algo salio mal');
   }

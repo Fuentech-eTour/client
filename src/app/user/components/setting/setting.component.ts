@@ -30,7 +30,6 @@ export class SettingComponent implements OnInit {
 
   savePassword(event: Event) {
     const newPassword = this.form.value;
-    console.log(newPassword);
     this.usersService.editPassword(newPassword).subscribe((res: any) => {
       this.openSnackBar(res.message);
       if (res.status === 'OK') {

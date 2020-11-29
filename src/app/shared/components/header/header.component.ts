@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
       this.rol.next(data);
     });
-    this.usersService.selectAddress$.subscribe(console.log);
+    this.usersService.selectAddress$.subscribe();
   }
 
   ngAfterViewInit() {
@@ -103,7 +103,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -113,7 +112,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -132,7 +130,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   toPerfil() {
     const idStore = this.authService.getIdStore();
-    console.log(idStore);
     if (idStore === undefined || idStore === null) {
       this.router.navigate(['/user']);
     } else {
@@ -146,7 +143,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   @HostListener('window: beforeinstallprompt', ['$event'])
   onBeforeInstallPrompt(event: Event) {
-    console.log(event);
     event.preventDefault();
     this.installEvent = event;
   }

@@ -14,7 +14,6 @@ export class BusinessHoursComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.data);
   }
 
   onNoClick(): void {

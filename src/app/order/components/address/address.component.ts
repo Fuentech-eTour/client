@@ -37,7 +37,6 @@ export class AddressComponent implements OnInit {
   saveAddress(event: Event) {
     const newAddress = this.form.value;
     this.usersService.createAddress(newAddress).subscribe((res: any) => {
-      console.log(res);
       if (res.status === 'OK') {
         this.form.reset();
         this.onNoClick();

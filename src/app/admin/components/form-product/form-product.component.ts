@@ -48,7 +48,6 @@ export class FormProductComponent implements OnInit {
     this.tagsService.getAllTagsProducts().subscribe((tags: any) => {
       this.tags = tags;
     });
-    console.log(this.image);
   }
 
   saveProduct(event: Event) {
@@ -72,12 +71,10 @@ export class FormProductComponent implements OnInit {
           this.productsService.createProduct(product)
             .subscribe((res: any) => {
               this.windowService.loadingFalse();
-              console.log(res);
               if (res.status === 'Ok') {
                 this.windowService.loadingTrue();
                 const idTag = this.form.get('tags').value;
                 const idp = res.idproducto;
-                console.log(idTag, idp);
                 this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
                   this.windowService.loadingFalse();
                   this.router.navigate(['./admin/products']);

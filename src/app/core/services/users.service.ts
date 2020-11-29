@@ -76,7 +76,6 @@ export class UsersService {
   }
 
   deleteAddress(iddir: number, state) {
-    console.log(iddir, state);
     return this.http.put(`${environment.url_api}/users/cambiaestadodireccion/${iddir}`, state)
     .pipe(
       retry(3),
@@ -106,7 +105,6 @@ export class UsersService {
 
   // captura los errores de peticiones a servicios y los envia a Sentry --init--//
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
     Sentry.captureException(error);
     return throwError('ups algo salio mal');
   }

@@ -34,13 +34,11 @@ export class FooterComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
   sendMail() {
     if (this.emailField.valid) {
-      console.log(this.emailField.value);
     }
   }
 

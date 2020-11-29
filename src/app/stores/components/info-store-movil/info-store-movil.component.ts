@@ -38,7 +38,6 @@ export class InfoStoreMovilComponent implements OnInit {
     this.fetchQualificationStore();
     this.fetchConfigBusinessHours();
     this.fetchAvailabilityStore();
-    console.log(this.store[0]);
   }
 
   fetchConfigStore() {
@@ -57,7 +56,6 @@ export class InfoStoreMovilComponent implements OnInit {
   fetchAvailabilityStore() {
     this.storesService.getAvailabilityStoreById(this.store[0].id)
     .subscribe((res: any) => {
-      console.log(res);
       if (res.message === 'Cerrado') {
         this.availabilityStore = false;
       }
@@ -91,7 +89,6 @@ export class InfoStoreMovilComponent implements OnInit {
 
   fetchQualificationStore() {
     this.storesService.getQualificationStore(this.store[0].id).subscribe(({ puntuacion }: any) => {
-      console.log(puntuacion);
       if (puntuacion !== 'Aun no tiene puntuacion') {
         this.qualificationStore.next(puntuacion);
       } else {
@@ -107,7 +104,6 @@ export class InfoStoreMovilComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
     });
   }
 

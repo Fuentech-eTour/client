@@ -33,7 +33,6 @@ export class PurchaseDetailContainer implements OnInit {
       })
     );
     this.orderDetail$.subscribe((res: any) => {
-      console.log(res);
       this.orderDetail = res;
       this.windowService.loadingFalse();
     });

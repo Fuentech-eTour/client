@@ -52,7 +52,6 @@ export class SidebarStoreComponent implements OnInit {
   fetchAvailabilityStore() {
     this.storesService.getAvailabilityStoreById(this.store[0].id)
     .subscribe((res: any) => {
-      console.log(res);
       if (res.message === 'Cerrado') {
         this.availabilityStore = false;
       }
@@ -86,7 +85,7 @@ export class SidebarStoreComponent implements OnInit {
 
   fetchQualificationStore() {
     this.storesService.getQualificationStore(this.store[0].id).subscribe(({ puntuacion }: any) => {
-      console.log(puntuacion);
+      (puntuacion);
       if (puntuacion !== 'Aun no tiene puntuacion') {
         this.qualificationStore.next(puntuacion);
       } else {
@@ -102,7 +101,6 @@ export class SidebarStoreComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
     });
   }
 

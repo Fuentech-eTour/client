@@ -48,7 +48,6 @@ export class TagsStoresComponent implements OnInit, AfterContentInit {
   ngAfterContentInit(): void {
     this.windowService.loadingTrue();
     this.tags$.subscribe((tags: any) => {
-      console.log(tags);
       this.windowService.loadingFalse();
       if (tags.status === '402') {
         this.openSnackBar(tags.message);

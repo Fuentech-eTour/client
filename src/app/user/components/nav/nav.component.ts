@@ -47,7 +47,6 @@ export class NavComponent implements OnInit {
     ngOnInit() {
       this.orderService.stateOrder$()
         .subscribe((data: any) => {
-          console.log(data);
           this.stateNumOrder += 1;
           localStorage.setItem('stateNotifications', this.stateNumOrder.toString());
           this.numNewOrders.next(this.stateNumOrder);
