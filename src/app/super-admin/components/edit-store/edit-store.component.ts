@@ -53,7 +53,6 @@ export class EditStoreComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.storesService.getOneStores(parseInt(params.id, 10))
       .subscribe(store => {
-        (store, parseInt(params.id, 10));
         this.image = store[0].imagen;
         this.idstore = store[0].id;
         this.idconfig = store[0].idconfig;
