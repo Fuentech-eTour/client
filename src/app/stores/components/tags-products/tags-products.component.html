@@ -1,15 +1,17 @@
-<div style="background-color: #f9fafc; width: 100%; height: 10px;"></div>
-<div *ngIf="(tags$ | async) as tags">
-    <div class="title-cont">
-        <mat-card-title>{{tags[0]?.descripcion | titlecase}}</mat-card-title>
-    </div>
-    <app-banner-stores *ngFor="let store of tags[0]?.tiendas" [store]="store"></app-banner-stores>
-    <div *ngIf="tags[0]?.tiendas >= numberProductsFetch" class="action-btn">
-        <!-- <div (click)="seeMore()">Ver mas</div> -->
-        <div (click)="paginationPrevious()"><mat-icon>keyboard_arrow_left</mat-icon></div>
-        <div (click)="btnOne()" [ngClass]="{'btnPageSelect': stateBtnOne}">{{ btnPageOne }}</div>
-        <div (click)="btnTwo()" [ngClass]="{'btnPageSelect': stateBtnTwo}">{{ btnPageTwo }}</div>
-        <div (click)="btnThree()" [ngClass]="{'btnPageSelect': stateBtnThree}">{{ btnPageThree }}</div>
-        <div (click)="paginationNext()"><mat-icon>keyboard_arrow_right</mat-icon></div>
+<div class="container">
+    <div style="background-color: #f9fafc; width: 100%; height: 10px;"></div>
+    <div *ngIf="(tags$ | async) as tags">
+        <div class="title-cont">
+            <mat-card-title>{{tags[0]?.descripcion | titlecase}}</mat-card-title>
+        </div>
+        <app-banner-stores *ngFor="let store of tags[0]?.tiendas" [store]="store"></app-banner-stores>
+        <div *ngIf="tags[0]?.tiendas >= numberProductsFetch" class="action-btn">
+            <!-- <div (click)="seeMore()">Ver mas</div> -->
+            <div (click)="paginationPrevious()"><mat-icon>keyboard_arrow_left</mat-icon></div>
+            <div (click)="btnOne()" [ngClass]="{'btnPageSelect': stateBtnOne}">{{ btnPageOne }}</div>
+            <div (click)="btnTwo()" [ngClass]="{'btnPageSelect': stateBtnTwo}">{{ btnPageTwo }}</div>
+            <div (click)="btnThree()" [ngClass]="{'btnPageSelect': stateBtnThree}">{{ btnPageThree }}</div>
+            <div (click)="paginationNext()"><mat-icon>keyboard_arrow_right</mat-icon></div>
+        </div>
     </div>
 </div>

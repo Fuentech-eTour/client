@@ -189,7 +189,7 @@ li {
 
 /* botones next y prev de los componente banner --final-- */
 
-/* scroll --init-- */
+/* scroll body --init-- */
 
 body::-webkit-scrollbar {
     width: 8px;     /* Tamaño del scroll en vertical */
@@ -223,9 +223,9 @@ body::-webkit-scrollbar-track:active {
   background: #e7e7e7;
 }
 
-/* scroll --final-- */
+/* scroll body --final-- */
 
-/* scroll cart --init-- */
+/* scroll sidebar --init-- */
 
 .ng-tns-c66-1::-webkit-scrollbar {
     width: 8px;     /* Tamaño del scroll en vertical */
@@ -259,9 +259,9 @@ body::-webkit-scrollbar-track:active {
   background: #e7e7e7;
 }
 
-/* scroll --final-- */
+/* scroll sidebar --final-- */
 
-/* scroll sidebar --init-- */
+/* scroll cart --init-- */
 
 .ng-tns-c66-0::-webkit-scrollbar {
     width: 8px;     /* Tamaño del scroll en vertical */
@@ -288,7 +288,6 @@ body::-webkit-scrollbar-track:active {
 .ng-tns-c66-0::-webkit-scrollbar-track {
     background: #ebebeb;
     border-radius: 4px;
-    margin-top: 54px;
 }
 /* Cambiamos el fondo cuando esté en active o hover */
 .ng-tns-c66-0::-webkit-scrollbar-track:hover,
@@ -296,7 +295,7 @@ body::-webkit-scrollbar-track:active {
   background: #e7e7e7;
 }
 
-/* scroll sidebar --final-- */
+/* scroll cart --final-- */
 
 /* tabs module search --init-- */
 .mat-tab-body-content {
@@ -312,6 +311,7 @@ body::-webkit-scrollbar-track:active {
 
 .mat-drawer-backdrop {
     position: fixed !important;
+    z-index: 4 !important;
 }
 
 /*sidenav izquierdo y derecho --final--*/

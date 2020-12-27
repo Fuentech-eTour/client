@@ -1,3 +1,13 @@
+.sidenav {
+    position: fixed;
+    width: 288px;
+    padding-top: 64px;
+}
+  
+.sidenav .mat-toolbar {
+    background: inherit;
+}
+
 .cont-name-store {
     margin: 0px;
     padding-top: 10px;
@@ -28,10 +38,10 @@
     background-color: white;
     @media (min-width: 700px) {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         grid-gap: 10px 10px;
         padding-bottom: 20px;
-        margin-top: 20px;
+        margin: 20px;
         background-color: #fafafa;
     }
     app-info-store-movil {
@@ -55,7 +65,7 @@
         font-weight: 900;
         border-bottom: solid 1px #e0e0e0;
         @media (min-width: 700px) {
-            padding: 20px 0px;
+            padding: 20px 10px;
         }
     }
 }
@@ -82,7 +92,7 @@ app-product-store-movil {
 
 @media (min-width: 375px) {
     .store-products-grid {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     .container {
         max-width: 1110px;
@@ -93,7 +103,7 @@ app-product-store-movil {
 
 @media (min-width: 600px) {
     .store-products-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
     .container {
         max-width: 1110px;
@@ -104,7 +114,7 @@ app-product-store-movil {
 
 @media (min-width: 890px) {
     .store-products-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
     .container {
         max-width: 1110px;
@@ -115,7 +125,7 @@ app-product-store-movil {
 
 @media (min-width: 1080px) {
     .store-products-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
     .container {
         max-width: 1110px;

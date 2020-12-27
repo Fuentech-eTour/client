@@ -68,11 +68,12 @@ export class OrderComponent implements OnInit {
     this.fetchAllAddress();
     this.addressSubscribe();
     this.orderSubscribe();
+    console.log(this.order);
   }
 
   orderSubscribe() {
     this.order$.subscribe((data: any[]) => {
-      this.order = data.filter(store => store.valormin < (store.total - store.valordomicilio));
+      this.order = data.filter(store => store.valormin <= (store.total - store.valordomicilio));
     });
   }
 

@@ -1,12 +1,16 @@
 .position-bar-top2 {
     width: 100%;
-    position: fixed;
+    height: 56px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
     align-items: center;
     margin-left: 0px;
-    margin-top: 56px;
+    // margin-top: 56px;
     padding: 5px;
     background-color: rgb(177, 177, 177);
     z-index: 750;
+    margin-right: 0rem !important;
 
     .close-cont {
         color: white; 
@@ -23,15 +27,15 @@
 }
 
 .position-sidenav {
-    margin-top: 102px;
+    // margin-top: 102px;
     width: 100%;
     overflow: none;
 
     .aline-product {
-        margin-bottom: 36px;
+        // margin-bottom: 36px;
 
         .position-message-center {
-            padding-top: 20px;
+            // padding-top: 20px;
             margin: 20px;
             align-items: center;
             text-align: center;
@@ -132,7 +136,8 @@
 
 .position-bar-bottom {
     width: 100%; // 90% o 100%
-    position: fixed;
+    position: absolute;
+    right: 0px;
     bottom: 0px;
     margin-left: 0px;
     padding-top: 5px;
@@ -141,6 +146,7 @@
     padding-right: 5px;
     background-color: rgb(177, 177, 177);
     z-index: 750;
+    margin-right: 0rem !important; 
 }
 
 @media(min-width: 576px) {
@@ -153,7 +159,7 @@
     }
     .position-sidenav {
         /* top: 46px; */
-        margin-top: 46px;
+        margin-top: 0px;
     }
     .aline-product {
         margin-bottom: 0px;

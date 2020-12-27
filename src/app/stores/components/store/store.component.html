@@ -1,27 +1,32 @@
-<!-- <div ClassName="container" class="cont-name-store">
-    <p>
-        <mat-icon (click)="backHistory()">arrow_back</mat-icon>
-    </p>
-</div> -->
-<div class="cont-store-grid">
-    <app-info-store-movil *ngIf="(store$ | async)  as store" [store]="store"></app-info-store-movil>
-    <app-slider-category-movil *ngIf="(store$ | async)  as store" [store]="store"></app-slider-category-movil>
-    <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
-    <div *ngIf="(store$ | async)  as store">
-        <div *ngFor="let tag of store[0].tags">
-            <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
-            <div class="store-products-grid container">
-                <app-product-store    *ngFor="let product of tag.products" 
-                                    [product]="product" 
-                                    [razonsocial]="nameStore" 
-                                    [imagen]="imagent">
-                </app-product-store>
-                <app-product-store-movil    *ngFor="let product of tag.products" 
-                                            [product]="product" 
-                                            [razonsocial]="nameStore" 
-                                            [imagen]="imagent">
-                </app-product-store-movil> 
+<mat-drawer-container>
+    <mat-drawer #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="cont-name-store">
+            <p>
+                <mat-icon (click)="backHistory()">arrow_back</mat-icon>
+            </p>
+        </div>
+        <div class="cont-store-grid">
+            <app-info-store-movil *ngIf="(store$ | async)  as store" [store]="store"></app-info-store-movil>
+            <app-slider-category-movil *ngIf="(store$ | async)  as store" [store]="store"></app-slider-category-movil>
+            <div *ngIf="(store$ | async)  as store">
+                <div *ngFor="let tag of store[0].tags">
+                    <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
+                    <div class="store-products-grid container">
+                        <app-product-store    *ngFor="let product of tag.products" 
+                                            [product]="product">
+                        </app-product-store>
+                        <app-product-store-movil    *ngFor="let product of tag.products" 
+                                                    [product]="product" 
+                                                    [razonsocial]="nameStore" 
+                                                    [imagen]="imagent">
+                        </app-product-store-movil> 
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </mat-drawer-content>
+</mat-drawer-container>

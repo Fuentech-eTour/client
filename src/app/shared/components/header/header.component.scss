@@ -3,10 +3,12 @@
     @media (min-width: 600px) {
         height: 64px;
     }
-    mat-toolbar {
+    .navbar-fixed-top {
         position: fixed;
         width: 100%;
         z-index: 1000;
+    }
+    mat-toolbar {
         background-color: white;
         box-shadow: 0px 0px 10px 0px #c7c7c7;
         mat-toolbar-row {
@@ -66,7 +68,9 @@
                     display: inline-block;
                     text-align: left;
                     background-color: #f9fafc;
-                    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+                    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 
+                                0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+                                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
                     @media (max-width: 1000px) {
                         display: none;
                     }

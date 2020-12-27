@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MaterialModule } from './material/material.module';
 
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,6 +45,7 @@ if (environment.production) {
     AppRoutingModule,
     FormsModule,
     SharedModule,
+    MaterialModule,
     MatSidenavModule,
     CoreModule,
     BrowserAnimationsModule,

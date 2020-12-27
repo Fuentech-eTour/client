@@ -1,11 +1,12 @@
 .cont-category {
-    position: fixed;
-    width: 225px;
+    //position: fixed;
+    //width: 100%;
     height: auto;
-    max-height: 70vh;
+    padding: 20px;
+    //max-height: 70vh;
     display: none;
     // margin-top: 5px;
-    border-radius: 20px;
+    //border-radius: 20px;
     overflow: auto;
     @media (min-width: 700px) {
         display: inline-block;
@@ -81,37 +82,35 @@
     }
 }
 
-.cont-category::-webkit-scrollbar {
+.scroll-sidebar::-webkit-scrollbar {
     width: 8px;     /* Tamaño del scroll en vertical */
     height: 8px;    /* Tamaño del scroll en horizontal */
     // display: none;  /* Ocultar scroll */
 }
 
 /* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-.cont-category::-webkit-scrollbar-thumb {
-    // background: #dfdfdf;
-    background: white;
+.scroll-sidebar::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
     border-radius: 4px;
 }
 /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-.cont-category::-webkit-scrollbar-thumb:hover {
-    background: #dfdfdf;
+.scroll-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 /* Cambiamos el fondo cuando esté en active */
-.cont-category::-webkit-scrollbar-thumb:active {
+.scroll-sidebar::-webkit-scrollbar-thumb:active {
     background-color: #999999;
 }
 
 /* Ponemos un color de fondo y redondeamos las esquinas del track */
-.cont-category::-webkit-scrollbar-track {
+.scroll-sidebar::-webkit-scrollbar-track {
     margin: 20px 0px;
-    background: white;
+    //background: #ebebeb;
     border-radius: 4px;
 }
 /* Cambiamos el fondo cuando esté en active o hover */
-.cont-category::-webkit-scrollbar-track:hover,
-.cont-category::-webkit-scrollbar-track:active {
-  // background: #e7e7e7;
-  background: white;
+.scroll-sidebar::-webkit-scrollbar-track:hover,
+.scroll-sidebar::-webkit-scrollbar-track:active {
+  background: #e7e7e7;
 }

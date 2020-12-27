@@ -10,10 +10,10 @@ import { WindowService } from '@core/services/window.service';
 import { UsersService } from '@core/services/users.service';
 
 import { map, delay, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { AddProduct } from '../../../core/models/addProduct.model';
 import { CartService } from './../../../core/services/cart.service';
-import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',

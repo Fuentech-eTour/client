@@ -1,7 +1,11 @@
 mat-card {
     width: 100%;
-    padding-top: 24px;
+    padding: 0px;
     border-radius: 20px;
+}
+
+.product-cont {
+    padding: 16px;
 }
 
 mat-card-header {

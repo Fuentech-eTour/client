@@ -4,7 +4,8 @@ import { WindowService } from '@core/services/window.service';
 import { ProductsService } from '@core/services/products/products.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-store',
@@ -13,11 +14,18 @@ import { switchMap } from 'rxjs/operators';
 })
 export class StoreComponent implements OnInit, OnDestroy {
 
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
   store$: Observable<any>;
   nameStore: string;
   imagent: string;
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private storesService: StoresService,
     private route: ActivatedRoute,
     private windowService: WindowService,
