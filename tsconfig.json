@@ -19,7 +19,8 @@
       "@core/*": ["src/app/core/*"],
       "@utils/*": ["src/app/utils/*"],
       "@material/*": ["src/app/material/*"],
-      "@shered/*": ["src/app/shered/*"]
+      "@shered/*": ["src/app/shered/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "angularCompilerOptions": {

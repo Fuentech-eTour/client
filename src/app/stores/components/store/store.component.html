@@ -17,7 +17,9 @@
                     <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
                     <div class="store-products-grid container">
                         <app-product-store    *ngFor="let product of tag.products" 
-                                            [product]="product">
+                                            [product]="product"
+                                            [razonsocial]="nameStore" 
+                                            [imagen]="imagent">
                         </app-product-store>
                         <app-product-store-movil    *ngFor="let product of tag.products" 
                                                     [product]="product" 

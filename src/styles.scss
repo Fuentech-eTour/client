@@ -225,77 +225,41 @@ body::-webkit-scrollbar-track:active {
 
 /* scroll body --final-- */
 
-/* scroll sidebar --init-- */
+/* scroll --init-- */
 
-.ng-tns-c66-1::-webkit-scrollbar {
+.mat-drawer-inner-container::-webkit-scrollbar {
     width: 8px;     /* Tamaño del scroll en vertical */
     height: 8px;    /* Tamaño del scroll en horizontal */
     // display: none;  /* Ocultar scroll */
 }
 
 /* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-.ng-tns-c66-1::-webkit-scrollbar-thumb {
+.mat-drawer-inner-container::-webkit-scrollbar-thumb {
     background: #dfdfdf;
     border-radius: 4px;
 }
 /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-.ng-tns-c66-1::-webkit-scrollbar-thumb:hover {
+.mat-drawer-inner-container::-webkit-scrollbar-thumb:hover {
     background: #b3b3b3;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 /* Cambiamos el fondo cuando esté en active */
-.ng-tns-c66-1::-webkit-scrollbar-thumb:active {
+.mat-drawer-inner-container::-webkit-scrollbar-thumb:active {
     background-color: #999999;
 }
 
 /* Ponemos un color de fondo y redondeamos las esquinas del track */
-.ng-tns-c66-1::-webkit-scrollbar-track {
+.mat-drawer-inner-container::-webkit-scrollbar-track {
     background: #ebebeb;
     border-radius: 4px;
 }
 /* Cambiamos el fondo cuando esté en active o hover */
-.ng-tns-c66-1::-webkit-scrollbar-track:hover,
-.ng-tns-c66-1::-webkit-scrollbar-track:active {
+.mat-drawer-inner-container::-webkit-scrollbar-track:hover,
+.mat-drawer-inner-container::-webkit-scrollbar-track:active {
   background: #e7e7e7;
 }
 
-/* scroll sidebar --final-- */
-
-/* scroll cart --init-- */
-
-.ng-tns-c66-0::-webkit-scrollbar {
-    width: 8px;     /* Tamaño del scroll en vertical */
-    height: 8px;    /* Tamaño del scroll en horizontal */
-    // display: none;  /* Ocultar scroll */
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-.ng-tns-c66-0::-webkit-scrollbar-thumb {
-    background: #dfdfdf;
-    border-radius: 4px;
-}
-/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-.ng-tns-c66-0::-webkit-scrollbar-thumb:hover {
-    background: #b3b3b3;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-/* Cambiamos el fondo cuando esté en active */
-.ng-tns-c66-0::-webkit-scrollbar-thumb:active {
-    background-color: #999999;
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del track */
-.ng-tns-c66-0::-webkit-scrollbar-track {
-    background: #ebebeb;
-    border-radius: 4px;
-}
-/* Cambiamos el fondo cuando esté en active o hover */
-.ng-tns-c66-0::-webkit-scrollbar-track:hover,
-.ng-tns-c66-0::-webkit-scrollbar-track:active {
-  background: #e7e7e7;
-}
-
-/* scroll cart --final-- */
+/* scroll --final-- */
 
 /* tabs module search --init-- */
 .mat-tab-body-content {

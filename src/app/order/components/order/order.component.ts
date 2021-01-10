@@ -68,7 +68,6 @@ export class OrderComponent implements OnInit {
     this.fetchAllAddress();
     this.addressSubscribe();
     this.orderSubscribe();
-    console.log(this.order);
   }
 
   orderSubscribe() {

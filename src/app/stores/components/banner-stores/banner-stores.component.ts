@@ -94,7 +94,6 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   fetchAvailabilityStore() {
     this.storesService.getAvailabilityStoreById(this.store.id)
     .subscribe((res: any) => {
-      console.log(res);
       if (res.message === 'Cerrado') {
         this.availabilityStore = false;
       }
@@ -120,7 +119,6 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
   fetchConfigBusinessHours() {
     this.storesService.getConfigBusinessHours(this.store.id)
     .subscribe((res: any) => {
-      console.log(res);
       if (res.status === 402) {
         return;
       }
@@ -137,9 +135,7 @@ export class BannerStoresComponent implements OnInit, AfterViewInit {
       }
 
       for (const hours of res) {
-        console.log(hours.idutdays, currentDay);
         if (hours.idutdays === currentDay) {
-          console.log(hours);
           this.currentBusinessHours.next(hours);
           break;
         }

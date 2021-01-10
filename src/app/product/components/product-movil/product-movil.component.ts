@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { BtnAddCountComponent } from '../../../shared/components/btn-add-count/btn-add-count.component';
@@ -25,7 +25,6 @@ export class ProductMovilComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private productsService: ProductsService,
-    private authService: AuthService,
     private windowService: WindowService,
   ) {
     this.favoriteProducts$ = this.productsService.favoriteProducts$;
@@ -42,6 +41,7 @@ export class ProductMovilComponent implements OnInit {
         }
       }
     });
+    console.log(this.product);
   }
 
   openDialogDetailProduct(): void {

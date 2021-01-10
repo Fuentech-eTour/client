@@ -1,30 +1,32 @@
 <div *ngIf="(product$ | async) as product">
-    <mat-card style="padding: 20px; margin: 20px 0px;">
+    <mat-card style="padding: 0px; margin: 0px;">
         <div class="btn-close-cont">
-            <mat-icon (click)="onNoClick()">highlight_off</mat-icon> 
+            
+            <div class="btn-close">
+                <mat-card-title>Detalles del producto</mat-card-title>
+                <mat-icon (click)="onNoClick()">highlight_off</mat-icon>
+            </div>
          </div>
-        <mat-dialog-content style="margin: 0px;">
-            <div class="row border-table middle-xs">
-                <div class="col-xs-12 col-sm-6 col-md-6 img-cont">
-                    <div>
-                        <img *ngIf="product[0]?.imagen !== ''" onerror="this.src = './../../../../assets/images/not-image.png'" [src]="product[0]?.imagen">
-                        <img *ngIf="product[0]?.imagen ===''" src="./../../../../assets/images/not-image.png">
-                    </div>
+        <mat-dialog-content>
+            <div class="content-cont">
+                <div class="img-cont">
+                    <img *ngIf="product[0]?.imagen !== ''" 
+                        onerror="this.src = './../../../../assets/images/not-image.png'" 
+                        [src]="product[0]?.imagen">
+                    <img *ngIf="product[0]?.imagen ===''" src="./../../../../assets/images/not-image.png">
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="description-cont">
                     <div>
+                        <mat-card-title>{{ product[0]?.nombrearticulo | titlecase }}</mat-card-title>
                         <ul>
-                            <li>
-                                <mat-card-title>{{ product[0]?.nombrearticulo }}</mat-card-title>
-                            </li>
                             <li>
                                 <mat-card-subtitle>Precio/unid: {{ product[0]?.valorventa | currency }}</mat-card-subtitle>
                             </li>
                         </ul>
-                        <p>{{ product[0]?.descripcion }}</p>
+                        <p>Descripción: {{ product[0]?.descripcion | lowercase }}</p>
                     </div>
                     <div class="actions-cont">
-                       <app-btn-add-count [product]="product[0]"></app-btn-add-count> 
+                        <app-btn-add-count [product]="product[0]"></app-btn-add-count> 
                     </div>
                 </div>
             </div>

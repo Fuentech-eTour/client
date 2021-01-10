@@ -4,13 +4,13 @@
     height: auto;
     padding: 20px;
     //max-height: 70vh;
-    display: none;
+    //display: none;
     // margin-top: 5px;
     //border-radius: 20px;
     overflow: auto;
-    @media (min-width: 700px) {
+    /* @media (min-width: 700px) {
         display: inline-block;
-    }
+    } */
     mat-card-header {
         display: block;
         align-items: center;
@@ -80,37 +80,4 @@
             }
         }
     }
-}
-
-.scroll-sidebar::-webkit-scrollbar {
-    width: 8px;     /* Tamaño del scroll en vertical */
-    height: 8px;    /* Tamaño del scroll en horizontal */
-    // display: none;  /* Ocultar scroll */
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-.scroll-sidebar::-webkit-scrollbar-thumb {
-    background: #dfdfdf;
-    border-radius: 4px;
-}
-/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-.scroll-sidebar::-webkit-scrollbar-thumb:hover {
-    background: #b3b3b3;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-/* Cambiamos el fondo cuando esté en active */
-.scroll-sidebar::-webkit-scrollbar-thumb:active {
-    background-color: #999999;
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del track */
-.scroll-sidebar::-webkit-scrollbar-track {
-    margin: 20px 0px;
-    //background: #ebebeb;
-    border-radius: 4px;
-}
-/* Cambiamos el fondo cuando esté en active o hover */
-.scroll-sidebar::-webkit-scrollbar-track:hover,
-.scroll-sidebar::-webkit-scrollbar-track:active {
-  background: #e7e7e7;
 }

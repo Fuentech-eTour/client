@@ -45,6 +45,7 @@ export class ProductComponent implements OnInit {
           }
         }
       });
+      console.log(this.product);
     }
 
     openDialogDetailProduct(): void {

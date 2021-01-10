@@ -3,17 +3,18 @@ mat-card {
     //padding: 10px 16px 0px;
     padding: 24px 10px 10px;
     border-radius: 20px;
-    margin: 5px 5px 5px 10px; // si se aplica la Logica para numero de card product response se debe poner solo 5px de margin
+    margin: 5px 0px; // si se aplica la Logica para numero de card product response se debe poner solo 5px de margin
     text-align: center;
     min-width: 140px;
-    max-width: 141px;
+    //max-width: 141px;
     //border: solid 1px rgba(0, 0, 0, 0.12);
     box-shadow: none;
     @media (min-width: 425px) {
         /* min-width: 140px;
         max-width: 160px; */
         min-width: 148px;
-        max-width: 148px;
+        //max-width: 148px;
+        width: 100%;
     }
     @media (min-width: 700px) {
         &:hover {

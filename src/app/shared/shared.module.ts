@@ -24,6 +24,7 @@ import { NavMovilComponent } from './components/nav-movil/nav-movil.component';
 import { BtnAddCountComponent } from './components/btn-add-count/btn-add-count.component';
 import { HeaderSearchComponent } from './components/header-search/header-search.component';
 import { SanitizerUrlPipe } from './pipes/sanitizer-url/sanitizer-url.pipe';
+import { LoaderImageComponent } from './components/loader-image/loader-image.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SanitizerUrlPipe } from './pipes/sanitizer-url/sanitizer-url.pipe';
     BtnAddCountComponent,
     HeaderSearchComponent,
     SanitizerUrlPipe,
+    LoaderImageComponent,
   ],
   exports: [
     ExponentialPipe,
@@ -53,6 +55,7 @@ import { SanitizerUrlPipe } from './pipes/sanitizer-url/sanitizer-url.pipe';
     BtnAddCountComponent,
     HeaderSearchComponent,
     SanitizerUrlPipe,
+    LoaderImageComponent,
   ],
   imports: [
     CommonModule,
