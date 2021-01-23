@@ -1,7 +1,10 @@
 <mat-drawer-container>
     <mat-drawer #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-        <app-sidebar-store *ngIf="(store$ | async)  as store" [store]="store"></app-sidebar-store>
+        <app-sidebar-store *ngIf="(storeForSidenav$ | async)  as store" 
+        [store]="store"
+        (addTag)="fetchProductsForIdTag($event)">
+        </app-sidebar-store>
     </mat-drawer>
     <mat-drawer-content>
         <div class="cont-name-store">
@@ -9,26 +12,67 @@
                 <mat-icon (click)="backHistory()">arrow_back</mat-icon>
             </p>
         </div>
+        <app-info-store-movil *ngIf="(storeForSidenav$ | async)  as store" 
+            [store]="store">
+        </app-info-store-movil>
+        <nav mat-tab-nav-bar>
+            <a mat-tab-link 
+            *ngFor="let tag of tags"
+            [active]="activeLink === tag.id" 
+            (click)="fetchProductsForIdTag(tag)"> 
+                {{ tag.descripcion | titlecase }} 
+            </a>
+        </nav>
         <div class="cont-store-grid">
-            <app-info-store-movil *ngIf="(store$ | async)  as store" [store]="store"></app-info-store-movil>
-            <app-slider-category-movil *ngIf="(store$ | async)  as store" [store]="store"></app-slider-category-movil>
-            <div *ngIf="(store$ | async)  as store">
-                <div *ngFor="let tag of store[0].tags">
-                    <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
-                    <div class="store-products-grid container">
-                        <app-product-store    *ngFor="let product of tag.products" 
-                                            [product]="product"
-                                            [razonsocial]="nameStore" 
-                                            [imagen]="imagent">
-                        </app-product-store>
-                        <app-product-store-movil    *ngFor="let product of tag.products" 
-                                                    [product]="product" 
-                                                    [razonsocial]="nameStore" 
-                                                    [imagen]="imagent">
-                        </app-product-store-movil> 
+            <div *ngIf="viewAllProducts">
+                <div *ngIf="(store$ | async)  as store">
+                    <div class="store-products-grid container">                
+                        <div *ngFor="let product of store[0].products">
+                            <app-product-store  [product]="product"
+                                                [razonsocial]="nameStore" 
+                                                [imagen]="imagent">
+                            </app-product-store>
+                            <app-product-store-movil    [product]="product" 
+                                                        [razonsocial]="nameStore" 
+                                                        [imagen]="imagent">
+                            </app-product-store-movil> 
+                        </div>
                     </div>
                 </div>
             </div>
+            <div *ngIf="!viewAllProducts">
+                <div *ngIf="(products$ | async)  as products">
+                    <div class="store-products-grid container">                
+                        <div *ngFor="let product of products">
+                            <app-product-store  [product]="product"
+                                                [razonsocial]="nameStore" 
+                                                [imagen]="imagent">
+                            </app-product-store>
+                            <app-product-store-movil    [product]="product" 
+                                                        [razonsocial]="nameStore" 
+                                                        [imagen]="imagent">
+                            </app-product-store-movil> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="action-btn" *ngIf="hiddenPagination">
+            <!-- <div (click)="seeMore()">Ver mas</div> -->
+            <div (click)="paginationPrevious()"><mat-icon>keyboard_arrow_left</mat-icon></div>
+            <div (click)="btnOne()" 
+                [ngClass]="{'btnPageSelect': stateBtnOne}">
+                {{ btnPageOne }}
+            </div>
+            <div (click)="btnTwo()" 
+                [ngClass]="{'btnPageSelect': stateBtnTwo}">
+                {{ btnPageTwo }}
+            </div>
+            <div (click)="btnThree()" 
+                [ngClass]="{'btnPageSelect': stateBtnThree}">
+            {{ btnPageThree }}
+            </div>
+            <div (click)="paginationNext()"><mat-icon>keyboard_arrow_right</mat-icon></div>
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

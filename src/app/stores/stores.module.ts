@@ -19,7 +19,6 @@ import { SearchStoresComponent } from './components/search-stores/search-stores.
 import { TagsStoresComponent } from './components/tags-stores/tags-stores.component';
 import { CommentsStoreComponent } from './components/comments-store/comments-store.component';
 import { InfoStoreMovilComponent } from './components/info-store-movil/info-store-movil.component';
-import { SliderCategoryMovilComponent } from './components/slider-category-movil/slider-category-movil.component';
 import { BusinessHoursComponent } from './components/business-hours/business-hours.component';
 
 
@@ -36,7 +35,6 @@ import { BusinessHoursComponent } from './components/business-hours/business-hou
     TagsStoresComponent,
     CommentsStoreComponent,
     InfoStoreMovilComponent,
-    SliderCategoryMovilComponent,
     BusinessHoursComponent,
   ],
   imports: [

@@ -120,11 +120,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.authService.logout();
   }
 
-  searchStore(value: string) {
-    if (value !== '') {
-      this.router.navigate(['/search', value]);
-    } else {
-      this.router.navigate(['/stores']);
+  searchStore($event: KeyboardEvent, value: any) {
+    if ($event.key === 'Enter' && !$event.shiftKey) {
+      $event.preventDefault();
+      if (value !== '') {
+        this.router.navigate(['/search', value]);
+      }
     }
   }
 

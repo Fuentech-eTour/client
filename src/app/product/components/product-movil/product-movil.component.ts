@@ -41,7 +41,6 @@ export class ProductMovilComponent implements OnInit {
         }
       }
     });
-    console.log(this.product);
   }
 
   openDialogDetailProduct(): void {

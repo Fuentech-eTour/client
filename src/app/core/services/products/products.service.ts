@@ -22,8 +22,9 @@ export class ProductsService {
     private http: HttpClient
   ) { }
 
-  getAllProducts() {
-    return this.http.get<Product[]>(`${environment.url_api}/products/obtenertodos`)
+  getAllProducts(newPageProduct: number) {
+    return this.http.post<Product[]>(`${environment.url_api}/products/obtenertodos`,
+    { limit: 20, offset: newPageProduct })
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -33,6 +34,15 @@ export class ProductsService {
   getAllProductsByTags(newPageTag: number, newPageProduct: number) {
     return this.http.post(`${environment.url_api}/products/obtenerProductoalltagsid`,
     { limitg: 4, cng: newPageTag, limit: 20, cnt: newPageProduct })
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getProductsByIdStoreAndIdTag(idStore: number, idTag: number, pageProducts: number) {
+    return this.http.post(`${environment.url_api}/products/obtenerproductsporidstoreyidtag`,
+    { idStore, idTag, limitProducts: 20, pageProducts })
     .pipe(
       retry(3),
       catchError(this.handleError),

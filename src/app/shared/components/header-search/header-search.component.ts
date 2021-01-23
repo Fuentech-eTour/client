@@ -35,7 +35,16 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  searchStore(value: string) {
+  searchStore($event: KeyboardEvent, value: any) {
+    if ($event.key === 'Enter' && !$event.shiftKey) {
+      $event.preventDefault();
+      if (value !== '') {
+        this.router.navigate(['/search', value]);
+      }
+    }
+  }
+
+  searchStoreBtn(value: any) {
     if (value !== '') {
       this.router.navigate(['/search', value]);
     }

@@ -70,10 +70,7 @@
     </h1>
     <ul class="category">
         <li *ngFor="let catProd of categoriasProductos$ | async"
-            [routerLink] 
-            [fragment]="'seccion'+catProd.id" 
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">
+            (click)="onAddTag(catProd)">
             <a>
                 {{ catProd.descripcion | titlecase}}
             </a>

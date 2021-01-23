@@ -14,11 +14,12 @@
                                 formControlName="search" 
                                 placeholder="Buscar..." 
                                 autocomplete="off"
-                                autofocus="true">
+                                autofocus="true"
+                                (keyup)="searchStore($event, termino.value)">
                     </mat-form-field>
                     <div class="actions-cont">
                         <div class="btn-send-cont border-on">
-                            <mat-icon matSuffix (click)="searchStore(termino.value)">search</mat-icon>
+                            <mat-icon matSuffix (click)="searchStoreBtn(termino.value)">search</mat-icon>
                         </div>
                     </div>
                 </form>

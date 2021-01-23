@@ -155,6 +155,11 @@
                             display: block;
                         }
                     }
+                    .display-movil-search {
+                        @media (min-width: 1001px) {
+                            display: none;
+                        }
+                    }
                     .display-movil {
                         min-width: 0px;
                         @media (min-width: 600px) {

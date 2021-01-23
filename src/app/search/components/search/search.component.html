@@ -8,7 +8,7 @@
                 </app-product>
                 <app-product-movil *ngFor="let product of products" [product]="product"></app-product-movil>
             </div>
-            <div *ngIf="products.length >= numberProductsFetch" class="action-btn">
+            <div *ngIf="hiddenPaginationProducts" class="action-btn">
                 <!-- <div (click)="seeMore()">Ver mas</div> -->
                 <div (click)="paginationPrevious()"><mat-icon>keyboard_arrow_left</mat-icon></div>
                 <div (click)="btnOne()" [ngClass]="{'btnPageSelect': stateBtnOne}">{{ btnPageOne }}</div>
@@ -21,7 +21,7 @@
             <div style="background-color: #f9fafc; width: 100%; height: 10px;"></div>
             <h1 class="message" *ngIf="messageStores">Lo sentimos, no hemos encontrado tiendas en tu busqueda</h1>
             <app-banner-stores *ngFor="let store of stores" [store]="store"></app-banner-stores>
-            <div *ngIf="stores.length >= numberStoresFetch" class="action-btn">
+            <div *ngIf="hiddenPaginationStores" class="action-btn">
                 <!-- <div (click)="seeMore()">Ver mas</div> -->
                 <div (click)="paginationPreviousStores()"><mat-icon>keyboard_arrow_left</mat-icon></div>
                 <div (click)="btnOneStores()" [ngClass]="{'btnPageSelect': stateBtnOneStore}">{{ btnPageOneStore }}</div>

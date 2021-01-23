@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div *ngFor="let tag of tags">
         <div *ngIf="tag.products?.length !== 0 && tag.products !== undefined" class="products-cont">
             <mat-card-subtitle class="title-tag" [id]="'seccion'+tag.id">{{ tag.descripcion }}</mat-card-subtitle>
@@ -12,13 +12,31 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="container">
+    <div class="products-cont product-grid">
+        <div *ngFor="let product of products">
+            <app-product [product]="product"></app-product>
+            <app-product-movil  [product]="product"></app-product-movil>
+        </div>
+    </div>
 </div>
 
 <div class="action-btn">
     <!-- <div (click)="seeMore()">Ver mas</div> -->
     <div (click)="paginationPrevious()"><mat-icon>keyboard_arrow_left</mat-icon></div>
-    <div (click)="btnOne()" [ngClass]="{'btnPageSelect': stateBtnOne}">{{ btnPageOne }}</div>
-    <div (click)="btnTwo()" [ngClass]="{'btnPageSelect': stateBtnTwo}">{{ btnPageTwo }}</div>
-    <div (click)="btnThree()" [ngClass]="{'btnPageSelect': stateBtnThree}">{{ btnPageThree }}</div>
+    <div (click)="btnOne()" 
+        [ngClass]="{'btnPageSelect': stateBtnOne}">
+        {{ btnPageOne }}
+    </div>
+    <div (click)="btnTwo()" 
+        [ngClass]="{'btnPageSelect': stateBtnTwo}">
+        {{ btnPageTwo }}
+    </div>
+    <div (click)="btnThree()" 
+        [ngClass]="{'btnPageSelect': stateBtnThree}">
+    {{ btnPageThree }}
+    </div>
     <div (click)="paginationNext()"><mat-icon>keyboard_arrow_right</mat-icon></div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { StoresService } from '@core/services/stores.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class SidebarStoreComponent implements OnInit {
 
   @Input() store: Observable<any>;
+  @Output() addTag = new EventEmitter<any>();
   store$: Observable<any>;
 
   private categoriasProductos = new BehaviorSubject<[]>([]);
@@ -102,6 +103,10 @@ export class SidebarStoreComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  onAddTag(tag: any) {
+    this.addTag.emit(tag);
   }
 
   openSnackBar(message) {

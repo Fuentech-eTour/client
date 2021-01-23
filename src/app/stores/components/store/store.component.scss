@@ -2,6 +2,7 @@
     position: fixed;
     width: 288px;
     padding-top: 64px;
+    z-index: 1 !important;
 }
   
 .sidenav .mat-toolbar {
@@ -30,6 +31,52 @@
     
 }
 
+.action-btn {
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0px;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+  
+    div {
+        display: flex;
+        width: 25px;
+        border-radius: 20px;
+        border: 1px solid rgba(0,0,0,.12);
+        padding: 5px;
+        margin: 0px 2.5px;
+        cursor: pointer;
+        color: #ff4b88;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+  
+        // non-selectable
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        &:hover {
+            border: 1px solid #ff4b88;
+            background-color: #ff4b8715;
+        }
+    }
+  
+    .btnPageSelect {
+        border: 1px solid #ff4b88;
+        background-color: #ff4b8715;
+    }
+}
+app-info-store-movil {
+    @media (min-width: 700px) {
+        display: none;
+    }
+}
+/* app-slider-category-movil {
+    @media (min-width: 700px) {
+        display: none;
+    }
+} */
 .cont-store-grid {
     //margin-top: 20px;
     //margin-right: 20px;
@@ -43,16 +90,6 @@
         padding-bottom: 20px;
         margin: 0px 20px;
         background-color: #fafafa;
-    }
-    app-info-store-movil {
-        @media (min-width: 700px) {
-            display: none;
-        }
-    }
-    app-slider-category-movil {
-        @media (min-width: 700px) {
-            display: none;
-        }
     }
     app-sidebar-store {
         display: flex;
@@ -74,6 +111,7 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px 10px;
+    padding-top: 10px;
 }
 
 app-product-store {

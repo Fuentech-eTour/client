@@ -37,7 +37,7 @@
                     <input  matInput 
                             #termino 
                             type="text" 
-                            (keyup)="searchStore(termino.value)" 
+                            (keyup)="searchStore($event, termino.value)" 
                             autocomplete="off" 
                             placeholder="Buscar..."
                             autofocus="true">
@@ -50,11 +50,9 @@
                     <a mat-button routerLink="/products" routerLinkActive="active" mat-button>
                         Productos
                         <mat-icon style="color: #73726c;">widgets</mat-icon></a> -->
-                    <a (click)="openSearch()" 
-                        routerLink="/search" 
-                        routerLinkActive="active"
-                         mat-button 
-                         class="display-movil">
+                    <a (click)="openSearch()"
+                        mat-button 
+                        class="display-movil-search">
                         <mat-icon   matBadgeColor="warn"
                                     style="color: #73726c;">
                                     search

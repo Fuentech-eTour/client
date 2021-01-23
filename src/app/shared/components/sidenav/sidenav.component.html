@@ -7,13 +7,12 @@
         <p *ngFor="let catStores of tagsStores" [routerLink]="['/stores/tagsstores', catStores.id]" (click)="mostrar2.toggle()">{{ catStores.descripcion | titlecase }}</p>
         <p *ngIf="stateSeeMoreStores" (click)="seeMoreTagsStores()"><b>Ver mas...</b></p>
     </div>
-    <!-- <h1 class="title" routerLink="/products" (click)="mostrar2.toggle()">Productos
+    <h1 class="title" routerLink="/products" (click)="mostrar2.toggle()">Productos
+        <img class="icon-category" src="./../../../../assets/images/Supermarket128x128.png" width="20px" height="20px" alt="categoria tienda">
+    </h1>
+    <!-- <h1 class="title">Productos
         <img class="icon-category" src="./../../../../assets/images/Supermarket128x128.png" width="20px" height="20px" alt="categoria tienda">
     </h1> -->
-    <h1 class="title">Productos
-        <img class="icon-category" src="./../../../../assets/images/Supermarket128x128.png" width="20px" height="20px" alt="categoria tienda">
-        <!-- <mat-icon class="icon-category">category</mat-icon> -->
-    </h1>
     <div class="category">
         <p *ngFor="let catProd of tagsProducts" [routerLink]="['/stores/tagsproducts', catProd.id]" (click)="mostrar2.toggle()">{{ catProd.descripcion | titlecase }}</p>
         <p *ngIf="stateSeeMoreProducts" (click)="seeMoreTagsProducts()"><b>Ver mas...</b></p>

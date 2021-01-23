@@ -38,12 +38,12 @@ const routes: Routes = [
         path: 'search',
         loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
       },
-      {
-        path: 'order',
-        canActivate: [ AdminGuard ],
-        loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
-      },
     ]
+  },
+  {
+    path: 'order',
+    canActivate: [ AdminGuard ],
+    loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
   },
   {
     path: 'admin',

@@ -5,17 +5,15 @@ app-product {
   }
 }
 
-app-product-movil {
-  border-bottom: solid 1px #e0e0e0;
-  @media (min-width: 700px) {
-      display: none;
-  }
-}
-
 .products-cont {
   background-color: white;
   @media (min-width: 700px) {
     background-color: #fafafa;
+  }
+  app-product-movil {
+    @media (min-width: 700px) {
+      display: none;
+    }
   }
   .title-tag {
     margin: 0px;

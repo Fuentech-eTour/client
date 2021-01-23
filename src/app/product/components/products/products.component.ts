@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   totalCompra$: Observable<number>;
   products$: Observable<AddProduct[]>;
   store$: Observable<Store[]>;
-  tags: any;
+  products: [];
   mySwiper: Swiper;
   showFiller = false;
   slidesPerView: number;
@@ -27,10 +27,8 @@ export class ProductsComponent implements OnInit {
   searchParams: any;
 
   // pagination for the searched products
-  numberTagsFetch = 4;
-  numberProductsFetch = 24;
+  numberProductsFetch = 20;
   stateSeeMoreProducts = 0;
-  stateSeeMoreTags = 0;
   stateBtnPage = 1;
   btnPageOne = 1;
   btnPageTwo = 2;
@@ -67,9 +65,9 @@ export class ProductsComponent implements OnInit {
 
   fetchProductsByTags() {
     this.windowService.loadingTrue();
-    this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
-    .subscribe(tags => {
-      this.tags = tags;
+    this.productsService.getAllProducts(this.stateSeeMoreProducts)
+    .subscribe((products: []) => {
+      this.products = products;
       this.windowService.loadingFalse();
     });
   }
@@ -97,55 +95,52 @@ export class ProductsComponent implements OnInit {
   btnOne() {
     if (this.btnPageOne === 1) {
       this.stateSeeMoreProducts = 0;
-      this.stateSeeMoreTags = 0;
     }
     if (this.btnPageOne !== 1) {
       this.stateSeeMoreProducts = this.numberProductsFetch * (this.btnPageOne - 1);
-      this.stateSeeMoreTags = this.numberTagsFetch * (this.btnPageOne - 1);
     }
+
     this.windowService.loadingTrue();
-    this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
-    .subscribe((tags: any) => {
+    this.productsService.getAllProducts(this.stateSeeMoreProducts)
+    .subscribe((products: any) => {
       this.windowService.loadingFalse();
-      if (tags.status === '402') {
-        this.tags = [];
+      if (products.status === '402') {
+        this.products = [];
         return;
       }
-      this.tags = tags;
+      this.products = products;
     });
     this.stateBtnPage = this.btnPageOne;
     this.changeStatePage();
   }
 
   btnTwo() {
-    this.stateSeeMoreProducts = this.numberProductsFetch * (this.btnPageOne - 1);
-    this.stateSeeMoreTags = this.numberTagsFetch * (this.btnPageOne - 1);
+    this.stateSeeMoreProducts = this.numberProductsFetch * (this.btnPageTwo - 1);
     this.windowService.loadingTrue();
-    this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
-    .subscribe((tags: any) => {
+    this.productsService.getAllProducts(this.stateSeeMoreProducts)
+    .subscribe((products: any) => {
       this.windowService.loadingFalse();
-      if (tags.status === '402') {
-        this.tags = [];
+      if (products.status === '402') {
+        this.products = [];
         return;
       }
-      this.tags = tags;
+      this.products = products;
     });
     this.stateBtnPage = this.btnPageTwo;
     this.changeStatePage();
   }
 
   btnThree() {
-    this.stateSeeMoreProducts = this.numberProductsFetch * (this.btnPageOne - 1);
-    this.stateSeeMoreTags = this.numberTagsFetch * (this.btnPageOne - 1);
+    this.stateSeeMoreProducts = this.numberProductsFetch * (this.btnPageThree - 1);
     this.windowService.loadingTrue();
-    this.productsService.getAllProductsByTags(this.stateSeeMoreTags, this.stateSeeMoreProducts)
-    .subscribe((tags: any) => {
+    this.productsService.getAllProducts(this.stateSeeMoreProducts)
+    .subscribe((products: any) => {
       this.windowService.loadingFalse();
-      if (tags.status === '402') {
-        this.tags = [];
+      if (products.status === '402') {
+        this.products = [];
         return;
       }
-      this.tags = tags;
+      this.products = products;
     });
     this.stateBtnPage = this.btnPageThree;
     this.changeStatePage();
