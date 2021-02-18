@@ -126,6 +126,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       if (value !== '') {
         this.router.navigate(['/search', value]);
       }
+    } 
+    if ($event.type === 'click') {
+      if (value !== '') {
+        this.router.navigate(['/search', value]);
+      }
     }
   }
 
@@ -134,7 +139,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     if (idStore === undefined || idStore === null) {
       this.router.navigate(['/user']);
     } else {
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/admin/products']);
     }
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Store } from '../models/store.model';
+import { CreateStore, Store } from '../models/store.model';
 import { environment } from '../../../environments/environment';
 
 import { throwError, BehaviorSubject } from 'rxjs';
@@ -55,6 +55,14 @@ export class StoresService {
     );
   }
 
+  updateOneStoresByUser(data: CreateStore) {
+    return this.http.put(`${environment.url_api}/stores/actualizarstoreporelusuario`, data)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   inactivateStore(idstore: number) {
     return this.http.put(`${environment.url_api}/stores/inactivarstore/${idstore}`, { estado: 0 })
     .pipe(
@@ -65,6 +73,14 @@ export class StoresService {
 
   assingConfigStore(idstore: number, config: object) {
     return this.http.post(`${environment.url_api}/stores/asignarconfiguracion/${idstore}`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  assingConfigStoreByUser(config: object) {
+    return this.http.post(`${environment.url_api}/stores/asignarconfiguracionporelusuario`, config)
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -97,6 +113,14 @@ export class StoresService {
 
   createConfigBusinessHours(config: object) {
     return this.http.post(`${environment.url_api}/stores/creaconfiguraciondias`, config)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  createConfigBusinessHoursByUser(config: object) {
+    return this.http.post(`${environment.url_api}/stores/creaconfiguraciondiasporelusuario`, config)
     .pipe(
       retry(3),
       catchError(this.handleError),
@@ -144,6 +168,14 @@ export class StoresService {
     );
   }
 
+  getCategoryOfStore(id: number) {
+    return this.http.get<any>(`${environment.url_api}/stores/obtenereltagdelastore/${id}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   getStoreByName(name: string, newPage: number) {
     return this.http.post(`${environment.url_api}/products/obtenerproductsbystorename/${name}`,
     { cnt: newPage, limitt: 5, cnp: 0, limitp: 10 })
@@ -161,8 +193,24 @@ export class StoresService {
     );
   }
 
+  createStoreByUser(store: any) {
+    return this.http.post(`${environment.url_api}/stores/crearstoreporelusuario`, store)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
   assingTagStore(idstore: number, idtag: number) {
     return this.http.post(`${environment.url_api}/stores/asignatagstore`, { idstore, idtag })
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  assingTagStoreByUser(idtag: number) {
+    return this.http.post(`${environment.url_api}/stores/asignatagstoreporelusuario`, { idtag })
     .pipe(
       retry(3),
       catchError(this.handleError),

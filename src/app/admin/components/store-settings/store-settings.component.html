@@ -1,0 +1,169 @@
+<mat-card>
+    <div class="action-buttons">
+        <button mat-stroked-button color="accent" (click)="accordion.openAll()">Abrir todo</button>
+        <button mat-stroked-button color="accent" (click)="accordion.closeAll()">Cerrar todo</button>
+        <button mat-stroked-button color="accent"(click)="ngOnInit()"><mat-icon>cached</mat-icon></button>
+    </div>
+    <mat-accordion class="headers-align" multi>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Logo
+                </mat-panel-title>
+                <mat-spinner *ngIf="isloadingLogo$ | async" diameter=24></mat-spinner>
+                <mat-icon style="color: #0000008a; padding-right: 10px;">crop_original</mat-icon>
+            </mat-expansion-panel-header>
+            
+            <form [formGroup]="formLogo" (ngSubmit)="saveLogo($event)">
+                <div *ngIf="image !== undefined" class="row">
+                    <div class="col-xs col-cont">
+                        <div style="width: 100%;">
+                            <img [src]="image" alt="" height="150px">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs col-cont">
+                        <label for="file-upload" class="upload">
+                            <mat-icon>cloud_upload</mat-icon> 
+                            Subir imagen
+                        </label>
+                        <input type="file" (change)="uploadFile($event)" class="inputImg" id="file-upload" accept="image/*">
+                    </div>
+                </div>
+                
+                <div class="btn-cont">
+                    <button [disabled]="!formLogo.valid" 
+                    mat-stroked-button 
+                    color="accent" 
+                    type="submit">Guardar</button>
+                </div>
+            </form>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Categoría 
+              </mat-panel-title>
+              <mat-spinner *ngIf="isloadingCategory$ | async" diameter=24></mat-spinner>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">category</mat-icon>
+            </mat-expansion-panel-header>
+            
+            <form [formGroup]="formCategory" (ngSubmit)="credCategory($event)">
+                <div class="row">
+                    <div class="col-xs col-cont">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Categoría</mat-label>
+                            <mat-select formControlName="iduttagstores">
+                                <mat-option *ngFor="let tag of tagsStore" [value]=tag.id>{{tag.descripcion}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="btn-cont">
+                    <button [disabled]='!formCategory.valid' mat-stroked-button color="accent" type="submit">Guardar</button>
+                </div>
+            </form>
+        
+          </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Valor domicilio y compra mínima
+              </mat-panel-title>
+              <mat-spinner *ngIf="isloadingPriceConfig$ | async" diameter=24></mat-spinner>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">
+                request_quote</mat-icon>
+            </mat-expansion-panel-header>
+            
+            <form [formGroup]="formPriceConfig" (ngSubmit)="createPriceConfig($event)">
+                <div class="row">
+                    <div class="col-xs col-cont">
+                        <mat-form-field appearance="outline" class="input-g">
+                            <mat-label>Valor mínimo/pedido</mat-label>
+                            <input formControlName="valormin"  placeholder="Valor mínimo/pedido" 
+                                    matInput 
+                                    type="number">
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-xs col-cont">
+                        <mat-form-field appearance="outline" class="input-g">
+                            <mat-label>Valor domicilio</mat-label>
+                            <input formControlName="valordomicilio"  placeholder="Valor domicilio" 
+                                    matInput 
+                                    type="number">
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="btn-cont">
+                    <button [disabled]="!formPriceConfig.valid" mat-stroked-button color="accent" type="submit">Guardar</button>
+                </div>
+            </form>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Horario de atención
+              </mat-panel-title>
+              <mat-spinner *ngIf="isloadingBusinessHours$ | async" diameter=24></mat-spinner>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">date_range</mat-icon>
+            </mat-expansion-panel-header>
+            
+            <form [formGroup]="formBusinessHours" (ngSubmit)="createBusinessHours($event)">
+                <div class="row hours-cont" *ngFor="let day of days">
+                    <div class="col-xs">
+                        <div style="display: flex;">
+                            <div class="input-h3-1">{{ day.name }}: </div>
+                            <mat-form-field appearance="outline" class="input-h3-2">
+                                <mat-label>Hora inicio</mat-label>
+                                <input  placeholder="Hora inicio" 
+                                        [formControlName]="'horaini'+day.id" 
+                                        matInput
+                                        type="time">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="input-h3-3">
+                                <mat-label>Hora cierre</mat-label>
+                                <input  placeholder="Hora cierre" 
+                                        [formControlName]="'horafin'+day.id" 
+                                        matInput 
+                                        type="time">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="btn-cont">
+                    <button [disabled]="!formBusinessHours.valid" mat-stroked-button color="accent" type="submit">Guardar</button>
+                </div>
+            </form>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Contraseña
+              </mat-panel-title>
+              <mat-spinner *ngIf="false" diameter=24></mat-spinner>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">enhanced_encryption</mat-icon>
+            </mat-expansion-panel-header>
+        
+            
+        
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</mat-card>
+

@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 import { UsersService } from '@core/services/users.service';
 import { WindowService } from '@core/services/window.service';
-import { MyValidator } from './../../../utils/validators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserPermission } from '@core/models/user.model';
 
 @Component({
   selector: 'app-create-user-store',
@@ -41,9 +41,9 @@ export class CreateUserStoreComponent implements OnInit {
           this.windowService.loadingFalse();
           if (res.status === 'OK') {
             this.windowService.loadingTrue();
-            const createPermission = {
+            const createPermission: UserPermission = {
               urol: this.form.get('urol').value,
-              id: res.userid,
+              idUserStore: res.userid,
             };
             this.usersService.createPermisionUserStore(createPermission)
               .subscribe((resPermission: any) => {

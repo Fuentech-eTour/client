@@ -41,8 +41,11 @@
                             autocomplete="off" 
                             placeholder="Buscar..."
                             autofocus="true">
-                    
+                    <mat-label (click)="searchStore($event, termino.value)">
+                        <mat-icon style="color: #73726c; font-size: 25px;">search</mat-icon>
+                    </mat-label>
                 </div>
+                
                 <div class="row between-xs middled-xs card-content">
                     <!-- <a mat-button routerLink="/stores" routerLinkActive="active" mat-button>
                         Tiendas

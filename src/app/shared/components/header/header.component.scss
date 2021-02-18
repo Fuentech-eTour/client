@@ -107,12 +107,12 @@
                     input {
                         border-radius: 20px;
                         height: 35px;
-                        width: 300px;
+                        width: 100%;
                         display: inline-block;
                         text-align: left;
                         background-color: #f9fafc;
                         text-decoration: none;
-                        padding: 0px 20px;
+                        padding: 0px 40px 0px 20px;
                         // height: 30px;
                         // width: 230px;
                         font-size: 15px;
@@ -129,12 +129,10 @@
                         }
                     }
                     mat-label {
-                        margin-left: 0px;
-                        margin-top: 6px;
-                        position: absolute;
-                        width: 35px;
-                        height: 35px;
+                        position: relative;
                         cursor: pointer;
+                        top: 3px;
+                        left: -40px;
                     }
                 }
                 .card-content {

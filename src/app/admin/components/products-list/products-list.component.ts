@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductsService } from '@core/services/products/products.service';
 import { AuthService } from '@core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -17,6 +18,7 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private authService: AuthService,
+    private router: Router,
   ) {
     this.id = this.authService.getIdStore();
    }
@@ -29,6 +31,9 @@ export class ProductsListComponent implements OnInit {
     // tslint:disable-next-line: radix
     this.productsService.getProductsByStore(parseInt(this.id))
     .subscribe((store: any) => {
+      if (store.status === '402') {
+        this.router.navigate(['/admin/store-settings']);
+      }
       if (store.length >= 0) {
         this.products = store[0].products;
       }

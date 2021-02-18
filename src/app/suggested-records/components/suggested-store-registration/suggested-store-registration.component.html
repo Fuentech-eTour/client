@@ -1,0 +1,141 @@
+<mat-toolbar>
+    <a mat-icon-button style="width: 75px;">
+        <img src="./../../../../assets/images/logo1.png" routerLink="/home" style="cursor: pointer;" alt="logo">
+    </a>
+</mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+<div class="cont-suggested">
+    <div class="cont-info">
+        <header>
+            <mat-card-title class="title">Digitalizamos mercados</mat-card-title>
+        </header>
+        <div class="content">
+            <section class="color-white">
+                Somos la plataforma que te ayuda de forma facil a digitalizar tu comercio...
+            </section>
+            <img src="https://agenciaimpulso.cl/wp-content/uploads/2020/11/diseno-tiendas-virtuales-2.png" alt="">
+        </div>
+    </div>
+    <div class="cont-form">
+        <form [formGroup]="form" (ngSubmit)="saveStore($event)">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>¡Comienza ahora! <br>Crea tu tienda</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-xs col-xs-cont">
+                            <div class="row">
+                                <div class="col-xs">
+                                    <!-- <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Tipo</mat-label>
+                                        <mat-select formControlName="tipodoc">
+                                        <mat-option value="CC">CC</mat-option>
+                                        <mat-option value="NIT">NIT</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>NIT</mat-label>
+                                        <input placeholder="NIT" formControlName="identificacion" matInput type="text">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Digito verificación</mat-label>
+                                        <mat-select formControlName="digito">
+                                            <mat-option *ngFor="let digit of verificationDigit" [value]=digit>{{ digit }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Razón social</mat-label>
+                                        <input placeholder="Razón social" formControlName="razonsocial" matInput type="text">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Tipo de sociedad</mat-label>
+                                        <mat-select formControlName="tipo">
+                                        <mat-option value="Natural">Persona Natural</mat-option>
+                                        <mat-option value="SAS">S.A.S - por Acciones Simplificadas</mat-option>
+                                        <mat-option value="Limitada">Ltda - de Responsabilidad Limitada</mat-option>
+                                        <mat-option value="UP">UP - Empresa Unipersonal</mat-option>
+                                        <mat-option value="SA">S.A. - Anónima</mat-option>
+                                        <mat-option value="SenC">S. en C. - en Comandita Simple</mat-option>
+                                        <mat-option value="SCA">S.C.A. - Comandita por Acciones</mat-option>
+                                        <mat-option value="Colectiva">Colectiva</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Regimen</mat-label>
+                                        <mat-select formControlName="regimen">
+                                        <mat-option value="comun">Común</mat-option>
+                                        <mat-option value="simplificado">Simplificado</mat-option>
+                                        <mat-option value="especial">Especial</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs col-xs-cont">
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Municipio</mat-label>
+                                        <mat-select formControlName="idutmunicipality">
+                                            <mat-option *ngFor="let municipality of municipalities" [value]=municipality.id>{{municipality.descripcion}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Dirección</mat-label>
+                                        <input placeholder="Dirección" formControlName="direccion" matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>E-mail</mat-label>
+                                        <input placeholder="E-mail" formControlName="email" matInput type="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Teléfono</mat-label>
+                                        <input placeholder="Teléfono" formControlName="telefono" matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs">
+                                    <mat-form-field appearance="outline" class="input-g">
+                                        <mat-label>Zona</mat-label>
+                                        <mat-select formControlName="zona">
+                                        <mat-option value="urbano">Urbano</mat-option>
+                                        <mat-option value="rural">Rural</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button [disabled]="form.invalid" [ngClass]="{btnActive: !form.invalid}" mat-raised-button type="submit">Enviar</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+</div>
+
+
+

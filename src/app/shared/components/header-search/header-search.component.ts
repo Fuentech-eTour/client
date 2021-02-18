@@ -41,6 +41,11 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
       if (value !== '') {
         this.router.navigate(['/search', value]);
       }
+    } 
+    if ($event.type === 'click') {
+      if (value !== '') {
+        this.router.navigate(['/search', value]);
+      }
     }
   }
 

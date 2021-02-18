@@ -108,27 +108,26 @@ li {
 }
 
 /* Bottom Sheet comments --init-- */
-
 .mat-bottom-sheet-container {
     border-radius: 20px 20px 0px 0px;
 }
-
-.mat-form-field-wrapper {
-    padding: 0px;
-    margin: 0px !important;
+.cont-comments-modal {
+    .mat-form-field-wrapper {
+        padding: 0px;
+        margin: 0px !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 14px 0px 10px !important;
+    }
+    .mat-form-field-infix {
+        border-top: none !important;
+    }
+    .mat-form-field-appearance-outline {
+        margin: 0px !important;
+    }
 }
 
-.mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 14px 0px 10px !important;
-}
 
-.mat-form-field-infix {
-    border-top: none !important;
-}
-
-.mat-form-field-appearance-outline {
-    margin: 0px !important;
-}
 
 /* .mat-bottom-sheet-container {
     height: 90vh !important;
@@ -260,6 +259,42 @@ body::-webkit-scrollbar-track:active {
 }
 
 /* scroll --final-- */
+
+/* custom-scroll --init-- */
+
+.custom-scroll::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    // display: none;  /* Ocultar scroll */
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+    border-radius: 4px;
+}
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+/* Cambiamos el fondo cuando esté en active */
+.custom-scroll::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del track */
+.custom-scroll::-webkit-scrollbar-track {
+    background: #ebebeb;
+    border-radius: 4px;
+}
+/* Cambiamos el fondo cuando esté en active o hover */
+.custom-scroll::-webkit-scrollbar-track:hover,
+.custom-scroll::-webkit-scrollbar-track:active {
+  background: #e7e7e7;
+}
+
+/* custom-scroll --final-- */
 
 /* tabs module search --init-- */
 .mat-tab-body-content {

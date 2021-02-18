@@ -13,6 +13,7 @@ import { FormProductComponent } from './components/form-product/form-product.com
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { StoreSettingsComponent } from './components/store-settings/store-settings.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     FormProductComponent,
     ProductEditComponent,
     OrdersComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    StoreSettingsComponent
   ],
   imports: [
     CommonModule,

@@ -9,6 +9,7 @@ import { FormProductComponent } from './components/form-product/form-product.com
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { StoreSettingsComponent } from './components/store-settings/store-settings.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,11 @@ const routes: Routes = [
     path: '',
     component: NavComponent,
     children: [
+      {
+        path: '',
+        redirectTo: '/admin/products',
+        pathMatch: 'full'
+      },
       {
         path: 'home',
         component: DashboardComponent
@@ -44,6 +50,10 @@ const routes: Routes = [
         path: 'products/edit/:id',
         component: ProductEditComponent
       },
+      {
+        path: 'store-settings',
+        component: StoreSettingsComponent
+      }
     ]
   }
 ];

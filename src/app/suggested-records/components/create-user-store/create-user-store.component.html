@@ -1,0 +1,93 @@
+<form [formGroup]="form" (ngSubmit)="saveUserStore($event)" class="container">
+    <mat-card>
+        <div class="cont-logo">
+            <img src="../../../../assets/images/logo1.png" alt="logo" height="80px">
+        </div>
+        <mat-card-header>
+            <mat-card-title>Crear administrador tienda</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>E-mail</mat-label>
+                                <input placeholder="E-mail" formControlName="usuario" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Nombres</mat-label>
+                                <input placeholder="Nombres" formControlName="nombres" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Apellidos </mat-label>
+                                <input placeholder="Apellidos" formControlName="apellidos" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Identificación </mat-label>
+                                <input placeholder="Identificación" formControlName="identificacion" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs col-xs-cont">
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Cargo </mat-label>
+                                <input placeholder="Cargo" formControlName="cargo" matInput type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Contraseña </mat-label>
+                                <input placeholder="Contraseña" formControlName="clave" matInput type="password">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Repita Contraseña</mat-label>
+                                <input placeholder="Repita Contraseña" (keyup)="validatorPassword()" formControlName="repClave" matInput type="password">
+                            </mat-form-field>
+                            <p *ngIf="passwordVerify">Las contraseñas no coinciden</p>
+                            <div *ngIf="claveField.errors && claveField.dirty">
+                                <p *ngIf="claveField.hasError('required')">Este campo es requerido</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs">
+                            <mat-form-field appearance="outline" class="input-g">
+                                <mat-label>Rol</mat-label>
+                                <mat-select formControlName="urol">
+                                  <mat-option value=3>Administrador</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="form.invalid" [ngClass]="{btnActive: !form.invalid}" mat-raised-button type="submit">Enviar</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+
+

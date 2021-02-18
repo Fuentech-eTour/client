@@ -2,27 +2,21 @@
     <mat-toolbar>
         <mat-toolbar-row>
             <div class="input-msn-cont">
-                <form [formGroup]="form">
-                    <div class="actions-cont state-display">
-                        <div class="btn-send-cont border-off">
-                            <mat-icon matSuffix (click)="closedSearch()">arrow_back</mat-icon>
-                        </div>
-                    </div>
-                    <mat-form-field appearance="outline">
-                        <input  #termino 
-                                matInput 
-                                formControlName="search" 
-                                placeholder="Buscar..." 
-                                autocomplete="off"
-                                autofocus="true"
-                                (keyup)="searchStore($event, termino.value)">
-                    </mat-form-field>
-                    <div class="actions-cont">
-                        <div class="btn-send-cont border-on">
-                            <mat-icon matSuffix (click)="searchStoreBtn(termino.value)">search</mat-icon>
-                        </div>
-                    </div>
-                </form>
+                <div class="search-cont">
+                    <mat-label class="label-closed" (click)="closedSearch()">
+                        <mat-icon style="color: #73726c; font-size: 25px;">closed</mat-icon>
+                    </mat-label>
+                    <input  matInput 
+                            #termino 
+                            type="text" 
+                            (keyup)="searchStore($event, termino.value)" 
+                            autocomplete="off" 
+                            placeholder="Buscar..."
+                            autofocus="true">
+                    <mat-label class="label-search" (click)="searchStore($event, termino.value)">
+                        <mat-icon>search</mat-icon>
+                    </mat-label>
+                </div>
             </div>
         </mat-toolbar-row>
         <mat-progress-bar mode="indeterminate" [ngStyle]="{'display': (isLoading$ | async) ? 'flex' : 'none' }" style="bottom: 0px; position: absolute;"></mat-progress-bar>

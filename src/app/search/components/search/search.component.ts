@@ -21,8 +21,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   stateSearchProducts$: Observable<any>;
   isLoading$: Observable<boolean>;
   searchParams: any;
-  hiddenPaginationProducts = true;
-  hiddenPaginationStores = true;
+  hiddenPaginationProducts: boolean;
+  hiddenPaginationStores: boolean;
 
   // pagination for the searched products
   numberProductsFetch = 12;
@@ -57,6 +57,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.products = [];
     this.messageStores = false;
     this.messageProducts = false;
+    this.hiddenPaginationProducts = false;
+    this.hiddenPaginationStores = false;
    }
 
   ngOnInit(): void {
@@ -64,11 +66,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.fetchStoreSearchByName();
     this.assignSearchSettingsForProducts();
     this.assignSearchSettingsForStores();
-    /* this.windowService.windowWidth$.subscribe(width => {
-      if (width < 600) {
-        this.windowService.stateHeaderTrue();
-      }
-    }); */
   }
 
   ngOnDestroy() {
@@ -79,6 +76,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.stateSearchProducts$ = this.route.params
     .pipe(
       switchMap((params: Params) => {
+        this.searchParams = params.name;
+        this.stateSeeMore = 0;
         return this.productsService.getProductByName(params.name, this.stateSeeMore);
       })
     );
@@ -89,6 +88,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     .pipe(
       switchMap((params: Params) => {
         this.searchParams = params.name;
+        this.stateSeeMoreStore = 0;
         return this.storesService.getStoreByName(params.name, this.stateSeeMoreStore);
       })
     );
@@ -96,9 +96,12 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   assignSearchSettingsForProducts() {
     this.stateSearchProducts$.subscribe((state: any) => {
+      this.hiddenPaginationProducts = false;
+      const quantityProducts = 12;
       if (state.status === '402') {
         this.messageProducts = true;
         this.products = [];
+        this.hiddenPaginationProducts = false;
         this.windowService.loadingFalse();
       } else {
         this.messageProducts = false;
@@ -106,8 +109,8 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.products = state;
           this.windowService.loadingFalse();
         }
-        if (state.length < 5) {
-          this.hiddenPaginationProducts = false;
+        if (state.length >= quantityProducts) {
+          this.hiddenPaginationProducts = true;
         }
       }
     });
@@ -115,9 +118,12 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   assignSearchSettingsForStores() {
     this.stateSearchStores$.subscribe((state: any) => {
+      this.hiddenPaginationStores = false;
+      const quantityStores = 5;
       if (state.status === '402') {
         this.messageStores = true;
         this.stores = [];
+        this.hiddenPaginationStores = false;
         this.windowService.loadingFalse();
       } else {
         this.messageStores = false;
@@ -125,8 +131,8 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.stores = state;
           this.windowService.loadingFalse();
         }
-        if (state.length < 5) {
-          this.hiddenPaginationStores = false;
+        if (state.length >= quantityStores) {
+          this.hiddenPaginationStores = true;
         }
       }
     });

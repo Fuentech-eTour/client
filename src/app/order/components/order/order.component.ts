@@ -172,7 +172,6 @@ export class OrderComponent implements OnInit {
         )
         .subscribe(({ status, data }: any) => {
           this.orderService.addCurrentSells(data);
-          const idSell = data[0].idSell;
           if (status === 'OK') {
             this.cartService.resetOrder();
             // tslint:disable-next-line: prefer-for-of

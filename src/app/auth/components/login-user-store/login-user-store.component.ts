@@ -6,6 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserStoreLogin } from '@core/models/user.model';
 
 @Component({
   selector: 'app-login-user-store',
@@ -34,22 +35,14 @@ export class LoginUserStoreComponent implements OnInit {
     this.windowService.loadingTrue();
     event.preventDefault();
     if (this.form.valid) {
-      const user = this.form.value;
+      const user: UserStoreLogin = this.form.value;
       this.authService.loginUserStore(user)
         .subscribe( (res: any) => {
           this.openSnackBar(res.message);
           this.windowService.loadingFalse();
           if (res.status === 'OK') {
             this.openSnackBar('Inicio de sesión exitoso');
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('refreshToken', res.data.refreshToken);
-            localStorage.setItem('user_name', res.data.user_name);
-            localStorage.setItem('idstore', res.data.idstore);
-            localStorage.setItem('session', 'isStore');
-            this.windowService.stateSession('isStore');
-            this.windowService.addUserName(res.data.user_name.split(' ')[0]);
             this.router.navigate(['./admin']);
-            this.windowService.loadingFalse();
           }
         });
     }

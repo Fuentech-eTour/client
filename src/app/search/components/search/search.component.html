@@ -1,7 +1,7 @@
 <div class="container">
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Productos">
-            <div style="background-color: #f9fafc; width: 100%; height: 10px;"></div>
+            <!-- <div style="background-color: #f9fafc; width: 100%; height: 10px;"></div> -->
             <h1 class="message" *ngIf="messageProducts">Lo sentimos, no hemos encontrado productos en tu busqueda</h1>
             <div class="product-grid" ClassName="container">
                 <app-product *ngFor="let product of products" [product]="product">
@@ -18,7 +18,7 @@
             </div>
         </mat-tab>
         <mat-tab label="Tiendas">
-            <div style="background-color: #f9fafc; width: 100%; height: 10px;"></div>
+            <!-- <div style="background-color: #f9fafc; width: 100%; height: 10px;"></div> -->
             <h1 class="message" *ngIf="messageStores">Lo sentimos, no hemos encontrado tiendas en tu busqueda</h1>
             <app-banner-stores *ngFor="let store of stores" [store]="store"></app-banner-stores>
             <div *ngIf="hiddenPaginationStores" class="action-btn">

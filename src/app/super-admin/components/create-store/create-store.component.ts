@@ -9,12 +9,7 @@ import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UtilityService } from '../../../core/services/utility.service';
 import { TagsService } from '@core/services/tags.service';
-
-interface Days {
-  id: number;
-  name: string;
-  initials: string;
-}
+import { Days } from '@core/models/store.model';
 
 @Component({
   selector: 'app-create-store',

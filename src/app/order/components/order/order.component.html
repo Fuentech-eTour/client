@@ -1,3 +1,10 @@
+<mat-toolbar>
+  <div>
+    <mat-icon routerLink="/stores">
+      storefront
+    </mat-icon>
+  </div>
+</mat-toolbar>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -10,11 +17,8 @@
           </mat-icon>
         </button>
       </div>
-      <mat-form-field style="display: none;">
-        <input matInput formControlName="firstCtrl">
-      </mat-form-field>
 
-      <div *ngFor="let store of order" style="margin-bottom: 20px;">
+      <mat-card class="cont-detail-store" *ngFor="let store of order" style="margin-bottom: 20px;">
         <mat-card-title style="text-align: center; font-size: 16px;">{{ store.razonsocial }}</mat-card-title>
         <mat-table [dataSource]="store.products" class="mat-elevation-z8" style="border-radius: 20px; background: #ffffff00;">
           <!-- Image -->
@@ -44,8 +48,7 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-      </div>
-
+      </mat-card>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">

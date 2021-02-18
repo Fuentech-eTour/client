@@ -65,6 +65,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'suggested',
+    loadChildren: () => import('./suggested-records/suggested-records.module').then(m => m.SuggestedRecordsModule)
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }

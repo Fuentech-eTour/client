@@ -3,25 +3,55 @@
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list class="nav-list-movil">
-            <!-- <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
-            <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a> -->
-            <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/orders" routerLinkActive="active">Pedidos</a>
-            <a (click)="drawerAdmin.toggle()" mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
-            <a (click)="drawerAdmin.toggle()" mat-list-item [routerLink]="['/stores', idStore]" routerLinkActive="active">Mi tienda</a>
-            <!-- <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Configuración</a> -->
-            <a (click)="drawerAdmin.toggle()" mat-list-item (click)="logout()">Cerrar sesión</a>
+            <!-- <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
+            <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a> -->
+            <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/orders" routerLinkActive="active">
+                <mat-icon>moped</mat-icon>
+                <span>Pedidos</span>
+            </a>
+            <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/products" routerLinkActive="active">
+                <mat-icon>workspaces</mat-icon>
+                <span>Productos</span>
+            </a>
+            <a (click)="drawerAdmin.toggle()" mat-menu-item [routerLink]="['/stores', idStore]" routerLinkActive="active">
+                <mat-icon>storefront</mat-icon>
+                <span>Mi tienda</span>
+            </a>
+            <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/store-settings" routerLinkActive="active">
+                <mat-icon>settings</mat-icon>
+                <span>Configuración</span> 
+            </a>
+            <a (click)="drawerAdmin.toggle()" mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Cerrar sesión</span>
+            </a>
         </mat-nav-list>
         <mat-nav-list class="nav-list">
-            <!-- <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
-            <a mat-list-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a> -->
-            <a mat-list-item routerLink="/admin/orders" routerLinkActive="active">Pedidos</a>
-            <a mat-list-item routerLink="/admin/products" routerLinkActive="active">Productos</a>
-            <a mat-list-item [routerLink]="['/stores', idStore]" routerLinkActive="active">Mi tienda</a>
-            <!-- <a mat-list-item routerLink="/admin/home" routerLinkActive="active">Configuración</a> -->
-            <a mat-list-item (click)="logout()">Cerrar sesión</a>
+            <!-- <a mat-menu-item routerLink="/admin/home" routerLinkActive="active">Estadisticas</a>
+            <a mat-menu-item routerLink="/admin/inventory" routerLinkActive="active">Inventario</a> -->
+            <a mat-menu-item routerLink="/admin/orders" routerLinkActive="active">
+                <mat-icon>moped</mat-icon>
+                <span>Pedidos</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/products" routerLinkActive="active">
+                <mat-icon>workspaces</mat-icon>
+                <span>Productos</span>
+            </a>
+            <a mat-menu-item [routerLink]="['/stores', idStore]" routerLinkActive="active">
+                <mat-icon>storefront</mat-icon>
+                <span>Mi tienda</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/store-settings" routerLinkActive="active">
+                <mat-icon>settings</mat-icon>
+                <span>Configuración</span> 
+            </a>
+            <a mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Cerrar sesión</span>
+            </a>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content class="custom-scroll">
         <mat-toolbar class="navbar-fixed-top" color="primary" style="background-color: white; color: gray;">
             <mat-toolbar-row style="border-bottom: solid 1px #e0e0e0;">
                 <div class="row between-xs middled-xs header-row">

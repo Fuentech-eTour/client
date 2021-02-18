@@ -6,6 +6,7 @@ import { WindowService } from './window.service';
 import { StoresService } from './stores.service';
 import { ProductsService } from './products/products.service';
 import { tap } from 'rxjs/operators';
+import { UserStoreLogin } from '@core/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +31,28 @@ export class AuthService {
 
   refreshToken() {
     return this.http.post(`${environment.url_api}/users/tkenclient`, {refreshToken: this.getRefreshToken()})
-    .pipe(tap((res: any) => {
-      this.setToken(res.data.accessToken);
-    }));
+    .pipe(
+      tap((res: any) => {
+        this.setToken(res.data.accessToken);
+      })
+    );
   }
 
-  loginUserStore(user: JSON) {
-    return this.http.post(`${environment.url_api}/users/loginstore`, user);
+  loginUserStore(user: UserStoreLogin) {
+    return this.http.post(`${environment.url_api}/users/loginstore`, user).pipe(
+      tap((res: any) => {
+        if (res.status === 'OK') {
+          console.log(res);
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('refreshToken', res.data.refreshToken);
+          localStorage.setItem('user_name', res.data.user_name);
+          localStorage.setItem('idstore', res.data.idstore);
+          localStorage.setItem('session', 'isStore');
+          this.windowService.stateSession('isStore');
+          this.windowService.addUserName(res.data.user_name.split(' ')[0]);
+        }
+      })
+    );
   }
 
   loggedIn() {

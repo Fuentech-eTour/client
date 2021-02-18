@@ -9,3 +9,25 @@ export interface Store {
     valormin?: number;
     valordomicilio?: number;
 }
+
+export interface Days {
+    id: number;
+    name: string;
+    initials: string;
+}
+
+export interface CreateStore {
+    tipodoc: string;
+    identificacion: string;
+    digito: number;
+    razonsocial: string;
+    tipo: string;
+    idutmunicipality: number;
+    direccion: string;
+    email: string;
+    telefono: string;
+    regimen: string;
+    zona: string;
+    digitoclave: string;
+    imagen: string;
+}

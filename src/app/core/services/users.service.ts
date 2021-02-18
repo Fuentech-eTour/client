@@ -5,6 +5,7 @@ import { throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import * as Sentry from '@sentry/browser';
+import { UserPermission } from '@core/models/user.model';
 
 
 @Injectable({
@@ -43,8 +44,24 @@ export class UsersService {
     );
   }
 
-  createPermisionUserStore(userPermission: any) {
-    return this.http.post(`${environment.url_api}/users/createpermisionuserstore/${userPermission.id}`, userPermission)
+  createPermisionUserStore(userPermission: UserPermission) {
+    return this.http.post(`${environment.url_api}/users/createpermisionuserstore/${userPermission.idUserStore}`, userPermission)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  createUserStoreByUser(userStore: any) {
+    return this.http.post(`${environment.url_api}/users/createustoreporelusuario`, userStore)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  createPermisionUserStoreByUser(userPermission: UserPermission) {
+    return this.http.post(`${environment.url_api}/users/createpermisionuserstoreporelusuario`, userPermission)
     .pipe(
       retry(3),
       catchError(this.handleError),

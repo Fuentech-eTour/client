@@ -55,7 +55,7 @@ export class FormProductComponent implements OnInit {
     this.windowService.loadingTrue();
     const nameStore = this.authService.getUserName().toString().split(' ').join('');
     const file = this.file;
-    const name = `product-${nameStore}-${this.date}.png`;
+    const name = `product-${nameStore}-${this.date}.jpg`;
     const fileRef = this.angularFireStorage.ref(name);
     const task = this.angularFireStorage.upload(name, file);
 
@@ -65,8 +65,11 @@ export class FormProductComponent implements OnInit {
         this.windowService.loadingFalse();
         this.image$ = fileRef.getDownloadURL();
         this.image$.subscribe(url => {
+          const newUrl = url.replace('.jpg', '_500x500.jpg');
+          console.log(newUrl);
+          console.log(url);
           this.windowService.loadingTrue();
-          this.form.get('imagen').setValue(url);
+          this.form.get('imagen').setValue(newUrl);
           const product = this.form.value;
           this.productsService.createProduct(product)
             .subscribe((res: any) => {
@@ -78,6 +81,7 @@ export class FormProductComponent implements OnInit {
                 this.productsService.addTagProduct(idp, {idt: idTag}).subscribe(resul => {
                   this.windowService.loadingFalse();
                   this.router.navigate(['./admin/products']);
+                  //window.location.reload();
                 });
               }
             });
@@ -91,8 +95,8 @@ export class FormProductComponent implements OnInit {
     if (event.target.files.length === 0) {
       return;
     }
-    if (event.target.files[0].size > 150000) {
-      this.openSnackBar('El tamaño de la imagen supera los 150kb');
+    if (event.target.files[0].size > 1000000*5) {
+      this.openSnackBar('El tamaño de la imagen supera los 5Mb');
       return;
     }
     this.file = event.target.files[0];

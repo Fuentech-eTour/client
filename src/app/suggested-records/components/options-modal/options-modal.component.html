@@ -1,0 +1,17 @@
+<div>
+    <mat-card>
+        <div>
+            <h1>Confirmar información</h1>
+        </div>
+        <div mat-dialog-content>
+            <p>Una vez tomes la opción aceptar, te estaremos enviado 
+                un e-mail a <strong>{{ data.emailStore }}</strong>,
+                en el cual recibiras las instrucciones para continuar el proceso.
+            </p>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close="NO" cdkFocusInitial>Cancelar</button>
+            <button mat-button mat-dialog-close="SI">Aceptar</button>
+        </div>
+    </mat-card>
+</div>

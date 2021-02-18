@@ -50,7 +50,7 @@ export class ProductsService {
   }
 
   getProductsByStore(id: number) {
-    return this.http.get<Product[]>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`)
+    return this.http.post<Product[]>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`, { limit: 20, offset: 0 })
     .pipe(
       retry(3),
       catchError(this.handleError),

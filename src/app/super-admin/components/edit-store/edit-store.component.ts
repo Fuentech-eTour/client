@@ -30,7 +30,7 @@ export class EditStoreComponent implements OnInit {
   tagsStore: any;
   idstore: number;
   idconfig: number;
-  verificationDigit: any[];
+  verificationDigit: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   days: any[];
   existingBusinessHours = true;
 
@@ -46,7 +46,6 @@ export class EditStoreComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
     this.buildForm();
-    this.verificationDigit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   }
 
   ngOnInit(): void {

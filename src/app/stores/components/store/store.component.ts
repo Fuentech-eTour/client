@@ -4,7 +4,7 @@ import { WindowService } from '@core/services/window.service';
 import { ProductsService } from '@core/services/products/products.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { map, shareReplay, switchMap, switchMapTo } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
@@ -31,7 +31,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   nameStore: string;
   imagent: string;
   products$: Observable<any>;
-  hiddenPagination = true;
+  hiddenPagination = false;
   viewAllProducts = true;
   activeLink = 1;
 
@@ -70,15 +70,18 @@ export class StoreComponent implements OnInit, OnDestroy {
         return this.storesService.getProductsOneStore(
           params.id, 
           this.stateSeeMoreProducts
-        );
+        )
       })
     );
     this.storeForSidenav$ = this.store$;
     this.store$.subscribe((store: any[]) => {
+      console.log(store);
       this.idStore = store[0].id;
       this.nameStore = store[0].razonsocial;
       this.imagent = store[0].imagen;
-      if (store[0].products.length < 20) {
+      if (store[0].products) {
+        this.hiddenPagination = store[0].products.length < 20 ? false : true;
+      } else {
         this.hiddenPagination = false;
       }
       this.windowService.loadingFalse();
@@ -93,7 +96,6 @@ export class StoreComponent implements OnInit, OnDestroy {
     });
     this.productCategories$.subscribe(tags => {
       this.tags = tags;
-      console.log(tags);
     });
   }
 
