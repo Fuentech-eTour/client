@@ -14,6 +14,7 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { StoreSettingsComponent } from './components/store-settings/store-settings.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { StoreSettingsComponent } from './components/store-settings/store-settin
     ProductEditComponent,
     OrdersComponent,
     OrderDetailComponent,
-    StoreSettingsComponent
+    StoreSettingsComponent,
+    UserSettingsComponent
   ],
   imports: [
     CommonModule,

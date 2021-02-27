@@ -66,8 +66,6 @@ export class FormProductComponent implements OnInit {
         this.image$ = fileRef.getDownloadURL();
         this.image$.subscribe(url => {
           const newUrl = url.replace('.jpg', '_500x500.jpg');
-          console.log(newUrl);
-          console.log(url);
           this.windowService.loadingTrue();
           this.form.get('imagen').setValue(newUrl);
           const product = this.form.value;

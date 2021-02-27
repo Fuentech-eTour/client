@@ -6,6 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@core/services/auth.service';
 import { WindowService } from '@core/services/window.service';
 import { OrderService } from '@core/services/order.service';
+import { StoresService } from '@core/services/stores.service';
 
 @Component({
   selector: 'app-nav',
@@ -33,12 +34,16 @@ export class NavComponent implements OnInit {
   pendingOrder$ = this.pendingOrder.asObservable();
   private isloadingTwo = new BehaviorSubject<boolean>(false);
   isloadingTwo$ = this.isloadingTwo.asObservable();
+  categoryExists: boolean;
+  configStoreExists: boolean;
+  businessHoursExists: boolean;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private windowService: WindowService,
     private orderService: OrderService,
+    private storesService: StoresService,
     ) {
       this.userName = this.authService.getUserName();
       this.isLoading$ = this.windowService.isloading$;
@@ -72,6 +77,44 @@ export class NavComponent implements OnInit {
         } else {
           return true;
         }}));
+
+      this.fecthCategoryStore();
+      this.fetchConfigStore();
+      this.fetchConfigBusinessHours();
+    }
+
+    fecthCategoryStore() {
+      this.storesService.getCategoryOfStore(parseInt(this.idStore, 10))
+      .subscribe((res) => {
+        if (res.status === '200') {
+          this.categoryExists = true;
+        } else if (res.status === '404') {
+          this.categoryExists = false;
+        }
+      });
+    }
+
+    fetchConfigStore() {
+      this.storesService.getConfigStoreById(parseInt(this.idStore, 10))
+      .subscribe((data) => {
+        if (data.status === 402) {
+          this.configStoreExists = false;
+          return;
+        }
+        this.configStoreExists = true;
+      });
+    }
+
+    fetchConfigBusinessHours() {
+      this.storesService
+        .getConfigBusinessHours(parseInt(this.idStore, 10))
+        .subscribe((data: any) => {
+          if (data.status === 402) {
+            this.businessHoursExists = false;
+            return;
+          }
+          this.businessHoursExists = true;
+        });
     }
 
     fetchPendingOrder() {

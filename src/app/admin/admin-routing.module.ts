@@ -10,6 +10,7 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { StoreSettingsComponent } from './components/store-settings/store-settings.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'store-settings',
         component: StoreSettingsComponent
+      },
+      {
+        path: 'user-settings',
+        component: UserSettingsComponent
       }
     ]
   }

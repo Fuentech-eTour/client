@@ -28,13 +28,13 @@ export class CreateStoreComponent implements OnInit {
   tagsStore: any;
   verificationDigit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   days: Days[] = [
-    { id: 1, name: 'Lunes', initials: 'Lu' },
-    { id: 2, name: 'Martes', initials: 'Ma' },
-    { id: 3, name: 'Miércoles', initials: 'Mi' },
-    { id: 4, name: 'Jueves', initials: 'Ju' },
-    { id: 5, name: 'Viernes', initials: 'Vi' },
-    { id: 6, name: 'Sábado', initials: 'Sa' },
-    { id: 7, name: 'Domingo', initials: 'Do' }
+    { idutdays: 1, name: 'Lunes', initials: 'Lu' },
+    { idutdays: 2, name: 'Martes', initials: 'Ma' },
+    { idutdays: 3, name: 'Miércoles', initials: 'Mi' },
+    { idutdays: 4, name: 'Jueves', initials: 'Ju' },
+    { idutdays: 5, name: 'Viernes', initials: 'Vi' },
+    { idutdays: 6, name: 'Sábado', initials: 'Sa' },
+    { idutdays: 7, name: 'Domingo', initials: 'Do' }
   ];
 
   constructor(
@@ -118,23 +118,23 @@ export class CreateStoreComponent implements OnInit {
                   });
                   const businessHours: any[] = [];
                   for (const hours of this.days) {
-                    if (this.form.get(`horaini${hours.id}`).value !== ' ' &&
-                        this.form.get(`horafin${hours.id}`).value !== ' ') {
+                    if (this.form.get(`horaini${hours.idutdays}`).value !== ' ' &&
+                        this.form.get(`horafin${hours.idutdays}`).value !== ' ') {
                       // tslint:disable-next-line: no-shadowed-variable
                       const objectBusinessHours = {
-                        idstore: res.idstore, idday: hours.id,
-                        horaini: this.form.get(`horaini${hours.id}`).value,
-                        horafin: this.form.get(`horafin${hours.id}`).value
+                        idstore: res.idutdaysstore, idday: hours.idutdays,
+                        horaini: this.form.get(`horaini${hours.idutdays}`).value,
+                        horafin: this.form.get(`horafin${hours.idutdays}`).value
                       };
                       businessHours.push(objectBusinessHours);
                     } else {
-                      this.form.get(`horaini${hours.id}`).setValue('00:00:00');
-                      this.form.get(`horafin${hours.id}`).setValue('00:00:00');
-                      const horaini = this.form.get(`horaini${hours.id}`).value;
-                      const horafin = this.form.get(`horafin${hours.id}`).value;
+                      this.form.get(`horaini${hours.idutdays}`).setValue('00:00:00');
+                      this.form.get(`horafin${hours.idutdays}`).setValue('00:00:00');
+                      const horaini = this.form.get(`horaini${hours.idutdays}`).value;
+                      const horafin = this.form.get(`horafin${hours.idutdays}`).value;
                       // tslint:disable-next-line: no-shadowed-variable
                       const objectBusinessHours = {
-                        idstore: res.idstore, idday: hours.id,
+                        idstore: res.idstore, idday: hours.idutdays,
                         horaini,
                         horafin
                       };

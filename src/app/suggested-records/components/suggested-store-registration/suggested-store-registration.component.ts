@@ -64,7 +64,6 @@ export class SuggestedStoreRegistrationComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(results => {
-      console.log(results);
       if (results === 'SI') {
         if (this.form.valid) {
           this.windowService.loadingTrue();
@@ -73,7 +72,6 @@ export class SuggestedStoreRegistrationComponent implements OnInit {
           const store = this.form.value;
           this.storesService.createStoreByUser(store)
           .subscribe((res: any) => {
-            console.log(res);
             this.openSnackBar(res.message);
             if (res.status === 'OK') {
               this.form.reset();

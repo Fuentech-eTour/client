@@ -68,14 +68,13 @@ export class StoreComponent implements OnInit, OnDestroy {
     .pipe(
       switchMap((params: Params) => {
         return this.storesService.getProductsOneStore(
-          params.id, 
+          params.id,
           this.stateSeeMoreProducts
         )
       })
     );
     this.storeForSidenav$ = this.store$;
     this.store$.subscribe((store: any[]) => {
-      console.log(store);
       this.idStore = store[0].id;
       this.nameStore = store[0].razonsocial;
       this.imagent = store[0].imagen;
@@ -107,8 +106,8 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.viewAllProducts = false;
     this.hiddenPagination = true;
     this.products$ = this.productsService.getProductsByIdStoreAndIdTag(
-      this.idStore, 
-      this.idTag, 
+      this.idStore,
+      this.idTag,
       this.stateSeeMoreProducts
     )
     this.products$.subscribe((products: any) => {

@@ -14,7 +14,7 @@ export class SidebarStoreComponent implements OnInit {
 
   @Input() store: Observable<any>;
   @Output() addTag = new EventEmitter<any>();
-  store$: Observable<any>;
+  store$: Observable<[any]>;
 
   private categoriasProductos = new BehaviorSubject<[]>([]);
   categoriasProductos$ = this.categoriasProductos.asObservable();
@@ -85,8 +85,8 @@ export class SidebarStoreComponent implements OnInit {
   }
 
   fetchQualificationStore() {
-    this.storesService.getQualificationStore(this.store[0].id).subscribe(({ puntuacion }: any) => {
-      (puntuacion);
+    this.storesService.getQualificationStore(this.store[0].id)
+    .subscribe(({ puntuacion }: any) => {
       if (puntuacion !== 'Aun no tiene puntuacion') {
         this.qualificationStore.next(puntuacion);
       } else {

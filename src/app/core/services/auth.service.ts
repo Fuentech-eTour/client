@@ -42,7 +42,6 @@ export class AuthService {
     return this.http.post(`${environment.url_api}/users/loginstore`, user).pipe(
       tap((res: any) => {
         if (res.status === 'OK') {
-          console.log(res);
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('refreshToken', res.data.refreshToken);
           localStorage.setItem('user_name', res.data.user_name);

@@ -13,13 +13,20 @@
                 <mat-icon>workspaces</mat-icon>
                 <span>Productos</span>
             </a>
-            <a (click)="drawerAdmin.toggle()" mat-menu-item [routerLink]="['/stores', idStore]" routerLinkActive="active">
+            <a (click)="drawerAdmin.toggle()" 
+            mat-menu-item [routerLink]="['/stores', idStore]" 
+            routerLinkActive="active"
+            *ngIf="categoryExists && configStoreExists && businessHoursExists">
                 <mat-icon>storefront</mat-icon>
                 <span>Mi tienda</span>
             </a>
             <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/store-settings" routerLinkActive="active">
                 <mat-icon>settings</mat-icon>
                 <span>Configuración</span> 
+            </a>
+            <a (click)="drawerAdmin.toggle()" mat-menu-item routerLink="/admin/user-settings" routerLinkActive="active">
+                <mat-icon>manage_accounts</mat-icon>
+                <span>Usuario</span> 
             </a>
             <a (click)="drawerAdmin.toggle()" mat-menu-item (click)="logout()">
                 <mat-icon>logout</mat-icon>
@@ -37,13 +44,20 @@
                 <mat-icon>workspaces</mat-icon>
                 <span>Productos</span>
             </a>
-            <a mat-menu-item [routerLink]="['/stores', idStore]" routerLinkActive="active">
+            <a mat-menu-item 
+            [routerLink]="['/stores', idStore]" 
+            routerLinkActive="active"
+            *ngIf="categoryExists && configStoreExists && businessHoursExists">
                 <mat-icon>storefront</mat-icon>
                 <span>Mi tienda</span>
             </a>
             <a mat-menu-item routerLink="/admin/store-settings" routerLinkActive="active">
                 <mat-icon>settings</mat-icon>
                 <span>Configuración</span> 
+            </a>
+            <a mat-menu-item routerLink="/admin/user-settings" routerLinkActive="active">
+                <mat-icon>manage_accounts</mat-icon>
+                <span>Usuario</span> 
             </a>
             <a mat-menu-item (click)="logout()">
                 <mat-icon>logout</mat-icon>

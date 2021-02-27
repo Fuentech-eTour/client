@@ -53,7 +53,7 @@
               <mat-icon style="color: #0000008a; padding-right: 10px;">category</mat-icon>
             </mat-expansion-panel-header>
             
-            <form [formGroup]="formCategory" (ngSubmit)="credCategory($event)">
+            <form [formGroup]="formCategory" (ngSubmit)="tryCategory($event)">
                 <div class="row">
                     <div class="col-xs col-cont">
                         <mat-form-field appearance="outline">
@@ -82,7 +82,7 @@
                 request_quote</mat-icon>
             </mat-expansion-panel-header>
             
-            <form [formGroup]="formPriceConfig" (ngSubmit)="createPriceConfig($event)">
+            <form [formGroup]="formPriceConfig" (ngSubmit)="tryPriceConfig($event)">
                 <div class="row">
                     <div class="col-xs col-cont">
                         <mat-form-field appearance="outline" class="input-g">
@@ -121,7 +121,7 @@
               <mat-icon style="color: #0000008a; padding-right: 10px;">date_range</mat-icon>
             </mat-expansion-panel-header>
             
-            <form [formGroup]="formBusinessHours" (ngSubmit)="createBusinessHours($event)">
+            <form [formGroup]="formBusinessHours" (ngSubmit)="tryBusinessHours($event)">
                 <div class="row hours-cont" *ngFor="let day of days">
                     <div class="col-xs">
                         <div style="display: flex;">
@@ -129,14 +129,14 @@
                             <mat-form-field appearance="outline" class="input-h3-2">
                                 <mat-label>Hora inicio</mat-label>
                                 <input  placeholder="Hora inicio" 
-                                        [formControlName]="'horaini'+day.id" 
+                                        [formControlName]="'horaini'+day.idutdays" 
                                         matInput
                                         type="time">
                             </mat-form-field>
                             <mat-form-field appearance="outline" class="input-h3-3">
                                 <mat-label>Hora cierre</mat-label>
                                 <input  placeholder="Hora cierre" 
-                                        [formControlName]="'horafin'+day.id" 
+                                        [formControlName]="'horafin'+day.idutdays" 
                                         matInput 
                                         type="time">
                             </mat-form-field>
@@ -148,19 +148,6 @@
                     <button [disabled]="!formBusinessHours.valid" mat-stroked-button color="accent" type="submit">Guardar</button>
                 </div>
             </form>
-        
-        </mat-expansion-panel>
-
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Contraseña
-              </mat-panel-title>
-              <mat-spinner *ngIf="false" diameter=24></mat-spinner>
-              <mat-icon style="color: #0000008a; padding-right: 10px;">enhanced_encryption</mat-icon>
-            </mat-expansion-panel-header>
-        
-            
         
         </mat-expansion-panel>
 

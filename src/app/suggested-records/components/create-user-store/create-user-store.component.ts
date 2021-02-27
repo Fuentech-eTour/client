@@ -32,7 +32,6 @@ export class CreateUserStoreComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(({ token }) => {
       this.form.get('token').setValue(token);
-      console.log(this.form.get('token').value);
     });
   }
 

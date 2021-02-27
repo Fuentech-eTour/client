@@ -144,7 +144,7 @@ export class StoresService {
   }
 
   getProductsOneStore(id: number, newPageProduct: number) {
-    return this.http.post<any>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`, 
+    return this.http.post<any>(`${environment.url_api}/products/obtenerproductsbystoreid/${id}`,
     { limit: 20, offset: newPageProduct })
     .pipe(
       retry(3),
@@ -287,6 +287,22 @@ export class StoresService {
 
   getUsersStore(idstore: number) {
     return this.http.get<any>(`${environment.url_api}/users/obtenerusuariosportienda/${idstore}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  getUsersStoreByUser() {
+    return this.http.get<any>(`${environment.url_api}/users/obtenerusuariosporelusuario`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError),
+    );
+  }
+
+  editUserStoreByUser(data: object) {
+    return this.http.put(`${environment.url_api}/users/updateuserStore`, data)
     .pipe(
       retry(3),
       catchError(this.handleError),

@@ -1,0 +1,73 @@
+<mat-card>
+    <div class="action-buttons">
+        <button mat-stroked-button color="accent" (click)="accordion.openAll()">Abrir todo</button>
+        <button mat-stroked-button color="accent" (click)="accordion.closeAll()">Cerrar todo</button>
+        <button mat-stroked-button color="accent"(click)="ngOnInit()"><mat-icon>cached</mat-icon></button>
+    </div>
+    <mat-accordion class="headers-align" multi>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Cambiar contraseña
+              </mat-panel-title>
+              <mat-spinner *ngIf="isloadingPassword$ | async" diameter=24></mat-spinner>
+              <mat-icon style="color: #0000008a; padding-right: 10px;">enhanced_encryption</mat-icon>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="formUserStore" (ngSubmit)="savePassword($event)">
+                <div class="row">
+                    <div class="col-xs col-cont">
+                        <mat-form-field>
+                            <mat-label>Nueva contraseña (min 6 caracteres)</mat-label>
+                            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="clave">
+                            <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide2 password'" [attr.aria-pressed]="hide2">
+                              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formUserStore.controls['clave'].hasError('required')">
+                              Campo <strong>requerido</strong>
+                            </mat-error>
+                            <mat-error *ngIf="formUserStore.controls['clave'].hasError('minLength')">
+                              La contraseña debe tener <strong>6</strong> o más caracteres
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs col-cont">
+                        <mat-form-field>
+                            <mat-label>Repita contraseña</mat-label>
+                            <input matInput [type]="hide3 ? 'password' : 'text'" formControlName="repiteClave">
+                            <button type="button" mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide3 password'" [attr.aria-pressed]="hide3">
+                            <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formUserStore.controls['repiteClave'].hasError('required')">
+                              Campo <strong>requerido</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <div *ngIf="formUserStore.errors" style="color: #f44336; margin-bottom: 10px;">
+                            <small *ngIf="formUserStore.errors['password-mismatch']">
+                                Las contraseñas no coinciden.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-cont">
+                    <button [disabled]="formUserStore.invalid" 
+                    mat-stroked-button 
+                    color="accent" 
+                    type="submit">
+                        Guardar
+                    </button>
+                </div>
+                                
+              </form>
+        
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</mat-card>
+
+

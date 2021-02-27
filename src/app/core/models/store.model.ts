@@ -11,7 +11,7 @@ export interface Store {
 }
 
 export interface Days {
-    id: number;
+    idutdays: number;
     name: string;
     initials: string;
 }
