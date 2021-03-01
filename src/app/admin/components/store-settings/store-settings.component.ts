@@ -66,8 +66,8 @@ export class StoreSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchOnestore();
-    this.fecthCategoryStore();
     this.fetchAllTagsStore();
+    this.fecthCategoryStore();
     this.fetchConfigStore();
     this.fetchConfigBusinessHours();
   }
@@ -86,7 +86,7 @@ export class StoreSettingsComponent implements OnInit {
         this.categoryExists = true;
         this.idTagCategory = res.data[0].id;
         const tag = {
-          iduttagstores: res.data[1].iduttagstores,
+          iduttagstores: res.data[0].iduttagstores,
         };
         this.formCategory.patchValue(tag);
       } else if (res.status === '404') {
